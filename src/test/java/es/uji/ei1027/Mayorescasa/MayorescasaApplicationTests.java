@@ -1,4 +1,4 @@
-package es.uji.ei1027.SeniorsAtHome;
+package es.uji.ei1027.Mayorescasa;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SAHApplicationTests {
+public class MayorescasaApplicationTests {
 
 	@Test
 	public void contextLoads() {

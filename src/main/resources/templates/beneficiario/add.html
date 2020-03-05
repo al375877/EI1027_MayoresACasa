@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear nuevo beneficiario</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nuevo beneficiario</h2>
+<form action="#" th:action="@{/beneficiario/add}"
+      th:object="${beneficiario}" method="post">
+    <table>
+
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>DNI</label></td>
+            <td><input type="text" th:field="*{dni}" /></td>
+        </tr>
+        <tr>
+            <td><label>Genero</label></td>
+            <td><input type="text" th:field="*{genero}" /></td>
+        </tr>
+        <tr>
+            <td><label>Edad</label></td>
+            <td><input type="number" th:field="*{edad}" /></td>
+        </tr>
+        <tr>
+            <td><label>Usuario</label></td>
+            <td><input type="text" th:field="*{usuario}" /></td>
+        </tr>
+        <tr>
+            <td><label>Contraseña</label></td>
+            <td><input type="text" th:field="*{contraseña}" /></td>
+        </tr>
+        <tr>
+            <td><label>Email</label></td>
+            <td><input type="text" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td><label>Direccion</label></td>
+            <td><input type="text" th:field="*{direccion}" /></td>
+        </tr>
+        <tr>
+            <td><label>Usuario Asistente</label></td>
+            <td><input type="text" th:field="*{usuario_asis}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha de nacimiento</label></td>
+            <td><input type="date" th:field="*{fecha_nacimiento}" /></td>
+        </tr>
+        <tr>
+            <td><label>Teléfono</label></td>
+            <td><input type="number" th:field="*{numero_telefono}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Añadir beneficiario" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
