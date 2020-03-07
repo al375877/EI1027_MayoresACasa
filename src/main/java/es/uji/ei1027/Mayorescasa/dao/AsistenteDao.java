@@ -1,0 +1,66 @@
+package es.uji.ei1027.Mayorescasa.dao;
+import es.uji.ei1027.Mayorescasa.model.Asistente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Repository  //En Spring los DAOs van anotados con @Repository
+public class AsistenteDao {
+    private JdbcTemplate jdbcTemplate;
+
+    //Obtenermos el jbcTemplate a partir del Data Source
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        jdbcTemplate=new JdbcTemplate(dataSource);
+    }
+    //AÑADIMOS Asistente
+    public void addBeneficiario(Asistente asistente) {
+        jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?,?,?,?)",
+                asistente.getNombre(),asistente.getDni(),asistente.getGenero(),
+                asistente.getEdad(),asistente.getUsuario(),asistente.getContraseña(),
+                asistente.getEmail(),asistente.getDireccion(),
+                asistente.getFecha_nacimiento(),asistente.getNumero_telefono());
+    }
+
+    //BORRAMOS Asistente
+    public void deleteAsistente(String asistente) {
+        jdbcTemplate.update("DELETE FROM Asistente WHERE usuario=?",asistente);
+    }
+
+    //ACTUALIZAMOS Asistente (No se actualiza usuario y dni por claves primaria)
+    public void updateAsistente(Asistente asistente){
+        jdbcTemplate.update("UPDATE beneficiario SET nombre=?, genero=?, edad=?, contraseña=?, " +
+                        "email=?, direccion=?,fecha_nacimiento=?, numero_telefono=? " +
+                        "WHERE usuario=? ",
+                asistente.getNombre(),asistente.getGenero(), asistente.getEdad(),
+                asistente.getContraseña(), asistente.getEmail(),asistente.getDireccion(),
+                asistente.getFecha_nacimiento(),
+                asistente.getNumero_telefono(), asistente.getUsuario());
+    }
+
+    public Asistente getAsistente (String usuario ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM asistente WHERE usuario=?", new AsistenteRowMapper(),usuario);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    //LISTAMOS Asistente
+    public List<Asistente> getAsistente() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM asistente", new
+                    AsistenteRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Asistente>();
+        }
+    }
+}

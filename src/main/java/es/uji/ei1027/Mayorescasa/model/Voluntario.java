@@ -1,28 +1,11 @@
 package es.uji.ei1027.Mayorescasa.model;
 
-import java.sql.Date;
+import java.util.Date;
 
-public class Beneficiario {
-    private String nombre;
-    private String dni;
-    private String genero;
-    private int edad;
-    private String usuario;
-    private String contraseña;
-    private String email;
-    private String direccion;
-    private String usuario_asis;
-    //@DateTimeFormat(pattern = "dd/MM/yyyy")
+public class Voluntario {
+    private String nombre,dni,genero,contraseña,usuario,email, direccion,hobbie;
+    private int edad,numero_telefono;
     private Date fecha_nacimiento;
-    private int numero_telefono;
-
-    public String getUsuario_asis() {
-        return usuario_asis;
-    }
-
-    public void setUsuario_asis(String usuario_asis) {
-        this.usuario_asis = usuario_asis;
-    }
 
     public String getNombre() {
         return nombre;
@@ -48,12 +31,12 @@ public class Beneficiario {
         this.genero = genero;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public String getUsuario() {
@@ -62,14 +45,6 @@ public class Beneficiario {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
     }
 
     public String getEmail() {
@@ -88,12 +63,20 @@ public class Beneficiario {
         this.direccion = direccion;
     }
 
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
+    public String getHobbie() {
+        return hobbie;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setHobbie(String hobbie) {
+        this.hobbie = hobbie;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     public int getNumero_telefono() {
@@ -104,20 +87,28 @@ public class Beneficiario {
         this.numero_telefono = numero_telefono;
     }
 
+    public Date getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
     @Override
     public String toString() {
-        return "Beneficiario{" +
+        return "Voluntario{" +
                 "nombre='" + nombre + '\'' +
                 ", dni='" + dni + '\'' +
                 ", genero='" + genero + '\'' +
-                ", edad=" + edad +
-                ", usuario='" + usuario + '\'' +
                 ", contraseña='" + contraseña + '\'' +
+                ", usuario='" + usuario + '\'' +
                 ", email='" + email + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", usuario_asis='" + usuario_asis + '\'' +
-                ", fecha_nacimiento=" + fecha_nacimiento +
+                ", hobbie='" + hobbie + '\'' +
+                ", edad=" + edad +
                 ", numero_telefono=" + numero_telefono +
+                ", fecha_nacimiento=" + fecha_nacimiento +
                 '}';
     }
 }
