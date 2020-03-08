@@ -20,7 +20,7 @@ public class AsistenteDao {
         jdbcTemplate=new JdbcTemplate(dataSource);
     }
     //AÑADIMOS Asistente
-    public void addBeneficiario(Asistente asistente) {
+    public void addAsistente(Asistente asistente) {
         jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?,?,?,?)",
                 asistente.getNombre(),asistente.getDni(),asistente.getGenero(),
                 asistente.getEdad(),asistente.getUsuario(),asistente.getContraseña(),
@@ -35,7 +35,7 @@ public class AsistenteDao {
 
     //ACTUALIZAMOS Asistente (No se actualiza usuario y dni por claves primaria)
     public void updateAsistente(Asistente asistente){
-        jdbcTemplate.update("UPDATE beneficiario SET nombre=?, genero=?, edad=?, contraseña=?, " +
+        jdbcTemplate.update("UPDATE Asistente SET nombre=?, genero=?, edad=?, contraseña=?, " +
                         "email=?, direccion=?,fecha_nacimiento=?, numero_telefono=? " +
                         "WHERE usuario=? ",
                 asistente.getNombre(),asistente.getGenero(), asistente.getEdad(),
