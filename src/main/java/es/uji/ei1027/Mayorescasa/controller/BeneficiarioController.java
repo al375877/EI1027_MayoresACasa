@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/beneficiario")
 public class BeneficiarioController {
@@ -29,10 +32,14 @@ public class BeneficiarioController {
         model.addAttribute("beneficiarios", beneficiarioDao.getBeneficiarios());
         return "beneficiario/list";
     }
-
+//Llamada de la peticion add
     @RequestMapping(value="/add")
     public String addbeneficiario(Model model) {
         model.addAttribute("beneficiario", new Beneficiario());
+        List<String> generoList = new ArrayList<>();
+        generoList.add("Femenini");
+        generoList.add("Masculino");
+        model.addAttribute("generoList", generoList);
         return "beneficiario/add";
     }
 

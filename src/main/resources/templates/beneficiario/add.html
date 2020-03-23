@@ -14,15 +14,23 @@
 
         <tr>
             <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" /></td>
+            <td><input type="text" th:field="*{nombre}" maxlength="50" /></td>
         </tr>
         <tr>
             <td><label>DNI</label></td>
-            <td><input type="text" th:field="*{dni}" /></td>
+            <td><input type="text" th:field="*{dni}" maxlength="10"/></td>
         </tr>
         <tr>
             <td><label>Genero</label></td>
-            <td><input type="text" th:field="*{genero}" /></td>
+
+            <td> <select class="form_control" type="text" th:field="*{genero}">
+                <!--option value="Not Selected">Select an option</option-->
+                <option th:each="generovalue : ${generoList}"
+                        th:value="${generovalue}"
+                        th:text="${generovalue}"></option>
+            </select>
+            </td>
+            <td th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"  class="error" ></td>
         </tr>
         <tr>
             <td><label>Edad</label></td>
@@ -30,23 +38,23 @@
         </tr>
         <tr>
             <td><label>Usuario</label></td>
-            <td><input type="text" th:field="*{usuario}" /></td>
+            <td><input type="text" th:field="*{usuario}" maxlength="50"/></td>
         </tr>
         <tr>
             <td><label>Contraseña</label></td>
-            <td><input type="text" th:field="*{contraseña}" /></td>
+            <td><input type="password" th:field="*{contraseña}" maxlength="50"/></td>
         </tr>
         <tr>
             <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" /></td>
+            <td><input type="text" th:field="*{email}" maxlength="100"/></td>
         </tr>
         <tr>
             <td><label>Direccion</label></td>
-            <td><input type="text" th:field="*{direccion}" /></td>
+            <td><input type="text" th:field="*{direccion}" maxlength="100"/></td>
         </tr>
         <tr>
             <td><label>Usuario Asistente</label></td>
-            <td><input type="text" th:field="*{usuario_asis}" /></td>
+            <td><input type="text" th:field="*{usuario_asis}" maxlength="50"/></td>
         </tr>
         <tr>
             <td><label>Fecha de nacimiento</label></td>
