@@ -21,9 +21,9 @@ public class AsistenteDao {
     }
     //AÑADIMOS Asistente
     public void addAsistente(Asistente asistente) {
-        jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?,?,?)",
                 asistente.getNombre(),asistente.getDni(),asistente.getGenero(),
-                asistente.getEdad(),asistente.getUsuario(),asistente.getContraseña(),
+                asistente.getUsuario(),asistente.getContraseña(),
                 asistente.getEmail(),asistente.getDireccion(),
                 asistente.getFecha_nacimiento(),asistente.getNumero_telefono());
     }
@@ -35,8 +35,8 @@ public class AsistenteDao {
 
     //ACTUALIZAMOS Asistente (No se actualiza usuario y dni por claves primaria)
     public void updateAsistente(Asistente asistente){
-        jdbcTemplate.update("UPDATE Asistente SET nombre=?, genero=?, edad=?, contraseña=?, " +
-                        "email=?, direccion=?,fecha_nacimiento=?, numero_telefono=? " +
+        jdbcTemplate.update("UPDATE Asistente SET nombre=?, genero=?, contraseña=?, " +
+                        "email=?, direccion=?,fecha_nacimiento=?, telefono=? " +
                         "WHERE usuario=? ",
                 asistente.getNombre(),asistente.getGenero(), asistente.getEdad(),
                 asistente.getContraseña(), asistente.getEmail(),asistente.getDireccion(),
@@ -54,7 +54,7 @@ public class AsistenteDao {
     }
 
     //LISTAMOS Asistente
-    public List<Asistente> getAsistente() {
+    public List<Asistente> getAsistentes() {
         try{
             return jdbcTemplate.query("SELECT * FROM asistente", new
                     AsistenteRowMapper());

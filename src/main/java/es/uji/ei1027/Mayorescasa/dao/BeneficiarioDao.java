@@ -22,11 +22,11 @@ public class BeneficiarioDao {
     }
     //AÑADIMOS BENEFICIARIO
     public void addBeneficiario(Beneficiario beneficiario) {
-        jdbcTemplate.update("INSERT INTO Beneficiario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO Beneficiario VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
                 beneficiario.getNombre(),beneficiario.getDni(),beneficiario.getGenero(),
-                beneficiario.getEdad(),beneficiario.getUsuario(),beneficiario.getContraseña(),
-                beneficiario.getEmail(),beneficiario.getDireccion(),beneficiario.getUsuario_asis(),
-                beneficiario.getFecha_nacimiento(),beneficiario.getNumero_telefono());
+                beneficiario.getUsuario(),beneficiario.getContraseña(),
+                beneficiario.getEmail(),beneficiario.getDireccion(),beneficiario.getUsuario_asis(),beneficiario.getTipoDieta(),
+                beneficiario.getEdad(),beneficiario.getFecha_nacimiento(),beneficiario.getNumero_telefono());
     }
 
     //BORRAMOS BENEFICIARIO
@@ -36,12 +36,12 @@ public class BeneficiarioDao {
 
     //ACTUALIZAMOS BENEFICIARIO (No se actualiza usuario y dni por claves primaria)
     public void updateBeneficiario(Beneficiario beneficiario){
-        jdbcTemplate.update("UPDATE beneficiario SET nombre=?, genero=?, edad=?, contraseña=?, " +
-                        "email=?, direccion=?, usuario_asis=?, fecha_nacimiento=?, numero_telefono=? " +
+        jdbcTemplate.update("UPDATE beneficiario SET nombre=?, genero=?, contraseña=?, " +
+                        "email=?, direccion=?, usuario_asis=?, edad=?, tipoDieta=?, fecha_nacimiento=?, telefono=? " +
                         "WHERE usuario=? ",
-                beneficiario.getNombre(),beneficiario.getGenero(), beneficiario.getEdad(),
+                beneficiario.getNombre(),beneficiario.getGenero(),
                 beneficiario.getContraseña(), beneficiario.getEmail(),beneficiario.getDireccion(),
-                beneficiario.getUsuario_asis(), beneficiario.getFecha_nacimiento(),
+                beneficiario.getUsuario_asis(),  beneficiario.getEdad(),beneficiario.getTipoDieta(),beneficiario.getFecha_nacimiento(),
                 beneficiario.getNumero_telefono(), beneficiario.getUsuario());
     }
 
