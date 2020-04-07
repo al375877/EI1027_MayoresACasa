@@ -12,14 +12,16 @@ public final class BeneficiarioRowMapper implements RowMapper<Beneficiario> {
         beneficiario.setNombre(rs.getString("nombre"));
         beneficiario.setDni(rs.getString("dni"));
         beneficiario.setGenero(rs.getString("genero"));
-        beneficiario.setEdad(rs.getInt("edad"));
         beneficiario.setUsuario(rs.getString("usuario"));
         beneficiario.setContraseña(rs.getString("contraseña"));
         beneficiario.setEmail(rs.getString("email"));
         beneficiario.setDireccion(rs.getString("direccion"));
         beneficiario.setUsuario_asis(rs.getString("usuario_asis"));
+        beneficiario.setTipoDieta(rs.getString("tipoDieta"));
+        beneficiario.setEdad(rs.getInt("edad"));
         beneficiario.setFecha_nacimiento(rs.getDate("fecha_nacimiento"));
-        beneficiario.setNumero_telefono(rs.getInt("numero_telefono"));
+        beneficiario.setNumero_telefono(rs.getInt("telefono"));
+
         return beneficiario;
 
     }

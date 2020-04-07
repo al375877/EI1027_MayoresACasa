@@ -14,13 +14,13 @@ public final class AsistenteRowMapper implements RowMapper<Asistente> {
         asistente.setNombre(rs.getString("nombre"));
         asistente.setDni(rs.getString("dni"));
         asistente.setGenero(rs.getString("genero"));
-        asistente.setEdad(rs.getInt("edad"));
+
         asistente.setUsuario(rs.getString("usuario"));
         asistente.setContraseña(rs.getString("contraseña"));
         asistente.setEmail(rs.getString("email"));
         asistente.setDireccion(rs.getString("direccion"));
         asistente.setFecha_nacimiento(rs.getDate("fecha_nacimiento"));
-        asistente.setNumero_telefono(rs.getInt("numero_telefono"));
+        asistente.setNumero_telefono(rs.getInt("telefono"));
         return asistente;
 
     }

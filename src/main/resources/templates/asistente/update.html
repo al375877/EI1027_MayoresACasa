@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Actualizar beneficiario</title>
+    <title>Actualizar Asistente</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Beneficiario</h2>
-<form action="#" th:action="@{/beneficiario/update}"
-      th:object="${beneficiario}" method="post">
+<h2>Asistente</h2>
+<form action="#" th:action="@{/asistente/update}"
+      th:object="${asistente}" method="post">
     <table>
         <tr>
             <td><label>Nombre</label></td>
@@ -19,10 +19,7 @@
             <td><label>Genero</label></td>
             <td><input type="text" th:field="*{genero}" /></td>
         </tr>
-        <tr>
-            <td><label>Edad</label></td>
-            <td><input type="number" th:field="*{edad}" /></td>
-        </tr>
+
         <tr>
             <td><label>Usuario</label></td>
             <td><input type="text" th:field="*{usuario}" /></td>
@@ -39,10 +36,7 @@
             <td><label>Direccion</label></td>
             <td><input type="text" th:field="*{direccion}" /></td>
         </tr>
-        <tr>
-            <td><label>Usuario Asistente</label></td>
-            <td><input type="text" th:field="*{usuario_asis}" /></td>
-        </tr>
+
         <tr>
             <td><label>Fecha de nacimiento</label></td>
             <td><input type="date" th:field="*{fecha_nacimiento}" /></td>
@@ -52,10 +46,7 @@
             <td><input type="number" th:field="*{numero_telefono}" /></td>
         </tr>
         <tr>
-        <tr>
-            <td><label>Tipo Dieta</label></td>
-            <td><input type="text" th:field="*{tipoDieta}" /></td>
-        </tr>
+
         <tr>
             <td colspan="2"><input type="submit" value="Edita beneficiario" /></td>
         </tr>

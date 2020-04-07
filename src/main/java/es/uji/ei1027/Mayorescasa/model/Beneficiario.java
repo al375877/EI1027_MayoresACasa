@@ -12,9 +12,13 @@ public class Beneficiario {
     private String email;
     private String direccion;
     private String usuario_asis;
+    private String tipodieta;
+    private int telefono;
+
+
     //@DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fecha_nacimiento;
-    private int numero_telefono;
+
 
     public String getUsuario_asis() {
         return usuario_asis;
@@ -97,11 +101,13 @@ public class Beneficiario {
     }
 
     public int getNumero_telefono() {
-        return numero_telefono;
+        System.out.println(telefono);
+        return telefono;
+
     }
 
-    public void setNumero_telefono(int numero_telefono) {
-        this.numero_telefono = numero_telefono;
+    public void setNumero_telefono(int telefono) {
+        this.telefono = telefono;
     }
 
     @Override
@@ -117,7 +123,17 @@ public class Beneficiario {
                 ", direccion='" + direccion + '\'' +
                 ", usuario_asis='" + usuario_asis + '\'' +
                 ", fecha_nacimiento=" + fecha_nacimiento +
-                ", numero_telefono=" + numero_telefono +
+                ", telefono=" + telefono +
+                ", tipodieta="+tipodieta+
                 '}';
+    }
+
+    public String getTipoDieta() {
+        System.out.println(tipodieta);
+        return tipodieta;
+    }
+
+    public void setTipoDieta(String tipodieta) {
+        this.tipodieta = tipodieta;
     }
 }

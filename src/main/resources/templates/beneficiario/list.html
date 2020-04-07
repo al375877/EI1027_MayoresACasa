@@ -1,52 +1,55 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<style>
-    table{
-        width:80%;
-        font-size:1vw;
-    }
-    thead, td {
-        border: 1px solid #ddd;
-        text-align:center;
-    }
-</style>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
+
 <head>
     <title>Gestionar beneficiarios</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
 </head>
 <body>
+<div  layout:fragment="content">
 <h1>Lista de los Beneficiarios</h1>
-<table>
+<table class="table table-striped" >
     <thead>
     <tr>
         <th scope="col">Nombre</th>
         <th scope="col">DNI</th>
         <th scope="col">Género</th>
-        <th scope="col">Edad</th>
         <th scope="col">Usuario</th>
         <th scope="col">Email</th>
         <th scope="col">Direccion</th>
+        <th scope="col">Tipo Dieta</th>
+        <th scope="col">Edad</th>
         <th scope="col">F.Nacimiento</th>
         <th scope="col">Telefono</th>
+
     </tr>
     </thead>
     <tbody>
+
     <tr th:each="beneficiario: ${beneficiarios}">
         <td th:text="${beneficiario.nombre}"></td>
         <td th:text="${beneficiario.dni}"></td>
         <td th:text="${beneficiario.genero}"></td>
-        <td th:text="${beneficiario.edad}"></td>
         <td th:text="${beneficiario.usuario}"></td>
         <td th:text="${beneficiario.email}"></td>
         <td th:text="${beneficiario.direccion}"></td>
+        <td th:text="${beneficiario.tipoDieta}"></td>
+        <td th:text="${beneficiario.edad}"></td>
         <td th:text="${beneficiario.fecha_nacimiento}"></td>
         <td th:text="${beneficiario.numero_telefono}"></td>
-        <td><a type="button" class="btn btn-warning" th:href="@{/beneficiario/update/{usuario}(usuario=${beneficiario.usuario})}">Editar</a></td>
-        <td><a type="button" class="btn btn-danger" th:href="@{/beneficiario/delete/{usuario}(usuario=${beneficiario.usuario})}">Borrar</a></td>
+
+
+        <td><a type="button" class="boton_editar" th:href="@{/beneficiario/update/{usuario}(usuario=${beneficiario.usuario})}">Editar</a></td>
+        <td><a type="button" class="boton_eliminar" th:href="@{/beneficiario/delete/{usuario}(usuario=${beneficiario.usuario})}">Borrar</a></td>
     </tr>
     </tbody>
 </table>
-<a type="button" class="btn btn-success" href="add">Añadir beneficiario</a>
+<a type="button" class="boton_añadir" href="add">Añadir beneficiario</a><a href="/" class="boton_personalizado1" role="button" >Volver</a>
+</div>
 </body>
 </html>

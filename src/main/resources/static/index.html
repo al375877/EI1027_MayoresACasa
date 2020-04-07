@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8" />
-    <title>EI1027</title>
+    <title>Mayores a casa</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+
+
+
 </head>
 <body>
-<h1>Mayores a casa</h1>
-<ul>
-    <li><a href="beneficiario/list">Gestion de los beneficiarios</a></li>
-</ul>
+
+<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Mayores a casa</h1></div>
+
+<br>
+<table style="margin:auto">
+
+    <tr>
+
+        <td><a class="boton_personalizado1" href="beneficiario/list" role="button">Beneficiarios</a></td>
+        <td></td>
+        <td><a class="boton_personalizado1" href="asistente/list" role="button">Asistentes</a></td>
+        <td></td>
+        <td><a class="boton_personalizado1" href="compañia/list" role="button">Compañia</a></td>
+    </tr>
+
+</table>
+
+
+
 </body>
 </html>
