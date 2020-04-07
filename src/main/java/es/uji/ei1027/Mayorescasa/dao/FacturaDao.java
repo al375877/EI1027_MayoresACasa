@@ -20,8 +20,8 @@ public class FacturaDao {
 
     //AÑADIMOS Factura
     public void addFactura(Factura factura) {
-        jdbcTemplate.update("INSERT INTO Factura VALUES (?,?,?)",
-                factura.getCod_fac(), factura.getFecha(), factura.getPrecio());
+        jdbcTemplate.update("INSERT INTO Factura VALUES (?,?,?,?,?)",
+                factura.getCod_fac(), factura.getFecha(), factura.getPrecio(), factura.getConcepto(), factura.getUsuBen());
     }
 
     //BORRAMOS Factura
@@ -31,8 +31,8 @@ public class FacturaDao {
 
     //ACTUALIZAMOS Factura
     public void updateFactura(Factura factura) {
-        jdbcTemplate.update("UPDATE Factura SET fecha=?, precio=? WHERE cod_fac=?",
-                factura.getFecha(), factura.getPrecio(), factura.getCod_fac());
+        jdbcTemplate.update("UPDATE Factura SET fecha=?, preciototal=?, concepto=?, usu_ben=? WHERE cod_fac=?",
+                factura.getFecha(), factura.getPrecio(), factura.getConcepto(), factura.getUsuBen(), factura.getCod_fac());
     }
 
     public Factura getFactura(String cod_fac) {

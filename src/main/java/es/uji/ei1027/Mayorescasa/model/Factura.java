@@ -6,6 +6,24 @@ public class Factura {
     private String cod_fac;
     private Date fecha;
     private float precio;
+    private String concepto;
+    private String usuBen;
+
+    public String getConcepto() {
+        return concepto;
+    }
+
+    public void setConcepto(String concepto) {
+        this.concepto = concepto;
+    }
+
+    public String getUsuBen() {
+        return usuBen;
+    }
+
+    public void setUsuBen(String usuBen) {
+        this.usuBen = usuBen;
+    }
 
     public String getCod_fac() {
         return cod_fac;

@@ -1,6 +1,6 @@
 package es.uji.ei1027.Mayorescasa.model;
 
-public class Compañia {
+public class Empresa {
     String nombre,cif,persona_contacto,usuario,contraseña,email,direccion,servicio;
     int numero_telefono;
 

@@ -3,31 +3,40 @@ package es.uji.ei1027.Mayorescasa.model;
 import java.util.Date;
 
 public class Peticion {
-    private String cod, tipoServicio, estado, comentarios, usuario_ben;
-    private Date fecha_inicio, fecha_fin, fecha_aceptado, fecha_rechazado;
+    private String cod_pet, tiposervicio, comentarios, usuario_ben;
+    private int linea;
+    private double precioservicio;
+    private Date fechaaceptada,fecharechazada,fechafinal;
 
-    public String getCod() {
-        return cod;
+    @Override
+    public String toString() {
+        return "Peticion{" +
+                "cod_pet='" + cod_pet + '\'' +
+                ", tiposervicio='" + tiposervicio + '\'' +
+                ", comentarios='" + comentarios + '\'' +
+                ", usuario_ben='" + usuario_ben + '\'' +
+                ", linea=" + linea +
+                ", precioservicio=" + precioservicio +
+                ", fechaaceptada=" + fechaaceptada +
+                ", fecharechazada=" + fecharechazada +
+                ", fechafinal=" + fechafinal +
+                '}';
     }
 
-    public void setCod(String cod) {
-        this.cod = cod;
+    public String getCod_pet() {
+        return cod_pet;
     }
 
-    public String getTipoServicio() {
-        return tipoServicio;
+    public void setCod_pet(String cod_pet) {
+        this.cod_pet = cod_pet;
     }
 
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
+    public String getTiposervicio() {
+        return tiposervicio;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setTiposervicio(String tiposervicio) {
+        this.tiposervicio = tiposervicio;
     }
 
     public String getComentarios() {
@@ -46,50 +55,43 @@ public class Peticion {
         this.usuario_ben = usuario_ben;
     }
 
-    public Date getFecha_inicio() {
-        return fecha_inicio;
+    public int getLinea() {
+        return linea;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
-        this.fecha_inicio = fecha_inicio;
+    public void setLinea(int linea) {
+        this.linea = linea;
     }
 
-    public Date getFecha_fin() {
-        return fecha_fin;
+    public double getPrecioservicio() {
+        return precioservicio;
     }
 
-    public void setFecha_fin(Date fecha_fin) {
-        this.fecha_fin = fecha_fin;
+    public void setPrecioservicio(double precioservicio) {
+        this.precioservicio = precioservicio;
     }
 
-    public Date getFecha_aceptado() {
-        return fecha_aceptado;
+    public Date getFechaaceptada() {
+        return fechaaceptada;
     }
 
-    public void setFecha_aceptado(Date fecha_aceptado) {
-        this.fecha_aceptado = fecha_aceptado;
+    public void setFechaaceptada(Date fechaaceptada) {
+        this.fechaaceptada = fechaaceptada;
     }
 
-    public Date getFecha_rechazado() {
-        return fecha_rechazado;
+    public Date getFecharechazada() {
+        return fecharechazada;
     }
 
-    public void setFecha_rechazado(Date fecha_rechazado) {
-        this.fecha_rechazado = fecha_rechazado;
+    public void setFecharechazada(Date fecharechazada) {
+        this.fecharechazada = fecharechazada;
     }
 
-    @Override
-    public String toString() {
-        return "Peticion{" +
-                "cod='" + cod + '\'' +
-                ", tipoServicio='" + tipoServicio + '\'' +
-                ", estado='" + estado + '\'' +
-                ", comentarios='" + comentarios + '\'' +
-                ", usuario_ben='" + usuario_ben + '\'' +
-                ", fecha_inicio=" + fecha_inicio +
-                ", fecha_fin=" + fecha_fin +
-                ", fecha_aceptado=" + fecha_aceptado +
-                ", fecha_rechazado=" + fecha_rechazado +
-                '}';
+    public Date getFechafinal() {
+        return fechafinal;
+    }
+
+    public void setFechafinal(Date fechafinal) {
+        this.fechafinal = fechafinal;
     }
 }

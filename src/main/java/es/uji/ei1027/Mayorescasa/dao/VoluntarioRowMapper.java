@@ -13,13 +13,12 @@ public final class VoluntarioRowMapper implements RowMapper<Voluntario>  {
         voluntario.setNombre(rs.getString("nombre"));
         voluntario.setDni(rs.getString("dni"));
         voluntario.setGenero(rs.getString("genero"));
-        voluntario.setEdad(rs.getInt("edad"));
         voluntario.setUsuario(rs.getString("usuario"));
         voluntario.setContraseña(rs.getString("contraseña"));
         voluntario.setEmail(rs.getString("email"));
         voluntario.setDireccion(rs.getString("direccion"));
         voluntario.setFecha_nacimiento(rs.getDate("fecha_nacimiento"));
-        voluntario.setNumero_telefono(rs.getInt("numero_telefono"));
+        voluntario.setNumero_telefono(rs.getInt("telefono"));
         voluntario.setHobbie(rs.getString("hobbie"));
         return voluntario;
 

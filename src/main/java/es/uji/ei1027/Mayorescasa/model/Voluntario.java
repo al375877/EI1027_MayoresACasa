@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Voluntario {
     private String nombre,dni,genero,contraseña,usuario,email, direccion,hobbie;
-    private int edad,numero_telefono;
+    private int numero_telefono;
     private Date fecha_nacimiento;
 
     public String getNombre() {
@@ -71,14 +71,6 @@ public class Voluntario {
         this.hobbie = hobbie;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
     public int getNumero_telefono() {
         return numero_telefono;
     }
@@ -106,7 +98,6 @@ public class Voluntario {
                 ", email='" + email + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", hobbie='" + hobbie + '\'' +
-                ", edad=" + edad +
                 ", numero_telefono=" + numero_telefono +
                 ", fecha_nacimiento=" + fecha_nacimiento +
                 '}';

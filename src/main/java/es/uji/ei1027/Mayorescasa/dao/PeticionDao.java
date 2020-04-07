@@ -21,9 +21,11 @@ public class PeticionDao {
     //AÑADIMOS Peticion
     public void addPeticion(Peticion peticion) {
         jdbcTemplate.update("INSERT INTO Peticion VALUES (?,?,?,?,?,?,?,?,?)",
-                peticion.getCod(), peticion.getTipoServicio(), peticion.getEstado(),
-                peticion.getFecha_inicio(), peticion.getFecha_fin(), peticion.getFecha_aceptado(),
-                peticion.getFecha_rechazado(), peticion.getComentarios(), peticion.getUsuario_ben());
+                peticion.getCod_pet(), peticion.getTiposervicio(), peticion.getPrecioservicio(), peticion.getLinea(),
+                peticion.getFechaaceptada(), peticion.getFecharechazada(), peticion.getFechafinal(), peticion.getComentarios(),
+                peticion.getUsuario_ben()
+        );
+
     }
 
     //BORRAMOS Peticion
@@ -33,13 +35,11 @@ public class PeticionDao {
 
     //ACTUALIZAMOS Peticion
     public void updatePeticion(Peticion peticion) {
-        jdbcTemplate.update("UPDATE peticon SET tipoServicio=?, estado=?, fecha_inicio=?, " +
-                        "fecha_fin=?, fecha_aceptado=?, fecha_rechazado=?, comentarios=?," +
-                        "usuario_ben=? WHERE cod=?",
-                peticion.getTipoServicio(), peticion.getEstado(),
-                peticion.getFecha_inicio(), peticion.getFecha_fin(), peticion.getFecha_aceptado(),
-                peticion.getFecha_rechazado(), peticion.getComentarios(), peticion.getUsuario_ben(),
-                peticion.getCod()
+        jdbcTemplate.update("UPDATE peticon SET tiposervicio=?, precioservicio=?, linea=?, fechaaceptada=?, fecharechazada=?," +
+                        "fechafinal=?, comentarios=?, usuario_ben=? ",
+                peticion.getTiposervicio(), peticion.getPrecioservicio(), peticion.getLinea(),
+                peticion.getFechaaceptada(), peticion.getFecharechazada(), peticion.getFechafinal(), peticion.getComentarios(),
+                peticion.getUsuario_ben(),peticion.getCod_pet()
         );
     }
 

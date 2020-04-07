@@ -20,10 +20,10 @@ public class VoluntarioDao {
         jdbcTemplate=new JdbcTemplate(dataSource);
     }
     //AÑADIMOS Voluntario
-    public void addBeneficiario(Voluntario voluntario) {
-        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+    public void addVoluntario(Voluntario voluntario) {
+        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?,?,?,?,?,?,?,?)",
                 voluntario.getNombre(),voluntario.getDni(),voluntario.getGenero(),
-                voluntario.getEdad(),voluntario.getUsuario(),voluntario.getContraseña(),
+                voluntario.getUsuario(),voluntario.getContraseña(),
                 voluntario.getEmail(),voluntario.getDireccion(),
                 voluntario.getFecha_nacimiento(),voluntario.getNumero_telefono(),voluntario.getHobbie());
     }
@@ -35,10 +35,10 @@ public class VoluntarioDao {
 
     //ACTUALIZAMOS Voluntario (No se actualiza usuario y dni por claves primaria)
     public void updateVoluntario(Voluntario voluntario){
-        jdbcTemplate.update("UPDATE beneficiario SET nombre=?, genero=?, edad=?, contraseña=?, " +
-                        "email=?, direccion=?, fecha_nacimiento=?, numero_telefono=? ,hobie=?" +
+        jdbcTemplate.update("UPDATE voluntario SET nombre=?, genero=?, contraseña=?, " +
+                        "email=?, direccion=?, fechanacimiento=?, telefono=? ,hobbies=?" +
                         "WHERE usuario=? ",
-                voluntario.getNombre(),voluntario.getGenero(), voluntario.getEdad(),
+                voluntario.getNombre(),voluntario.getGenero(),
                 voluntario.getContraseña(), voluntario.getEmail(),voluntario.getDireccion(),
                 voluntario.getFecha_nacimiento(),
                 voluntario.getNumero_telefono(),voluntario.getHobbie(), voluntario.getUsuario());
