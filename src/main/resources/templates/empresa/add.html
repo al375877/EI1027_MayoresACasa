@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/base}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear nuevo Asistente</title>
+    <title>Añadir empresa</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
@@ -11,9 +9,9 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Nuevo Asistente</h2>
-<form action="#" th:action="@{/asistente/add}"
-      th:object="${asistente}" method="post">
+<h2>Nueva empresa</h2>
+<form action="#" th:action="@{/empresa/add}"
+      th:object="${empresa}" method="post">
     <table style="margin:auto">
 
         <tr>
@@ -21,22 +19,14 @@
             <td><input type="text" th:field="*{nombre}" maxlength="50" /></td>
         </tr>
         <tr>
-            <td><label>DNI</label></td>
-            <td><input type="text" th:field="*{dni}" maxlength="10"/></td>
+            <td><label>cif</label></td>
+            <td><input type="text" th:field="*{cif}" maxlength="10"/></td>
         </tr>
         <tr>
-            <td><label>Genero</label></td>
+            <td><label>Persona de contacto</label></td>
 
-            <td> <select class="form_control" type="text" th:field="*{genero}">
-                <!--option value="Not Selected">Select an option</option-->
-                <option th:each="generovalue : ${generoList}"
-                        th:value="${generovalue}"
-                        th:text="${generovalue}"></option>
-            </select>
-            </td>
-            <td th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"  class="error" ></td>
+            <td><input type="text" th:field="*{persona_contacto}" maxlength="50" /></td>
         </tr>
-
         <tr>
             <td><label>Usuario</label></td>
             <td><input type="text" th:field="*{usuario}" maxlength="50"/></td>
@@ -53,22 +43,21 @@
             <td><label>Direccion</label></td>
             <td><input type="text" th:field="*{direccion}" maxlength="100"/></td>
         </tr>
-
-        <tr>
-            <td><label>Fecha de nacimiento</label></td>
-            <td><input type="date" th:field="*{fecha_nacimiento}" /></td>
-        </tr>
         <tr>
             <td><label>Teléfono</label></td>
             <td><input type="number" th:field="*{numero_telefono}" /></td>
         </tr>
         <tr>
-
-            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Añadir asistente" /></td>
+        <tr>
+            <td><label>Tipo Servicio</label></td>
+            <td><input type="text" th:field="*{servicio}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Añadir beneficiario" /></td>
         </tr>
     </table>
     <br>
-    <a th:href="@{/asistente/list}" class="boton_personalizado1" role="button" >Volver</a>
+    <a th:href="@{/empresa/list}" class="boton_personalizado1" role="button" >Volver</a>
 </form>
 </div>
 </body>

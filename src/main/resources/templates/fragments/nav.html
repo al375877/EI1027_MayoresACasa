@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TnKQQIT9V1FSjIXrrBT0XzJIH0eWhr7h1GPsePd1QBcgc7A2kxfeU3IS1wjpKLOzXBHzzxYoPiKEKs5plzaSYqwOOfP7cgmvrqpCwpSP0OJYjcVjugZM2ey7YURNJhBltgOF6SymDoNvXaUXh4YWqw" charset="UTF-8"></script></head>
+<body>
+<div class="nav" th:object="${session}">
+    <nav class="navbar navbar-expand-lg navbar-dark barra_azul" >
+
+        <div class="container">
+            <a class="navbar-brand" style="font-family:rondalo;" href="/"><b>Mayores a casa</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="/">Pagina principal <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/beneficiarios/list}">Gestion de beneficiarios</a>
+                    <a class="nav-link" th:href="@{/user/list}">Area privada</a>
+                    <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>
+
+                    <div  th:unless="*{user == null}" class="dropdown">
+                        <a type="button" th:text="*{user.username}" class="nav-link barra_azul " >
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Link 1</a>
+                            <a class="dropdown-item" href="#">Link 2</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item"  th:href="@{/logout}">Exit</a>
+                        </div>
+                    </div>
+
+
+                </ul>
+
+
+            </div>
+
+        </div>
+
+    </nav>
+</div>
+</body>
+</html>
+

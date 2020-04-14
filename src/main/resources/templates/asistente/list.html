@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 
 <head>
     <title>Gestionar beneficiarios</title>
@@ -9,6 +11,7 @@
           th:href="@{/css/estils.css}"/>
 </head>
 <body>
+<div layout:fragment="content">
 <h1>Lista de los Asistentes</h1>
 <table class="table table-striped" >
     <thead>
@@ -38,11 +41,12 @@
         <td th:text="${asistente.numero_telefono}"></td>
 
 
-        <td><a type="button" class="btn btn-warning" th:href="@{/asistente/update/{usuario}(usuario=${asistente.usuario})}">Editar</a></td>
-        <td><a type="button" class="btn btn-danger" th:href="@{/asistente/delete/{usuario}(usuario=${asistente.usuario})}">Borrar</a></td>
+        <td><a type="button"  class="boton_editar" th:href="@{/asistente/update/{usuario}(usuario=${asistente.usuario})}">Editar</a></td>
+        <td><a type="button" class="boton_eliminar" th:href="@{/asistente/delete/{usuario}(usuario=${asistente.usuario})}">Borrar</a></td>
     </tr>
     </tbody>
 </table>
-<a type="button" class="btn btn-success" href="add">Añadir Asistente</a><a href="/" class="btn btn-primary" role="button" >Volver</a>
+<a type="button"class="boton_añadir" href="add">Añadir Asistente</a><a href="/" class="boton_personalizado1" role="button" >Volver</a>
+</div>
 </body>
 </html>

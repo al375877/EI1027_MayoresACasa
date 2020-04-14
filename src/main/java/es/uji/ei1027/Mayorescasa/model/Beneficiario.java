@@ -101,7 +101,7 @@ public class Beneficiario {
     }
 
     public int getNumero_telefono() {
-        System.out.println(telefono);
+
         return telefono;
 
     }
@@ -129,7 +129,7 @@ public class Beneficiario {
     }
 
     public String getTipoDieta() {
-        System.out.println(tipodieta);
+
         return tipodieta;
     }
 

@@ -8,7 +8,7 @@ body {
 
 /* Capçalera de nivell 1 */
 h1 {
-   font-size: x-large;
+
    color: black;
    font-family:rondalo;
    font-size:48pt;
@@ -19,8 +19,20 @@ h1 {
 
 /* Capçalera de nivell 2 */
 h2 {
+   font-family:rondalo;
    font-size: large;
-   color: blue;
+   color: #4169E1;
+   text-align:center;
+   font-size:40pt;
+
+}
+h4 {
+   font-family:rondalo;
+   font-size: large;
+   color: #4169E1;
+   text-align:center;
+   font-size:28pt;
+
 }
 
 /* Classe CSS error */
@@ -104,4 +116,12 @@ h2 {
      color: #000000;
      background-color: #ffffff;
 
+  }
+  .botones_nav{
+      color: gray;
+      text-align: right;
+  }
+
+  .barra_azul{
+   ;background-color:#4169E1
   }

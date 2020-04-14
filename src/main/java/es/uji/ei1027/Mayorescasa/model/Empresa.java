@@ -2,7 +2,7 @@ package es.uji.ei1027.Mayorescasa.model;
 
 public class Empresa {
     String nombre,cif,persona_contacto,usuario,contraseña,email,direccion,servicio;
-    int numero_telefono;
+    int telefono;
 
     public String getNombre() {
         return nombre;
@@ -69,11 +69,11 @@ public class Empresa {
     }
 
     public int getNumero_telefono() {
-        return numero_telefono;
+        return telefono;
     }
 
-    public void setNumero_telefono(int numero_telefono) {
-        this.numero_telefono = numero_telefono;
+    public void setNumero_telefono(int telefono) {
+        this.telefono = telefono;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Empresa {
                 ", email='" + email + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", servicio='" + servicio + '\'' +
-                ", numero_telefono=" + numero_telefono +
+                ", numero_telefono=" + telefono +
                 '}';
     }
 }

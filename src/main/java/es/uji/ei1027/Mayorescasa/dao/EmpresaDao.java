@@ -34,7 +34,7 @@ public class EmpresaDao {
     //ACTUALIZAMOS empresa (No se actualiza usuario y dni por claves primaria)
     public void updateEmpresa(Empresa empresa){
         jdbcTemplate.update("UPDATE empresa SET nombre=?, cif=?, persona_contacto=?, contraseña=?, " +
-                        "email=?, direccion=?, telefono=? ,servicio=?" +
+                        "email=?, direccion=?, telefono=? ,tipoServicio=?" +
                         "WHERE usuario=? ",
                 empresa.getNombre(),empresa.getCif(), empresa.getPersona_contacto(),
                 empresa.getContraseña(), empresa.getEmail(),empresa.getDireccion(),
@@ -51,7 +51,7 @@ public class EmpresaDao {
     }
 
     //LISTAMOS empresa
-    public List<Empresa> getEmpresa() {
+    public List<Empresa> getEmpresas() {
         try{
             return jdbcTemplate.query("SELECT * FROM empresa", new
                     EmpresaRowMapper());

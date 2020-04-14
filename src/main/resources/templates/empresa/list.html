@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
+
+<head>
+    <title>Gestionar Empresas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+<h1>Lista de las empresas</h1>
+<table class="table table-striped" >
+    <thead>
+    <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">CIF</th>
+        <th scope="col">Persona de contacto</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Email</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Tipo Servicio</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="empresa: ${empresas}">
+        <td th:text="${empresa.nombre}"></td>
+        <td th:text="${empresa.cif}"></td>
+        <td th:text="${empresa.persona_contacto}"></td>
+        <td th:text="${empresa.usuario}"></td>
+        <td th:text="${empresa.email}"></td>
+        <td th:text="${empresa.direccion}"></td>
+        <td th:text="${empresa.numero_telefono}"></td>
+        <td th:text="${empresa.servicio}"></td>
+
+        <td><a type="button" class="boton_editar" th:href="@{/empresa/update/{usuario}(usuario=${empresa.usuario})}">Editar</a></td>
+        <td><a type="button" class="boton_eliminar" th:href="@{/empresa/delete/{usuario}(usuario=${empresa.usuario})}">Borrar</a></td>
+    </tr>
+    </tbody>
+</table>
+<a type="button" class="boton_añadir" href="add">Añadir Empresa</a><a href="/" class="boton_personalizado1" role="button" >Volver</a>
+</div>
+</body>
+</html>
