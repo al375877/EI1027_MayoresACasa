@@ -27,8 +27,10 @@
         <input class="form-control" type="password" th:field="*{password}"/>
     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     </p>
-    <input type="submit" value="Acceder" />
+    <input type="submit" class="boton_añadir" role="button" value="Acceder" />
 </form>
+
 </div>
+
 </body>
 </html>
