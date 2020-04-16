@@ -4,6 +4,7 @@ package es.uji.ei1027.Mayorescasa.model;
 public class UserDetails {
     String username;
     String password;
+    String autorizado;
 
     public String getUsername() {
         return username;
@@ -19,7 +20,13 @@ public class UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getAutorizado() {
+        return autorizado;
+    }
 
+    public void setAutorizado(String autorizado) {
+        this.autorizado = autorizado;
+    }
 
 
 }

@@ -26,10 +26,11 @@ public class UserController {
             UserDetails user =new UserDetails();
             model.addAttribute("user", user);
             session.setAttribute("nextUrl", "user/list");
+            session.setAttribute("autorizado",user.getAutorizado());
             return "login";
         }else {
             UserDetails user = (UserDetails) session.getAttribute("user");
-
+            session.setAttribute("autorizado",user.getAutorizado());
         }
         model.addAttribute("users", userDao.listAllUsers());
         return "user/list";

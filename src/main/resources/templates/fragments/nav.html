@@ -26,7 +26,9 @@
                 <ul class="navbar-nav mr-auto">
                     <a class="nav-link" href="/">Pagina principal <span class="sr-only">(current)</span></a>
                     <a class="nav-link" th:href="@{/beneficiario/list}">Gestion de beneficiarios</a>
-                    <a class="nav-link" th:href="@{/user/list}">Area privada</a>
+
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{autorizado==admi}" th:href="@{/user/list}">Area privada</a>
+
                     <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>
 
                     <div  th:unless="*{user == null}" class="dropdown">
