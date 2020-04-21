@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mayores a casa</title>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th,td {
+          border: 1px solid #dddddd;
+          text-align: center;
+          padding: 15px;
+        }
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | Beneficiaros | Servicios</h1></div>
+
+<br>
+<h2>¿Que servicio o servicios necesitas?</h2>
+<table style="margin:auto">
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Descripcion</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="peticion: ${peticiones}">
+            <td th:text="${peticion.tiposervicio}"></td>
+            <td th:text="${peticion.precioservicio}"></td>
+            <td th:text="${peticion.comentarios}"></td>
+            <td><a class="boton_personalizado1" href="" role="button">Solicitar</a></td>
+        </tr>
+        </tbody>
+    </table>
+<h3>¿No sabes como utilizar nuestra página?</h3>
+<a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
+</body>
+</html>

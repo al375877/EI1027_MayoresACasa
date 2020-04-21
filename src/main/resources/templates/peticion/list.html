@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
+
+<head>
+    <title>Gestionar Peticions</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<body>
+<div  layout:fragment="content">
+<h2>Lista de las peticions</h2>
+<table class="table table-striped" >
+    <thead>
+    <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Servicio</th>
+        <th scope="col">Precio Servicio</th>
+        <th scope="col">Linea</th>
+        <th scope="col">Fecha aceptada</th>
+        <th scope="col">Fecha rechazada</th>
+        <th scope="col">Fecha final</th>
+        <th scope="col">Comentarios</th>
+        <th scope="col">Usuario beneficiario</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="peticion: ${peticions}">
+        <td th:text="${peticion.cod_pet}"></td>
+        <td th:text="${peticion.tiposervicio}"></td>
+        <td th:text="${peticion.precioservicio}"></td>
+        <td th:text="${peticion.linea}"></td>
+        <td th:text="${peticion.fechaaceptada}"></td>
+        <td th:text="${peticion.fecharechazada}"></td>
+        <td th:text="${peticion.fechafinal}"></td>
+        <td th:text="${peticion.comentarios}"></td>
+        <td th:text="${peticion.usuario_ben}"></td>
+
+        <td><a type="button" class="boton_editar" th:href="@{/peticion/update/{cod_pet}(cod_pet=${peticion.cod_pet})}">Editar</a></td>
+        <td><a type="button" class="boton_eliminar" th:href="@{/peticion/delete/{cod_pet}(cod_pet=${peticion.cod_pet})}">Borrar</a></td>
+    </tr>
+    </tbody>
+</table>
+<a type="button" class="boton_añadir" href="add">Añadir Peticion</a><a href="/" class="boton_personalizado1" role="button" >Volver</a>
+</div>
+</body>
+</html>

@@ -9,15 +9,15 @@ import java.sql.SQLException;
 public final class PeticionRowMapper implements RowMapper<Peticion> {
     public Peticion mapRow(ResultSet rs, int RowNum) throws SQLException {
         Peticion peticion = new Peticion();
-        peticion.setCod_pet(rs.getString("Codigo"));
-        peticion.setTiposervicio(rs.getString("Tipo servicio"));
-        peticion.setPrecioservicio(rs.getDouble("Precio servicio"));
-        peticion.setLinea(rs.getInt(("Linea")));
-        peticion.setFechaaceptada(rs.getDate("Fecha aceptada"));
-        peticion.setFecharechazada(rs.getDate(("Fecha rechazada")));
-        peticion.setFechafinal(rs.getDate("Fecha final"));
-        peticion.setComentarios(rs.getString("Comentario"));
-        peticion.setUsuario_ben(rs.getString("Usuario beneficiario"));
+        peticion.setCod_pet(rs.getString("cod_pet"));
+        peticion.setTiposervicio(rs.getString("tiposervicio"));
+        peticion.setPrecioservicio(rs.getDouble("precioservicio"));
+        peticion.setLinea(rs.getInt(("linea")));
+        peticion.setFechaaceptada(rs.getDate("fechaaceptada"));
+        peticion.setFecharechazada(rs.getDate(("fecharechazada")));
+        peticion.setFechafinal(rs.getDate("fechafinal"));
+        peticion.setComentarios(rs.getString("comentarios"));
+        peticion.setUsuario_ben(rs.getString("usuario_ben"));
         return peticion;
     }
 }

@@ -35,4 +35,10 @@ public class UserController {
         model.addAttribute("users", userDao.listAllUsers());
         return "user/list";
     }
+
+    @RequestMapping("/index")
+    public String index(HttpSession session, Model model) {
+        return "user/index";
+    }
 }
+

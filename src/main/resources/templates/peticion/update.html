@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Peticion</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+<h2>Peticion</h2>
+<form action="#" th:action="@{/peticion/update}"
+      th:object="${peticion}" method="post">
+    <table style="margin:auto">
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Cif</label></td>
+            <td><input type="text" th:field="*{cif}" /></td>
+        </tr>
+        <tr>
+            <td><label>Persona de contacto</label></td>
+            <td><input type="text" th:field="*{persona_contacto}" /></td>
+        </tr>
+        <tr>
+            <td><label>Usuario</label></td>
+            <td><input type="text" th:field="*{usuario}" /></td>
+        </tr>
+        <tr>
+            <td><label>Contraseña</label></td>
+            <td><input type="text" th:field="*{contraseña}" /></td>
+        </tr>
+        <tr>
+            <td><label>Email</label></td>
+            <td><input type="text" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td><label>Direccion</label></td>
+            <td><input type="text" th:field="*{direccion}" /></td>
+        </tr>
+        <tr>
+            <td><label>Teléfono</label></td>
+            <td><input type="number" th:field="*{numero_telefono}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo Servicio</label></td>
+            <td><input type="text" th:field="*{servicio}" /></td>
+        </tr>
+        <tr>
+        <tr>
+            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Edita peticion" /></td>
+        </tr>
+    </table>
+    <br>
+    <a th:href="@{/peticion/list}" class="boton_personalizado1" role="button" >Volver</a>
+</form>
+</div>
+</body>
+</html>

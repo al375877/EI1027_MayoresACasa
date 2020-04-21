@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mayores a casa</title>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | Beneficiaros</h1></div>
+
+<br>
+<h2>Hola, ¿En que puedo ayudarte?</h2>
+<table style="margin:auto">
+    <tr>
+        <td><a class="boton_personalizado1" th:href="@{/voluntario/solicitar}" role="button">Ver/Solicitar Voluntarios</a></td>
+        <td></td>
+        <td><a class="boton_personalizado1" th:href="@{/peticion/servicios}" role="button">Contratar Servicios</a></td>
+        <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    </tr>
+</table>
+<table>
+    <tr><img src="https://www.thorigny.fr/sites/default/files/styles/image_entete_pi/public/seniors-ok.jpg?h=bf287e83&itok=jZhh_k2q" width="1000" height="333"></tr>
+</table>
+<h3>¿No sabes como utilizar nuestra página?</h3>
+<a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
+</body>
+</html>

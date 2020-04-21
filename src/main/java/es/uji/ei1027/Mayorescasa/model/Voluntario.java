@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Voluntario  extends UsuarioGeneral{
 
-    private String genero,hobbie;
-    private Date fecha_nacimiento;
+    private String genero,hobbies;
+    private Date fechanacimiento;
     private String dni;
 
     public String getGenero() {
@@ -16,20 +16,20 @@ public class Voluntario  extends UsuarioGeneral{
         this.genero = genero;
     }
 
-    public String getHobbie() {
-        return hobbie;
+    public String getHobbies() {
+        return hobbies;
     }
 
-    public void setHobbie(String hobbie) {
-        this.hobbie = hobbie;
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
     }
 
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
+    public Date getFechanacimiento() {
+        return fechanacimiento;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setFechanacimiento(Date fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
     }
     public String getDni() {
         return dni;

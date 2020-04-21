@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mayores a casa</title>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th,td {
+          border: 1px solid #dddddd;
+          text-align: center;
+          padding: 15px;
+        }
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Lista de los voluntarios disponibles</h1></div>
+<br>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Género</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Email</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">F.Nacimiento</th>
+            <th scope="col">Hobbies</th>
+            <th scope="col">Telefono</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="voluntario: ${voluntarios}">
+            <td th:text="${voluntario.nombre}"></td>
+            <td th:text="${voluntario.dni}"></td>
+            <td th:text="${voluntario.genero}"></td>
+            <td th:text="${voluntario.usuario}"></td>
+            <td th:text="${voluntario.email}"></td>
+            <td th:text="${voluntario.direccion}"></td>
+            <td th:text="${voluntario.fechanacimiento}"></td>
+            <td th:text="${voluntario.hobbies}"></td>
+            <td th:text="${voluntario.numero_telefono}"></td>
+            <td><a class="boton_personalizado1" href="" role="button">Solicitar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -11,6 +11,7 @@ package es.uji.ei1027.Mayorescasa.controller;
         import org.springframework.web.bind.annotation.RequestMapping;
         import org.springframework.web.bind.annotation.RequestMethod;
 
+        import javax.servlet.http.HttpSession;
         import java.util.ArrayList;
         import java.util.List;
 
@@ -72,6 +73,17 @@ public class AsistenteController {
     public String processDelete(@PathVariable String usuario) {
         asistenteDao.deleteAsistente(usuario);
         return "redirect:../list";
+    }
+
+    @RequestMapping("/index")
+    public String index(HttpSession session, Model model) {
+        return "asistente/index";
+    }
+
+    @RequestMapping("/solicitar")
+    public String solicitar(Model model) {
+        model.addAttribute("asistentes", asistenteDao.getAsistentes());
+        return "asistente/solicitar";
     }
 
 

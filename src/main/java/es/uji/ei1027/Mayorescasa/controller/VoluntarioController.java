@@ -1,7 +1,7 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
-import es.uji.ei1027.Mayorescasa.dao.BeneficiarioDao;
-import es.uji.ei1027.Mayorescasa.model.Beneficiario;
+import es.uji.ei1027.Mayorescasa.dao.VoluntarioDao;
+import es.uji.ei1027.Mayorescasa.model.Voluntario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,68 +16,74 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/beneficiario")
-public class BeneficiarioController {
+@RequestMapping("/voluntario")
+public class VoluntarioController {
 
-    private BeneficiarioDao beneficiarioDao;
+    private VoluntarioDao voluntarioDao;
 
     @Autowired
-    public void setBeneficiarioDao(BeneficiarioDao beneficiarioDao) {
-        this.beneficiarioDao=beneficiarioDao;
+    public void setVoluntarioDao(VoluntarioDao voluntarioDao) {
+        this.voluntarioDao=voluntarioDao;
     }
 
     // Operaciones: Crear, listar, actualizar, borrar
 
     @RequestMapping("/list")
-    public String listbeneficiarios(Model model) {
-        model.addAttribute("beneficiarios", beneficiarioDao.getBeneficiarios());
-        return "beneficiario/list";
+    public String listvoluntarios(Model model) {
+        model.addAttribute("voluntarios", voluntarioDao.getVoluntarios());
+        return "voluntario/list";
     }
-//Llamada de la peticion add
+    //Llamada de la peticion add
     @RequestMapping(value="/add")
-    public String addbeneficiario(Model model) {
-        model.addAttribute("beneficiario", new Beneficiario());
+    public String addvoluntario(Model model) {
+        model.addAttribute("voluntario", new Voluntario());
         List<String> generoList = new ArrayList<>();
         generoList.add("Femenini");
         generoList.add("Masculino");
         model.addAttribute("generoList", generoList);
-        return "beneficiario/add";
+        return "voluntario/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("beneficiario") Beneficiario beneficiario,
+    public String processAddSubmit(@ModelAttribute("voluntario") Voluntario voluntario,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "beneficiario/add";
-        beneficiarioDao.addBeneficiario(beneficiario);
+            return "voluntario/add";
+        voluntarioDao.addVoluntario(voluntario);
         return "redirect:list";
     }
 
     @RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
-    public String editbeneficiario(Model model, @PathVariable String usuario) {
-        model.addAttribute("beneficiario", beneficiarioDao.getBeneficiario(usuario));
-        return "beneficiario/update";
+    public String editvoluntario(Model model, @PathVariable String usuario) {
+        model.addAttribute("voluntario", voluntarioDao.getVoluntario(usuario));
+        return "voluntarios/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("beneficiario") Beneficiario beneficiario,
+            @ModelAttribute("voluntario") Voluntario voluntario,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "beneficiario/update";
-        beneficiarioDao.updateBeneficiario(beneficiario);
+            return "voluntario/update";
+        voluntarioDao.updateVoluntario(voluntario);
         return "redirect:list";
     }
 
     @RequestMapping(value="/delete/{usuario}")
     public String processDelete(@PathVariable String usuario) {
-        beneficiarioDao.deleteBeneficiario(usuario);
+        voluntarioDao.deleteVoluntario(usuario);
         return "redirect:../list";
     }
 
     @RequestMapping("/index")
     public String index(HttpSession session, Model model) {
-        return "beneficiario/index";
+        return "voluntario/index";
+    }
+
+    @RequestMapping("/solicitar")
+    public String solicitar(Model model) {
+        model.addAttribute("voluntarios", voluntarioDao.getVoluntarios());
+        return "voluntario/solicitar";
     }
 
 

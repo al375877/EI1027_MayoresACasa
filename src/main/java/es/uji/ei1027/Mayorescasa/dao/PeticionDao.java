@@ -4,18 +4,20 @@ import es.uji.ei1027.Mayorescasa.model.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository  //En Spring los DAOs van anotados con @Repository
 public class PeticionDao {
     private JdbcTemplate jdbcTemplate;
 
     //Obtenermos el jbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate=new JdbcTemplate(dataSource);
     }
 
     //AÑADIMOS Peticion
@@ -30,7 +32,7 @@ public class PeticionDao {
 
     //BORRAMOS Peticion
     public void deletePeticion(String cod) {
-        jdbcTemplate.update("DELETE FROM Peticion WHERE cod=?", cod);
+        jdbcTemplate.update("DELETE FROM Peticion WHERE cod_pet=?", cod);
     }
 
     //ACTUALIZAMOS Peticion
@@ -45,14 +47,14 @@ public class PeticionDao {
 
     public Peticion getPeticion(String cod) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM Peticion WHERE cod=?", new PeticionRowMapper(), cod);
+            return jdbcTemplate.queryForObject("SELECT * FROM Peticion WHERE cod_pet=?", new PeticionRowMapper(), cod);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
     //LISTAMOS Peticion
-    public List<Peticion> getPeticion() {
+    public List<Peticion> getPeticiones() {
         try {
             return jdbcTemplate.query("SELECT * FROM Peticion", new
                     PeticionRowMapper());

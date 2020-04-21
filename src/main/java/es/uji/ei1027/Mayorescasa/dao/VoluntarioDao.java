@@ -25,7 +25,7 @@ public class VoluntarioDao {
                 voluntario.getNombre(),voluntario.getDni(),voluntario.getGenero(),
                 voluntario.getUsuario(),voluntario.getContraseña(),
                 voluntario.getEmail(),voluntario.getDireccion(),
-                voluntario.getFecha_nacimiento(),voluntario.getNumero_telefono(),voluntario.getHobbie());
+                voluntario.getFechanacimiento(),voluntario.getNumero_telefono(),voluntario.getHobbies());
     }
 
     //BORRAMOS Voluntario
@@ -40,8 +40,8 @@ public class VoluntarioDao {
                         "WHERE usuario=? ",
                 voluntario.getNombre(),voluntario.getGenero(),
                 voluntario.getContraseña(), voluntario.getEmail(),voluntario.getDireccion(),
-                voluntario.getFecha_nacimiento(),
-                voluntario.getNumero_telefono(),voluntario.getHobbie(), voluntario.getUsuario());
+                voluntario.getFechanacimiento(),
+                voluntario.getNumero_telefono(),voluntario.getHobbies(), voluntario.getUsuario());
     }
 
     public Voluntario getVoluntario (String voluntario ){
@@ -54,7 +54,7 @@ public class VoluntarioDao {
     }
 
     //LISTAMOS Voluntario
-    public List<Voluntario> getVoluntario() {
+    public List<Voluntario> getVoluntarios() {
         try{
             return jdbcTemplate.query("SELECT * FROM voluntario", new
                     VoluntarioRowMapper());
