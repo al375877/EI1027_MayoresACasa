@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/peticion")
 public class PeticionController {
 
     private PeticionDao peticionDao;
+    private int codigo;
 
     @Autowired
     public void setPeticionDao(PeticionDao peticionDao) {
@@ -79,6 +81,50 @@ public class PeticionController {
         model.addAttribute("peticiones", peticionDao.getPeticiones());
         return "peticion/servicios";
     }
+
+    @RequestMapping("/limpieza")
+    public String limpieza(Model model) {
+        codigo = (int) (Math.random()*25+1);
+        Peticion pet = new Peticion();
+        pet.setCod_pet(Integer.toString(codigo) + "LIMP");
+        pet.setTiposervicio("LIMPIEZA");
+        pet.setUsuario_ben("bob"); //Retocar
+        pet.setLinea(codigo);
+        pet.setPrecioservicio(200);
+        pet.setComentarios("Peticion esperando aprobacion");
+        peticionDao.addPeticion(pet);
+        return "peticion/servicios";
+    }
+
+    @RequestMapping("/cattering")
+    public String cattering(Model model) {
+        codigo=(int) (Math.random()*25+1);
+        Peticion pet = new Peticion();
+        pet.setCod_pet(Integer.toString(codigo) + "CATT");
+        pet.setTiposervicio("CATTERING");
+        pet.setUsuario_ben("bob"); //Retocar
+        pet.setLinea(codigo);
+        pet.setPrecioservicio(300);
+        pet.setComentarios("Peticion esperando aprobacion");
+        peticionDao.addPeticion(pet);
+        return "peticion/servicios";
+    }
+
+    @RequestMapping("/sanitario")
+    public String sanitario(Model model) {
+        codigo=(int) (Math.random()*25+1);
+        Peticion pet = new Peticion();
+        pet.setCod_pet(Integer.toString(codigo) + "SAN");
+        pet.setTiposervicio("SANITARIO");
+        pet.setUsuario_ben("bob"); //Retocar
+        pet.setLinea(codigo);
+        pet.setPrecioservicio(150);
+        pet.setComentarios("Peticion esperando aprobacion");
+        peticionDao.addPeticion(pet);
+        return "peticion/servicios";
+    }
+
+
 
 
 

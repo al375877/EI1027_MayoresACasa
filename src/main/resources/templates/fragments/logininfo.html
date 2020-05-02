@@ -5,11 +5,11 @@
 <body>
 <div class="loggeduser" th:object="${session}">
     <p th:if="*{user == null}">
-        No autenticat <a href="/login" th:href="@{/login}">Entrar</a>
+        No conectado <a href="/login" th:href="@{/login}">Entrar</a>
     </p>
     <p th:unless="*{user == null}">
-        Autenticat com <span th:text="*{user.username}"></span> <a
-            href="/logout" th:href="@{/logout}">Eixir</a>
+        Conectado como <span th:text="*{user.username}"> | </span> <a
+            href="/logout" th:href="@{/logout}">SALIR</a>
     </p>
 </div>
 </body>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Añadir peticion</title>
     <meta charset="UTF-8" />
@@ -15,49 +15,45 @@
     <table style="margin:auto">
 
         <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" maxlength="50" /></td>
+            <td><label>Codigo Peticion</label></td>
+            <td><input type="text" th:field="*{cod_pet}" placeholder="12123" maxlength="50" readonly="readonly" /></td>
         </tr>
         <tr>
-            <td><label>cif</label></td>
-            <td><input type="text" th:field="*{cif}" maxlength="10"/></td>
+            <td><label>Servicio</label></td>
+            <td><input type="text" th:field="*{tiposervicio}" placeholder="LIMPIEZA" maxlength="50" readonly="readonly"/></td>
         </tr>
         <tr>
-            <td><label>Persona de contacto</label></td>
-
-            <td><input type="text" th:field="*{persona_contacto}" maxlength="50" /></td>
+<!--            <span th:text="*{user.username}"> | </span>-->
+            <td><label>Beneficiario</label></td>
+            <td><input type="text" th:field="*{usuario_ben}" placeholder="bob" maxlength="50" readonly="readonly"/></td>
         </tr>
         <tr>
-            <td><label>Usuario</label></td>
-            <td><input type="text" th:field="*{usuario}" maxlength="50"/></td>
+            <td><label>Linea</label></td>
+            <td><input type="number" th:field="*{linea}" placeholder="1" maxlength="50" readonly="readonly"/></td>
         </tr>
         <tr>
-            <td><label>Contraseña</label></td>
-            <td><input type="password" th:field="*{contraseña}" maxlength="50"/></td>
+            <td><label>Precio</label></td>
+            <td><input type="number" th:field="*{precioservicio}" placeholder="200€" maxlength="50" readonly="readonly" /></td>
         </tr>
         <tr>
-            <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" maxlength="100"/></td>
+            <td><label>Fecha aceptada</label></td>
+            <td><input type="date" th:field="*{fechaaceptada}" maxlength="50" readonly="readonly"/></td>
         </tr>
         <tr>
-            <td><label>Direccion</label></td>
-            <td><input type="text" th:field="*{direccion}" maxlength="100"/></td>
+            <td><label>Fecha rechazada</label></td>
+            <td><input type="date" th:field="*{fecharechazada}" maxlength="50" readonly="readonly"/></td>
         </tr>
         <tr>
-            <td><label>Teléfono</label></td>
-            <td><input type="number" th:field="*{numero_telefono}" /></td>
+            <td><label>Fecha final</label></td>
+            <td><input type="date" th:field="*{fechafinal}" maxlength="50" readonly="readonly"/></td>
         </tr>
         <tr>
-        <tr>
-            <td><label>Tipo Servicio</label></td>
-            <td><input type="text" th:field="*{servicio}" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Añadir beneficiario" /></td>
+            <td><label>Comentarios</label></td>
+            <td><input type="text" th:field="*{comentarios}" maxlength="200" /></td>
         </tr>
     </table>
     <br>
-    <a th:href="@{/peticion/list}" class="boton_personalizado1" role="button" >Volver</a>
+    <a th:href="@{servicios}" class="boton_personalizado1" role="button" >Volver</a>
 </form>
 </div>
 </body>

@@ -27,7 +27,7 @@
     </style>
 </head>
 <body>
-<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | Beneficiaros | Servicios</h1></div>
+<div  th:replace="fragments/logininfo" style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | Beneficiaros | Servicios</h1></div>
 
 <br>
 <h2>¿Que servicio o servicios necesitas?</h2>
@@ -42,11 +42,23 @@
         </thead>
         <tbody>
 
-        <tr th:each="peticion: ${peticiones}">
-            <td th:text="${peticion.tiposervicio}"></td>
-            <td th:text="${peticion.precioservicio}"></td>
-            <td th:text="${peticion.comentarios}"></td>
-            <td><a class="boton_personalizado1" href="" role="button">Solicitar</a></td>
+        <tr>
+            <td>LIMPIEZA</td>
+            <td>200€/MES</td>
+            <td>De Lunes a Domingo, 16 a 18 horas</td>
+            <td><a class="boton_personalizado1" href="limpieza" role="button">Solicitar</a></td>
+        </tr>
+        <tr>
+            <td>CATTERING</td>
+            <td>300€/MES</td>
+            <td>De Lunes a Domingo, 14 a 15 horas y 21 a 22 horas</td>
+            <td><a class="boton_personalizado1" href="cattering" role="button">Solicitar</a></td>
+        </tr>
+        <tr>
+            <td>SALUD</td>
+            <td>150€/MES</td>
+            <td>De Lunes a Domingo, 10 a 12 horas</td>
+            <td><a class="boton_personalizado1" href="sanitario" role="button">Solicitar</a></td>
         </tr>
         </tbody>
     </table>

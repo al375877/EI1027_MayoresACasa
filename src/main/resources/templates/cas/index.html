@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mayores a casa</title>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | CAS </h1></div>
+
+<br>
+<h3>Página para gestionar la aplicación web y aceptacion de peticiones</h3>
+<table style="margin:auto">
+    <tr>
+        <td><a class="boton_personalizado1" href="" role="button">Ver/Modificar usuarios</a></td>
+        <td></td>
+        <td><a class="boton_personalizado1" th:href="@{/peticion/list}" role="button">Peticiones de servicios</a></td>
+        <td></td>
+        <td><a class="boton_personalizado1" href="" role="button">Solicitudes de registro</a></td>
+        <td></td>
+        <td><a class="boton_personalizado1" href="" role="button">Ver/Añadir/Eliminar contratos</a></td>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    </tr>
+</table>
+<table>
+    <tr><img src="https://www.ealde.es/wp-content/uploads/2018/11/gestion-de-recursos-direccion-de-proyectos.jpg" width="1000" height="333"></tr>
+</table>
+<a class="boton_personalizado1" th:href="@{/}" role="button">Página Principal</a>
+</body>
+</html>

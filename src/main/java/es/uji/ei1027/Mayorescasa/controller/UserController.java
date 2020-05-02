@@ -25,7 +25,7 @@ public class UserController {
         if (session.getAttribute("user") == null){
             UserDetails user =new UserDetails();
             model.addAttribute("user", user);
-            session.setAttribute("nextUrl", "user/list");
+            session.setAttribute("nextUrl", "beneficiario/index");
             session.setAttribute("autorizado",user.getAutorizado());
             return "login";
         }else {
