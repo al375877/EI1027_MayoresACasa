@@ -21,6 +21,7 @@ public class PeticionController {
 
     private PeticionDao peticionDao;
     private int codigo;
+    private List<String> beneficiarios= new ArrayList<>();
 
     @Autowired
     public void setPeticionDao(PeticionDao peticionDao) {
@@ -84,44 +85,71 @@ public class PeticionController {
 
     @RequestMapping("/limpieza")
     public String limpieza(Model model) {
-        codigo = (int) (Math.random()*25+1);
+        codigo++;
         Peticion pet = new Peticion();
-        pet.setCod_pet(Integer.toString(codigo) + "LIMP");
+        pet.setCod_pet(aleatorio() + "LIMP");
         pet.setTiposervicio("LIMPIEZA");
         pet.setUsuario_ben("bob"); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(200);
         pet.setComentarios("Peticion esperando aprobacion");
-        peticionDao.addPeticion(pet);
-        return "peticion/servicios";
+        if (beneficiarios.contains(pet.getUsuario_ben() + "LIMP")){
+            return "peticion/existe";
+        } else {
+            beneficiarios.add(pet.getUsuario_ben() + "LIMP");
+            peticionDao.addPeticion(pet);
+            return "peticion/servicios";
+        }
+
     }
 
     @RequestMapping("/cattering")
     public String cattering(Model model) {
-        codigo=(int) (Math.random()*25+1);
+        codigo++;
         Peticion pet = new Peticion();
-        pet.setCod_pet(Integer.toString(codigo) + "CATT");
+        pet.setCod_pet(aleatorio()  + "CATT");
         pet.setTiposervicio("CATTERING");
         pet.setUsuario_ben("bob"); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
         pet.setComentarios("Peticion esperando aprobacion");
-        peticionDao.addPeticion(pet);
-        return "peticion/servicios";
+        if (beneficiarios.contains(pet.getUsuario_ben()+ "CATT")){
+            return "peticion/existe";
+        } else {
+            beneficiarios.add(pet.getUsuario_ben()+ "CATT");
+            peticionDao.addPeticion(pet);
+            return "peticion/servicios";
+        }
     }
 
     @RequestMapping("/sanitario")
     public String sanitario(Model model) {
-        codigo=(int) (Math.random()*25+1);
+        codigo++;
         Peticion pet = new Peticion();
-        pet.setCod_pet(Integer.toString(codigo) + "SAN");
+        pet.setCod_pet(aleatorio()  + "SAN");
         pet.setTiposervicio("SANITARIO");
         pet.setUsuario_ben("bob"); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
-        pet.setComentarios("Peticion esperando aprobacion");
-        peticionDao.addPeticion(pet);
-        return "peticion/servicios";
+        if (beneficiarios.contains(pet.getUsuario_ben()+"SAN")){
+            return "peticion/existe";
+        } else {
+            beneficiarios.add(pet.getUsuario_ben()+"SAN");
+            peticionDao.addPeticion(pet);
+            return "peticion/servicios";
+        }
+    }
+
+    private String aleatorio(){
+        Random aleatorio = new Random();
+        String alfa = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
+        String cadena = "";
+        int numero;
+        int forma;
+        forma=(int)(aleatorio.nextDouble() * alfa.length()-1+0);
+        numero=(int)(aleatorio.nextDouble() * 99+100);
+        cadena=cadena+alfa.charAt(forma)+numero;
+        return cadena;
     }
 
 
