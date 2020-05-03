@@ -2,14 +2,10 @@ package es.uji.ei1027.Mayorescasa.model;
 
 import java.util.Date;
 
-public abstract class UsuarioGeneral  {
-    private String nombre;
-    private String contraseña;
-    private String usuario;
-    private String email;
-    private String direccion;
+public abstract class Usuario {
+    private String nombre, dni, usuario, contraseña, email, direccion, genero;
     private int numero_telefono;
-
+    private Date fechaNacimiento;
 
     public String getNombre() {
         return nombre;
@@ -19,12 +15,12 @@ public abstract class UsuarioGeneral  {
         this.nombre = nombre;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getDni() {
+        return dni;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getUsuario() {
@@ -33,6 +29,14 @@ public abstract class UsuarioGeneral  {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public String getEmail() {
@@ -51,6 +55,14 @@ public abstract class UsuarioGeneral  {
         this.direccion = direccion;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
     public int getNumero_telefono() {
         return numero_telefono;
     }
@@ -59,4 +71,11 @@ public abstract class UsuarioGeneral  {
         this.numero_telefono = numero_telefono;
     }
 
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 }

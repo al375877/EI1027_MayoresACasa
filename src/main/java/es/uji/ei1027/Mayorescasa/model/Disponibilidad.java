@@ -2,7 +2,7 @@ package es.uji.ei1027.Mayorescasa.model;
 
 import java.util.Date;
 
-public class ReservaHorarios {
+public class Disponibilidad {
     private String usuario_ben, usuario_vol, tipo;
     private int diasemana;
     private Date fechainicial, fechafinal;

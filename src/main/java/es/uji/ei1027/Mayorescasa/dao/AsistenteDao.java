@@ -21,11 +21,9 @@ public class AsistenteDao {
     }
     //AÑADIMOS Asistente
     public void addAsistente(Asistente asistente) {
-        jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?,?,?)",
-                asistente.getNombre(),asistente.getDni(),asistente.getGenero(),
-                asistente.getUsuario(),asistente.getContraseña(),
-                asistente.getEmail(),asistente.getDireccion(),
-                asistente.getFecha_nacimiento(),asistente.getNumero_telefono());
+        jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?)",
+                asistente.getNombre(),asistente.getDni(),asistente.getUsuario(),asistente.getContraseña(),
+                asistente.getMail(),asistente.getBeneficiario(), asistente.getTelefono());
     }
 
     //BORRAMOS Asistente
@@ -35,15 +33,13 @@ public class AsistenteDao {
 
     //ACTUALIZAMOS Asistente (No se actualiza usuario y dni por claves primaria)
     public void updateAsistente(Asistente asistente){
-        jdbcTemplate.update("UPDATE Asistente SET nombre=?, genero=?, contraseña=?, " +
-                        "email=?, direccion=?,fecha_nacimiento=?, telefono=? " +
+        jdbcTemplate.update("UPDATE Asistente SET nombre=?, dni=?, " +
+                        "contraseña=?, email=?, beneficiario=?, telefono=? " +
                         "WHERE usuario=? ",
-                asistente.getNombre(),asistente.getGenero(), asistente.getEdad(),
-                asistente.getContraseña(), asistente.getEmail(),asistente.getDireccion(),
-                asistente.getFecha_nacimiento(),
-                asistente.getNumero_telefono(), asistente.getUsuario());
+                asistente.getNombre(),asistente.getDni(),asistente.getContraseña(),
+                asistente.getMail(),asistente.getBeneficiario(), asistente.getTelefono(),
+                asistente.getUsuario());
     }
-
     public Asistente getAsistente (String usuario ){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM asistente WHERE usuario=?", new AsistenteRowMapper(),usuario);

@@ -79,7 +79,6 @@ public class PeticionController {
 
     @RequestMapping("/servicios")
     public String servicios(Model model) {
-        model.addAttribute("peticiones", peticionDao.getPeticiones());
         return "peticion/servicios";
     }
 
@@ -89,14 +88,14 @@ public class PeticionController {
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio() + "LIMP");
         pet.setTiposervicio("LIMPIEZA");
-        pet.setUsuario_ben("bob"); //Retocar
+        pet.setDni_ben("54781268Q"); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(200);
         pet.setComentarios("Peticion esperando aprobacion");
-        if (beneficiarios.contains(pet.getUsuario_ben() + "LIMP")){
+        if (beneficiarios.contains(pet.getDni_ben() + "LIMP")){
             return "peticion/existe";
         } else {
-            beneficiarios.add(pet.getUsuario_ben() + "LIMP");
+            beneficiarios.add(pet.getDni_ben() + "LIMP");
             peticionDao.addPeticion(pet);
             return "peticion/servicios";
         }
@@ -108,15 +107,15 @@ public class PeticionController {
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "CATT");
-        pet.setTiposervicio("CATTERING");
-        pet.setUsuario_ben("bob"); //Retocar
+        pet.setTiposervicio("54781268Q");
+        pet.setDni_ben("jesus"); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
         pet.setComentarios("Peticion esperando aprobacion");
-        if (beneficiarios.contains(pet.getUsuario_ben()+ "CATT")){
+        if (beneficiarios.contains(pet.getDni_ben()+ "CATT")){
             return "peticion/existe";
         } else {
-            beneficiarios.add(pet.getUsuario_ben()+ "CATT");
+            beneficiarios.add(pet.getDni_ben()+ "CATT");
             peticionDao.addPeticion(pet);
             return "peticion/servicios";
         }
@@ -127,14 +126,14 @@ public class PeticionController {
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "SAN");
-        pet.setTiposervicio("SANITARIO");
-        pet.setUsuario_ben("bob"); //Retocar
+        pet.setTiposervicio("54781268Q");
+        pet.setDni_ben("jesus"); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
-        if (beneficiarios.contains(pet.getUsuario_ben()+"SAN")){
+        if (beneficiarios.contains(pet.getDni_ben()+"SAN")){
             return "peticion/existe";
         } else {
-            beneficiarios.add(pet.getUsuario_ben()+"SAN");
+            beneficiarios.add(pet.getDni_ben()+"SAN");
             peticionDao.addPeticion(pet);
             return "peticion/servicios";
         }

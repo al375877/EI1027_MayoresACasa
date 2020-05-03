@@ -17,16 +17,16 @@ public class FakeUserProvider implements UserDao {
     public FakeUserProvider() {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
         UserDetails userAlice = new UserDetails();
-        userAlice.setUsername("alice");
-        userAlice.setPassword(passwordEncryptor.encryptPassword("alice"));
+        userAlice.setUsername("tere");
+        userAlice.setPassword(passwordEncryptor.encryptPassword("tere"));
         userAlice.setAutorizado("admin");
-        knownUsers.put("alice", userAlice);
+        knownUsers.put("tere", userAlice);
 
         UserDetails userBob = new UserDetails();
-        userBob.setUsername("bob");
-        userBob.setPassword(passwordEncryptor.encryptPassword("bob"));
+        userBob.setUsername("jesus");
+        userBob.setPassword(passwordEncryptor.encryptPassword("jesus"));
         userBob.setAutorizado("ben");
-        knownUsers.put("bob", userBob);
+        knownUsers.put("jesus", userBob);
     }
 
     @Override

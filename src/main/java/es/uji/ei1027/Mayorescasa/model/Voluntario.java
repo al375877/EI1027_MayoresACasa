@@ -2,18 +2,19 @@ package es.uji.ei1027.Mayorescasa.model;
 
 import java.util.Date;
 
-public class Voluntario  extends UsuarioGeneral{
+public class Voluntario  extends Usuario {
 
-    private String genero,hobbies;
-    private Date fechanacimiento;
-    private String dni;
+    private String dni, hobbies;
+    private Disponibilidad disponibilidad;
 
-    public String getGenero() {
-        return genero;
+    @Override
+    public String getDni() {
+        return dni;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    @Override
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getHobbies() {
@@ -24,19 +25,11 @@ public class Voluntario  extends UsuarioGeneral{
         this.hobbies = hobbies;
     }
 
-    public Date getFechanacimiento() {
-        return fechanacimiento;
+    public Disponibilidad getDisponibilidad() {
+        return disponibilidad;
     }
 
-    public void setFechanacimiento(Date fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
+    public void setDisponibilidad(Disponibilidad disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
 }

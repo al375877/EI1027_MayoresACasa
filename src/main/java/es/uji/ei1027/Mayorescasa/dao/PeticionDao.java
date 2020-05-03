@@ -25,7 +25,7 @@ public class PeticionDao {
         jdbcTemplate.update("INSERT INTO Peticion VALUES (?,?,?,?,?,?,?,?,?)",
                 peticion.getCod_pet(), peticion.getTiposervicio(), peticion.getPrecioservicio(), peticion.getLinea(),
                 peticion.getFechaaceptada(), peticion.getFecharechazada(), peticion.getFechafinal(), peticion.getComentarios(),
-                peticion.getUsuario_ben()
+                peticion.getDni_ben()
         );
 
     }
@@ -38,10 +38,10 @@ public class PeticionDao {
     //ACTUALIZAMOS Peticion
     public void updatePeticion(Peticion peticion) {
         jdbcTemplate.update("UPDATE peticon SET tiposervicio=?, precioservicio=?, linea=?, fechaaceptada=?, fecharechazada=?," +
-                        "fechafinal=?, comentarios=?, usuario_ben=? ",
+                        "fechafinal=?, comentarios=?, dni_ben=? ",
                 peticion.getTiposervicio(), peticion.getPrecioservicio(), peticion.getLinea(),
                 peticion.getFechaaceptada(), peticion.getFecharechazada(), peticion.getFechafinal(), peticion.getComentarios(),
-                peticion.getUsuario_ben(),peticion.getCod_pet()
+                peticion.getDni_ben(),peticion.getCod_pet()
         );
     }
 

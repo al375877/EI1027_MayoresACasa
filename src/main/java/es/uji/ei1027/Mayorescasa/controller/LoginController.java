@@ -63,6 +63,7 @@ public class LoginController {
         // Guardem les dades de l'usuari autenticat a la sessió
         session.setAttribute("user", user);
 
+
         if(session.getAttribute("nextUrl")!=null) {
             Object url = session.getAttribute("nextUrl");
             session.removeAttribute("nextUrl");
@@ -72,6 +73,7 @@ public class LoginController {
         }
         return "redirect:/";
     }
+
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
