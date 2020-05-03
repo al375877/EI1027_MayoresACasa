@@ -4,9 +4,11 @@ public class Asistente {
 
    private String nombre;
     private String dni;
-    private String mail;
+    private String email;
     private String usuario;
     private String contraseña;
+    private String beneficiario;
+    private int telefono;
 
     public String getBeneficiario() {
         return beneficiario;
@@ -15,9 +17,6 @@ public class Asistente {
     public void setBeneficiario(String beneficiario) {
         this.beneficiario = beneficiario;
     }
-
-    private String beneficiario;
-   private int telefono;
 
     public String getNombre() {
         return nombre;
@@ -35,12 +34,12 @@ public class Asistente {
         this.dni = dni;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsuario() {

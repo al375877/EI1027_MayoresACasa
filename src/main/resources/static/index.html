@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{templates/fragments/base}">
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<!--      layout:decorate="~{templates/fragments/base}">-->
 <head>
     <meta charset="UTF-8" />
     <title>Mayores a casa</title>
-<!--    <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TnKQQIT9V1FSjIXrrBT0XzJIH0eWhr7h1GPsePd1QBcgc7A2kxfeU3IS1wjpKLOzXBHzzxYoPiKEKs5plzaSYqwOOfP7cgmvrqpCwpSP0OJYjcVjugZM2ey7YURNJhBltgOF6SymDoNvXaUXh4YWqw" charset="UTF-8"></script>-->
+    <!--    <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TnKQQIT9V1FSjIXrrBT0XzJIH0eWhr7h1GPsePd1QBcgc7A2kxfeU3IS1wjpKLOzXBHzzxYoPiKEKs5plzaSYqwOOfP7cgmvrqpCwpSP0OJYjcVjugZM2ey7YURNJhBltgOF6SymDoNvXaUXh4YWqw" charset="UTF-8"></script>-->
 
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
     <style>
@@ -21,8 +21,7 @@
     </style>
 </head>
 <body>
-<div  layout:fragment="content">
-<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Mayores a casa</h1></div>
+<div layout:fragment="content" style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Mayores a casa</h1></div>
 
 <br>
 <table style="margin:auto">
@@ -38,7 +37,6 @@
     <tr></tr>
     <tr></tr>
     <tr></tr>
-    </tr>
 
 </table>
 <table>
@@ -47,6 +45,5 @@
 <h3>¿No sabes como utilizar nuestra página?</h3>
 <a class="boton_personalizado1" href="asistente/solicitar" role="button">Contacta con un asistente</a>
 
-</div>
 </body>
 </html>

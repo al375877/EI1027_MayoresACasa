@@ -23,7 +23,7 @@ public class AsistenteDao {
     public void addAsistente(Asistente asistente) {
         jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?)",
                 asistente.getNombre(),asistente.getDni(),asistente.getUsuario(),asistente.getContraseña(),
-                asistente.getMail(),asistente.getBeneficiario(), asistente.getTelefono());
+                asistente.getEmail(),asistente.getBeneficiario(), asistente.getTelefono());
     }
 
     //BORRAMOS Asistente
@@ -37,7 +37,7 @@ public class AsistenteDao {
                         "contraseña=?, email=?, beneficiario=?, telefono=? " +
                         "WHERE usuario=? ",
                 asistente.getNombre(),asistente.getDni(),asistente.getContraseña(),
-                asistente.getMail(),asistente.getBeneficiario(), asistente.getTelefono(),
+                asistente.getEmail(),asistente.getBeneficiario(), asistente.getTelefono(),
                 asistente.getUsuario());
     }
     public Asistente getAsistente (String usuario ){

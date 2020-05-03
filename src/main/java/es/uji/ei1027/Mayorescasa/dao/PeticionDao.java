@@ -37,8 +37,8 @@ public class PeticionDao {
 
     //ACTUALIZAMOS Peticion
     public void updatePeticion(Peticion peticion) {
-        jdbcTemplate.update("UPDATE peticon SET tiposervicio=?, precioservicio=?, linea=?, fechaaceptada=?, fecharechazada=?," +
-                        "fechafinal=?, comentarios=?, dni_ben=? ",
+        jdbcTemplate.update("UPDATE peticion SET tiposervicio=?, precioservicio=?, linea=?, fechaaceptada=?, fecharechazada=?," +
+                        "fechafinal=?, comentarios=?, dni_ben=? WHERE cod_pet=? ",
                 peticion.getTiposervicio(), peticion.getPrecioservicio(), peticion.getLinea(),
                 peticion.getFechaaceptada(), peticion.getFecharechazada(), peticion.getFechafinal(), peticion.getComentarios(),
                 peticion.getDni_ben(),peticion.getCod_pet()

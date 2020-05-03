@@ -182,6 +182,18 @@ public class PeticionController {
         return "redirect:../list";
     }
 
+    @RequestMapping(value="/rechazar/{cod}")
+    public String rechazarPeticion(@PathVariable String cod) {
+        Peticion pet;
+        pet = peticionDao.getPeticion(cod);
+        Date fecha = new Date();
+        System.out.println(fecha);
+        pet.setFecharechazada(fecha);
+        pet.setComentarios("Peticion RECHAZADA");
+        peticionDao.updatePeticion(pet);
+        return "redirect:../list";
+    }
+
 
 
 

@@ -15,7 +15,7 @@ public final class AsistenteRowMapper implements RowMapper<Asistente> {
         asistente.setDni(rs.getString("dni"));
         asistente.setUsuario(rs.getString("usuario"));
         asistente.setContraseña(rs.getString("contraseña"));
-        asistente.setMail(rs.getString("email"));
+        asistente.setEmail(rs.getString("email"));
         asistente.setBeneficiario(rs.getString("beneficiario"));
         asistente.setTelefono(rs.getInt("telefono"));
 

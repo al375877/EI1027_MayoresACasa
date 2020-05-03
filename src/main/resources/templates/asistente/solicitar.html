@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Mayores a casa</title>
@@ -22,16 +22,13 @@
     </style>
 </head>
 <body>
-<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Lista de los asistentes disponibles</h1></div>
+<div layout:fragment="content" style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Lista de los asistentes disponibles</h1></div>
 <br>
     <table>
         <thead>
         <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Género</th>
             <th scope="col">Email</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">F.Nacimiento</th>
             <th scope="col">Telefono</th>
 <!--            <th scope="col">Que necesitas?</th>-->
         </tr>
@@ -40,15 +37,14 @@
 
         <tr th:each="asistente: ${asistentes}">
             <td th:text="${asistente.nombre}"></td>
-            <td th:text="${asistente.genero}"></td>
             <td th:text="${asistente.email}"></td>
-            <td th:text="${asistente.direccion}"></td>
-            <td th:text="${asistente.fecha_nacimiento}"></td>
-            <td th:text="${asistente.numero_telefono}"></td>
+            <td th:text="${asistente.telefono}"></td>
 <!--            <td><input type="text" name="nombredelacaja"></td>-->
             <td><a class="boton_personalizado1" href="" role="button">Contacta</a></td>
         </tr>
         </tbody>
     </table>
+<a href="/cas/index" class="boton_personalizado1" role="button" >Volver</a>
+<a href="/" class="boton_personalizado1" role="button" >Página Principal</a>
 </body>
 </html>
