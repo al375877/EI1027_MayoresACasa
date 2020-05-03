@@ -3,9 +3,17 @@ package es.uji.ei1027.Mayorescasa.model;
 import java.util.Date;
 
 public class Usuario {
-    private String nombre, dni, usuario, contraseña, email, direccion, genero;
+    private String nombre, dni, usuario, contraseña, email, direccion, genero, tipoUsuario;
     private int numero_telefono;
     private Date fechaNacimiento;
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 
     public String getNombre() {
         return nombre;
