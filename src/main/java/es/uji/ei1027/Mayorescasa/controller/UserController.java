@@ -21,12 +21,12 @@ public class UserController {
         this.usuarioDao = usuarioDao;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/")
     public String listSocis(HttpSession session, Model model) {
         if (session.getAttribute("user") == null) {
             UserDetails user = new UserDetails();
             model.addAttribute("user", user);
-            //session.setAttribute("nextUrl", "beneficiario/index");
+
             return "login";
         }
 //        }else {

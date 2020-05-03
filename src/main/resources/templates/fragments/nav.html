@@ -16,7 +16,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark barra_azul" >
 
         <div class="container">
-            <a class="navbar-brand" style="font-family:rondalo;" href="/"><b>Mayores a casa</b></a>
+            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{user == null}" href="/"><b>Mayores a casa</b></a>
+            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='cas'}" th:href="@{/cas/index}"><b>Mayores a casa</b></a>
+            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Mayores a casa</b></a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,15 +27,18 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
 
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link" href="/">Pagina principal <span class="sr-only">(current)</span></a>
-                    <a class="nav-link" th:href="@{/beneficiario/list}">Gestion de beneficiarios</a>
+                    <a class="nav-link"  th:if="*{tipo=='cas'}" th:href="@{/cas/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                    <a class="nav-link"  th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
 
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{autorizado==admi}" th:href="@{/user/list}">Area privada</a>
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/beneficiario/list}">Gestion de Beneficiarios |</a>
+                    <a class="nav-link" th:unless="*{user == null}" th:if="*{tipo=='Beneficiario'}" th:href="@{/voluntario/solicitar}">Ver/Solicitar Voluntario |</a>
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/servicios}">Contratar Servicio |</a>
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/peticion/list}">Peticion Servicios |</a>
 
                     <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>
 
                     <div  th:unless="*{user == null}" class="dropdown">
-                        <li type="button" th:text="*{user.username}" class="nav-link barra_azul dropdown-toggle"  data-toggle="dropdown">
+                        <li type="button" th:text="*{user.usuario}" class="nav-link barra_azul dropdown-toggle"  data-toggle="dropdown">
                             <span class="caret"></span>
                         </li>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">

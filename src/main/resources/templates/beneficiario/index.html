@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css"
+              href="/css/estils.css"
+              th:href="@{/css/estils.css}"/>
+
+        <meta charset="UTF-8"/>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
     <title>Mayores a casa</title>
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
-          th:href="@{/css/estils.css}"/>
+
     <style>
         img {
             display: block;
@@ -14,7 +21,10 @@
     </style>
 </head>
 <body>
-<div  th:replace="fragments/logininfo" style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | Beneficiaros</h1></div>
+<div   layout:fragment="content">
+<div  style="padding: 25px 50px;background-color:#B0E0E6;">
+    <h1>Mayores a casa | Beneficiaros</h1>
+</div>
 
 <br>
 <h2>Hola, ¿En que puedo ayudarte?</h2>
@@ -33,10 +43,12 @@
     <tr></tr>
     </tr>
 </table>
+    <br>
 <table>
     <tr><img src="https://www.thorigny.fr/sites/default/files/styles/image_entete_pi/public/seniors-ok.jpg?h=bf287e83&itok=jZhh_k2q" width="1000" height="333"></tr>
 </table>
 <h3>¿No sabes como utilizar nuestra página?</h3>
 <a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
+</div>
 </body>
 </html>

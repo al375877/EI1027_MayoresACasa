@@ -1,15 +1,15 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
-<!--      layout:decorate="~{fragments/base}">-->
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
     <link rel="stylesheet" type="text/css"
           href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
     <title>Login</title>
     <meta charset="UTF-8"/>
-<!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
 </head>
 <body>
@@ -19,7 +19,7 @@
       th:object="${user}" method="post">
     <p>
         <label>Nombre de usuario:</label>
-        <input class="form-control" type="text" th:field="*{username}"/>
+        <input class="form-control" type="text" th:field="*{username}"  placeholder="Nombre usuario"/>
     <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
     </p>
     <p>
