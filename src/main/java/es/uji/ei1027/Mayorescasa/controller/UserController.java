@@ -22,17 +22,20 @@ public class UserController {
 
     @RequestMapping("/list")
     public String listSocis(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null){
-            UserDetails user =new UserDetails();
+        if (session.getAttribute("user") == null) {
+            UserDetails user = new UserDetails();
             model.addAttribute("user", user);
-            session.setAttribute("nextUrl", "beneficiario/index");
-            session.setAttribute("autorizado",user.getAutorizado());
+            //session.setAttribute("nextUrl", "beneficiario/index");
             return "login";
-        }else {
-            UserDetails user = (UserDetails) session.getAttribute("user");
-            session.setAttribute("autorizado",user.getAutorizado());
         }
+//        }else {
+//            UserDetails user = (UserDetails) session.getAttribute("user");
+//            session.setAttribute("autorizado",user.getAutorizado());
+//        }
         model.addAttribute("users", userDao.listAllUsers());
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        if (user.getAutorizado()=="admin")
+            return "cas/index";
         return "beneficiario/index";
     }
 

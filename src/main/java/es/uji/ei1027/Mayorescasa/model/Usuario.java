@@ -2,7 +2,7 @@ package es.uji.ei1027.Mayorescasa.model;
 
 import java.util.Date;
 
-public abstract class Usuario {
+public class Usuario {
     private String nombre, dni, usuario, contraseña, email, direccion, genero;
     private int numero_telefono;
     private Date fechaNacimiento;

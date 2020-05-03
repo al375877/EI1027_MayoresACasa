@@ -1,7 +1,10 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
 import es.uji.ei1027.Mayorescasa.dao.PeticionDao;
+import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
+import es.uji.ei1027.Mayorescasa.model.UserDetails;
+import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -82,13 +87,23 @@ public class PeticionController {
         return "peticion/servicios";
     }
 
+//    UserDetails user =new UserDetails();
+//            model.addAttribute("user", user);
+//            session.setAttribute("nextUrl", "beneficiario/index");
+//            session.setAttribute("autorizado",user.getAutorizado());
+
     @RequestMapping("/limpieza")
-    public String limpieza(Model model) {
+    public String limpieza(HttpSession session, Model model) {
+        UserDetails user =new UserDetails();
+        user= (UserDetails) session.getAttribute("user");
+//        System.out.println(user.getUsername());
+//        System.out.println(user.getAutorizado());
+//        System.out.println(user.getPassword());
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio() + "LIMP");
         pet.setTiposervicio("LIMPIEZA");
-        pet.setDni_ben("54781268Q"); //Retocar
+        pet.setDni_ben(user.getDni());
         pet.setLinea(codigo);
         pet.setPrecioservicio(200);
         pet.setComentarios("Peticion esperando aprobacion");
@@ -103,12 +118,14 @@ public class PeticionController {
     }
 
     @RequestMapping("/cattering")
-    public String cattering(Model model) {
+    public String cattering(HttpSession session, Model model) {
+        UserDetails user =new UserDetails();
+        user= (UserDetails) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "CATT");
-        pet.setTiposervicio("54781268Q");
-        pet.setDni_ben("jesus"); //Retocar
+        pet.setTiposervicio("CATTERING");
+        pet.setDni_ben(user.getDni()); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
         pet.setComentarios("Peticion esperando aprobacion");
@@ -122,12 +139,14 @@ public class PeticionController {
     }
 
     @RequestMapping("/sanitario")
-    public String sanitario(Model model) {
+    public String sanitario(HttpSession session, Model model) {
+        UserDetails user =new UserDetails();
+        user= (UserDetails) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "SAN");
-        pet.setTiposervicio("54781268Q");
-        pet.setDni_ben("jesus"); //Retocar
+        pet.setTiposervicio("SANITARIO");
+        pet.setDni_ben(user.getDni()); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
         if (beneficiarios.contains(pet.getDni_ben()+"SAN")){
@@ -149,6 +168,18 @@ public class PeticionController {
         numero=(int)(aleatorio.nextDouble() * 99+100);
         cadena=cadena+alfa.charAt(forma)+numero;
         return cadena;
+    }
+
+    @RequestMapping(value="/aceptar/{cod}")
+    public String aceptarPeticion(@PathVariable String cod) {
+        Peticion pet;
+        pet = peticionDao.getPeticion(cod);
+        Date fecha = new Date();
+        System.out.println(fecha);
+        pet.setFechaaceptada(fecha);
+        pet.setComentarios("Peticion ACEPTADA");
+        peticionDao.updatePeticion(pet);
+        return "redirect:../list";
     }
 
 

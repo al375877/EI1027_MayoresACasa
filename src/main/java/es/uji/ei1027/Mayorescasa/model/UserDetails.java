@@ -5,6 +5,15 @@ public class UserDetails {
     String username;
     String password;
     String autorizado;
+    String dni;
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
     public String getUsername() {
         return username;

@@ -6,6 +6,8 @@ package es.uji.ei1027.Mayorescasa.dao;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.stereotype.Repository;
 import es.uji.ei1027.Mayorescasa.model.UserDetails;
@@ -16,17 +18,19 @@ public class FakeUserProvider implements UserDao {
 
     public FakeUserProvider() {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-        UserDetails userAlice = new UserDetails();
-        userAlice.setUsername("tere");
-        userAlice.setPassword(passwordEncryptor.encryptPassword("tere"));
-        userAlice.setAutorizado("admin");
-        knownUsers.put("tere", userAlice);
+        UserDetails userTeresa = new UserDetails();
+        userTeresa.setUsername("tere");
+        userTeresa.setPassword(passwordEncryptor.encryptPassword("tere"));
+        userTeresa.setAutorizado("admin");
+        userTeresa.setDni("45125874P");
+        knownUsers.put("tere", userTeresa);
 
-        UserDetails userBob = new UserDetails();
-        userBob.setUsername("jesus");
-        userBob.setPassword(passwordEncryptor.encryptPassword("jesus"));
-        userBob.setAutorizado("ben");
-        knownUsers.put("jesus", userBob);
+        UserDetails userJesus = new UserDetails();
+        userJesus.setUsername("jesus");
+        userJesus.setPassword(passwordEncryptor.encryptPassword("jesus"));
+        userJesus.setAutorizado("ben");
+        userJesus.setDni("54781268Q");
+        knownUsers.put("jesus", userJesus);
     }
 
     @Override
