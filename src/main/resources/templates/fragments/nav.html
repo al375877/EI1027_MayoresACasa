@@ -17,7 +17,7 @@
 
         <div class="container">
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{user == null}" href="/"><b>Mayores a casa</b></a>
-            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='cas'}" th:href="@{/cas/index}"><b>Mayores a casa</b></a>
+            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='cas'}" th:href="@{/}"><b>Mayores a casa</b></a>
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Mayores a casa</b></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,6 +62,7 @@
 
     </nav>
 </div>
+
 </body>
 </html>
 

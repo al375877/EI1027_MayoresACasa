@@ -24,7 +24,13 @@
           border-collapse: collapse;
           width: 100%;
         }
-        th,td {
+        td {
+          border: 1px solid #dddddd;
+          text-align: center;
+          padding: 15px;
+          height: 60px;
+        }
+        th {
           border: 1px solid #dddddd;
           text-align: center;
           padding: 15px;
@@ -36,17 +42,18 @@
 </head>
 <body >
 <div  layout:fragment="content" >
-<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | Beneficiaros | Servicios</h1>
-</div>
+    <div  style="padding: 10px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black">Mayores a casa | Beneficiaros | Servicios</h2>
+    </div>
 
 <br>
 <h2>¿Que servicio o servicios necesitas?</h2>
 <table style=" table-layout: auto; width: 100%;  ">
         <thead>
         <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Descripcion</th>
+            <th style="text-align: center" scope="col">Nombre</th>
+            <th style="text-align: center" scope="col">Precio</th>
+            <th style="text-align: center" scope="col">Descripcion</th>
         </tr>
         </thead>
         <tbody>

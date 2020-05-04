@@ -1,5 +1,7 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
+import es.uji.ei1027.Mayorescasa.dao.DatosBeneficiario;
+import es.uji.ei1027.Mayorescasa.model.Asistente;
 import es.uji.ei1027.Mayorescasa.model.Beneficiario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,4 +25,20 @@ public class BeneficiarioController {
         return "beneficiario/index";
     }
 
+    @RequestMapping("/pedirRegistro", method=RequestMethod.POST)
+    public String pedirRegistro(@ModelAttribute(value="foo") DatosBeneficiario foo) {
+        return "beneficiario/pedirRegistro";
+    }
+    @RequestMapping(value = "/showForm", method=RequestMethod.GET)
+    public void showForm(Model model) {
+        DatosBeneficiario foo = new DatosBeneficiario();
+        foo.setNombre("bar");
+
+        model.addAttribute("foo", foo);
+        System.out.println(foo.getNombre());
+    }
+
 }
+
+
+
