@@ -25,7 +25,7 @@ public class BeneficiarioController {
         return "beneficiario/index";
     }
 
-    @RequestMapping("/pedirRegistro", method=RequestMethod.POST)
+    @RequestMapping(value = "/pedirRegistro", method=RequestMethod.POST)
     public String pedirRegistro(@ModelAttribute(value="foo") DatosBeneficiario foo) {
         return "beneficiario/pedirRegistro";
     }
