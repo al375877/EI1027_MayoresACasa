@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
-<!--      layout:decorate="~{fragments/base}">-->
-
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <title>Gestionar Peticiones</title>
-    <meta charset="UTF-8" />
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />-->
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Gestionar Peticiones</title>
+
     <style>
         table {
           font-family: arial, sans-serif;
@@ -26,9 +27,9 @@
     </style>
 </head>
 <body>
-<div  layout:fragment="content" style="padding: 25px 50px;background-color:#B0E0E6;">
+<div  layout:fragment="content" >
 <h2>Lista de las peticiones pendientes</h2>
-<table class="table table-striped" >
+<table class="table table-striped" style=" width:100%">
     <thead>
     <tr>
         <th scope="col">Codigo</th>
@@ -55,7 +56,7 @@
         <td th:text="${peticion.comentarios}"></td>
         <td th:text="${peticion.dni_ben}"></td>
 
-        <td><a type="button" class="boton_editar" th:href="@{/peticion/aceptar/{cod_pet}(cod_pet=${peticion.cod_pet})}">ACEPTAR</a></td>
+        <td><a type="button" class="boton_añadir" th:href="@{/peticion/aceptar/{cod_pet}(cod_pet=${peticion.cod_pet})}">ACEPTAR</a></td>
         <td><a type="button" class="boton_editar" th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${peticion.cod_pet})}">RECHAZAR</a></td>
         <td><a type="button" class="boton_eliminar" th:href="@{/peticion/delete/{cod_pet}(cod_pet=${peticion.cod_pet})}">BORRAR</a></td>
     </tr>

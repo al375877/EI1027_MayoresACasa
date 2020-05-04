@@ -7,9 +7,10 @@
     <link rel="stylesheet" type="text/css"
           href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
-    <title>Login</title>
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Login</title>
+
 
 </head>
 <body>
@@ -19,13 +20,13 @@
       th:object="${user}" method="post">
     <p>
         <label>Nombre de usuario:</label>
-        <input class="form-control" type="text" th:field="*{username}"  placeholder="Nombre usuario"/>
-    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        <input class="form-control" type="text" th:field="*{usuario}"  placeholder="Nombre usuario"/>
+    <div class="error" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></div>
     </p>
     <p>
         <label>Contraseña:</label>
-        <input class="form-control" type="password" th:field="*{password}"/>
-    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <input class="form-control" type="password" th:field="*{contraseña}"/>
+    <div class="error" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></div>
     </p>
     <input type="submit" class="boton_añadir" role="button" value="Acceder" />
 </form>
