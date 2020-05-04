@@ -10,42 +10,35 @@
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
-    <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+<!--    <style>-->
+<!--        img {-->
+<!--            display: block;-->
+<!--            margin-left: auto;-->
+<!--            margin-right: auto;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
 <div  layout:fragment="content">
-    <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | CAS </h1>
-    </div>
+    <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores a casa | CAS </h1></div>
 
     <br>
     <h3>Página para gestionar la aplicación web y aceptacion de peticiones</h3>
-    <table style="margin:auto">
-        <tr>
-            <td><a class="boton_personalizado1" href="" role="button">Ver/Modificar usuarios</a></td>
-            <td></td>
-            <td><a class="boton_personalizado1" th:href="@{/peticion/list}" role="button">Peticiones de servicios</a></td>
-            <td></td>
-            <td><a class="boton_personalizado1" href="" role="button">Solicitudes de registro</a></td>
-            <td></td>
-            <td><a class="boton_personalizado1" href="" role="button">Ver/Añadir/Eliminar contratos</a></td>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        </tr>
-    </table>
     <table>
-        <tr><img src="https://www.ealde.es/wp-content/uploads/2018/11/gestion-de-recursos-direccion-de-proyectos.jpg" width="1000" height="333"></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><a class="boton_personalizado1" href="" role="button">Ver/Modificar usuarios</a></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+<!--            <td><img src="https://www.ealde.es/wp-content/uploads/2018/11/gestion-de-recursos-direccion-de-proyectos.jpg" width="1000" height="333"></td>-->
+        <tr><td><a class="boton_personalizado1" th:href="@{/peticion/list}" role="button">Peticiones de servicios</a></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><a class="boton_personalizado1" href="" role="button">Solicitudes de registro</a></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><a class="boton_personalizado1" href="" role="button">Ver/Añadir/Eliminar contratos</a></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
     </table>
     <a class="boton_personalizado1" th:href="@{/}" role="button">Página Principal</a>
 
