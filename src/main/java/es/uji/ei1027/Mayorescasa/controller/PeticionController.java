@@ -24,11 +24,11 @@ public class PeticionController {
 
     private PeticionDao peticionDao;
     private int codigo;
-    private List<String> beneficiarios= new ArrayList<>();
+    private List<String> beneficiarios = new ArrayList<>();
 
     @Autowired
     public void setPeticionDao(PeticionDao peticionDao) {
-        this.peticionDao=peticionDao;
+        this.peticionDao = peticionDao;
     }
 
     // Operaciones: Crear, listar, actualizar, borrar
@@ -38,18 +38,15 @@ public class PeticionController {
         model.addAttribute("peticiones", peticionDao.getPeticiones());
         return "peticion/list";
     }
+
     //Llamada de la peticion add
-    @RequestMapping(value="/add")
+    @RequestMapping(value = "/add")
     public String addpeticion(Model model) {
         model.addAttribute("peticion", new Peticion());
-        List<String> generoList = new ArrayList<>();
-        generoList.add("Femenini");
-        generoList.add("Masculino");
-        model.addAttribute("generoList", generoList);
         return "peticion/add";
     }
 
-    @RequestMapping(value="/add", method= RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
@@ -58,13 +55,13 @@ public class PeticionController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
+    @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editpeticion(Model model, @PathVariable String usuario) {
         model.addAttribute("peticion", peticionDao.getPeticion(usuario));
         return "peticiones/update";
     }
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("peticion") Peticion peticion,
             BindingResult bindingResult) {
@@ -74,7 +71,7 @@ public class PeticionController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{usuario}")
+    @RequestMapping(value = "/delete/{usuario}")
     public String processDelete(@PathVariable String usuario) {
         peticionDao.deletePeticion(usuario);
         return "redirect:../list";
@@ -86,12 +83,9 @@ public class PeticionController {
     }
 
     @RequestMapping("/limpieza")
-    public String limpieza(HttpSession session, Model model) {
-        Usuario user =new Usuario();
-        user= (Usuario) session.getAttribute("user");
-//        System.out.println(user.getUsername());
-//        System.out.println(user.getAutorizado());
-//        System.out.println(user.getPassword());
+    public void limpieza(HttpSession session, Model model) {
+
+        Usuario user = (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio() + "LIMP");
@@ -100,18 +94,24 @@ public class PeticionController {
         pet.setLinea(codigo);
         pet.setPrecioservicio(200);
         pet.setComentarios("Peticion esperando aprobacion");
-        if (beneficiarios.contains(pet.getDni_ben() + "LIMP")){
-            return "peticion/existe";
+
+        if (beneficiarios.contains(pet.getDni_ben() + "LIMP")) {
+
+            System.out.println("----------HE PUTO ENTRADO PERO NO HAGO NADA------------------");
+            session.setAttribute("existe",true);
+
         } else {
-            beneficiarios.add(pet.getDni_ben() + "LIMP");
+            beneficiarios.add(pet.getDni_ben()+"LIMP");
             peticionDao.addPeticion(pet);
-            return "peticion/servicios";
+            session.setAttribute("existe",false);
         }
 
     }
 
+
+
     @RequestMapping("/cattering")
-    public String cattering(HttpSession session, Model model) {
+    public void cattering(HttpSession session, Model model) {
         Usuario user =new Usuario();
         user= (Usuario) session.getAttribute("user");
         codigo++;
@@ -123,16 +123,17 @@ public class PeticionController {
         pet.setPrecioservicio(300);
         pet.setComentarios("Peticion esperando aprobacion");
         if (beneficiarios.contains(pet.getDni_ben()+ "CATT")){
-            return "peticion/existe";
+            model.addAttribute("model", "#existe");
         } else {
             beneficiarios.add(pet.getDni_ben()+ "CATT");
             peticionDao.addPeticion(pet);
-            return "peticion/servicios";
+            model.addAttribute("model", "#noexiste");
         }
+
     }
 
     @RequestMapping("/sanitario")
-    public String sanitario(HttpSession session, Model model) {
+    public void sanitario(HttpSession session, Model model) {
         Usuario user =new Usuario();
         user= (Usuario) session.getAttribute("user");
         codigo++;
@@ -143,12 +144,13 @@ public class PeticionController {
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
         if (beneficiarios.contains(pet.getDni_ben()+"SAN")){
-            return "peticion/existe";
+            model.addAttribute("model", "#existe");
         } else {
             beneficiarios.add(pet.getDni_ben()+"SAN");
             peticionDao.addPeticion(pet);
-            return "peticion/servicios";
+            model.addAttribute("model", "#noexiste");
         }
+
     }
 
     private String aleatorio(){
