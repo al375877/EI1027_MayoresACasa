@@ -96,8 +96,6 @@ public class PeticionController {
         pet.setComentarios("Peticion esperando aprobacion");
 
         if (beneficiarios.contains(pet.getDni_ben() + "LIMP")) {
-
-            System.out.println("----------HE PUTO ENTRADO PERO NO HAGO NADA------------------");
             session.setAttribute("existe",true);
 
         } else {

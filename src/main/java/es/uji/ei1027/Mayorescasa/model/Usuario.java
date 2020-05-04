@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class Usuario {
     private String nombre, dni, usuario, contraseña, email, direccion, genero, tipoUsuario;
-    private int telefono;
-    private Date fechanacimiento;
+    private int telefono, nacimiento;
 
     public String getTipoUsuario() {
         return tipoUsuario;
@@ -79,11 +78,11 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public Date getfechanacimiento() {
-        return fechanacimiento;
+    public int getNacimiento() {
+        return nacimiento;
     }
 
-    public void setfechanacimiento(Date fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
+    public void setNacimiento(int nacimiento) {
+        this.nacimiento = nacimiento;
     }
 }

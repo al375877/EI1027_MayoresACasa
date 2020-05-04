@@ -1,80 +1,112 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!--<html xmlns:th="http://www.thymeleaf.org"-->
-<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
-<!--      layout:decorate="~{fragments/base}">-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
     <title>Nuevo voluntario</title>
-</head>
-<!--<head>-->
-<!--    <meta charset="UTF-8" />-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />-->
-<!--    <link rel="stylesheet" type="text/css" href="/css/estils.css"-->
-<!--          th:href="@{/css/estils.css}"/>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div   layout:fragment="content">-->
-<!--    <div  style="padding: 25px 50px;background-color:#B0E0E6;">-->
-<!--        <h1 style="color:black;" >Mayores a casa | Voluntarios </h1>-->
-<!--    </div>-->
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
 
-<!--    <header><h3>Cuidado de mayores a domicilio<br>-->
-<!--        Registrate como voluntario o llámanos al 920 14 58 74<br>-->
-<!--        <hr></h3></header>-->
+    </style>
+</head>
 <body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h1 style="color:black;" >Mayores a casa | Voluntarios </h1>
+    </div>
+
+    <header><h3>Cuidado de mayores a domicilio<br>
+        Registrate como voluntario o llámanos al 920 14 58 74<br>
+        <hr></h3></header>
 <form action="#" th:action="@{/voluntario/add}"
       th:object="${usuario}" method="post">
     <table style="margin:auto">
 
         <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" maxlength="50" /></td>
-        </tr>
-        <tr>
-            <td><label>DNI</label></td>
-            <td><input type="text" th:field="*{dni}" maxlength="10"/></td>
-        </tr>
-        <tr>
-            <td><label>Genero</label></td>
-            <td><input type="text" th:field="*{genero}" maxlength="10"/></td>
-        </tr>
-<!--        <tr>-->
-<!--            <td><label>Genero</label></td>-->
+            <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
+            <td>Nombre:&nbsp;</td>
+            <td><input type="text" th:field="*{nombre}"
+                       placeholder="Nombre y apellidos" maxlength="50"/></td>
+            <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></td>
 
-<!--            <td> <select class="form_control" type="text" th:field="*{genero}">-->
-<!--                <option th:each="generovalue : ${generoList}"-->
-<!--                        th:value="${generovalue}"-->
-<!--                        th:text="${generovalue}"></option>-->
-<!--            </select>-->
-<!--            </td>-->
-<!--            <td th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"  class="error" ></td>-->
-<!--        </tr>-->
-
+        </tr>
+        <tr><td><br></td></tr>
         <tr>
-            <td><label>Usuario</label></td>
+            <td><img src="https://image.flaticon.com/icons/svg/126/126109.svg"width="30" height="30"></td>
+            <td>DNI:&nbsp;</td>
+            <td><input type="text" th:field="*{dni}" maxlength="10"
+                       placeholder="12345678X"/></td>
+            <td th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+            <td><img src="https://image.flaticon.com/icons/svg/126/126491.svg"width="30" height="30"></td>
+            <td>Genero:&nbsp;</td>
+            <td><select class="form_control" type="text" th:field="*{genero}">
+                <option value="No seleccionado">Selecciona el genero</option>
+                <option value="Femeni">Femenino</option>
+                <option value="Masculi">Masculino</option>
+            </select>
+            </td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+            <td><img src="https://image.flaticon.com/icons/svg/126/126485.svg"width="30" height="30"></td>
+            <td>Usuario:&nbsp;</td>
             <td><input type="text" th:field="*{usuario}" maxlength="50"/></td>
+            <td th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></td>
         </tr>
+        <tr><td><br></td></tr>
         <tr>
-            <td><label>Contraseña</label></td>
+            <td><img src="https://image.flaticon.com/icons/svg/126/126479.svg"width="30" height="30"></td>
+            <td>Contraseña:&nbsp;</td>
             <td><input type="password" th:field="*{contraseña}" maxlength="50"/></td>
+            <td th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></td>
         </tr>
+        <tr><td><br></td></tr>
         <tr>
-            <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" maxlength="100"/></td>
+            <td><img src="https://image.flaticon.com/icons/svg/126/126516.svg"width="30" height="30"></td>
+            <td>Email:&nbsp;</td>
+            <td><input type="text" th:field="*{email}" maxlength="100"
+                       placeholder="ejemplo@email.com"/></td>
+            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
         </tr>
+        <tr><td><br></td></tr>
         <tr>
-            <td><label>Direccion</label></td>
-            <td><input type="text" th:field="*{direccion}" maxlength="100"/></td>
+            <td><img src="https://image.flaticon.com/icons/svg/126/126470.svg"width="30" height="30"></td>
+            <td>Direccion:&nbsp;</td>
+            <td><input type="text" th:field="*{direccion}" maxlength="100"
+                       placeholder="Calle Teruel, 23 (Castellón)"/></td>
         </tr>
-
+        <tr><td><br></td></tr>
         <tr>
-            <td><label>Fecha de nacimiento</label></td>
-            <td><input type="date" th:field="*{fechanacimiento}" /></td>
+            <td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td>
+            <td>Año Nacim.:&nbsp;</td>
+            <td><input type="number" th:field="*{nacimiento}" /></td>
+            <td th:if="${#fields.hasErrors('nacimiento')}" th:errors="*{nacimiento}"></td>
         </tr>
+        <tr><td><br></td></tr>
         <tr>
-            <td><label>Teléfono</label></td>
-            <td><input type="number" th:field="*{telefono}" /></td>
+            <td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td>
+            <td>Teléfono:&nbsp;</td>
+            <td><input type="tel" id="phone" name="phone" pattern="[0-9]{9}" th:field="*{telefono}"
+                       placeholder="612345678"/></td>
+            <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
         </tr>
+        <tr><td><br></td></tr>
         <tr>
 
             <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Registrate" /></td>
@@ -82,7 +114,7 @@
     </table>
     <br>
 </form>
-<!--</div>-->
+</div>
 <a th:href="@{/}" class="boton_personalizado1" role="button" >Volver</a>
 </body>
 </html>

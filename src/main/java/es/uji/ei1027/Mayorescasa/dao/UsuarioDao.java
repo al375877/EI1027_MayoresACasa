@@ -24,8 +24,13 @@ public class UsuarioDao {
         jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?)",
                 usuario.getNombre(),usuario.getUsuario(),usuario.getContraseña(),
                 usuario.getEmail(),usuario.getDireccion(),usuario.getDni(),
-                usuario.getGenero(),usuario.getfechanacimiento(),usuario.getTelefono(),
+                usuario.getGenero(),usuario.getNacimiento(),usuario.getTelefono(),
                 usuario.getTipoUsuario());
+    }
+    //AÑADIMOS Voluntario
+    public void addVoluntario(String dni, String hobbies) {
+        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?)",
+                dni,hobbies);
     }
 //
 //    //BORRAMOS Usuario
