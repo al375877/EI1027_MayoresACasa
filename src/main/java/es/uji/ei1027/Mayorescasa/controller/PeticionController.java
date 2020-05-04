@@ -1,9 +1,7 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
 import es.uji.ei1027.Mayorescasa.dao.PeticionDao;
-import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
-import es.uji.ei1027.Mayorescasa.model.UserDetails;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,15 +85,10 @@ public class PeticionController {
         return "peticion/servicios";
     }
 
-//    UserDetails user =new UserDetails();
-//            model.addAttribute("user", user);
-//            session.setAttribute("nextUrl", "beneficiario/index");
-//            session.setAttribute("autorizado",user.getAutorizado());
-
     @RequestMapping("/limpieza")
     public String limpieza(HttpSession session, Model model) {
-        UserDetails user =new UserDetails();
-        user= (UserDetails) session.getAttribute("user");
+        Usuario user =new Usuario();
+        user= (Usuario) session.getAttribute("user");
 //        System.out.println(user.getUsername());
 //        System.out.println(user.getAutorizado());
 //        System.out.println(user.getPassword());
@@ -119,8 +112,8 @@ public class PeticionController {
 
     @RequestMapping("/cattering")
     public String cattering(HttpSession session, Model model) {
-        UserDetails user =new UserDetails();
-        user= (UserDetails) session.getAttribute("user");
+        Usuario user =new Usuario();
+        user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "CATT");
@@ -140,8 +133,8 @@ public class PeticionController {
 
     @RequestMapping("/sanitario")
     public String sanitario(HttpSession session, Model model) {
-        UserDetails user =new UserDetails();
-        user= (UserDetails) session.getAttribute("user");
+        Usuario user =new Usuario();
+        user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "SAN");
@@ -194,8 +187,12 @@ public class PeticionController {
         return "redirect:../list";
     }
 
-
-
-
+    @RequestMapping("/misPeticiones")
+    public String misPeticiones(HttpSession session, Model model) {
+        Usuario user =new Usuario();
+        user= (Usuario) session.getAttribute("user");
+        model.addAttribute("peticiones", peticionDao.getPeticionesPropias(user.getDni()));
+        return "peticion/misPeticiones";
+    }
 
 }

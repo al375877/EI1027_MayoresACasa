@@ -23,5 +23,4 @@ public class BeneficiarioController {
         return "beneficiario/index";
     }
 
-
 }

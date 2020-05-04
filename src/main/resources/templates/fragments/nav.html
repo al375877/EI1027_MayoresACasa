@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TnKQQIT9V1FSjIXrrBT0XzJIH0eWhr7h1GPsePd1QBcgc7A2kxfeU3IS1wjpKLOzXBHzzxYoPiKEKs5plzaSYqwOOfP7cgmvrqpCwpSP0OJYjcVjugZM2ey7YURNJhBltgOF6SymDoNvXaUXh4YWqw" charset="UTF-8"></script>
+<!--    <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TnKQQIT9V1FSjIXrrBT0XzJIH0eWhr7h1GPsePd1QBcgc7A2kxfeU3IS1wjpKLOzXBHzzxYoPiKEKs5plzaSYqwOOfP7cgmvrqpCwpSP0OJYjcVjugZM2ey7YURNJhBltgOF6SymDoNvXaUXh4YWqw" charset="UTF-8"></script>-->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -43,7 +43,8 @@
                         </li>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mi perfil</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mis facturas</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/peticion/list}">Peticiones</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/misPeticiones}">Mis Peticiones</a></li>
 
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:href="@{/logout}">Cerrar sesión</a></li>

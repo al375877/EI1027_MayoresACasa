@@ -62,4 +62,14 @@ public class PeticionDao {
             return new ArrayList<Peticion>();
         }
     }
+
+    //LISTAMOS Peticion
+    public List<Peticion> getPeticionesPropias(String dni) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE dni_ben=?", new
+                    PeticionRowMapper(), dni);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Peticion>();
+        }
+    }
 }

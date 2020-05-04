@@ -86,6 +86,11 @@ public class AsistenteController {
         return "asistente/solicitar";
     }
 
+    @RequestMapping("/contacto")
+    public String contacto(HttpSession session, Model model) {
+        return "asistente/contacto";
+    }
+
 
 
 }
