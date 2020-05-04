@@ -2,7 +2,9 @@ package es.uji.ei1027.Mayorescasa.controller;
 
 
 
+import es.uji.ei1027.Mayorescasa.dao.PeticionDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+import es.uji.ei1027.Mayorescasa.model.Peticion;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 class UserValidator implements Validator {
     @Autowired
     private UsuarioDao usuarioDao;
+
     @Override
     public boolean supports(Class<?> cls) {
         return Usuario.class.isAssignableFrom(cls);
@@ -43,6 +46,8 @@ class UserValidator implements Validator {
 public class LoginController {
     @Autowired
     private UsuarioDao usuarioDao;
+    @Autowired
+    private PeticionDao peticionDao;
 
     //llamada al metodo login
     @RequestMapping("/login")
@@ -73,6 +78,33 @@ public class LoginController {
         session.setAttribute("user", user);
 
         session.setAttribute("tipo",user.getTipoUsuario());
+
+
+        if(user.getTipoUsuario().equals("Beneficiario")){
+
+            if(peticionDao.consultaPeticion(user.getDni(),"LIMPIEZA")){
+
+                session.setAttribute("existeL",true);
+            }else{
+
+                session.setAttribute("existeL",false);
+            }
+            if(peticionDao.consultaPeticion(user.getDni(),"CATTERING")){
+
+                session.setAttribute("existeC",true);
+            }else{
+
+                session.setAttribute("existeC",false);
+            }
+            if(peticionDao.consultaPeticion(user.getDni(),"SANITARIO")){
+
+                session.setAttribute("existeS",true);
+            }else{
+
+
+                session.setAttribute("existeS",false);
+            }
+        }
 
 
         return "redirect:/"+user.getTipoUsuario().toLowerCase()+"/index";

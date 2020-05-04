@@ -72,4 +72,15 @@ public class PeticionDao {
             return new ArrayList<Peticion>();
         }
     }
+
+    public boolean consultaPeticion(String dni,String tipoPeticion){
+        Peticion peticion;
+        try {
+             peticion = jdbcTemplate.queryForObject("SELECT * FROM Peticion WHERE dni_ben=? and tiposervicio=?",
+                    new PeticionRowMapper(), dni, tipoPeticion);
+        }catch (EmptyResultDataAccessException e){
+            peticion=null;
+        }
+        return peticion!=null;
+    }
 }

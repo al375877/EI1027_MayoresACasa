@@ -12,10 +12,10 @@
           th:href="@{/css/estils.css}"/>
 </head>
 <body>
-<div class="nav" th:object="${session}">
-    <nav class="navbar navbar-expand-lg navbar-dark barra_azul" >
+<div  th:object="${session}" >
+    <nav class="navbar navbar-expand-sm  navbar-dark barra_azul" >
 
-        <div class="container">
+        <div align="center">
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{user == null}" href="/"><b>Mayores a casa</b></a>
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='cas'}" th:href="@{/}"><b>Mayores a casa</b></a>
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Mayores a casa</b></a>
@@ -24,9 +24,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <div class="collapse navbar-collapse" id="collapsibleNavbar" >
 
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto" style="text-align:center;">
                     <a class="nav-link"  th:if="*{tipo=='cas'}" th:href="@{/cas/index}">Pagina principal | <span class="sr-only">(current)</span></a>
                     <a class="nav-link"  th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
 

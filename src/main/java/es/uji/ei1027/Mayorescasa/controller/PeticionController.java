@@ -24,7 +24,7 @@ public class PeticionController {
 
     private PeticionDao peticionDao;
     private int codigo;
-    private List<String> beneficiarios = new ArrayList<>();
+
 
     @Autowired
     public void setPeticionDao(PeticionDao peticionDao) {
@@ -83,7 +83,7 @@ public class PeticionController {
     }
 
     @RequestMapping("/limpieza")
-    public void limpieza(HttpSession session, Model model) {
+    public String limpieza(HttpSession session, Model model) {
 
         Usuario user = (Usuario) session.getAttribute("user");
         codigo++;
@@ -95,25 +95,23 @@ public class PeticionController {
         pet.setPrecioservicio(200);
         pet.setComentarios("Peticion esperando aprobacion");
 
-        if (beneficiarios.contains(pet.getDni_ben() + "LIMP")) {
-
-            System.out.println("----------HE PUTO ENTRADO PERO NO HAGO NADA------------------");
-            session.setAttribute("existe",true);
-
-        } else {
-            beneficiarios.add(pet.getDni_ben()+"LIMP");
+        boolean existe= (boolean) session.getAttribute("existeL");
+        if(existe){
+            System.out.println("EXISTE");
+            return "peticion/existe";
+        }else{
             peticionDao.addPeticion(pet);
-            session.setAttribute("existe",false);
+            session.setAttribute("existeL",true);
         }
-
+        return "peticion/servicios";
     }
 
 
 
     @RequestMapping("/cattering")
-    public void cattering(HttpSession session, Model model) {
-        Usuario user =new Usuario();
-        user= (Usuario) session.getAttribute("user");
+    public String cattering(HttpSession session, Model model) {
+
+        Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "CATT");
@@ -122,20 +120,21 @@ public class PeticionController {
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
         pet.setComentarios("Peticion esperando aprobacion");
-        if (beneficiarios.contains(pet.getDni_ben()+ "CATT")){
-            model.addAttribute("model", "#existe");
-        } else {
-            beneficiarios.add(pet.getDni_ben()+ "CATT");
+        boolean existe= (boolean) session.getAttribute("existeC");
+        if(existe){
+            System.out.println("EXISTE");
+            return "peticion/existe";
+        }else{
             peticionDao.addPeticion(pet);
-            model.addAttribute("model", "#noexiste");
+            session.setAttribute("existeC",true);
         }
-
+        return "peticion/servicios";
     }
 
     @RequestMapping("/sanitario")
-    public void sanitario(HttpSession session, Model model) {
-        Usuario user =new Usuario();
-        user= (Usuario) session.getAttribute("user");
+    public String sanitario(HttpSession session, Model model) {
+
+        Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "SAN");
@@ -143,14 +142,15 @@ public class PeticionController {
         pet.setDni_ben(user.getDni()); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
-        if (beneficiarios.contains(pet.getDni_ben()+"SAN")){
-            model.addAttribute("model", "#existe");
-        } else {
-            beneficiarios.add(pet.getDni_ben()+"SAN");
+        boolean existe= (boolean) session.getAttribute("existeS");
+        if(existe){
+            System.out.println("EXISTE");
+            return "peticion/existe";
+        }else{
             peticionDao.addPeticion(pet);
-            model.addAttribute("model", "#noexiste");
+            session.setAttribute("existeS",true);
         }
-
+        return "peticion/servicios";
     }
 
     private String aleatorio(){
