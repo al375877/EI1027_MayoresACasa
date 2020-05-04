@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository  //En Spring los DAOs van anotados con @Repository
 public class UsuarioDao {
@@ -17,12 +19,14 @@ public class UsuarioDao {
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate=new JdbcTemplate(dataSource);
     }
-//    //AÑADIMOS Usuario
-//    public void addUsuario(Usuario usuario) {
-//        jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?)",
-//                usuario.getNombre(),usuario.getDni(),usuario.getUsuario(),usuario.getContraseña(),
-//                usuario.getMail(),usuario.getBeneficiario(), usuario.getTelefono());
-//    }
+    //AÑADIMOS Usuario
+    public void addUsuario(Usuario usuario) {
+        jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?)",
+                usuario.getNombre(),usuario.getUsuario(),usuario.getContraseña(),
+                usuario.getEmail(),usuario.getDireccion(),usuario.getDni(),
+                usuario.getGenero(),usuario.getfechanacimiento(),usuario.getTelefono(),
+                usuario.getTipoUsuario());
+    }
 //
 //    //BORRAMOS Usuario
 //    public void deleteUsuario(String usuario) {
@@ -47,14 +51,25 @@ public class UsuarioDao {
         }
     }
 
-//    //LISTAMOS Usuario
-//    public List<Usuario> getUsuarios() {
-//        try{
-//            return jdbcTemplate.query("SELECT * FROM usuario", new
-//                    UsuarioRowMapper());
-//        }
-//        catch (EmptyResultDataAccessException e){
-//            return  new ArrayList<Usuario>();
-//        }
-//    }
+    //LISTAMOS Voluntarios
+    public List<Usuario> getVoluntarios() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM usuario WHERE tipousuario=?", new
+                    UsuarioRowMapper(), "Voluntario");
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Usuario>();
+        }
+    }
+
+    //LISTAMOS Usuario
+    public List<Usuario> getUsuarios() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM usuario", new
+                    UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Usuario>();
+        }
+    }
 }

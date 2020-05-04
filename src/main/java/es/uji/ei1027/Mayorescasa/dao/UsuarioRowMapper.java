@@ -1,6 +1,5 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
-import es.uji.ei1027.Mayorescasa.model.Disponibilidad;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -16,8 +15,8 @@ public class UsuarioRowMapper implements RowMapper<Usuario> {
         usuario.setContraseña(rs.getString("contraseña"));
         usuario.setEmail(rs.getString("email"));
         usuario.setDireccion(rs.getString("direccion"));
-        usuario.setNumero_telefono(rs.getInt("telefono"));
-        usuario.setFechaNacimiento(rs.getDate("fechanacimiento"));
+        usuario.setTelefono(rs.getInt("telefono"));
+        usuario.setfechanacimiento(rs.getDate("fechanacimiento"));
         usuario.setGenero(rs.getString("genero"));
         usuario.setTipoUsuario(rs.getString("tipousuario"));
 

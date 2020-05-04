@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/base}">
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{fragments/base}">-->
 <head>
-    <title>Crear nuevo voluntario</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
-          th:href="@{/css/estils.css}"/>
+    <title>Nuevo voluntario</title>
 </head>
+<!--<head>-->
+<!--    <meta charset="UTF-8" />-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/estils.css"-->
+<!--          th:href="@{/css/estils.css}"/>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div   layout:fragment="content">-->
+<!--    <div  style="padding: 25px 50px;background-color:#B0E0E6;">-->
+<!--        <h1 style="color:black;" >Mayores a casa | Voluntarios </h1>-->
+<!--    </div>-->
+
+<!--    <header><h3>Cuidado de mayores a domicilio<br>-->
+<!--        Registrate como voluntario o llámanos al 920 14 58 74<br>-->
+<!--        <hr></h3></header>-->
 <body>
-<div layout:fragment="content">
-<h2>Nuevo voluntario</h2>
 <form action="#" th:action="@{/voluntario/add}"
-      th:object="${voluntario}" method="post">
+      th:object="${usuario}" method="post">
     <table style="margin:auto">
 
         <tr>
@@ -26,16 +36,19 @@
         </tr>
         <tr>
             <td><label>Genero</label></td>
-
-            <td> <select class="form_control" type="text" th:field="*{genero}">
-                <!--option value="Not Selected">Select an option</option-->
-                <option th:each="generovalue : ${generoList}"
-                        th:value="${generovalue}"
-                        th:text="${generovalue}"></option>
-            </select>
-            </td>
-            <td th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"  class="error" ></td>
+            <td><input type="text" th:field="*{genero}" maxlength="10"/></td>
         </tr>
+<!--        <tr>-->
+<!--            <td><label>Genero</label></td>-->
+
+<!--            <td> <select class="form_control" type="text" th:field="*{genero}">-->
+<!--                <option th:each="generovalue : ${generoList}"-->
+<!--                        th:value="${generovalue}"-->
+<!--                        th:text="${generovalue}"></option>-->
+<!--            </select>-->
+<!--            </td>-->
+<!--            <td th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"  class="error" ></td>-->
+<!--        </tr>-->
 
         <tr>
             <td><label>Usuario</label></td>
@@ -60,16 +73,16 @@
         </tr>
         <tr>
             <td><label>Teléfono</label></td>
-            <td><input type="number" th:field="*{numero_telefono}" /></td>
+            <td><input type="number" th:field="*{telefono}" /></td>
         </tr>
         <tr>
 
-            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Añadir voluntario" /></td>
+            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Registrate" /></td>
         </tr>
     </table>
     <br>
-    <a th:href="@{/voluntario/list}" class="boton_personalizado1" role="button" >Volver</a>
 </form>
-</div>
+<!--</div>-->
+<a th:href="@{/}" class="boton_personalizado1" role="button" >Volver</a>
 </body>
 </html>

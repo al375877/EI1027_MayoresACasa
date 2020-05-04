@@ -29,11 +29,6 @@ public class UserController {
 
             return "login";
         }
-//        }else {
-//            UserDetails user = (UserDetails) session.getAttribute("user");
-//            session.setAttribute("autorizado",user.getAutorizado());
-//        }
-        //model.addAttribute("users", usuarioDao.listAllUsers());
         UserDetails user = (UserDetails) session.getAttribute("user");
         if (user.getAutorizado()=="admin")
             return "cas/index";
@@ -44,5 +39,12 @@ public class UserController {
     public String index(HttpSession session, Model model) {
         return "user/index";
     }
+
+    @RequestMapping("/list")
+    public String listasistentes(Model model) {
+        model.addAttribute("asistentes", usuarioDao.getUsuarios());
+        return "asistente/list";
+    }
+
 }
 

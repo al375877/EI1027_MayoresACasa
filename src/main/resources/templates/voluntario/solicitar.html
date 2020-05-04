@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <meta charset="UTF-8" />
-    <title>Mayores a casa</title>
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores a casa</title>
+
     <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
         table {
           font-family: arial, sans-serif;
           border-collapse: collapse;
           width: 100%;
         }
-        th,td {
+        td {
+          border: 1px solid #dddddd;
+          text-align: center;
+          padding: 15px;
+          height: 60px;
+        }
+        th {
           border: 1px solid #dddddd;
           text-align: center;
           padding: 15px;
@@ -22,37 +40,31 @@
     </style>
 </head>
 <body>
-<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Lista de los voluntarios disponibles</h1></div>
+<h1 >Lista de los voluntarios disponibles</h1>
+<div   layout:fragment="content">
 <br>
     <table>
         <thead>
         <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">DNI</th>
-            <th scope="col">Género</th>
-            <th scope="col">Usuario</th>
-            <th scope="col">Email</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">F.Nacimiento</th>
-            <th scope="col">Hobbies</th>
-            <th scope="col">Telefono</th>
+            <th style="text-align: center" scope="col">Nombre</th>
+            <th style="text-align: center" scope="col">DNI</th>
+            <th style="text-align: center" scope="col">Género</th>
+            <th style="text-align: center" scope="col">Email</th>
+            <th style="text-align: center" scope="col">Telefono</th>
         </tr>
         </thead>
         <tbody>
 
-        <tr th:each="voluntario: ${voluntarios}">
-            <td th:text="${voluntario.nombre}"></td>
-            <td th:text="${voluntario.dni}"></td>
-            <td th:text="${voluntario.genero}"></td>
-            <td th:text="${voluntario.usuario}"></td>
-            <td th:text="${voluntario.email}"></td>
-            <td th:text="${voluntario.direccion}"></td>
-            <td th:text="${voluntario.fechanacimiento}"></td>
-            <td th:text="${voluntario.hobbies}"></td>
-            <td th:text="${voluntario.numero_telefono}"></td>
+        <tr th:each="usuario: ${usuarios}">
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.dni}"></td>
+            <td th:text="${usuario.genero}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.telefono}"></td>
             <td><a class="boton_personalizado1" href="" role="button">Solicitar</a></td>
         </tr>
         </tbody>
     </table>
+</div>
 </body>
 </html>

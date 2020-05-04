@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Usuario {
     private String nombre, dni, usuario, contraseña, email, direccion, genero, tipoUsuario;
-    private int numero_telefono;
-    private Date fechaNacimiento;
+    private int telefono;
+    private Date fechanacimiento;
 
     public String getTipoUsuario() {
         return tipoUsuario;
@@ -71,19 +71,19 @@ public class Usuario {
         this.genero = genero;
     }
 
-    public int getNumero_telefono() {
-        return numero_telefono;
+    public int getTelefono() {
+        return telefono;
     }
 
-    public void setNumero_telefono(int numero_telefono) {
-        this.numero_telefono = numero_telefono;
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public Date getfechanacimiento() {
+        return fechanacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setfechanacimiento(Date fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
     }
 }

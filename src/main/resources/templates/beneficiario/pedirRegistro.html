@@ -9,7 +9,6 @@
 
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <title>Mayores a casa</title>
 
@@ -34,13 +33,13 @@
     </div>
 
     <header><h2>Cuidado de mayores a domicilio<br>
-    Solicita Información o llámanos al 920 14 58 74<br>
+        Solicita Información o llámanos al 920 14 58 74<br>
         <hr></h2></header>
 
-    <form form action="#" th:action="@{/pedirRegistro}" th:object="${foo}" method="post" class="topBefore" onsubmit="alert('Datos enviados, en 24h seras contactado.');return false">
+    <form  class="topBefore" onsubmit="alert('Datos enviados, en 24h seras contactado.');return false">
         <table style="margin:auto">
             <tr><td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td><td>&nbsp;Nombre:&nbsp;</td>
-                <td><input class="form-control" type="text" th:field="*{nombre}" placeholder=" Juan Perez Salvador" size="40" maxlength="50" ></td></tr>
+                <td><input class="form-control" id="nombre" type="text" placeholder=" Juan Perez Salvador" size="40" maxlength="50" ></td></tr>
             <tr><td><br></td></tr>
             <tr><td><img src="https://image.flaticon.com/icons/svg/126/126109.svg"width="30" height="30"></td><td>&nbsp;Dni:&nbsp;</td>
                 <td><input class="form-control" id="dni" type="text" placeholder="41254785Q" size="40" maxlength="50" ></td></tr>
@@ -73,12 +72,6 @@
             </tr>
         </table>
     </form>
-    <script>
-        $("#button").click(function(event){
-          alert("Formulario enviado con jQuery");
-          $('#form').submit();
-        });
-    </script>
     <table>
         <br>
         <br>
