@@ -10,21 +10,16 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
     <title>Gestionar Peticiones</title>
 
-<!--    <style>-->
-<!--        table {-->
-<!--          font-family: arial, sans-serif;-->
-<!--          border-collapse: collapse;-->
-<!--          width: 100%;-->
-<!--        }-->
-<!--        th,td {-->
-<!--          border: 1px solid #dddddd;-->
-<!--          text-align: center;-->
-<!--          padding: 15px;-->
-<!--        }-->
-<!--        tr:nth-child(even) {-->
-<!--          background-color: #dddddd;-->
-<!--        }-->
-<!--    </style>-->
+    <style>
+        table{
+            width: 100%;
+        }
+        th, td{
+            width: 50%;
+            border: 1px;
+            font-size:70%;
+        }
+    </style>
 </head>
 <body>
 <div  layout:fragment="content" >
@@ -56,9 +51,9 @@
         <td th:text="${peticion.comentarios}"></td>
         <td th:text="${peticion.dni_ben}"></td>
 
-        <td><a type="button" class="boton_añadir" th:href="@{/peticion/aceptar/{cod_pet}(cod_pet=${peticion.cod_pet})}">ACEPTAR</a></td>
-        <td><a type="button" class="boton_editar" th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${peticion.cod_pet})}">RECHAZAR</a></td>
-        <td><a type="button" class="boton_eliminar" th:href="@{/peticion/delete/{cod_pet}(cod_pet=${peticion.cod_pet})}">BORRAR</a></td>
+        <td><a type="button" class="boton_añadir" style="width:75px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/peticion/aceptar/{cod_pet}(cod_pet=${peticion.cod_pet})}">ACEPTAR</a></td>
+        <td><a type="button" class="boton_editar" style="width:80px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${peticion.cod_pet})}">RECHAZAR</a></td>
+        <td><a type="button" class="boton_eliminar" style="width:70px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/peticion/delete/{cod_pet}(cod_pet=${peticion.cod_pet})}">BORRAR</a></td>
     </tr>
     </tbody>
 </table>

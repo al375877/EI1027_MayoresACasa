@@ -20,10 +20,10 @@ public class EmpresaDao {
     }
     //AÑADIMOS Empresa
     public void addEmpresa(Empresa empresa) {
-        jdbcTemplate.update("INSERT INTO empresa VALUES (?,?,?,?,?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO empresa VALUES (?,?,?,?,?,?,?,?,?,?)",
                 empresa.getNombre(),empresa.getCif(),empresa.getPersona_contacto(),
                 empresa.getUsuario(),empresa.getContraseña(),empresa.getEmail(),empresa.getDireccion(),
-                empresa.getNumero_telefono(),empresa.getServicio());
+                empresa.getTelefono(),empresa.getTiposervicio(),empresa.getRegistro());
     }
 
     //BORRAMOS empresa
@@ -34,11 +34,11 @@ public class EmpresaDao {
     //ACTUALIZAMOS empresa (No se actualiza usuario y dni por claves primaria)
     public void updateEmpresa(Empresa empresa){
         jdbcTemplate.update("UPDATE empresa SET nombre=?, cif=?, persona_contacto=?, contraseña=?, " +
-                        "email=?, direccion=?, telefono=? ,tipoServicio=?" +
+                        "email=?, direccion=?, telefono=? ,tiposervicio=?, registro=?" +
                         "WHERE usuario=? ",
                 empresa.getNombre(),empresa.getCif(), empresa.getPersona_contacto(),
                 empresa.getContraseña(), empresa.getEmail(),empresa.getDireccion(),
-                empresa.getNumero_telefono(),empresa.getServicio(), empresa.getUsuario());
+                empresa.getTelefono(),empresa.getTiposervicio(), empresa.getRegistro(), empresa.getUsuario());
     }
 
     public Empresa getEmpresa (String empresa ){

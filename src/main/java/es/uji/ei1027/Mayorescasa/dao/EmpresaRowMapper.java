@@ -13,9 +13,10 @@ public class EmpresaRowMapper implements RowMapper<Empresa>{
         empresa.setContraseña(rs.getString("contraseña"));
         empresa.setEmail(rs.getString("email"));
         empresa.setDireccion(rs.getString("direccion"));
-        empresa.setNumero_telefono(rs.getInt("telefono"));
+        empresa.setTelefono(rs.getInt("telefono"));
         empresa.setPersona_contacto(rs.getString("persona_contacto"));
-        empresa.setServicio(rs.getString("tipoServicio"));
+        empresa.setTiposervicio(rs.getString("tiposervicio"));
+        empresa.setRegistro(rs.getString("registro"));
         return empresa;
 
     }

@@ -142,6 +142,7 @@ public class PeticionController {
         pet.setDni_ben(user.getDni()); //Retocar
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
+        pet.setComentarios("Peticion esperando aprobacion");
         boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
             System.out.println("EXISTE");

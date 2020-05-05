@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Nuevo empresa</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Mayores a casa |  CAS | Alta contrato</h2>
+    </div>
+    <form action="#" th:action="@{/contrato/add}"
+          th:object="${contrato}" method="post">
+        <table style="margin:auto">
+            <h2>Añade o da de alta un contrato.</h2><hr>
+
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126496.svg"width="30" height="30"></td>
+                <td>&nbsp;Empresa:&nbsp;</td>
+                <td><input type="text" th:field="*{empresa}"
+                           placeholder="usuario" maxlength="50"/></td>
+                <td th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></td>
+
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126175.svg"width="30" height="30"></td>
+                <td>&nbsp;Codigo de Peticion:&nbsp;</td>
+                <td><input type="text" th:field="*{cod_pet}" maxlength="10"
+                           placeholder="codigo"/></td>
+                <td th:if="${#fields.hasErrors('cod_pet')}" th:errors="*{cod_pet}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126115.svg"width="30" height="30"></td>
+                <td>&nbsp;Codigo contrato:&nbsp;</td>
+                <td><input type="text" th:field="*{codcontrato}" maxlength="50" placeholder="codigo"/></td>
+                <td th:if="${#fields.hasErrors('codcontrato')}" th:errors="*{codcontrato}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126141.svg"width="30" height="30"></td>
+                <td>&nbsp;Tipo de Servicio:&nbsp;</td>
+                <td><select class="form_control" type="text" th:field="*{tiposervicio}">
+                    <option value="Cattering">Cattering</option>
+                    <option value="Sanitario">Sanitario</option>
+                    <option value="Limpieza">Limpieza</option>
+                </select>
+                <td th:if="${#fields.hasErrors('tiposervicio')}" th:errors="*{tiposervicio}"></td>
+                </td>
+            </tr>
+            <tr><td><br></td></tr>
+<!--            <tr>-->
+<!--                <td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td>-->
+<!--                <td>&nbsp;Fecha inicial:&nbsp;</td>-->
+<!--                <td><input type="date" th:field="*{fechainicial}"/></td>-->
+<!--            </tr>-->
+<!--            <tr><td><br></td></tr>-->
+<!--            <tr>-->
+<!--                <td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td>-->
+<!--                <td>&nbsp;Fecha final:&nbsp;</td>-->
+<!--                <td><input type="date" th:field="*{fechafinal}"/></td>-->
+<!--            </tr>-->
+<!--            <tr><td><br></td></tr>-->
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126151.svg"width="30" height="30"></td>
+                <td>&nbsp;Cantidad Servicios:&nbsp;</td>
+                <td><input type="number" th:field="*{cantidadservicios}" placeholder="2,4,5,.."/></td>
+                <td th:if="${#fields.hasErrors('cantidadservicios')}" th:errors="*{cantidadservicios}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126094.svg"width="30" height="30"></td>
+                <td>&nbsp;Precio Unidad:&nbsp;</td>
+                <td><input type="number" th:field="*{preciounidad}" placeholder="190 (200-5%)" /></td>
+                <td th:if="${#fields.hasErrors('preciounidad')}" th:errors="*{preciounidad}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+
+            <td><br></td><td><br></td><td colspan="2"><input type="submit" class="boton_añadir" role="button" value="AÑADIR" /></td>
+            </tr>
+        </table>
+        <br>
+    </form>
+</div>
+</body>
+</html>

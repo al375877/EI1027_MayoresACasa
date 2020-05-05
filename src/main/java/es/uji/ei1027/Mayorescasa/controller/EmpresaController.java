@@ -3,6 +3,7 @@ package es.uji.ei1027.Mayorescasa.controller;
 
 import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
+import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,10 +44,13 @@ public class EmpresaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("empresa") Empresa empresa,
                                    BindingResult bindingResult) {
+        EmpresaValidator emrpesaValidator = new EmpresaValidator();
+        emrpesaValidator.validate(empresa, bindingResult);
         if (bindingResult.hasErrors())
             return "empresa/add";
+        empresa.setRegistro("PENDIENTE");
         empresaDao.addEmpresa(empresa);
-        return "redirect:list";
+        return "redirect:../login";
     }
 
     @RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
@@ -68,6 +72,26 @@ public class EmpresaController {
     @RequestMapping(value="/delete/{usuario}")
     public String processDelete(@PathVariable String usuario) {
         empresaDao.deleteEmpresa(usuario);
+        return "redirect:../list";
+    }
+
+    @RequestMapping(value="/aceptar/{usuario}")
+    public String aceptarBeneficiario(@PathVariable String usuario) {
+//        System.out.println(usuario);
+        Empresa usu;
+        usu = empresaDao.getEmpresa(usuario);
+//        System.out.println(usu.getNombre());
+        usu.setRegistro("ACEPTADO");
+        empresaDao.updateEmpresa(usu);
+        return "redirect:../list";
+    }
+
+    @RequestMapping(value="/rechazar/{usuario}")
+    public String rechazarBeneficiario(@PathVariable String usuario) {
+        Empresa usu;
+        usu = empresaDao.getEmpresa(usuario);
+        usu.setRegistro("RECHAZADO");
+        empresaDao.updateEmpresa(usu);
         return "redirect:../list";
     }
 

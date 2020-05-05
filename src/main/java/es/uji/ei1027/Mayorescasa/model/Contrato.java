@@ -3,22 +3,22 @@ package es.uji.ei1027.Mayorescasa.model;
 import java.util.Date;
 
 public class Contrato {
-    private String empresa, cod_pet, codContrato, tipoServicio;
-    private Date fechaInicial, fechaFinal;
+    private String empresa, cod_pet, codcontrato, tiposervicio;
+    private Date fechainicial, fechafinal;
     private int cantidadservicios;
-    private double precioUnidad;
+    private double preciounidad;
 
     @Override
     public String toString() {
         return "Contrato{" +
                 "empresa='" + empresa + '\'' +
                 ", cod_pet='" + cod_pet + '\'' +
-                ", codContrato='" + codContrato + '\'' +
-                ", tipoServicio='" + tipoServicio + '\'' +
-                ", fechaInicial=" + fechaInicial +
-                ", fechaFinal=" + fechaFinal +
+                ", codcontrato='" + codcontrato + '\'' +
+                ", tiposervicio='" + tiposervicio + '\'' +
+                ", fechainicial=" + fechainicial +
+                ", fechafinal=" + fechafinal +
                 ", cantidadservicios=" + cantidadservicios +
-                ", precioUnidad=" + precioUnidad +
+                ", preciounidad=" + preciounidad +
                 '}';
     }
 
@@ -38,51 +38,51 @@ public class Contrato {
         this.cod_pet = cod_pet;
     }
 
-    public String getCodContrato() {
-        return codContrato;
+    public String getcodcontrato() {
+        return codcontrato;
     }
 
-    public void setCodContrato(String codContrato) {
-        this.codContrato = codContrato;
+    public void setcodcontrato(String codcontrato) {
+        this.codcontrato = codcontrato;
     }
 
-    public String getTipoServicio() {
-        return tipoServicio;
+    public String gettiposervicio() {
+        return tiposervicio;
     }
 
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
+    public void settiposervicio(String tiposervicio) {
+        this.tiposervicio = tiposervicio;
     }
 
-    public Date getFechaInicial() {
-        return fechaInicial;
+    public Date getfechainicial() {
+        return fechainicial;
     }
 
-    public void setFechaInicial(Date fechaInicial) {
-        this.fechaInicial = fechaInicial;
+    public void setfechainicial(Date fechainicial) {
+        this.fechainicial = fechainicial;
     }
 
-    public Date getFechaFinal() {
-        return fechaFinal;
+    public Date getfechafinal() {
+        return fechafinal;
     }
 
-    public void setFechaFinal(Date fechaFinal) {
-        this.fechaFinal = fechaFinal;
+    public void setfechafinal(Date fechafinal) {
+        this.fechafinal = fechafinal;
     }
 
-    public int getCantidadservicios() {
+    public int getcantidadservicios() {
         return cantidadservicios;
     }
 
-    public void setCantidadservicios(int cantidadservicios) {
+    public void setcantidadservicios(int cantidadservicios) {
         this.cantidadservicios = cantidadservicios;
     }
 
-    public double getPrecioUnidad() {
-        return precioUnidad;
+    public double getpreciounidad() {
+        return preciounidad;
     }
 
-    public void setPrecioUnidad(double precioUnidad) {
-        this.precioUnidad = precioUnidad;
+    public void setpreciounidad(double preciounidad) {
+        this.preciounidad = preciounidad;
     }
 }

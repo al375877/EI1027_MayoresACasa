@@ -1,7 +1,7 @@
 package es.uji.ei1027.Mayorescasa.model;
 
 public class Empresa {
-    String nombre,cif,persona_contacto,usuario,contraseña,email,direccion,servicio;
+    String nombre,cif,persona_contacto,usuario,contraseña,email,direccion,tiposervicio, registro;
     int telefono;
 
     public String getNombre() {
@@ -60,25 +60,33 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public String getServicio() {
-        return servicio;
+    public String getTiposervicio() {
+        return tiposervicio;
     }
 
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
+    public void setTiposervicio(String tiposervicio) {
+        this.tiposervicio = tiposervicio;
     }
 
-    public int getNumero_telefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setNumero_telefono(int telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public String getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(String registro) {
+        this.registro = registro;
     }
 
     @Override
     public String toString() {
-        return "Compañia{" +
+        return "Empresa{" +
                 "nombre='" + nombre + '\'' +
                 ", cif='" + cif + '\'' +
                 ", persona_contacto='" + persona_contacto + '\'' +
@@ -86,8 +94,8 @@ public class Empresa {
                 ", contraseña='" + contraseña + '\'' +
                 ", email='" + email + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", servicio='" + servicio + '\'' +
-                ", numero_telefono=" + telefono +
+                ", tiposervicio='" + tiposervicio + '\'' +
+                ", telefono=" + telefono +
                 '}';
     }
 }

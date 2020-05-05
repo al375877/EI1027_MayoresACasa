@@ -1,6 +1,8 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
 import es.uji.ei1027.Mayorescasa.model.Contrato;
+import es.uji.ei1027.Mayorescasa.model.Empresa;
+import es.uji.ei1027.Mayorescasa.model.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,9 +24,9 @@ public class ContratoDao {
     //AÑADIMOS Contrato
     public void addContrato(Contrato contrato) {
         jdbcTemplate.update("INSERT INTO contrato VALUES (?,?,?,?,?,?,?,?)",
-                contrato.getEmpresa(),contrato.getCod_pet(),contrato.getCodContrato(),
-                contrato.getTipoServicio(),contrato.getFechaFinal(),contrato.getFechaFinal(),
-                contrato.getCantidadservicios(),contrato.getPrecioUnidad()
+                contrato.getEmpresa(),contrato.getCod_pet(),contrato.getcodcontrato(),
+                contrato.gettiposervicio(),contrato.getfechafinal(),contrato.getfechafinal(),
+                contrato.getcantidadservicios(),contrato.getpreciounidad()
         );
     }
 
@@ -38,9 +40,9 @@ public class ContratoDao {
         jdbcTemplate.update("UPDATE contrato SET cod_pet=?, codcontrato=?, tiposervicio=?, " +
                         "fechainicial=?, fechafinal=?, cantidadservicios=?, preciounidad=?" +
                         "WHERE empresa=? ",
-                contrato.getCod_pet(),contrato.getCodContrato(),
-                contrato.getTipoServicio(),contrato.getFechaFinal(),contrato.getFechaFinal(),
-                contrato.getCantidadservicios(),contrato.getPrecioUnidad(), contrato.getEmpresa()
+                contrato.getCod_pet(),contrato.getcodcontrato(),
+                contrato.gettiposervicio(),contrato.getfechafinal(),contrato.getfechafinal(),
+                contrato.getcantidadservicios(),contrato.getpreciounidad(), contrato.getEmpresa()
         );
 
     }
@@ -64,6 +66,27 @@ public class ContratoDao {
             return  new ArrayList<Contrato>();
         }
     }
+
+    //LISTAMOS empresa
+    public List<Empresa> getEmpresas() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM empresa", new
+                    EmpresaRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Empresa>();
+        }
+    }
+    //LISTAMOS Peticion
+    public List<Peticion> getPeticiones() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Peticion", new
+                    PeticionRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Peticion>();
+        }
+    }
+
 
 }
 

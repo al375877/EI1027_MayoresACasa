@@ -1,50 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
-
 <head>
-    <title>Gestionar Empresas</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores a casa</title>
+
+    <style>
+        table{
+            width: 100%;
+        }
+        th, td{
+            width: 50%;
+            border: 1px;
+            font-size:70%;
+        }
+    </style>
 </head>
 <body>
-<div  layout:fragment="content">
-<h2>Lista de las empresas</h2>
-<table class="table table-striped" >
-    <thead>
-    <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">CIF</th>
-        <th scope="col">Persona de contacto</th>
-        <th scope="col">Usuario</th>
-        <th scope="col">Email</th>
-        <th scope="col">Direccion</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Tipo Servicio</th>
+<!--style="overflow: hidden;-->
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Mayores a casa | CAS | Solicitudes Pendientes </h2>
+    </div>
+    <h2>Lista de las empresas registradas</h2>
+    <table class="table table-striped" style=" width:80%">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">CIF</th>
+            <th scope="col">Contacto</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Email</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Servico</th>
+            <th scope="col">Registro</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="empresa: ${empresas}">
+            <td th:text="${empresa.nombre}"></td>
+            <td th:text="${empresa.cif}"></td>
+            <td th:text="${empresa.persona_contacto}"></td>
+            <td th:text="${empresa.usuario}"></td>
+            <td th:text="${empresa.email}"></td>
+            <td th:text="${empresa.direccion}"></td>
+            <td th:text="${empresa.telefono}"></td>
+            <td th:text="${empresa.tiposervicio}"></td>
+            <td th:text="${empresa.registro}"></td>
 
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr th:each="empresa: ${empresas}">
-        <td th:text="${empresa.nombre}"></td>
-        <td th:text="${empresa.cif}"></td>
-        <td th:text="${empresa.persona_contacto}"></td>
-        <td th:text="${empresa.usuario}"></td>
-        <td th:text="${empresa.email}"></td>
-        <td th:text="${empresa.direccion}"></td>
-        <td th:text="${empresa.numero_telefono}"></td>
-        <td th:text="${empresa.servicio}"></td>
-
-        <td><a type="button" class="boton_editar" th:href="@{/empresa/update/{usuario}(usuario=${empresa.usuario})}">Editar</a></td>
-        <td><a type="button" class="boton_eliminar" th:href="@{/empresa/delete/{usuario}(usuario=${empresa.usuario})}">Borrar</a></td>
-    </tr>
-    </tbody>
-</table>
-<a type="button" class="boton_añadir" href="add">Añadir Empresa</a><a href="/" class="boton_personalizado1" role="button" >Volver</a>
+            <td><a type="button" class="boton_añadir"  style="width:75px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/empresa/aceptar/{usuario}(usuario=${empresa.usuario})}">ACEPTAR</a></td>
+            <td><a type="button" class="boton_editar" style="width:75px; height:25px font-weight: 100; font-size: 9px;" th:href="@{/empresa/rechazar/{usuario}(usuario=${empresa.usuario})}">RECHAZAR</a></td>
+            <td><a type="button" class="boton_eliminar" style="width:70px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/empresa/delete/{usuario}(usuario=${empresa.usuario})}">BORRAR</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/cas/index" class="boton_personalizado1" role="button" >Volver</a>
+    <a href="/" class="boton_personalizado1" role="button" >Página Principal</a>
 </div>
 </body>
 </html>
