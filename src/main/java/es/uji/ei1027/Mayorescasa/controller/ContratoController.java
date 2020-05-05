@@ -28,6 +28,13 @@ public class ContratoController {
         this.contratoDao=contratoDao;
     }
 
+    @RequestMapping("/list")
+    public String listcontratos(Model model) {
+        model.addAttribute("contratos", contratoDao.getContratos());
+        System.out.println(contratoDao.getContratos());
+        return "contrato/list";
+    }
+
     @RequestMapping("/existe")
     public String index(HttpSession session, Model model) {
         return "contrato/existe";
@@ -53,15 +60,20 @@ public class ContratoController {
         List<Peticion>listaPet=contratoDao.getPeticiones();
         List<String> usuEmpresas = new ArrayList<>();
         List<String> codPets = new ArrayList<>();
-        for(Peticion peticion:listaPet) usuEmpresas.add(peticion.getCod_pet());
-        for(Empresa empresa:lista) codPets.add(empresa.getUsuario());
-        if(!usuEmpresas.contains(contrato.getEmpresa()) ||
-                !(codPets.contains(contrato.getCod_pet())))
-            return "contrato/existe";
-        Date fecha = new Date();
-        contrato.setfechainicial(fecha);
-        contratoDao.addContrato(contrato);
-        return "redirect:./";
+        for(Peticion peticion:listaPet) codPets.add(peticion.getCod_pet());
+        for(Empresa empresa:lista) usuEmpresas.add(empresa.getUsuario());
+//        System.out.println(codPets + contrato.getCod_pet());
+//        System.out.println(usuEmpresas + contrato.getEmpresa());
+//        System.out.println("*******************************************");
+        if((codPets.contains(contrato.getCod_pet())) && (usuEmpresas.contains(contrato.getEmpresa()))) {
+            Date fecha = new Date();
+            System.out.println(fecha);
+            contratoDao.addContrato(contrato);
+            contrato.setfechainicial(fecha);
+            contratoDao.updateFechas(fecha,null,contrato.getEmpresa());
+            return "contrato/add";
+        }
+        return "contrato/existe";
     }
 }
 

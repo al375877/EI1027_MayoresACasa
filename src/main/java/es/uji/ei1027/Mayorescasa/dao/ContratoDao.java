@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository  //En Spring los DAOs van anotados con @Repository
@@ -46,6 +47,11 @@ public class ContratoDao {
         );
 
     }
+    //ACTUALIZAR FECHAS
+    public void  updateFechas(Date fechaInicial, Date fechaFinal, String empresa){
+        jdbcTemplate.update("UPDATE contrato SET fechainicial=?, fechafinal=? WHERE empresa=? ",
+                fechaInicial, fechaFinal, empresa);
+    }
 
     public Contrato getContrato (String contrato ){
         try{
@@ -57,7 +63,7 @@ public class ContratoDao {
     }
 
     //LISTAMOS contrato
-    public List<Contrato> getContrato() {
+    public List<Contrato> getContratos() {
         try{
             return jdbcTemplate.query("SELECT * FROM contrato", new
                     ContratoRowMapper());
