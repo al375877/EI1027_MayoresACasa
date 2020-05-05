@@ -32,7 +32,7 @@
 
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/beneficiario/list}">Gestion de Beneficiarios |</a>
                     <a class="nav-link" th:unless="*{user == null}" th:if="*{tipo=='Beneficiario'}" th:href="@{/voluntario/solicitar}">Ver/Solicitar Voluntario |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/servicios}">Contratar Servicio |</a>
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/servicios}">Solicitar Servicio |</a>
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/peticion/list}">Peticion Servicios |</a>
 
                     <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>

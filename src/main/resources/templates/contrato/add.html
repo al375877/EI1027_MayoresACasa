@@ -29,78 +29,49 @@
     </div>
     <form action="#" th:action="@{/contrato/add}"
           th:object="${contrato}" method="post">
+        <h2>Añade un contrato.</h2><hr>
+        <h3>Como dar de alta un contrato</h3>
+        <ul>
+            <li>Añade el contrato a una empresa, si no existe la empresa debes registrarla primero.</li>
+            <li>Debes poner el usuario de la empresa en cuestion (No nombre ni contacto). </li>
+            <li>Abajo tienes un link para copiar el usuario y pegarlo en la casilla "Usuario empresa".</li>
+        </ul>
+        <hr>
         <table style="margin:auto">
-            <h2>Añade o da de alta un contrato.</h2><hr>
-
-            <tr>
-                <td><img src="https://image.flaticon.com/icons/svg/126/126496.svg"width="30" height="30"></td>
-                <td>&nbsp;Empresa:&nbsp;</td>
-                <td><input type="text" th:field="*{empresa}"
-                           placeholder="usuario" maxlength="50"/></td>
-                <td th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></td>
-
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td><img src="https://image.flaticon.com/icons/svg/126/126175.svg"width="30" height="30"></td>
-                <td>&nbsp;Codigo de Peticion:&nbsp;</td>
-                <td><input type="text" th:field="*{cod_pet}" maxlength="10"
-                           placeholder="codigo"/></td>
-                <td th:if="${#fields.hasErrors('cod_pet')}" th:errors="*{cod_pet}"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td><img src="https://image.flaticon.com/icons/svg/126/126115.svg"width="30" height="30"></td>
-                <td>&nbsp;Codigo contrato:&nbsp;</td>
-                <td><input type="text" th:field="*{codcontrato}" maxlength="50" placeholder="codigo"/></td>
-                <td th:if="${#fields.hasErrors('codcontrato')}" th:errors="*{codcontrato}"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td><img src="https://image.flaticon.com/icons/svg/126/126141.svg"width="30" height="30"></td>
-                <td>&nbsp;Tipo de Servicio:&nbsp;</td>
-                <td><select class="form_control" type="text" th:field="*{tiposervicio}">
-                    <option value="Cattering">Cattering</option>
-                    <option value="Sanitario">Sanitario</option>
-                    <option value="Limpieza">Limpieza</option>
-                </select>
-                <td th:if="${#fields.hasErrors('tiposervicio')}" th:errors="*{tiposervicio}"></td>
-                </td>
-            </tr>
-            <tr><td><br></td></tr>
-<!--            <tr>-->
-<!--                <td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td>-->
-<!--                <td>&nbsp;Fecha inicial:&nbsp;</td>-->
-<!--                <td><input type="date" th:field="*{fechainicial}"/></td>-->
-<!--            </tr>-->
-<!--            <tr><td><br></td></tr>-->
-<!--            <tr>-->
-<!--                <td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td>-->
-<!--                <td>&nbsp;Fecha final:&nbsp;</td>-->
-<!--                <td><input type="date" th:field="*{fechafinal}"/></td>-->
-<!--            </tr>-->
-<!--            <tr><td><br></td></tr>-->
-            <tr>
-                <td><img src="https://image.flaticon.com/icons/svg/126/126151.svg"width="30" height="30"></td>
-                <td>&nbsp;Cantidad Servicios:&nbsp;</td>
-                <td><input type="number" th:field="*{cantidadservicios}" placeholder="2,4,5,.."/></td>
-                <td th:if="${#fields.hasErrors('cantidadservicios')}" th:errors="*{cantidadservicios}"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
-                <td><img src="https://image.flaticon.com/icons/svg/126/126094.svg"width="30" height="30"></td>
-                <td>&nbsp;Precio Unidad:&nbsp;</td>
-                <td><input type="number" th:field="*{preciounidad}" placeholder="190 (200-5%)" /></td>
-                <td th:if="${#fields.hasErrors('preciounidad')}" th:errors="*{preciounidad}"></td>
-            </tr>
-            <tr><td><br></td></tr>
-
-            <td><br></td><td><br></td><td colspan="2"><input type="submit" class="boton_añadir" role="button" value="AÑADIR" /></td>
-            <a class="boton_personalizado1" th:href="@{/contrato/list}" role="button">Ver/Eliminar Contratos</a>
-            </tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/126/126496.svg"width="30" height="30"></td>
+                    <td>&nbsp;Usuario empresa:&nbsp;</td>
+                    <td><input type="text" th:field="*{empresa}"
+                               placeholder="usuario" maxlength="50"/></td>
+                    <td th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/126/126141.svg"width="30" height="30"></td>
+                    <td>&nbsp;Tipo de Servicio:&nbsp;</td>
+                    <td><select class="form_control" type="text" th:field="*{tiposervicio}">
+                        <option value="Cattering">Cattering</option>
+                        <option value="Sanitario">Sanitario</option>
+                        <option value="Limpieza">Limpieza</option>
+                    </select>
+                    <td th:if="${#fields.hasErrors('tiposervicio')}" th:errors="*{tiposervicio}"></td>
+                    </td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/126/126151.svg"width="30" height="30"></td>
+                    <td>&nbsp;Cantidad Servicios:&nbsp;</td>
+                    <td><input type="number" th:field="*{cantidadservicios}" placeholder="2,4,5,.."/></td>
+                    <td th:if="${#fields.hasErrors('cantidadservicios')}" th:errors="*{cantidadservicios}"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <td><br></td><td><br></td><td colspan="2"><input type="submit" class="boton_añadir" role="button" value="AÑADIR"/></td>
+                </tr>
         </table>
-        <br>
     </form>
+    <br>
+    <a class="boton_personalizado1" th:href="@{/empresa/list}" role="button">Lista de Empresas</a>
+    <a class="boton_personalizado1" th:href="@{/contrato/list}" role="button">Ver/Eliminar Contratos</a>
 </div>
 </body>
 </html>

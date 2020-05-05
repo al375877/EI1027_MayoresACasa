@@ -3,7 +3,7 @@ package es.uji.ei1027.Mayorescasa.model;
 import java.util.Date;
 
 public class Contrato {
-    private String empresa, cod_pet, codcontrato, tiposervicio;
+    private String empresa, codcontrato, tiposervicio;
     private Date fechainicial, fechafinal;
     private int cantidadservicios;
     private double preciounidad;
@@ -12,7 +12,6 @@ public class Contrato {
     public String toString() {
         return "Contrato{" +
                 "empresa='" + empresa + '\'' +
-                ", cod_pet='" + cod_pet + '\'' +
                 ", codcontrato='" + codcontrato + '\'' +
                 ", tiposervicio='" + tiposervicio + '\'' +
                 ", fechainicial=" + fechainicial +
@@ -30,59 +29,51 @@ public class Contrato {
         this.empresa = empresa;
     }
 
-    public String getCod_pet() {
-        return cod_pet;
-    }
-
-    public void setCod_pet(String cod_pet) {
-        this.cod_pet = cod_pet;
-    }
-
-    public String getcodcontrato() {
+    public String getCodcontrato() {
         return codcontrato;
     }
 
-    public void setcodcontrato(String codcontrato) {
+    public void setCodcontrato(String codcontrato) {
         this.codcontrato = codcontrato;
     }
 
-    public String gettiposervicio() {
+    public String getTiposervicio() {
         return tiposervicio;
     }
 
-    public void settiposervicio(String tiposervicio) {
+    public void setTiposervicio(String tiposervicio) {
         this.tiposervicio = tiposervicio;
     }
 
-    public Date getfechainicial() {
+    public Date getFechainicial() {
         return fechainicial;
     }
 
-    public void setfechainicial(Date fechainicial) {
+    public void setFechainicial(Date fechainicial) {
         this.fechainicial = fechainicial;
     }
 
-    public Date getfechafinal() {
+    public Date getFechafinal() {
         return fechafinal;
     }
 
-    public void setfechafinal(Date fechafinal) {
+    public void setFechafinal(Date fechafinal) {
         this.fechafinal = fechafinal;
     }
 
-    public int getcantidadservicios() {
+    public int getCantidadservicios() {
         return cantidadservicios;
     }
 
-    public void setcantidadservicios(int cantidadservicios) {
+    public void setCantidadservicios(int cantidadservicios) {
         this.cantidadservicios = cantidadservicios;
     }
 
-    public double getpreciounidad() {
+    public double getPreciounidad() {
         return preciounidad;
     }
 
-    public void setpreciounidad(double preciounidad) {
+    public void setPreciounidad(double preciounidad) {
         this.preciounidad = preciounidad;
     }
 }

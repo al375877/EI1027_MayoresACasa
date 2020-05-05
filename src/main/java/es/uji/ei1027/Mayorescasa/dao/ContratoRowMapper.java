@@ -9,13 +9,12 @@ public class ContratoRowMapper implements RowMapper<Contrato>{
     public Contrato mapRow(ResultSet rs, int RowNum) throws SQLException {
         Contrato contrato = new Contrato();
         contrato.setEmpresa(rs.getString("empresa"));
-        contrato.setCod_pet(rs.getString("cod_pet"));
-        contrato.setcodcontrato(rs.getString("codcontrato"));
-        contrato.settiposervicio(rs.getString("tiposervicio"));
-        contrato.setfechainicial(rs.getDate("fechainicial"));
-        contrato.setfechafinal(rs.getDate("fechafinal"));
-        contrato.setcantidadservicios(rs.getInt("cantidadservicios"));
-        contrato.setpreciounidad(rs.getDouble("preciounidad"));
+        contrato.setCodcontrato(rs.getString("codcontrato"));
+        contrato.setTiposervicio(rs.getString("tiposervicio"));
+        contrato.setFechainicial(rs.getDate("fechainicial"));
+        contrato.setFechafinal(rs.getDate("fechafinal"));
+        contrato.setCantidadservicios(rs.getInt("cantidadservicios"));
+        contrato.setPreciounidad(rs.getDouble("preciounidad"));
         return contrato;
 
     }

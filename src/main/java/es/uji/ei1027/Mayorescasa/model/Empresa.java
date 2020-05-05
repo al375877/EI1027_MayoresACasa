@@ -1,7 +1,7 @@
 package es.uji.ei1027.Mayorescasa.model;
 
 public class Empresa {
-    String nombre,cif,persona_contacto,usuario,contraseña,email,direccion,tiposervicio, registro;
+    String nombre,cif,persona_contacto,usuario,contraseña,email,direccion,tiposervicio;
     int telefono;
 
     public String getNombre() {
@@ -74,14 +74,6 @@ public class Empresa {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
-    }
-
-    public String getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(String registro) {
-        this.registro = registro;
     }
 
     @Override

@@ -33,6 +33,20 @@ public class BeneficiarioController {
         return "beneficiario/index";
     }
 
+    @RequestMapping("/info")
+    public String info(HttpSession session, Model model) {
+        return "beneficiario/info";
+    }
+    @RequestMapping(value="/info", method= RequestMethod.POST)
+    public String processAddSubmit() {
+        return "beneficiario/info2";
+    }
+
+    @RequestMapping("/info2")
+    public String info2(HttpSession session, Model model) {
+        return "beneficiario/info2";
+    }
+
     @RequestMapping("/pedirRegistro")
     public String pedirRegistro(Model model) {
         return "beneficiario/pedirRegistro";
@@ -87,32 +101,9 @@ public class BeneficiarioController {
             return "beneficiario/add";
         }
         usuario.setTipoUsuario("Beneficiario");
-        usuario.setRegistro("PENDIENTE");
         usuarioDao.addUsuario(usuario);
         usuarioDao.addBeneficiario(usuario.getDni(),usuario.getTipodieta(),"PENDIENTE");
         return "redirect:../login";
-    }
-
-    @RequestMapping(value="/aceptar/{usuario}")
-    public String aceptarBeneficiario(@PathVariable String usuario) {
-//        System.out.println(usuario);
-        Usuario usu;
-        usu = usuarioDao.getUsuario(usuario);
-//        System.out.println(usu.getNombre());
-        usu.setRegistro("ACEPTADO");
-        usuarioDao.updateUsuario(usu);
-        usuarioDao.updateBeneficiario(usu.getDni(),"ACEPTADO");
-        return "redirect:../list";
-    }
-
-    @RequestMapping(value="/rechazar/{usuario}")
-    public String rechazarBeneficiario(@PathVariable String usuario) {
-        Usuario usu;
-        usu = usuarioDao.getUsuario(usuario);
-        usu.setRegistro("RECHAZADO");
-        usuarioDao.updateUsuario(usu);
-        usuarioDao.updateBeneficiario(usu.getDni(),"RECHAZADO");
-        return "redirect:../list";
     }
 
 }

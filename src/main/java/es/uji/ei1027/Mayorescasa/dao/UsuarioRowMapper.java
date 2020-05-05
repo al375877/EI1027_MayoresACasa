@@ -20,8 +20,6 @@ public class UsuarioRowMapper implements RowMapper<Usuario> {
         usuario.setGenero(rs.getString("genero"));
         usuario.setTipoUsuario(rs.getString("tipousuario"));
         usuario.setTipodieta(rs.getString("tipodieta"));
-        usuario.setRegistro(rs.getString("registro"));
-
 
         return usuario;
 

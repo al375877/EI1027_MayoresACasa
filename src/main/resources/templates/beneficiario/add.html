@@ -14,9 +14,8 @@
 
     <style>
         img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 100%;
+            max-height: 100%;
         }
         form {
           font-family: arial, sans-serif;
@@ -32,14 +31,12 @@
         <h1 style="color:black;" >Mayores a casa | Beneficiaros </h1>
     </div>
 
-    <header><h2>Cuidado de mayores a domicilio<br>
-        Solicita Información o llámanos al 920 14 58 74<br>
+    <header><h2> Registra a un Beneficiario<br>
         <hr></h2></header>
 
     <form  action="#" th:action="@{/beneficiario/add}"
            th:object="${usuario}" method="post">
         <table style="margin:auto">
-            No te preocupes, una vez envies tus datos, nos pondremos en contacto contigo en menos de 24h.<hr>
             <tr>
                 <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
                 <td>Nombre:&nbsp;</td>
@@ -98,7 +95,7 @@
 <!--            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126500.svg"width="30" height="30"></td><td>&nbsp;¿Algo más?:&nbsp;</td>-->
 <!--                <td><textarea type="search" placeholder="Cuéntanos algo más sobre lo que necesitas. (opcional)" rows="10" cols="40" maxlength="200" ></textarea></td></tr>-->
             <tr>
-                <td></td><td></td><td><input class="boton_personalizado1" id="enviar" type="submit" value="Quiero Registrarme">
+                <td></td><td></td><td><input class="boton_personalizado1" id="enviar" type="submit" value="REGISTRAR">
                 <input class="boton_personalizado1" id="borrar" type="reset" value="BORRAR"></td>
             </tr>
             <tr>
@@ -109,7 +106,6 @@
     <table>
         <br>
         <br>
-        <tr><img src="https://setemah.com/es/wp-content/uploads/2016/07/contacta-con-nosotros.jpg" width="200" height="66"></tr>
     </table>
     <a href="/" class="boton_personalizado1" role="button" >Volver</a>
 </div>

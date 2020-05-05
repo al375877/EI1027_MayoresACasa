@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/contrato")
@@ -33,6 +35,12 @@ public class ContratoController {
         model.addAttribute("contratos", contratoDao.getContratos());
         System.out.println(contratoDao.getContratos());
         return "contrato/list";
+    }
+
+    @RequestMapping(value="/delete/{codcontrato}")
+    public String processDelete(@PathVariable String codcontrato) {
+        contratoDao.deleteContrato(codcontrato);
+        return "redirect:../list";
     }
 
     @RequestMapping("/existe")
@@ -59,21 +67,34 @@ public class ContratoController {
         List<Empresa>lista=contratoDao.getEmpresas();
         List<Peticion>listaPet=contratoDao.getPeticiones();
         List<String> usuEmpresas = new ArrayList<>();
-        List<String> codPets = new ArrayList<>();
-        for(Peticion peticion:listaPet) codPets.add(peticion.getCod_pet());
         for(Empresa empresa:lista) usuEmpresas.add(empresa.getUsuario());
-//        System.out.println(codPets + contrato.getCod_pet());
-//        System.out.println(usuEmpresas + contrato.getEmpresa());
-//        System.out.println("*******************************************");
-        if((codPets.contains(contrato.getCod_pet())) && (usuEmpresas.contains(contrato.getEmpresa()))) {
-            Date fecha = new Date();
-            System.out.println(fecha);
+        if(usuEmpresas.contains(contrato.getEmpresa())) {
+            contrato.setCodcontrato(aleatorio()+"CNT");
             contratoDao.addContrato(contrato);
-            contrato.setfechainicial(fecha);
-            contratoDao.updateFechas(fecha,null,contrato.getEmpresa());
+            Date fecha = new Date();
+            System.out.println(contrato.getTiposervicio());
+            System.out.println("*****************************");
+            if (contrato.getTiposervicio().equals("Limpieza")){
+                contratoDao.updateAdd(fecha,null,200,contrato.getCodcontrato()); }
+            if (contrato.getTiposervicio().equals("Cattering")){
+                contratoDao.updateAdd(fecha,null,300,contrato.getCodcontrato()); }
+            if (contrato.getTiposervicio().equals("Sanitario")){
+                contratoDao.updateAdd(fecha,null,150,contrato.getCodcontrato()); }
             return "contrato/add";
         }
         return "contrato/existe";
+    }
+
+    private String aleatorio(){
+        Random aleatorio = new Random();
+        String alfa = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
+        String cadena = "";
+        int numero;
+        int forma;
+        forma=(int)(aleatorio.nextDouble() * alfa.length()-1+0);
+        numero=(int)(aleatorio.nextDouble() * 99+100);
+        cadena=cadena+alfa.charAt(forma)+numero;
+        return cadena;
     }
 }
 

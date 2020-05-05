@@ -42,7 +42,6 @@
                 <th scope="col">Email</th>
                 <th scope="col">Año nacim.</th>
                 <th scope="col">Tipo dieta</th>
-                <th scope="col">Registro</th>
             </tr>
         </thead>
         <tbody>
@@ -56,10 +55,7 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.nacimiento}"></td>
                 <td th:text="${user.tipodieta}"></td>
-                <td th:text="${user.registro}"></td>
 
-                <td><a type="button" class="boton_añadir"  style="width:75px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/beneficiario/aceptar/{usuario}(usuario=${user.usuario})}">ACEPTAR</a></td>
-                <td><a type="button" class="boton_editar" style="width:75px; height:25px font-weight: 100; font-size: 9px;" th:href="@{/beneficiario/rechazar/{usuario}(usuario=${user.usuario})}">RECHAZAR</a></td>
                 <td><a type="button" class="boton_eliminar" style="width:70px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/beneficiario/delete/{dni}(dni=${user.dni})}">BORRAR</a></td>
             </tr>
         </tbody>

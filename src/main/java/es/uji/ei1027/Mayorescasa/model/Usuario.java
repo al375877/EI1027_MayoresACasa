@@ -12,16 +12,7 @@ public class Usuario {
     private String genero;
     private String tipoUsuario;
     private String tipodieta;
-    private String registro;
     private int telefono, nacimiento;
-
-    public String getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(String registro) {
-        this.registro = registro;
-    }
 
     public String getTipodieta() {
         return tipodieta;

@@ -28,6 +28,10 @@ public class EmpresaController {
     }
 
     // Operaciones: Crear, listar, actualizar, borrar
+    @RequestMapping("/info")
+    public String infoEmpresas(Model model) {
+        return "empresa/info";
+    }
 
     @RequestMapping("/list")
     public String listEmpresas(Model model) {
@@ -48,7 +52,6 @@ public class EmpresaController {
         emrpesaValidator.validate(empresa, bindingResult);
         if (bindingResult.hasErrors())
             return "empresa/add";
-        empresa.setRegistro("PENDIENTE");
         empresaDao.addEmpresa(empresa);
         return "redirect:../login";
     }
@@ -75,25 +78,6 @@ public class EmpresaController {
         return "redirect:../list";
     }
 
-    @RequestMapping(value="/aceptar/{usuario}")
-    public String aceptarBeneficiario(@PathVariable String usuario) {
-//        System.out.println(usuario);
-        Empresa usu;
-        usu = empresaDao.getEmpresa(usuario);
-//        System.out.println(usu.getNombre());
-        usu.setRegistro("ACEPTADO");
-        empresaDao.updateEmpresa(usu);
-        return "redirect:../list";
-    }
-
-    @RequestMapping(value="/rechazar/{usuario}")
-    public String rechazarBeneficiario(@PathVariable String usuario) {
-        Empresa usu;
-        usu = empresaDao.getEmpresa(usuario);
-        usu.setRegistro("RECHAZADO");
-        empresaDao.updateEmpresa(usu);
-        return "redirect:../list";
-    }
 
 
 

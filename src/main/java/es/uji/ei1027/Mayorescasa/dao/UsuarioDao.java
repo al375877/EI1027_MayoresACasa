@@ -21,11 +21,11 @@ public class UsuarioDao {
     }
     //AÑADIMOS Usuario
     public void addUsuario(Usuario usuario) {
-        jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                 usuario.getNombre(),usuario.getUsuario(),usuario.getContraseña(),
                 usuario.getEmail(),usuario.getDireccion(),usuario.getDni(),
                 usuario.getGenero(),usuario.getNacimiento(),usuario.getTelefono(),
-                usuario.getTipoUsuario(),usuario.getTipodieta(),usuario.getRegistro());
+                usuario.getTipoUsuario(),usuario.getTipodieta());
     }
     //AÑADIMOS Voluntario
     public void addVoluntario(String dni, String hobbies) {
@@ -54,11 +54,11 @@ public class UsuarioDao {
     public void updateUsuario(Usuario usuario){
         jdbcTemplate.update("UPDATE Usuario SET nombre=?, usuario=?," +
                         "contraseña=?, email=?, direccion=?, genero=?, " +
-                        "nacimiento=?, telefono=?, tipousuario=?, tipodieta=?, registro=? WHERE dni=?",
+                        "nacimiento=?, telefono=?, tipousuario=?, tipodieta=? WHERE dni=?",
                 usuario.getNombre(),usuario.getUsuario(),usuario.getContraseña(),
                 usuario.getEmail(),usuario.getDireccion(),usuario.getGenero(),
                 usuario.getNacimiento(),usuario.getTelefono(), usuario.getTipoUsuario(),
-                usuario.getTipodieta(),usuario.getRegistro(),usuario.getDni());
+                usuario.getTipodieta(),usuario.getDni());
     }
     public Usuario getUsuario (String name ){
         try{

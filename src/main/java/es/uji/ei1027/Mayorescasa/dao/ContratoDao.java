@@ -24,33 +24,33 @@ public class ContratoDao {
     }
     //AÑADIMOS Contrato
     public void addContrato(Contrato contrato) {
-        jdbcTemplate.update("INSERT INTO contrato VALUES (?,?,?,?,?,?,?,?)",
-                contrato.getEmpresa(),contrato.getCod_pet(),contrato.getcodcontrato(),
-                contrato.gettiposervicio(),contrato.getfechafinal(),contrato.getfechafinal(),
-                contrato.getcantidadservicios(),contrato.getpreciounidad()
+        jdbcTemplate.update("INSERT INTO contrato VALUES (?,?,?,?,?,?,?)",
+                contrato.getEmpresa(),contrato.getCodcontrato(),
+                contrato.getTiposervicio(),contrato.getFechafinal(),contrato.getFechafinal(),
+                contrato.getCantidadservicios(),contrato.getPreciounidad()
         );
     }
 
     //BORRAMOS Contrato
-    public void deleteContrato(String empresa) {
-        jdbcTemplate.update("DELETE FROM contrato WHERE empresa=?", empresa);
+    public void deleteContrato(String codcontrato) {
+        jdbcTemplate.update("DELETE FROM contrato WHERE codcontrato=?", codcontrato);
     }
 
     //ACTUALIZAMOS Contrato (No se actualiza usuario y dni por claves primaria)
     public void updateContrato(Contrato contrato){
-        jdbcTemplate.update("UPDATE contrato SET cod_pet=?, codcontrato=?, tiposervicio=?, " +
+        jdbcTemplate.update("UPDATE contrato SET codcontrato=?, tiposervicio=?, " +
                         "fechainicial=?, fechafinal=?, cantidadservicios=?, preciounidad=?" +
                         "WHERE empresa=? ",
-                contrato.getCod_pet(),contrato.getcodcontrato(),
-                contrato.gettiposervicio(),contrato.getfechafinal(),contrato.getfechafinal(),
-                contrato.getcantidadservicios(),contrato.getpreciounidad(), contrato.getEmpresa()
+                contrato.getCodcontrato(),
+                contrato.getTiposervicio(),contrato.getFechafinal(),contrato.getFechafinal(),
+                contrato.getCantidadservicios(),contrato.getPreciounidad(), contrato.getEmpresa()
         );
 
     }
     //ACTUALIZAR FECHAS
-    public void  updateFechas(Date fechaInicial, Date fechaFinal, String empresa){
-        jdbcTemplate.update("UPDATE contrato SET fechainicial=?, fechafinal=? WHERE empresa=? ",
-                fechaInicial, fechaFinal, empresa);
+    public void  updateAdd(Date fechaInicial, Date fechaFinal, int preciounidad, String codcontrato){
+        jdbcTemplate.update("UPDATE contrato SET fechainicial=?, fechafinal=?, preciounidad=? WHERE codcontrato=? ",
+                fechaInicial, fechaFinal, preciounidad, codcontrato);
     }
 
     public Contrato getContrato (String contrato ){

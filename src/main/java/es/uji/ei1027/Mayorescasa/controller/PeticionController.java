@@ -91,9 +91,10 @@ public class PeticionController {
         pet.setCod_pet(aleatorio() + "LIMP");
         pet.setTiposervicio("LIMPIEZA");
         pet.setDni_ben(user.getDni());
+        pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(200);
-        pet.setComentarios("Peticion esperando aprobacion");
+        pet.setComentarios("PENDIENTE");
 
         boolean existe= (boolean) session.getAttribute("existeL");
         if(existe){
@@ -116,10 +117,11 @@ public class PeticionController {
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "CATT");
         pet.setTiposervicio("CATTERING");
-        pet.setDni_ben(user.getDni()); //Retocar
+        pet.setDni_ben(user.getDni());
+        pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
-        pet.setComentarios("Peticion esperando aprobacion");
+        pet.setComentarios("PENDIENTE");
         boolean existe= (boolean) session.getAttribute("existeC");
         if(existe){
             System.out.println("EXISTE");
@@ -139,10 +141,11 @@ public class PeticionController {
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "SAN");
         pet.setTiposervicio("SANITARIO");
-        pet.setDni_ben(user.getDni()); //Retocar
+        pet.setDni_ben(user.getDni());
+        pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
-        pet.setComentarios("Peticion esperando aprobacion");
+        pet.setComentarios("PENDIENTE");
         boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
             System.out.println("EXISTE");
@@ -171,9 +174,8 @@ public class PeticionController {
         Peticion pet;
         pet = peticionDao.getPeticion(cod);
         Date fecha = new Date();
-        System.out.println(fecha);
         pet.setFechaaceptada(fecha);
-        pet.setComentarios("Peticion ACEPTADA");
+        pet.setComentarios("ACEPTADA");
         peticionDao.updatePeticion(pet);
         return "redirect:../list";
     }
@@ -185,7 +187,7 @@ public class PeticionController {
         Date fecha = new Date();
         System.out.println(fecha);
         pet.setFecharechazada(fecha);
-        pet.setComentarios("Peticion RECHAZADA");
+        pet.setComentarios("RECHAZADA");
         peticionDao.updatePeticion(pet);
         return "redirect:../list";
     }

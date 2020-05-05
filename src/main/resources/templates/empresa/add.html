@@ -28,10 +28,8 @@
         <h1 style="color:black;" >Mayores a casa |  Pedir Registro</h1>
     </div>
 
-    <header><h3>Cuidado de mayores a domicilio<br>
-        Introduce tus datos de empresa o llámanos al 920 14 58 74<br>
-        En 24 horas nos pondremos en contacto contigo<br>
-        <hr></h3></header>
+    <header><h2>Registra una empresa<br>
+        <hr></h2></header>
     <form action="#" th:action="@{/empresa/add}"
           th:object="${empresa}" method="post">
         <table style="margin:auto">
@@ -118,7 +116,8 @@
 <!--            </tr>-->
 <!--            <tr><td><br></td></tr>-->
 
-            <td><br></td><td><br></td><td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Enviar datos" /></td>
+            <td><br></td><td><br></td><td colspan="2"><input type="submit" class="boton_añadir" role="button" value="REGISTRAR" />
+            <input class="boton_personalizado1" id="borrar" type="reset" value="BORRAR"></td>
             </tr>
         </table>
         <br>

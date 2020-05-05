@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores a casa</title>
+
+    <style>
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        form {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h1 style="color:black;" >Mayores a casa | Beneficiaros </h1>
+    </div>
+
+    <header><h2>Cuidado de mayores a domicilio<br>
+        Solicita Información o llámanos al 920 14 58 74<br>
+        <hr></h2></header>
+
+    <form action="#" th:action="@{/beneficiario/info}" method="post">
+        <table style="margin:auto">
+            La Consejeria de Asuntos Sociales (CAS) ha puesto en marcha un proyecto para mejorar la calidad de
+            su vida, para que pueda estar en casa y tener su independencia. Nosotros le ofrecemos ayuda y compañia,
+            además de servicios a un coste mínimo, como:
+            <img src="http://imgfz.com/i/oITYgbJ.jpeg">
+            Puede contactar con un asistente para ayudarle a registrarse en nuestro servicio o llamar al telefono 920 14 58 74.
+            <br>&nbsp;
+            <br>&nbsp;
+            <a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
+            <hr>
+            Si desea por el contrario darnos sus datos, rellene el siguiente formulario.
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
+                <td>Nombre:&nbsp;</td>
+                <td><input input type="text" class="form-control" id="nombre" placeholder=" Juan Perez Salvador" size="40" maxlength="50" required></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td><td>&nbsp;Telefono:&nbsp;</td>
+                <td><input type="tel" name="phone" pattern="[0-9]{9}" placeholder="612345678" required></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126516.svg"width="30" height="30"></td><td>&nbsp;Email:&nbsp;</td>
+                <td><input class="form-control" type="text" placeholder=" ejemplo@gmail.com" size="40" maxlength="50" required></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td><td>&nbsp;Año Nacim.:&nbsp;</td>
+                <td><input class="form-control" type="number" placeholder="1960" size="40" maxlength="50" required></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126160.svg"width="30" height="30"></td><td>&nbsp;Tipo de dieta:&nbsp;</td>
+                <td><input class="form-control" type="text" placeholder=" vegana, sin sal, vegetariana" size="40" maxlength="50" ></td>
+            <tr><td><br></td></tr>
+                <tr><td><img src="https://image.flaticon.com/icons/svg/126/126500.svg"width="30" height="30"></td><td>&nbsp;¿Algo más?:&nbsp;</td>
+                <td><textarea type="search" placeholder="Cuéntanos algo más sobre lo que necesitas. (opcional)" rows="10" cols="40" maxlength="200" ></textarea></td></tr>
+            <tr>
+                <td></td><td></td><td><input class="boton_personalizado1" id="enviar" type="submit" value="Enviar mis datos">
+                                      <input class="boton_personalizado1" id="borrar" type="reset" value="BORRAR"></td></td></td></tr>
+            No te preocupes, una vez envies tus datos, nos pondremos en contacto contigo en menos de 24h.<hr>
+            <tr>
+                <br>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <br>
+        <br>
+    </table>
+    <a href="/" class="boton_personalizado1" role="button" >Volver</a>
+</div>
+</body>
+</html>

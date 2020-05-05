@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores a casa</title>
+
+    <style>
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        form {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h1 style="color:black;" >Mayores a casa | Beneficiaros </h1>
+    </div>
+
+    <header><h2>Cuidado de mayores a domicilio<br>
+        Solicita Información o llámanos al 920 14 58 74<br>
+        <hr></h2></header>
+
+    <form>
+        <table style="margin:auto">
+            La Consejeria de Asuntos Sociales (CAS) ha puesto en marcha un proyecto para mejorar la calidad de
+            su vida, para que pueda estar en casa y tener su independencia. Nosotros le ofrecemos ayuda y compañia,
+            además de servicios a un coste mínimo, como:
+            <img src="http://imgfz.com/i/oITYgbJ.jpeg">
+            Puede contactar con un asistente para ayudarle a registrarse en nuestro servicio o llamar al telefono 920 14 58 74.
+            <br>&nbsp;
+            <br>&nbsp;
+            <a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
+            <hr>
+            Gracias por enviarnos tus datos, en menos de 24h nos pondremos en contacto contigo, en el telefono que has indicado.
+
+    <table>
+        <br>
+        <br>
+    </table>
+    <a href="/" class="boton_personalizado1" role="button" >Volver</a>
+</div>
+</body>
+</html>
