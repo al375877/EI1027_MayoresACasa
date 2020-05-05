@@ -9,32 +9,33 @@
 
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-    <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-        }
-        td {
-          border: 1px solid #dddddd;
-          text-align: center;
-          padding: 15px;
-          height: 60px;
-        }
-        th {
-          border: 1px solid #dddddd;
-          text-align: center;
-          padding: 15px;
-        }
-        tr:nth-child(even) {
-          background-color: #dddddd;
-        }
-    </style>
+<!--    <style>-->
+<!--        img {-->
+<!--            display: block;-->
+<!--            margin-left: auto;-->
+<!--            margin-right: auto;-->
+<!--        }-->
+<!--        table {-->
+<!--          font-family: arial, sans-serif;-->
+<!--          border-collapse: collapse;-->
+<!--          width: 100%;-->
+<!--        }-->
+<!--        td {-->
+
+<!--          text-align: center;-->
+<!--          padding: 15px;-->
+<!--          height: 60px;-->
+<!--        }-->
+<!--        th {-->
+<!--          border: 1px solid #dddddd;-->
+<!--          text-align: center;-->
+<!--          padding: 15px;-->
+<!--        }-->
+<!--        tr:nth-child(even) {-->
+<!--          background-color: #dddddd;-->
+<!--        }-->
+
+<!--    </style>-->
 </head>
 <body >
 <div  layout:fragment="content"  th:object="${session}">
@@ -58,19 +59,19 @@
             <td>LIMPIEZA</td>
             <td>200€/MES</td>
             <td>De Lunes a Domingo, 16 a 18 horas</td>
-            <td><a class="boton_personalizado1" href="limpieza" role="button"  >Solicitar</a></td>
+            <td style=" padding: 15px;height: 60px;"><a class="boton_personalizado1" href="limpieza" role="button"  >Solicitar</a></td>
         </tr>
         <tr>
             <td>CATTERING</td>
             <td>300€/MES</td>
             <td>De Lunes a Domingo, 14 a 15 horas y 21 a 22 horas</td>
-            <td><a class="boton_personalizado1" href="cattering" role="button" >Solicitar</a></td>
+            <td style=" padding: 15px;height: 60px;"><a class="boton_personalizado1" href="cattering" role="button" >Solicitar</a></td>
         </tr>
         <tr>
             <td>SALUD</td>
             <td>150€/MES</td>
             <td>De Lunes a Domingo, 10 a 12 horas</td>
-            <td><a class="boton_personalizado1" href="sanitario" role="button" >Solicitar</a></td>
+            <td style=" padding: 15px;height: 60px;"> <a class="boton_personalizado1" href="sanitario" role="button" >Solicitar</a></td>
         </tr>
         </tbody>
 </table>
