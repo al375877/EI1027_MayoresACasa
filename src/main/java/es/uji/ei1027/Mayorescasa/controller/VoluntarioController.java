@@ -54,7 +54,7 @@ public class VoluntarioController {
         }
         usuario.setTipoUsuario("Voluntario");
         usuarioDao.addUsuario(usuario);
-        usuarioDao.addVoluntario(usuario.getDni(),"Sin Hobbies");
+        usuarioDao.addVoluntario(usuario.getDni(),"No añadido");
         return "redirect:../login";
     }
 

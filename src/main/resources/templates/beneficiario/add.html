@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores a casa</title>
+
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h1 style="color:black;" >Mayores a casa | Beneficiaros </h1>
+    </div>
+
+    <header><h2>Cuidado de mayores a domicilio<br>
+        Solicita Información o llámanos al 920 14 58 74<br>
+        <hr></h2></header>
+
+    <form  action="#" th:action="@{/beneficiario/add}"
+           th:object="${usuario}" method="post">
+        <table style="margin:auto">
+            No te preocupes, una vez envies tus datos, nos pondremos en contacto contigo en menos de 24h.<hr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
+                <td>Nombre:&nbsp;</td>
+                <td><input input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder=" Juan Perez Salvador" size="40" maxlength="50" ></td>
+                <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126109.svg"width="30" height="30"></td><td>&nbsp;Dni:&nbsp;</td>
+                <td><input class="form-control" type="text" th:field="*{dni}" placeholder="41254785Q" size="40" maxlength="50" ></td>
+                <td th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></td>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126485.svg"width="30" height="30"></td>
+                <td>Usuario:&nbsp;</td>
+                <td><input type="text" th:field="*{usuario}" maxlength="50"/></td>
+                <td th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126479.svg"width="30" height="30"></td>
+                <td>Contraseña:&nbsp;</td>
+                <td><input type="password" th:field="*{contraseña}" maxlength="50"/></td>
+                <td th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126470.svg"width="30" height="30"></td><td>&nbsp;Direccion:&nbsp;</td>
+                <td><input class="form-control" type="text" th:field="*{direccion}" placeholder=" Calle nueva, 32 (Castellon)" size="40" maxlength="50" ></td>
+                <td th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td><td>&nbsp;Telefono:&nbsp;</td>
+                <td><input type="tel" name="phone" pattern="[0-9]{9}" th:field="*{telefono}" placeholder="612345678"/></td>
+                <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126491.svg"width="30" height="30"></td>
+                <td>Genero:&nbsp;</td>
+                <td><select class="form_control" type="text" th:field="*{genero}">
+                    <option value="No seleccionado">Selecciona el genero</option>
+                    <option value="Femeni">Femenino</option>
+                    <option value="Masculi">Masculino</option>
+                </select>
+                </td>
+            </tr>
+            <tr><td><br></td></tr>
+                <tr><td><img src="https://image.flaticon.com/icons/svg/126/126516.svg"width="30" height="30"></td><td>&nbsp;Email:&nbsp;</td>
+                <td><input class="form-control" type="text" th:field="*{email}"  placeholder=" ejemplo@gmail.com" size="40" maxlength="50" ></td>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td><td>&nbsp;Año Nacim.:&nbsp;</td>
+                <td><input class="form-control" type="number" th:field="*{nacimiento}" placeholder="1960" size="40" maxlength="50" ></td>
+                <td th:if="${#fields.hasErrors('nacimiento')}" th:errors="*{nacimiento}"></td>
+            <tr><td><br></td></tr>
+            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126160.svg"width="30" height="30"></td><td>&nbsp;Tipo de dieta:&nbsp;</td>
+                <td><input class="form-control" type="text" th:field="*{tipodieta}" placeholder=" vegana, sin sal, vegetariana" size="40" maxlength="50" ></td>
+                <td th:if="${#fields.hasErrors('tipodieta')}" th:errors="*{tipodieta}"></td>
+            <tr><td><br></td></tr>
+<!--            <tr><td><img src="https://image.flaticon.com/icons/svg/126/126500.svg"width="30" height="30"></td><td>&nbsp;¿Algo más?:&nbsp;</td>-->
+<!--                <td><textarea type="search" placeholder="Cuéntanos algo más sobre lo que necesitas. (opcional)" rows="10" cols="40" maxlength="200" ></textarea></td></tr>-->
+            <tr>
+                <td></td><td></td><td><input class="boton_personalizado1" id="enviar" type="submit" value="Quiero Registrarme">
+                <input class="boton_personalizado1" id="borrar" type="reset" value="BORRAR"></td>
+            </tr>
+            <tr>
+                <br>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <br>
+        <br>
+        <tr><img src="https://setemah.com/es/wp-content/uploads/2016/07/contacta-con-nosotros.jpg" width="200" height="66"></tr>
+    </table>
+    <a href="/" class="boton_personalizado1" role="button" >Volver</a>
+</div>
+</body>
+</html>

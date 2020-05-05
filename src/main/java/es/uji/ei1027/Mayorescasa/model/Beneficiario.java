@@ -3,13 +3,20 @@ package es.uji.ei1027.Mayorescasa.model;
 public class Beneficiario extends Usuario {
     private String dni;
     private String tipodieta;
+    private String registro;
 
-    @Override
+    public String getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(String registro) {
+        this.registro = registro;
+    }
+
     public String getDni() {
         return dni;
     }
 
-    @Override
     public void setDni(String dni) {
         this.dni = dni;
     }

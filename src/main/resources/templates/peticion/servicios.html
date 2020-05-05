@@ -80,30 +80,6 @@
 </table>
 <h3>¿No sabes como utilizar nuestra página?</h3>
 <a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
-    <!-- Modal -->
-    <div class="modal fade" id="modal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Header</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div  class="modal-body">
-                    <p th:if="*{existe==true}" >Usted ya ha solicitado este servicio.</p>
-                    <p th:unless="*{existe==true}" >Se ha solicitado correctamente.</p>
-                </div>
-
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-</div>
-
 </div>
 </body>
 </html>

@@ -1,14 +1,32 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
+import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+import es.uji.ei1027.Mayorescasa.model.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.UsesSunMisc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/beneficiario")
 public class BeneficiarioController {
+
+    private UsuarioDao usuarioDao;
+
+    @Autowired
+    public void setUsuarioDao(UsuarioDao usuarioDao) {
+        this.usuarioDao=usuarioDao;
+    }
 
     @RequestMapping("/index")
     public String index(HttpSession session, Model model) {
@@ -20,7 +38,82 @@ public class BeneficiarioController {
         return "beneficiario/pedirRegistro";
     }
 
+    @RequestMapping("/list")
+    public String listusuarios(Model model) {
+        model.addAttribute("usuarios", usuarioDao.getBeneficiarios());
+        return "beneficiario/list";
+    }
 
+    @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
+    public String editusuario(Model model, @PathVariable String usuario) {
+        model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
+        return "usuarios/update";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String processUpdateSubmit(
+            @ModelAttribute("usuario") Usuario usuario,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "usuario/update";
+        usuarioDao.updateUsuario(usuario);
+        return "redirect:list";
+    }
+
+    @RequestMapping(value = "/delete/{usuario}")
+    public String processDelete(@PathVariable String usuario) {
+        usuarioDao.deleteUsuario(usuario);
+        return "redirect:../list";
+    }
+
+    //Llamada de la usuario add
+    @RequestMapping(value="/add")
+    public String addbeneficiario(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        List<String> generoList = new ArrayList<>();
+        generoList.add("Femenino");
+        generoList.add("Masculino");
+        model.addAttribute("generoList", generoList);
+        return "beneficiario/add";
+    }
+
+    @RequestMapping(value="/add", method= RequestMethod.POST)
+    public String processAddSubmit(@ModelAttribute("usuario") Usuario usuario,
+                                   BindingResult bindingResult) {
+        BeneficiarioValidator nadadorValidator = new BeneficiarioValidator();
+        nadadorValidator.validate(usuario, bindingResult);
+        if (bindingResult.hasErrors()) {
+            System.out.println("Error al añadir el beneficiario");
+            return "beneficiario/add";
+        }
+        usuario.setTipoUsuario("Beneficiario");
+        usuario.setRegistro("PENDIENTE");
+        usuarioDao.addUsuario(usuario);
+        usuarioDao.addBeneficiario(usuario.getDni(),usuario.getTipodieta(),"PENDIENTE");
+        return "redirect:../login";
+    }
+
+    @RequestMapping(value="/aceptar/{usuario}")
+    public String aceptarBeneficiario(@PathVariable String usuario) {
+//        System.out.println(usuario);
+        Usuario usu;
+        usu = usuarioDao.getUsuario(usuario);
+//        System.out.println(usu.getNombre());
+        usu.setRegistro("ACEPTADO");
+        usuarioDao.updateUsuario(usu);
+        usuarioDao.updateBeneficiario(usu.getDni(),"ACEPTADO");
+        return "redirect:../list";
+    }
+
+    @RequestMapping(value="/rechazar/{usuario}")
+    public String rechazarBeneficiario(@PathVariable String usuario) {
+        Usuario usu;
+        usu = usuarioDao.getUsuario(usuario);
+        usu.setRegistro("RECHAZADO");
+        usuarioDao.updateUsuario(usu);
+        usuarioDao.updateBeneficiario(usu.getDni(),"RECHAZADO");
+        return "redirect:../list";
+    }
 
 }
 

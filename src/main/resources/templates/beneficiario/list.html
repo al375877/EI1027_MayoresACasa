@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores a casa</title>
+
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Mayores a casa | CAS | Solicitudes Pendientes </h2>
+    </div>
+    <h2>Lista de los beneficiarios registrados (o pendientes)</h2>
+    <table class="table table-striped" style=" width:80%">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Email</th>
+                <th scope="col">Año nacim.</th>
+                <th scope="col">Tipo dieta</th>
+                <th scope="col">Registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user: ${usuarios}">
+                <td th:text="${user.nombre}"></td>
+                <td th:text="${user.dni}"></td>
+                <td th:text="${user.usuario}"></td>
+                <td th:text="${user.direccion}"></td>
+                <td th:text="${user.telefono}"></td>
+                <td th:text="${user.genero}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.nacimiento}"></td>
+                <td th:text="${user.tipodieta}"></td>
+                <td th:text="${user.registro}"></td>
+
+                <td><a type="button" class="boton_añadir" th:href="@{/beneficiario/aceptar/{usuario}(usuario=${user.usuario})}">ACEPTAR</a></td>
+                <td><a type="button" class="boton_editar" th:href="@{/beneficiario/rechazar/{usuario}(usuario=${user.usuario})}">RECHAZAR</a></td>
+                <td><a type="button" class="boton_eliminar" th:href="@{/beneficiario/delete/{dni}(dni=${user.dni})}">BORRAR</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/cas/index" class="boton_personalizado1" role="button" >Volver</a>
+    <a href="/" class="boton_personalizado1" role="button" >Página Principal</a>
+</div>
+</body>
+</html>

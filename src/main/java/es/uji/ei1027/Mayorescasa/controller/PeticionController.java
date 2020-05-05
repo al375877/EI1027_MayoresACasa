@@ -106,8 +106,6 @@ public class PeticionController {
 
     }
 
-
-
     @RequestMapping("/cattering")
     public void cattering(HttpSession session, Model model) {
         Usuario user =new Usuario();
