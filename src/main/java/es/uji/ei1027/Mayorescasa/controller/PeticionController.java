@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -79,11 +76,13 @@ public class PeticionController {
 
     @RequestMapping("/servicios")
     public String servicios(Model model) {
+        String comentario = "";
+        model.addAttribute("comentario", comentario);
         return "peticion/servicios";
     }
 
-    @RequestMapping("/limpieza")
-    public String limpieza(HttpSession session, Model model) {
+    @RequestMapping(value = "/addComentarioL", method = RequestMethod.POST)
+    public String limpieza(@ModelAttribute("comment") String comentario, HttpSession session) {
 
         Usuario user = (Usuario) session.getAttribute("user");
         codigo++;
@@ -108,9 +107,8 @@ public class PeticionController {
     }
 
 
-
-    @RequestMapping("/cattering")
-    public String cattering(HttpSession session, Model model) {
+    @RequestMapping(value = "/addComentarioC", method = RequestMethod.POST)
+    public String cattering(@ModelAttribute("comment") String comentario, HttpSession session) {
 
         Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
@@ -121,7 +119,7 @@ public class PeticionController {
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
-        pet.setComentarios("PENDIENTE");
+        pet.setComentarios(comentario);
         boolean existe= (boolean) session.getAttribute("existeC");
         if(existe){
             System.out.println("EXISTE");
@@ -133,9 +131,9 @@ public class PeticionController {
         return "peticion/servicios";
     }
 
-    @RequestMapping("/sanitario")
-    public String sanitario(HttpSession session, Model model) {
-
+    @RequestMapping(value = "/addComentarioS", method = RequestMethod.POST)
+    public String sanitario(@ModelAttribute("comment") String comentario, HttpSession session) {
+        System.out.println(comentario);
         Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
@@ -145,7 +143,7 @@ public class PeticionController {
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
-        pet.setComentarios("PENDIENTE");
+        pet.setComentarios(comentario);
         boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
             System.out.println("EXISTE");

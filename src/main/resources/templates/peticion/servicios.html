@@ -40,7 +40,7 @@
 <body >
 <div  layout:fragment="content"  th:object="${session}">
     <div  style="background-color:#B0E0E6; "class="container">
-        <h2 style="color:black">Mayores a casa | Beneficiaros | Servicios</h2>
+        <h2 style="color:black">Mayores en casa | Beneficiaros | Servicios</h2>
     </div>
 
 <br>
@@ -59,19 +59,32 @@
             <td>LIMPIEZA</td>
             <td>200€/MES</td>
             <td>De Lunes a Domingo, 16 a 18 horas</td>
-            <td style=" padding: 15px;height: 60px;"><a class="boton_personalizado1" href="limpieza" role="button"  >Solicitar</a></td>
+            <form action="/peticion/addComentario" method="post" id="addComentL">
+                <td><textarea rows="4" cols="50" name="comment" form="addComentL" style="height: 3em; width:20em;"></textarea> </td>
+                <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="limpieza" role="button" type="submit"  value="Solicitar"></td>
+            </form>
         </tr>
+          </td>
+        </tr>
+
         <tr>
             <td>CATTERING</td>
             <td>300€/MES</td>
             <td>De Lunes a Domingo, 14 a 15 horas y 21 a 22 horas</td>
-            <td style=" padding: 15px;height: 60px;"><a class="boton_personalizado1" href="cattering" role="button" >Solicitar</a></td>
+            <form action="/peticion/addComentario" method="post" id="addComentC">
+                <td><textarea rows="4" cols="50" name="comment" form="addComentC" style="height: 3em; width:20em;"></textarea> </td>
+            <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="cattering" role="button" type="submit" value="Solicitar"></td>
+            </form>
         </tr>
+
         <tr>
             <td>SALUD</td>
             <td>150€/MES</td>
             <td>De Lunes a Domingo, 10 a 12 horas</td>
-            <td style=" padding: 15px;height: 60px;"> <a class="boton_personalizado1" href="sanitario" role="button" >Solicitar</a></td>
+            <form th:action="@{/peticion/addComentarioS}" method="POST" id="addComentS">
+                <td><textarea rows="4" cols="50" name="comment" form="addComentS" style="height: 3em; width:20em;"></textarea> </td>
+                <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="sanitario" role="button" type="submit" value="Solicitar"></td>
+            </form>
         </tr>
         </tbody>
 </table>
