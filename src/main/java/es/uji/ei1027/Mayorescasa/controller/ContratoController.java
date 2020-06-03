@@ -1,6 +1,7 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
 import es.uji.ei1027.Mayorescasa.dao.ContratoDao;
+import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
 import es.uji.ei1027.Mayorescasa.model.Contrato;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
@@ -22,9 +23,10 @@ import java.util.Random;
 @Controller
 @RequestMapping("/contrato")
 public class ContratoController {
-
+    @Autowired
     private ContratoDao contratoDao;
-
+    @Autowired
+    EmpresaDao  empresaDao;
     @Autowired
     public void setContratoDao(ContratoDao contratoDao) {
         this.contratoDao=contratoDao;
@@ -52,12 +54,18 @@ public class ContratoController {
     @RequestMapping(value="/add")
     public String addcontrato(Model model) {
         model.addAttribute("contrato", new Contrato());
+        List<Empresa> empresas=empresaDao.getEmpresas();
+        List<String> usersEmpresas=new ArrayList<>();
+        for(Empresa empresa: empresas){
+            usersEmpresas.add(empresa.getUsuario());
+        }
+        model.addAttribute("empresas",usersEmpresas);
         return "contrato/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("contrato") Contrato contrato,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, Model model) {
         ContratoValidator contratoValidator = new ContratoValidator();
         contratoValidator.validate(contrato, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -80,8 +88,16 @@ public class ContratoController {
                 contratoDao.updateAdd(fecha,null,300,contrato.getCodcontrato()); }
             if (contrato.getTiposervicio().equals("Sanitario")){
                 contratoDao.updateAdd(fecha,null,150,contrato.getCodcontrato()); }
+
+            List<Empresa> empresas=empresaDao.getEmpresas();
+            List<String> usersEmpresas=new ArrayList<>();
+            for(Empresa empresa: empresas){
+                usersEmpresas.add(empresa.getUsuario());
+            }
+            model.addAttribute("empresas",usersEmpresas);
             return "contrato/add";
         }
+
         return "contrato/existe";
     }
 

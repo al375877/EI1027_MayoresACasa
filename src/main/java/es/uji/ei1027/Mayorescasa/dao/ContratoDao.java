@@ -53,15 +53,23 @@ public class ContratoDao {
                 fechaInicial, fechaFinal, preciounidad, codcontrato);
     }
 
-    public Contrato getContrato (String contrato ){
+    public Contrato getContrato (String cod ){
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE usuario=?", new ContratoRowMapper(),contrato);
+            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE codcontrato=?", new ContratoRowMapper(),cod);
         }
         catch (EmptyResultDataAccessException e){
             return null;
         }
     }
-
+    //get a partir de una empresa
+    public Contrato getContratoE (String empresa ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE empresa=?", new ContratoRowMapper(),empresa);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
     //LISTAMOS contrato
     public List<Contrato> getContratos() {
         try{
@@ -81,6 +89,23 @@ public class ContratoDao {
         }
         catch (EmptyResultDataAccessException e){
             return  new ArrayList<Empresa>();
+        }
+    }
+    //LISTAMOS empresa por categoria
+    public List<String> getEmpresasC(String categoria) {
+        List<String> empresasNombre= new ArrayList<>();
+
+        try{
+            List<Empresa> empresas=jdbcTemplate.query("SELECT * FROM empresa where tiposervicio=?", new
+                    EmpresaRowMapper(),categoria);
+            for(Empresa empresa : empresas){
+                empresasNombre.add(empresa.getUsuario());
+
+            }
+            return empresasNombre;
+        }
+        catch (EmptyResultDataAccessException e){
+            return  empresasNombre;
         }
     }
     //LISTAMOS Peticion

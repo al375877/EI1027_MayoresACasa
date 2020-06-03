@@ -1,13 +1,10 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
-import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class VoluntarioValidator implements Validator {
     @Override

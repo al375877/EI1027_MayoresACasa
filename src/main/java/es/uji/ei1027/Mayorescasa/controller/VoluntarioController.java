@@ -1,7 +1,11 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
+import es.uji.ei1027.Mayorescasa.dao.DisponibilidadDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+import es.uji.ei1027.Mayorescasa.model.Disponibilidad;
+import es.uji.ei1027.Mayorescasa.model.TempUsuarioComentario;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
+import es.uji.ei1027.Mayorescasa.model.Voluntario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,9 +27,11 @@ public class VoluntarioController {
 
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao) {
+
         this.usuarioDao=usuarioDao;
     }
-
+    @Autowired
+    DisponibilidadDao disponibilidadDao;
     // Operaciones: Crear, listar, actualizar, borrar
 
     @RequestMapping("/list")
@@ -58,37 +65,84 @@ public class VoluntarioController {
         return "redirect:../login";
     }
 
-//    @RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
-//    public String editvoluntario(Model model, @PathVariable String usuario) {
-//        model.addAttribute("voluntario", usuarioDao.getVoluntario(usuario));
-//        return "voluntarios/update";
-//    }
-//
-//    @RequestMapping(value="/update", method = RequestMethod.POST)
-//    public String processUpdateSubmit(
-//            @ModelAttribute("voluntario") Voluntario voluntario,
-//            BindingResult bindingResult) {
-//        if (bindingResult.hasErrors())
-//            return "voluntario/update";
-//        usuarioDao.updateVoluntario(voluntario);
-//        return "redirect:list";
-//    }
-//
-//    @RequestMapping(value="/delete/{usuario}")
-//    public String processDelete(@PathVariable String usuario) {
-//        usuarioDao.deleteVoluntario(usuario);
-//        return "redirect:../list";
-//    }
-
     @RequestMapping("/index")
     public String index(HttpSession session, Model model) {
         return "voluntario/index";
     }
 
+
     @RequestMapping("/solicitar")
-    public String solicitar(Model model) {
-        model.addAttribute("usuarios", usuarioDao.getVoluntarios());
+    public String solicitar(Model model,HttpSession session) {
+        List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntarios();
+        List<Usuario> asignados= (List<Usuario>) session.getAttribute("volAsignados");
+        List<TempUsuarioComentario> listaTemporal= new ArrayList<>();
+        //si ya tiene uno de los voluntarios asignado, lo elimina de los disponibles.
+        System.out.println("SIZE:"+asignados.size());
+        if (asignados.size()>0) {
+            for(Usuario asignado:asignados) {
+                for(Voluntario vol:voluntariosDisponibles) {
+                    if (vol.getDni().equals(asignado.getDni())) {
+                        voluntariosDisponibles.remove(vol);
+                        break;//solo hace el break en el for de dentro
+                    }
+                }
+                TempUsuarioComentario temporal = new TempUsuarioComentario();
+                temporal.setUsuario(asignado);
+                temporal.setComentario(disponibilidadDao.getComentario(asignado.getDni()));
+                listaTemporal.add(temporal);
+            }
+
+            model.addAttribute("temp",listaTemporal);
+        }
+        if(voluntariosDisponibles.size()>0){
+            model.addAttribute("voluntarios", voluntariosDisponibles);
+        }
+
         return "voluntario/solicitar";
     }
 
+
+    @RequestMapping(value="/solicitar", method= RequestMethod.POST)
+    public String setDisponibildad(@ModelAttribute("dniV") String dniV,@ModelAttribute("comment") String comment, HttpSession session,Model model){
+
+        Usuario user= (Usuario) session.getAttribute("user");
+        List<TempUsuarioComentario> listaTemporal= new ArrayList<>();
+        List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntarios();
+
+        //añado la relacion entre ben y vol
+        Disponibilidad disponibilidad=new Disponibilidad();
+        disponibilidad.setUsuario_ben(user.getDni());
+        disponibilidad.setUsuario_vol(dniV);
+        Date fecha = new Date();
+        disponibilidad.setFechainicial(fecha);
+        disponibilidad.setComentario(comment);
+        disponibilidadDao.addDisponibilidad(disponibilidad);
+
+        //recojo los voluntarios asignados al beneficiario
+        List<Usuario> asignados= disponibilidadDao.consultaDisponibilidad(user.getDni());
+        session.setAttribute("volAsignados",asignados);
+
+
+
+        //si ya tiene uno de los voluntarios asignado, lo elimina de los disponibles.
+        for(Usuario asignado:asignados) {
+            for(Voluntario vol:voluntariosDisponibles) {
+                if(vol.getDni().equals(asignado.getDni())){
+                    voluntariosDisponibles.remove(vol);
+                    break;//solo hace el break en el for de dentro
+                }
+            }
+            TempUsuarioComentario temporal = new TempUsuarioComentario();
+            temporal.setUsuario(asignado);
+            temporal.setComentario(disponibilidadDao.getComentario(asignado.getDni()));
+            listaTemporal.add(temporal);
+
+        }
+        model.addAttribute("temp",listaTemporal);
+
+        if(voluntariosDisponibles.size()>0){
+            model.addAttribute("voluntarios", voluntariosDisponibles);
+        }
+        return "voluntario/solicitar";
+    }
 }

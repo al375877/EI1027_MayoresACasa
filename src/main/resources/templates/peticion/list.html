@@ -24,38 +24,50 @@
     <thead>
     <tr >
         <th style="text-align: center" scope="col">Servicio</th>
-        <th style="text-align: center" scope="col">Fecha aceptada</th>
-        <th style="text-align: center" scope="col">Fecha rechazada</th>
-        <th style="text-align: center" scope="col">Fecha final</th>
         <th style="text-align: center" scope="col">Estado</th>
+        <th style="text-align: center" scope="col">Comentario</th>
         <th style="text-align: center" scope="col">Beneficiario</th>
         <th style="text-align: center" scope="col">DNI</th>
+        <th style="text-align: center" scope="col">Empresa</th>
     </tr>
     </thead>
     <tbody>
 
-    <tr th:each="peticion: ${peticiones}">
-        <td th:text="${peticion.tiposervicio}"></td>
-        <td th:text="${peticion.fechaaceptada}"></td>
-        <td th:text="${peticion.fecharechazada}"></td>
-        <td th:text="${peticion.fechafinal}"></td>
-        <td th:text="${peticion.comentarios}"></td>
-        <td th:text="${peticion.beneficiario}"></td>
-        <td th:text="${peticion.dni_ben}"></td>
+    <tr th:each="element:${map}" th:unless="*{map == null}">
+        <td th:text="${element.key.tiposervicio}"></td>
+         <td th:text="${element.key.estado}"></td>
+        <td th:text="${element.key.comentarios}"></td>
+        <td th:text="${element.key.beneficiario}"></td>
+        <td th:text="${element.key.dni_ben}"></td>
+        <td >
+            <select form="añadir" name="empresa">
+                <option th:each="empresa:${map.get(element.key)}"
+                        th:value="${empresa}"
+                        th:text="${empresa}"></option>
+            </select>
 
-<!--        <button type="submit"><img src="delete.gif" alt="x" /></button>-->
+        </td>
+        <td th:text="${element.key.cod_pet}"></td>
+        <td>
 
-        <td><a type="button" class="boton_añadir" style="width:80px; height:15px font-weight: 100; font-size: 14px;"
-               th:href="@{/peticion/aceptar/{cod_pet}(cod_pet=${peticion.cod_pet})}">
-               <img src="https://image.flaticon.com/icons/svg/159/159767.svg" width="30" height="30" alt="x" /></a></td>
-        <td><a type="button" class="boton_editar" style="width:80px; height:15px font-weight: 100; font-size: 14px;"
-               th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${peticion.cod_pet})}">
-               <img src="https://image.flaticon.com/icons/svg/126/126098.svg" width="30" height="30" alt="x" /></a></td>
-        <td><a type="button" class="boton_eliminar" style="width:80px; height:15px font-weight: 100; font-size: 14px;"
-               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${peticion.cod_pet})}">
-               <img src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="30" height="30" alt="x" /></a></td>
+            <form action="#" th:action="@{/peticion/aceptar}" method="POST" id="añadir">
+                <input type="hidden" name="cod" th:value="${element.key.cod_pet}">
+                <input type="image" class="boton_añadir"  src="https://image.flaticon.com/icons/svg/159/159767.svg" alt="Submit" width="50"  >
+            </form>
+        </td>
+        <td><a type="button"
+               th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.key.cod_pet})}">
+               <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
+        <td><a type="button"
+               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${element.key.cod_pet})}">
+               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>
+    </tr>
+
+    <tr>
+
     </tr>
     </tbody>
+
 </table>
 
 </div>

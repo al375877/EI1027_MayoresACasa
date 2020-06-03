@@ -41,15 +41,21 @@
                 <tr>
                     <td><img src="https://image.flaticon.com/icons/svg/126/126496.svg"width="30" height="30"></td>
                     <td>&nbsp;Usuario empresa:&nbsp;</td>
-                    <td><input type="text" th:field="*{empresa}"
-                               placeholder="usuario" maxlength="50"/></td>
+                    <td>
+                        <select class="form_control" th:field="*{empresa}" >
+                            <option th:each="empresa:${empresas}"
+                                    th:value="${empresa}"
+                                    th:text="${empresa}"
+                                ></option>
+
+                        </select>
                     <td th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
                     <td><img src="https://image.flaticon.com/icons/svg/126/126141.svg"width="30" height="30"></td>
                     <td>&nbsp;Tipo de Servicio:&nbsp;</td>
-                    <td><select class="form_control" type="text" th:field="*{tiposervicio}">
+                    <td><select class="form_control" th:field="*{tiposervicio}">
                         <option value="Cattering">Cattering</option>
                         <option value="Sanitario">Sanitario</option>
                         <option value="Limpieza">Limpieza</option>

@@ -5,7 +5,8 @@ import java.util.Date;
 public class Voluntario  extends Usuario {
 
     private String dni, hobbies;
-    private Disponibilidad disponibilidad;
+
+    private String dias_semana;
 
     @Override
     public String getDni() {
@@ -25,11 +26,13 @@ public class Voluntario  extends Usuario {
         this.hobbies = hobbies;
     }
 
-    public Disponibilidad getDisponibilidad() {
-        return disponibilidad;
-    }
 
-    public void setDisponibilidad(Disponibilidad disponibilidad) {
-        this.disponibilidad = disponibilidad;
+
+
+    public String getDias_semana() {
+        return dias_semana;
+    }
+    public void setDias_semana(String dias){
+        this.dias_semana=dias;
     }
 }

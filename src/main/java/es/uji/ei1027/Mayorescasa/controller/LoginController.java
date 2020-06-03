@@ -2,8 +2,10 @@ package es.uji.ei1027.Mayorescasa.controller;
 
 
 
+import es.uji.ei1027.Mayorescasa.dao.DisponibilidadDao;
 import es.uji.ei1027.Mayorescasa.dao.PeticionDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+import es.uji.ei1027.Mayorescasa.model.Disponibilidad;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 class UserValidator implements Validator {
     @Autowired
@@ -48,6 +51,9 @@ public class LoginController {
     private UsuarioDao usuarioDao;
     @Autowired
     private PeticionDao peticionDao;
+
+    @Autowired
+    private DisponibilidadDao disponibilidadDao;
 
     //llamada al metodo login
     @RequestMapping("/login")
@@ -100,10 +106,11 @@ public class LoginController {
 
                 session.setAttribute("existeS",true);
             }else{
-
-
                 session.setAttribute("existeS",false);
             }
+            List<Usuario> listaVoluntarios=disponibilidadDao.consultaDisponibilidad(user.getDni());
+            session.setAttribute("volAsignados",listaVoluntarios);
+
         }
 
 

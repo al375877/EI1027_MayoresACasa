@@ -1,6 +1,7 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
 import es.uji.ei1027.Mayorescasa.model.Usuario;
+import es.uji.ei1027.Mayorescasa.model.Voluntario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -68,14 +69,22 @@ public class UsuarioDao {
             return null;
         }
     }
-    //LISTAMOS Voluntarios
-    public List<Usuario> getVoluntarios() {
+    public Usuario getUsuarioDni (String dni ){
         try{
-            return jdbcTemplate.query("SELECT * FROM usuario WHERE tipousuario=?", new
-                    UsuarioRowMapper(), "Voluntario");
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE dni=?", new UsuarioRowMapper(), dni);
         }
         catch (EmptyResultDataAccessException e){
-            return  new ArrayList<Usuario>();
+            return null;
+        }
+    }
+    //LISTAMOS Voluntarios
+    public List<Voluntario> getVoluntarios() {
+        try{
+           return jdbcTemplate.query("SELECT * FROM voluntario", new
+                    VoluntarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Voluntario>();
         }
     }
 
@@ -88,6 +97,12 @@ public class UsuarioDao {
         catch (EmptyResultDataAccessException e){
             return  new ArrayList<Usuario>();
         }
+    }
+
+    public void setDisponibilidad(String dniVol){
+        jdbcTemplate.update("UPDATE Voluntario SET esta_disponible=? WHERE dni=?",
+                "no", dniVol);
+
     }
 
     //LISTAMOS Usuario

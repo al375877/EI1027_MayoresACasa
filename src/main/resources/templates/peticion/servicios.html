@@ -9,43 +9,21 @@
 
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-<!--    <style>-->
-<!--        img {-->
-<!--            display: block;-->
-<!--            margin-left: auto;-->
-<!--            margin-right: auto;-->
-<!--        }-->
-<!--        table {-->
-<!--          font-family: arial, sans-serif;-->
-<!--          border-collapse: collapse;-->
-<!--          width: 100%;-->
-<!--        }-->
-<!--        td {-->
-
-<!--          text-align: center;-->
-<!--          padding: 15px;-->
-<!--          height: 60px;-->
-<!--        }-->
-<!--        th {-->
-<!--          border: 1px solid #dddddd;-->
-<!--          text-align: center;-->
-<!--          padding: 15px;-->
-<!--        }-->
-<!--        tr:nth-child(even) {-->
-<!--          background-color: #dddddd;-->
-<!--        }-->
-
-<!--    </style>-->
+    <style>
+         tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+    </style>
 </head>
 <body >
 <div  layout:fragment="content"  th:object="${session}">
-    <div  style="background-color:#B0E0E6; "class="container">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6; "class="container">
         <h2 style="color:black">Mayores en casa | Beneficiaros | Servicios</h2>
     </div>
 
 <br>
 <h2>¿Que servicio o servicios necesitas?</h2>
-<table style=" table-layout: auto; width: 100%;  ">
+<table style=" font-family: arial, sans-serif;table-layout: auto; width: 100%;  ">
         <thead>
         <tr>
             <th style="text-align: center" scope="col">Nombre</th>
@@ -59,7 +37,7 @@
             <td>LIMPIEZA</td>
             <td>200€/MES</td>
             <td>De Lunes a Domingo, 16 a 18 horas</td>
-            <form action="/peticion/addComentario" method="post" id="addComentL">
+            <form th:action="@{/peticion/addComentarioL}" method="POST" id="addComentL">
                 <td><textarea rows="4" cols="50" name="comment" form="addComentL" style="height: 3em; width:20em;"></textarea> </td>
                 <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="limpieza" role="button" type="submit"  value="Solicitar"></td>
             </form>
@@ -71,7 +49,7 @@
             <td>CATTERING</td>
             <td>300€/MES</td>
             <td>De Lunes a Domingo, 14 a 15 horas y 21 a 22 horas</td>
-            <form action="/peticion/addComentario" method="post" id="addComentC">
+            <form th:action="@{/peticion/addComentarioC}" method="POST" id="addComentC">
                 <td><textarea rows="4" cols="50" name="comment" form="addComentC" style="height: 3em; width:20em;"></textarea> </td>
             <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="cattering" role="button" type="submit" value="Solicitar"></td>
             </form>

@@ -19,6 +19,9 @@ public final class PeticionRowMapper implements RowMapper<Peticion> {
         peticion.setComentarios(rs.getString("comentarios"));
         peticion.setDni_ben(rs.getString("dni_ben"));
         peticion.setBeneficiario(rs.getString("beneficiario"));
+        peticion.setEstado(rs.getString("estado"));
+        peticion.setEmpresa(rs.getString("empresa"));
+        peticion.setCodcontrato(rs.getString("codcontrato"));
         return peticion;
     }
 }

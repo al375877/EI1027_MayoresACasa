@@ -1,28 +1,34 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
+import es.uji.ei1027.Mayorescasa.dao.ContratoDao;
+import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
 import es.uji.ei1027.Mayorescasa.dao.PeticionDao;
+import es.uji.ei1027.Mayorescasa.model.Contrato;
+import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("/peticion")
 public class PeticionController {
-
+    @Autowired
     private PeticionDao peticionDao;
     private int codigo;
-
-
+    @Autowired
+    private ContratoDao contratoDao;
+    @Autowired
+    private EmpresaDao empresaDao;
     @Autowired
     public void setPeticionDao(PeticionDao peticionDao) {
         this.peticionDao = peticionDao;
@@ -31,8 +37,20 @@ public class PeticionController {
     // Operaciones: Crear, listar, actualizar, borrar
 
     @RequestMapping("/list")
-    public String listpeticiones(Model model) {
-        model.addAttribute("peticiones", peticionDao.getPeticiones());
+    public String listpeticiones(Model model, HttpSession session) {
+
+        Usuario user= (Usuario) session.getAttribute("user");
+        Map<Peticion, List<String>> peticionEmpresas= new HashMap();
+        for(Peticion pet:peticionDao.getPeticiones()){
+            List<String> empresas= contratoDao.getEmpresasC(pet.getTiposervicio());
+            peticionEmpresas.put(pet,empresas);
+            for(String empresa: empresas){
+                System.out.println("PETICIOON: "+pet.getCod_pet()+" empresas: "+empresa);
+            }
+
+        }
+        model.addAttribute("map",peticionEmpresas);
+
         return "peticion/list";
     }
 
@@ -76,8 +94,6 @@ public class PeticionController {
 
     @RequestMapping("/servicios")
     public String servicios(Model model) {
-        String comentario = "";
-        model.addAttribute("comentario", comentario);
         return "peticion/servicios";
     }
 
@@ -88,13 +104,13 @@ public class PeticionController {
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio() + "LIMP");
-        pet.setTiposervicio("LIMPIEZA");
+        pet.setTiposervicio("Limpieza");
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(200);
-        pet.setComentarios("PENDIENTE");
-
+        pet.setComentarios(comentario);
+        pet.setEstado("PENDIENTE");
         boolean existe= (boolean) session.getAttribute("existeL");
         if(existe){
             System.out.println("EXISTE");
@@ -114,12 +130,15 @@ public class PeticionController {
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "CATT");
-        pet.setTiposervicio("CATTERING");
+        pet.setTiposervicio("Cattering");
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
         pet.setComentarios(comentario);
+        pet.setEstado("PENDIENTE");
+        pet.setEmpresa("null");
+        pet.setCodcontrato("null");
         boolean existe= (boolean) session.getAttribute("existeC");
         if(existe){
             System.out.println("EXISTE");
@@ -138,12 +157,13 @@ public class PeticionController {
         codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "SAN");
-        pet.setTiposervicio("SANITARIO");
+        pet.setTiposervicio("Sanitario");
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
         pet.setComentarios(comentario);
+        pet.setEstado("PENDIENTE");
         boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
             System.out.println("EXISTE");
@@ -166,34 +186,42 @@ public class PeticionController {
         cadena=cadena+alfa.charAt(forma)+numero;
         return cadena;
     }
+    @RequestMapping(value = "/aceptar", method = RequestMethod.POST)
+    public String aceptarPeticion(@ModelAttribute("cod") String cod,@ModelAttribute("empresa") String empresa) {
 
-    @RequestMapping(value="/aceptar/{cod}")
-    public String aceptarPeticion(@PathVariable String cod) {
+        System.out.println("Cod=============="+cod+"empresa=========="+empresa);
+        Contrato contrato=contratoDao.getContratoE(empresa);
         Peticion pet;
+
         pet = peticionDao.getPeticion(cod);
+
+        pet.setCodcontrato(contrato.getCodcontrato());
         Date fecha = new Date();
         pet.setFechaaceptada(fecha);
-        pet.setComentarios("ACEPTADA");
+        pet.setEmpresa(empresa);
+        pet.setEstado("ACEPTADA");
         peticionDao.updatePeticion(pet);
-        return "redirect:../list";
+
+        return "redirect:list";
     }
 
     @RequestMapping(value="/rechazar/{cod}")
-    public String rechazarPeticion(@PathVariable String cod) {
+    public String rechazarPeticion(@PathVariable String cod, Model model) {
         Peticion pet;
         pet = peticionDao.getPeticion(cod);
         Date fecha = new Date();
         System.out.println(fecha);
         pet.setFecharechazada(fecha);
-        pet.setComentarios("RECHAZADA");
+        pet.setEstado("RECHAZADA");
         peticionDao.updatePeticion(pet);
+
         return "redirect:../list";
     }
 
     @RequestMapping("/misPeticiones")
     public String misPeticiones(HttpSession session, Model model) {
-        Usuario user =new Usuario();
-        user= (Usuario) session.getAttribute("user");
+
+        Usuario user= (Usuario) session.getAttribute("user");
         model.addAttribute("peticiones", peticionDao.getPeticionesPropias(user.getDni()));
         return "peticion/misPeticiones";
     }

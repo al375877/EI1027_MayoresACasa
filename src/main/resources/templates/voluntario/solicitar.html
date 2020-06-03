@@ -13,27 +13,7 @@
     <title>Mayores en casa</title>
 
     <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-        }
-        td {
-          border: 1px solid #dddddd;
-          text-align: center;
-          padding: 15px;
-          height: 60px;
-        }
-        th {
-          border: 1px solid #dddddd;
-          text-align: center;
-          padding: 15px;
-        }
+
         tr:nth-child(even) {
           background-color: #dddddd;
         }
@@ -42,26 +22,57 @@
 <body>
 <h1 >Lista de los voluntarios disponibles</h1>
 <div   layout:fragment="content">
-<br>
-    <table>
+    <div  style="padding: 25px 50px;background-color:#B0E0E6; "class="container">
+        <h2 style="color:black">Mayores en casa | Beneficiaros | Voluntarios</h2>
+    </div>
+    <br>
+    <h3 th:unless="*{temp == null}" >Voluntarios asignados</h3>
+    <table th:unless="*{temp == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;">
         <thead>
         <tr>
-            <th style="text-align: center" scope="col">Nombre</th>
-            <th style="text-align: center" scope="col">DNI</th>
-            <th style="text-align: center" scope="col">Género</th>
-            <th style="text-align: center" scope="col">Email</th>
-            <th style="text-align: center" scope="col">Telefono</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">telefono</th>
+            <th scope="col">direccion</th>
+            <th scope="col">Dia de preferencia</th>
         </tr>
         </thead>
         <tbody>
+            <tr th:each="obj: ${temp}" >
+                <td th:text="${obj.nombre}"> </td>
+                <td th:text="${obj.email}"> </td>
+                <td th:text="${obj.telefono}"> </td>
+                <td th:text="${obj.direccion}"> </td>
+                <td th:text="${obj.comentario}"> </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <h3   th:unless="*{voluntarios == null}">Voluntarios disponibles</h3>
+    <table  th:unless="*{voluntarios == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;" >
+        <thead>
+            <tr>
+                <th scope="col">Hobbies</th>
+                <th scope="col">Dias semana</th>
+                <th scope="col" style="text-align:left">Dia de preferencia</th>
 
-        <tr th:each="usuario: ${usuarios}">
-            <td th:text="${usuario.nombre}"></td>
-            <td th:text="${usuario.dni}"></td>
-            <td th:text="${usuario.genero}"></td>
-            <td th:text="${usuario.email}"></td>
-            <td th:text="${usuario.telefono}"></td>
-            <td><a class="boton_personalizado1" href="" role="button">Solicitar</a></td>
+            </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="vol: ${voluntarios}">
+            <td th:text="${vol.hobbies}"></td>
+            <td  th:text="${vol.dias_semana}"></td>
+
+            <td >
+                <form action="#" th:action="@{/voluntario/solicitar}" method="POST">
+
+                    <textarea rows="4" cols="50" name="comment" style="height: 3em; width:20em;"></textarea>
+                    <input type="hidden"  name="dniV" th:value="${vol.dni}">
+                    <td><input  type="submit" class="boton_personalizado1" value="Solicitar"></td>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>

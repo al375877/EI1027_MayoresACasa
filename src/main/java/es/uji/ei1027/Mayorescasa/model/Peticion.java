@@ -3,7 +3,19 @@ package es.uji.ei1027.Mayorescasa.model;
 import java.util.Date;
 
 public class Peticion {
-    private String cod_pet, tiposervicio, comentarios, dni_ben, beneficiario;
+    private String cod_pet;
+    private String tiposervicio;
+    private String comentarios;
+    private String dni_ben;
+    private String beneficiario;
+
+
+
+    private String estado;
+    private String codcontrato;
+
+
+    private String empresa;
     private int linea;
     private double precioservicio;
     private Date fechaaceptada,fecharechazada,fechafinal;
@@ -21,6 +33,28 @@ public class Peticion {
                 ", fecharechazada=" + fecharechazada +
                 ", fechafinal=" + fechafinal +
                 '}';
+    }
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public String getCodcontrato() {
+        return codcontrato;
+    }
+
+    public void setCodcontrato(String codcontrato) {
+        this.codcontrato = codcontrato;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
     public String getCod_pet() {
