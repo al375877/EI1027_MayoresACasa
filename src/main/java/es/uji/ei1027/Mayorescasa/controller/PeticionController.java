@@ -99,9 +99,10 @@ public class PeticionController {
 
     @RequestMapping(value = "/addComentarioL", method = RequestMethod.POST)
     public String limpieza(@ModelAttribute("comment") String comentario, HttpSession session) {
-
+        if (comentario==null) comentario="";
         Usuario user = (Usuario) session.getAttribute("user");
         codigo++;
+
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio() + "LIMP");
         pet.setTiposervicio("Limpieza");
@@ -111,6 +112,7 @@ public class PeticionController {
         pet.setPrecioservicio(200);
         pet.setComentarios(comentario);
         pet.setEstado("PENDIENTE");
+
         boolean existe= (boolean) session.getAttribute("existeL");
         if(existe){
             System.out.println("EXISTE");
@@ -125,7 +127,7 @@ public class PeticionController {
 
     @RequestMapping(value = "/addComentarioC", method = RequestMethod.POST)
     public String cattering(@ModelAttribute("comment") String comentario, HttpSession session) {
-
+        if (comentario==null) comentario="";
         Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
@@ -137,8 +139,7 @@ public class PeticionController {
         pet.setPrecioservicio(300);
         pet.setComentarios(comentario);
         pet.setEstado("PENDIENTE");
-        pet.setEmpresa("null");
-        pet.setCodcontrato("null");
+
         boolean existe= (boolean) session.getAttribute("existeC");
         if(existe){
             System.out.println("EXISTE");
@@ -152,7 +153,8 @@ public class PeticionController {
 
     @RequestMapping(value = "/addComentarioS", method = RequestMethod.POST)
     public String sanitario(@ModelAttribute("comment") String comentario, HttpSession session) {
-        System.out.println(comentario);
+        if (comentario==null) comentario="";
+        
         Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
@@ -164,6 +166,7 @@ public class PeticionController {
         pet.setPrecioservicio(150);
         pet.setComentarios(comentario);
         pet.setEstado("PENDIENTE");
+
         boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
             System.out.println("EXISTE");
@@ -189,7 +192,7 @@ public class PeticionController {
     @RequestMapping(value = "/aceptar", method = RequestMethod.POST)
     public String aceptarPeticion(@ModelAttribute("cod") String cod,@ModelAttribute("empresa") String empresa) {
 
-        System.out.println("Cod=============="+cod+"empresa=========="+empresa);
+
         Contrato contrato=contratoDao.getContratoE(empresa);
         Peticion pet;
 

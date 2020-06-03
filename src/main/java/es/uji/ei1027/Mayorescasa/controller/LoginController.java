@@ -88,21 +88,21 @@ public class LoginController {
 
         if(user.getTipoUsuario().equals("Beneficiario")){
 
-            if(peticionDao.consultaPeticion(user.getDni(),"LIMPIEZA")){
+            if(peticionDao.consultaPeticion(user.getDni(),"Limpieza")){
 
                 session.setAttribute("existeL",true);
             }else{
 
                 session.setAttribute("existeL",false);
             }
-            if(peticionDao.consultaPeticion(user.getDni(),"CATTERING")){
+            if(peticionDao.consultaPeticion(user.getDni(),"Cattering")){
 
                 session.setAttribute("existeC",true);
             }else{
 
                 session.setAttribute("existeC",false);
             }
-            if(peticionDao.consultaPeticion(user.getDni(),"SANITARIO")){
+            if(peticionDao.consultaPeticion(user.getDni(),"Sanitario")){
 
                 session.setAttribute("existeS",true);
             }else{
@@ -111,6 +111,10 @@ public class LoginController {
             List<Usuario> listaVoluntarios=disponibilidadDao.consultaDisponibilidad(user.getDni());
             session.setAttribute("volAsignados",listaVoluntarios);
 
+        }
+
+        if(user.getTipoUsuario().equals("Voluntario")){
+            session.setAttribute("dni",user.getDni());
         }
 
 

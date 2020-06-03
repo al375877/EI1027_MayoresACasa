@@ -14,8 +14,11 @@
 
     <style>
 
-        tr:nth-child(even) {
-          background-color: #dddddd;
+
+
+          th, td, tr{
+            text-align: center;
+            border:black 1;
         }
     </style>
 </head>
@@ -27,7 +30,7 @@
     </div>
     <br>
     <h3 th:unless="*{temp == null}" >Voluntarios asignados</h3>
-    <table th:unless="*{temp == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;">
+    <table th:unless="*{temp == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;"  class="table table-striped" border="5" bordercolor="#0973ba">
         <thead>
         <tr>
             <th scope="col">Nombre</th>
@@ -49,7 +52,7 @@
     </table>
     <br>
     <h3   th:unless="*{voluntarios == null}">Voluntarios disponibles</h3>
-    <table  th:unless="*{voluntarios == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;" >
+    <table  th:unless="*{voluntarios == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;"  class="table table-striped" border="5" bordercolor="#0973ba">
         <thead>
             <tr>
                 <th scope="col">Hobbies</th>

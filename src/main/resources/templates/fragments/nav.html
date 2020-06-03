@@ -19,7 +19,7 @@
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{user == null}" href="/"><b>Mayores en casa</b></a>
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='cas'}" th:href="@{/}"><b>Mayores en casa</b></a>
             <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Mayores en casa</b></a>
-
+            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/index}"><b>Mayores en casa</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,11 +29,14 @@
                 <ul class="navbar-nav mr-auto" style="text-align:center;">
                     <a class="nav-link"  th:if="*{tipo=='cas'}" th:href="@{/cas/index}">Pagina principal | <span class="sr-only">(current)</span></a>
                     <a class="nav-link"  th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                    <a class="nav-link"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
 
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/beneficiario/list}">Gestion de Beneficiarios |</a>
                     <a class="nav-link" th:unless="*{user == null}" th:if="*{tipo=='Beneficiario'}" th:href="@{/voluntario/solicitar}">Ver/Solicitar Voluntario |</a>
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/servicios}">Solicitar Servicio |</a>
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/peticion/list}">Peticion Servicios |</a>
+
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/beneficiarios}">Consultar listado de beneficiarios|</a>
 
                     <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>
 
@@ -42,7 +45,7 @@
                             <span class="caret"></span>
                         </li>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mi perfil</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/perfil}">Mi perfil</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/peticion/list}">Peticiones</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/misPeticiones}">Mis Peticiones</a></li>
 

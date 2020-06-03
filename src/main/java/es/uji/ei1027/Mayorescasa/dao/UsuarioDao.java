@@ -29,9 +29,9 @@ public class UsuarioDao {
                 usuario.getTipoUsuario(),usuario.getTipodieta());
     }
     //AÑADIMOS Voluntario
-    public void addVoluntario(String dni, String hobbies) {
-        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?)",
-                dni,hobbies);
+    public void addVoluntario(String dni, String hobbies, String dias_semana) {
+        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?)",
+                dni,hobbies,dias_semana);
     }
 
     //AÑADIMOS Beneficiario

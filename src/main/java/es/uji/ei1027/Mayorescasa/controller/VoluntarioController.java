@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/voluntario")
 public class VoluntarioController {
-
+    @Autowired
     private UsuarioDao usuarioDao;
 
     @Autowired
@@ -32,6 +32,7 @@ public class VoluntarioController {
     }
     @Autowired
     DisponibilidadDao disponibilidadDao;
+
     // Operaciones: Crear, listar, actualizar, borrar
 
     @RequestMapping("/list")
@@ -43,6 +44,7 @@ public class VoluntarioController {
     @RequestMapping(value="/add")
     public String addvoluntario(Model model) {
         model.addAttribute("usuario", new Usuario());
+        model.addAttribute("voluntario", new Voluntario());
         List<String> generoList = new ArrayList<>();
         generoList.add("Femenino");
         generoList.add("Masculino");
@@ -51,23 +53,29 @@ public class VoluntarioController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("usuario") Usuario usuario,
+    public String processAddSubmit(@ModelAttribute("voluntario") Voluntario voluntario,
                                    BindingResult bindingResult) {
         VoluntarioValidator nadadorValidator = new VoluntarioValidator();
-        nadadorValidator.validate(usuario, bindingResult);
+        nadadorValidator.validate(voluntario, bindingResult);
         if (bindingResult.hasErrors()) {
             System.out.println("Error al añadir el voluntario");
             return "voluntario/add";
         }
-        usuario.setTipoUsuario("Voluntario");
-        usuarioDao.addUsuario(usuario);
-        usuarioDao.addVoluntario(usuario.getDni(),"No añadido");
+        voluntario.setTipoUsuario("Voluntario");
+        usuarioDao.addUsuario(voluntario);
+
+
+        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana());
         return "redirect:../login";
     }
 
     @RequestMapping("/index")
     public String index(HttpSession session, Model model) {
         return "voluntario/index";
+    }
+    @RequestMapping("/perfil")
+    public String perfil(HttpSession session, Model model) {
+        return "voluntario/perfil";
     }
 
 

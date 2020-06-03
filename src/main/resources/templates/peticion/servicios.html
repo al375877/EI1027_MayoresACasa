@@ -10,9 +10,11 @@
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
     <style>
-         tr:nth-child(even) {
-              background-color: #dddddd;
-            }
+
+            th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
     </style>
 </head>
 <body >
@@ -23,12 +25,13 @@
 
 <br>
 <h2>¿Que servicio o servicios necesitas?</h2>
-<table style=" font-family: arial, sans-serif;table-layout: auto; width: 100%;  ">
+<table style=" font-family: arial, sans-serif;table-layout: auto; width: 100%;  "  class="table table-striped" border="5" bordercolor="#0973ba">
         <thead>
         <tr>
             <th style="text-align: center" scope="col">Nombre</th>
             <th style="text-align: center" scope="col">Precio</th>
             <th style="text-align: center" scope="col">Descripcion</th>
+            <th style="text-align: center" scope="col">Añade información extra</th>
         </tr>
         </thead>
         <tbody>

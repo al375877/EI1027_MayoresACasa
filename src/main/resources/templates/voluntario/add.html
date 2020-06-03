@@ -31,7 +31,7 @@
     <header><h3>Cuidado de mayores a domicilio<br>
         Registrate como voluntario o llámanos al 920 14 58 74<br>
         <hr></h3></header>
-<form action="#" th:action="@{/voluntario/add}" th:object="${usuario}" method="post">
+<form action="#" th:action="@{/voluntario/add}" th:object="${voluntario}"  method="post">
     <table style="margin:auto">
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
@@ -100,9 +100,25 @@
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td>
             <td>Teléfono:&nbsp;</td>
-            <td><input type="tel" name="phone" pattern="[0-9]{9}" th:field="*{telefono}"
+            <td><input type="tel" name="phone" pattern="[0-9]{9}" th:field="*{telefono}" maxlength="9"
                        placeholder="612345678"/></td>
             <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+            <td><img src="https://image.flaticon.com/icons/png/512/159/159717.png"width="30" height="30"></td>
+            <td>Hobbies:&nbsp;</td>
+            <td><input type="text" name="hobbies"  th:field="*{hobbies}"
+                       placeholder="limpieza, cocinar, jugar a futbol..."/></td>
+            <td th:if="${#fields.hasErrors('hobbies')}" th:errors="*{hobbies}"></td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+            <td><img src="https://image.flaticon.com/icons/png/512/159/159221.png"width="30" height="30"></td>
+            <td>Disponibilidad:&nbsp;</td>
+            <td><input type="text" name="disp"  th:field="*{dias_semana}"
+                       /></td>
+            <td th:if="${#fields.hasErrors('dias_semana')}" th:errors="*{dias_semana}"></td>
         </tr>
         <tr><td><br></td></tr>
         <tr>

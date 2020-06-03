@@ -18,6 +18,10 @@
             margin-left: auto;
             margin-right: auto;
         }
+           th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
     </style>
 </head>
 <body>
@@ -26,32 +30,30 @@
         <h2 style="color:black">Mayores en casa | Beneficiaros | Tus Peticiones</h2>
     </div>
     <h2>Lista de las peticiones</h2>
-    <table class="table table-striped" >
+    <table class="table table-striped" border="5" bordercolor="#0973ba"   >
         <thead>
         <tr>
-            <th scope="col">Codigo</th>
+
             <th scope="col">Servicio</th>
             <th scope="col">Precio Servicio</th>
-            <th scope="col">Linea</th>
             <th scope="col">Fecha aceptada</th>
             <th scope="col">Fecha rechazada</th>
             <th scope="col">Fecha final</th>
             <th scope="col">Comentarios</th>
-            <th scope="col">Dni Beneficiario</th>
+            <th  scope="col">Empresa</th>
         </tr>
         </thead>
         <tbody>
 
         <tr th:each="peticion: ${peticiones}">
-            <td th:text="${peticion.cod_pet}"></td>
+
             <td th:text="${peticion.tiposervicio}"></td>
             <td th:text="${peticion.precioservicio}"></td>
-            <td th:text="${peticion.linea}"></td>
             <td th:text="${peticion.fechaaceptada}"></td>
             <td th:text="${peticion.fecharechazada}"></td>
             <td th:text="${peticion.fechafinal}"></td>
             <td th:text="${peticion.comentarios}"></td>
-            <td th:text="${peticion.dni_ben}"></td>
+            <td  th:text="${peticion.empresa}"></td>
         </tr>
         </tbody>
     </table>
