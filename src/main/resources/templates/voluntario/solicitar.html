@@ -38,6 +38,7 @@
             <th scope="col">telefono</th>
             <th scope="col">direccion</th>
             <th scope="col">Dia de preferencia</th>
+            <th scope="col" >Finalizar la relacion con un voluntario</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +48,10 @@
                 <td th:text="${obj.telefono}"> </td>
                 <td th:text="${obj.direccion}"> </td>
                 <td th:text="${obj.comentario}"> </td>
+                <td>
+                    <a type="button" th:href="@{/voluntario/rechazarVol/{dni}(dni=${obj.usuario.dni})}">
+                        <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -57,7 +62,7 @@
             <tr>
                 <th scope="col">Hobbies</th>
                 <th scope="col">Dias semana</th>
-                <th scope="col" style="text-align:left">Dia de preferencia</th>
+                <th scope="col">Dia de preferencia</th>
 
             </tr>
         </thead>
@@ -76,11 +81,11 @@
                 </form>
             </td>
 
-        </tr>
 
-        <tr>
 
         </tr>
+
+
 
         </tbody>
     </table>

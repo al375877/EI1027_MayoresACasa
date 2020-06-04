@@ -6,6 +6,7 @@ import es.uji.ei1027.Mayorescasa.model.Disponibilidad;
 import es.uji.ei1027.Mayorescasa.model.TempUsuarioComentario;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import es.uji.ei1027.Mayorescasa.model.Voluntario;
+import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -342,5 +343,15 @@ public class VoluntarioController {
         return "redirect:./perfil";
     }
 
+    @RequestMapping( value="/rechazarVol/{dni}", method = RequestMethod.GET)
+    public String finalizarConVoluntario( @PathVariable("dni") String dniVol,HttpSession session){
+        Usuario user=(Usuario) session.getAttribute("user");
+        Disponibilidad dis=disponibilidadDao.getDisponibilidad(user.getDni(),dniVol);
+        Date fecha=new Date();
+        dis.setFechafinal(fecha);
+        dis.setEstado("Finalizada");
+        disponibilidadDao.finalizarDis(dis);
+        return "redirect:../solicitar";
+    }
 
 }
