@@ -10,52 +10,46 @@
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 
-<!--    <style>-->
-<!--        img {-->
-<!--            display: block;-->
-<!--            margin-left: auto;-->
-<!--            margin-right: auto;-->
-<!--        }-->
-<!--    </style>-->
+    <style>
+        img{
+        display:block;
+        margin:auto;
+        }
+    </style>
 </head>
 <body>
 <div  layout:fragment="content">
     <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores en casa | CAS </h1></div>
 
     <br>
-    <h3>Página para gestionar la aplicación web y aceptacion de peticiones</h3>
+    <img src="http://imgfz.com/i/XRATq0B.png"width="900" height="300">
     <table>
         <tr><td>&nbsp;</td></tr>
-<!--        <tr><td>&nbsp;</td></tr>-->
-<!--        <tr><td><a class="boton_personalizado1" href="" role="button">Ver/Modificar usuarios</a></td></tr>-->
-<!--        <tr><td>&nbsp;</td></tr>-->
-<!--        <tr><td>&nbsp;</td></tr>-->
-<!--            <td><img src="https://www.ealde.es/wp-content/uploads/2018/11/gestion-de-recursos-direccion-de-proyectos.jpg" width="1000" height="333"></td>-->
+        <tr><td><h3>Gestión de Beneficiarios</h3></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><a class="boton_personalizado1" th:href="@{/beneficiario/add}" role="button">Registrar Beneficiario</a></td></tr>
+        <tr><td>&nbsp;</td></tr>
         <tr><td><a class="boton_personalizado1" th:href="@{/peticion/list}" role="button">Peticiones de Servicios de los Beneficiarios</a></td></tr>
         <tr><td>&nbsp;</td></tr>
+        <tr><td><h3>Gestión de Voluntarios</h3></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><a class="boton_personalizado1" th:href="@{/voluntario/list}" role="button">Administrar voluntarios</a></td></tr>
         <tr><td>&nbsp;</td></tr>
+        <tr><td><h3>Gestión de Empresa</h3></td></tr>
         <tr><td>&nbsp;</td></tr>
-<!--        <tr><td><a class="boton_personalizado1" th:href="@{/beneficiario/list}" role="button">Solicitudes de Registro de los Beneficiarios</a></td></tr>-->
-<!--        <tr><td>&nbsp;</td></tr>-->
-<!--        <tr><td>&nbsp;</td></tr>-->
-        <tr><td><a class="boton_personalizado1" th:href="@{/beneficiario/add}" role="button">Registrar Beneficiario</a></td></tr>
-        <tr><td>&nbsp;</td></tr>
+        <tr><td><a class="boton_personalizado1" th:href="@{/empresa/list}" role="button">Lista de Empresas</a></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><a class="boton_personalizado1" th:href="@{/empresa/add}" role="button">Registrar Empresa</a></td></tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
         <tr><td><a class="boton_personalizado1" th:href="@{/contrato/add}" role="button">Añadir Contratos de Empresa</a></td></tr>
-        <tr><td>&nbsp;</td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><a class="boton_personalizado1" th:href="@{/contrato/list}" role="button">Ver/Eliminar Contratos de Empresa</a></td></tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_personalizado1" th:href="@{/empresa/list}" role="button">Empresas</a></td></tr>
-        <tr><td>&nbsp;</td></tr>
+        <tr><td><h3>Gestión de Facturas</h3></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><a class="boton_personalizado1" th:href="@{/peticion/facturas}" role="button">Generar Factura</a></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
     </table>
 
 </div>
