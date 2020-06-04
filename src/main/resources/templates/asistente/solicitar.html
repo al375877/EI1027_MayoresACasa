@@ -10,25 +10,9 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
     <title>Contacta</title>
     <style>
-        table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-        }
-        td {
-          border: 1px solid #dddddd;
-          text-align: center;
-          padding: 15px;
-          height: 60px;
-        }
-
-        th{
-          border: 1px solid #dddddd;
-          text-align: center;
-          padding: 15px;
-        }
-        tr:nth-child(even) {
-          background-color: #dddddd;
+        th, td, tr{
+            text-align: center;
+            border:black 1;
         }
     </style>
 </head>
@@ -36,13 +20,12 @@
 <div layout:fragment="content">
     <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Lista de los asistentes disponibles</h1></div>
     <br>
-        <table>
+        <table class="table table-striped" border="5" bordercolor="#0973ba">
             <thead>
             <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Email</th>
-                <th scope="col">Telefono</th>
-    <!--            <th scope="col">Que necesitas?</th>-->
+                <th style="text-align: center" scope="col">Nombre</th>
+                <th style="text-align: center" scope="col">Email</th>
+                <th style="text-align: center" scope="col">Telefono</th>
             </tr>
             </thead>
             <tbody>
@@ -51,8 +34,7 @@
                 <td th:text="${asistente.nombre}"></td>
                 <td th:text="${asistente.email}"></td>
                 <td th:text="${asistente.telefono}"></td>
-    <!--            <td><input type="text" name="nombredelacaja"></td>-->
-                <td><a class="boton_personalizado1" href="/asistente/contacto" role="button">Contacta</a></td>
+                <td><a class="boton_personalizado1" href="/asistente/contacto" role="button" >Contacta</a></td>
             </tr>
             </tbody>
         </table>
