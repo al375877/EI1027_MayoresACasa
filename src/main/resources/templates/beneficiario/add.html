@@ -49,15 +49,15 @@
             <tr><td><br></td></tr>
             <tr>
                 <td><img src="https://image.flaticon.com/icons/svg/126/126485.svg"width="30" height="30"></td>
-                <td>Usuario:&nbsp;</td>
-                <td><input type="text" th:field="*{usuario}" maxlength="50"/></td>
+                <td> &nbsp;Usuario:&nbsp;</td>
+                <td><input  class="form-control" type="text" th:field="*{usuario}" maxlength="50"/></td>
                 <td th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></td>
             </tr>
             <tr><td><br></td></tr>
             <tr>
                 <td><img src="https://image.flaticon.com/icons/svg/126/126479.svg"width="30" height="30"></td>
                 <td>Contraseña:&nbsp;</td>
-                <td><input type="password" th:field="*{contraseña}" maxlength="50"/></td>
+                <td><input  class="form-control" type="password" th:field="*{contraseña}" maxlength="50"/></td>
                 <td th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></td>
             </tr>
             <tr><td><br></td></tr>
@@ -66,7 +66,7 @@
                 <td th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></td>
             <tr><td><br></td></tr>
             <tr><td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td><td>&nbsp;Telefono:&nbsp;</td>
-                <td><input type="tel" name="phone" pattern="[0-9]{9}" th:field="*{telefono}" placeholder="612345678"/></td>
+                <td><input class="form-control"  type="tel" name="phone" pattern="[0-9]{9}" th:field="*{telefono}" placeholder="612345678"/></td>
                 <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
             <tr><td><br></td></tr>
             <tr>

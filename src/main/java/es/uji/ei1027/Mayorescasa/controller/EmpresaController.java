@@ -53,7 +53,7 @@ public class EmpresaController {
         if (bindingResult.hasErrors())
             return "empresa/add";
         empresaDao.addEmpresa(empresa);
-        return "redirect:../login";
+        return "redirect:../empresa/list";
     }
 
     @RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
