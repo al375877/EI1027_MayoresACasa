@@ -6,7 +6,6 @@ import es.uji.ei1027.Mayorescasa.model.Disponibilidad;
 import es.uji.ei1027.Mayorescasa.model.TempUsuarioComentario;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import es.uji.ei1027.Mayorescasa.model.Voluntario;
-import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,10 +64,15 @@ public class VoluntarioController {
         if(voluntario.getEstado().equals("Pendiente")){
             voluntario.setEstado("Rechazado");
             usuarioDao.updateEstadoVoluntario(voluntario);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("EMAIL ENVIADO");
+            System.out.println("*************************************************************************");
             System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
                     "Correo del que envia: mayoresEnCasa@gva.es\n" +
                     "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
                     "Gracias por su colaboración.\n");
+            System.out.println("*************************************************************************");
         }
 
         return "redirect:../list";
@@ -82,6 +86,10 @@ public class VoluntarioController {
         if(voluntario.getEstado().equals("Pendiente")){
             voluntario.setEstado("Aceptado");
             usuarioDao.updateEstadoVoluntario(voluntario);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("EMAIL ENVIADO");
+            System.out.println("*************************************************************************");
             System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
                     "Correo del que envia: mayoresEnCasa@gva.es\n" +
                     "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
@@ -245,6 +253,10 @@ public class VoluntarioController {
                 dis.setEstado("Rechazada");
                 disponibilidadDao.updateEstado(dis);
             }
+            System.out.println("");
+            System.out.println("");
+            System.out.println("EMAIL ENVIADO");
+            System.out.println("*************************************************************************");
             System.out.println("Correo destinatario:"+usuarioDao.getUsuarioDni(dniBen).getEmail()+"\n" +
                     "Correo del que envia: mayoresEnCasa@gva.es\n" +
                     "Don/Doña "+usuarioDao.getUsuarioDni(dniBen).getNombre()+", lamentamos comunicarle que el voluntario/a"+user.getNombre()+" por motivos personales no podrá seguir prestano servicio. \n" +
@@ -265,6 +277,10 @@ public class VoluntarioController {
             disponibilidadDao.updateEstado(dis);
 
         }
+        System.out.println("");
+        System.out.println("");
+        System.out.println("EMAIL ENVIADO");
+        System.out.println("*************************************************************************");
         System.out.println("Correo destinatario: "+usuarioDao.getUsuarioDni(dniBen).getEmail()+"\n" +
                 "Correo del que envia: mayoresEnCasa@gva.es\n" +
                 "Don/Doña "+usuarioDao.getUsuarioDni(dniBen).getNombre()+", le confirmamos que el voluntario que solicitaste, "+user.getNombre()+",  ha aceptado su petición.\n" +
@@ -365,6 +381,10 @@ public class VoluntarioController {
         dis.setFechafinal(fecha);
         dis.setEstado("Finalizada");
         disponibilidadDao.finalizarDis(dis);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("EMAIL ENVIADO");
+        System.out.println("*************************************************************************");
         System.out.println("Correo destinatario:"+usuarioDao.getUsuarioDni(dniVol).getEmail()+"\n" +
                 "Correo del que envia: mayoresEnCasa@gva.es\n" +
                 "Estimado/a "+usuarioDao.getUsuarioDni(dniVol).getNombre()+", lamentamos comunicarle que el beneficiario/a "+user.getNombre()+", por motivos personales ha decido que no quiere que vuelvas.\n" +

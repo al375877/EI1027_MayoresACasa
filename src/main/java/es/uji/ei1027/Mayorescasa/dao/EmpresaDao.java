@@ -1,5 +1,6 @@
 package es.uji.ei1027.Mayorescasa.dao;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
+import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -59,6 +60,27 @@ public class EmpresaDao {
         catch (EmptyResultDataAccessException e){
             return  new ArrayList<Empresa>();
         }
+    }
+
+    //AÑADIMOS Usuario
+    public void addUsuario(String nombre, String usuario, String contraseña, String email, String direccion,
+    String dni, String genero, String nacimiento, int telefono, String tipoUsuario, String tipoDieta) {
+        jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                nombre, usuario, contraseña, email, direccion, dni, genero, nacimiento, telefono, tipoUsuario, tipoDieta );
+    }
+
+    public Usuario getUsuarioDni (String dni ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE dni=?", new UsuarioRowMapper(), dni);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    //BORRAMOS Usuario
+    public void deleteUsuario(String usuario) {
+        jdbcTemplate.update("DELETE FROM Usuario WHERE usuario=?", usuario);
     }
 
 }

@@ -2,6 +2,7 @@ package es.uji.ei1027.Mayorescasa.controller;
 
 
 import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
+import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,11 @@ public class EmpresaController {
     @RequestMapping("/info")
     public String infoEmpresas(Model model) {
         return "empresa/info";
+    }
+
+    @RequestMapping("/update")
+    public String update(Model model) {
+        return "empresa/update";
     }
 
     @RequestMapping("/list")
@@ -53,30 +60,39 @@ public class EmpresaController {
         if (bindingResult.hasErrors())
             return "empresa/add";
         empresaDao.addEmpresa(empresa);
+        empresaDao.addUsuario(empresa.getNombre(),empresa.getUsuario(), empresa.getContraseña(), empresa.getEmail(), empresa.getDireccion(),
+                empresa.getCif(), null, null, empresa.getTelefono(), "Empresa", null);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("EMAIL ENVIADO");
+        System.out.println("*************************************************************************");
+        System.out.println("Correo destinatario: " +empresaDao.getUsuarioDni(empresa.getCif()).getEmail()+ "\n"+
+                "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                "Estimado/a señor/a "+ empresa.getPersona_contacto() + ":");
+        System.out.println("Desde MAYORES EN CASA le comunicamos que ha sido registrada su empresa. Debe tener");
+        System.out.println("en cuenta que este usuario caduca a los 30 días, lo podrá cambiar en 2 días");
+        System.out.println("Su usuario y contraseña son:  ");
+        System.out.println("   Usuario: " + empresa.getUsuario());
+        System.out.println("   Contraseña: " + empresa.getContraseña());
+        System.out.println("Gracias por su colaboración.\n");
+        System.out.println("Mayores en casa.\n");
+        System.out.println("*************************************************************************");
         return "redirect:../empresa/list";
-    }
-
-    @RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
-    public String editaEmpresa(Model model, @PathVariable String usuario) {
-        model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
-        return "empresa/update";
-    }
-
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("empresa") Empresa empresa,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "empresa/update";
-        empresaDao.updateEmpresa(empresa);
-        return "redirect:list";
     }
 
     @RequestMapping(value="/delete/{usuario}")
     public String processDelete(@PathVariable String usuario) {
         empresaDao.deleteEmpresa(usuario);
+        empresaDao.deleteUsuario(usuario);
         return "redirect:../list";
     }
+
+    @RequestMapping("/index")
+    public String index(Model model) {
+        return "empresa/index";
+    }
+
+
 
 
 

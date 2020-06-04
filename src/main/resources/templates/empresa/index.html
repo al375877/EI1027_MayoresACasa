@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h1>Mayores en casa | Empresa</h1>
+    </div>
+    <br>
+    <br>
+    <table >
+        <tr><td>&nbsp;</td></tr>
+
+        <tr>
+            <td><img src="http://imgfz.com/i/f7CkrqW.png"></td>
+            <td><a class="boton_personalizado1" th:href="@{/empresa/update}" role="button">Gestiona tu empresa</a></td>
+
+
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+    <br>
+    <h3>¿No sabes como utilizar nuestra página?</h3>
+    <a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
+</div>
+</body>
+</html>

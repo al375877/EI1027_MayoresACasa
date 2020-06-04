@@ -1,62 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <title>Actualizar Empresa</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Gestionar empresa</title>
+
+    <style>
+        th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
+    </style>
 </head>
 <body>
-<div layout:fragment="content">
-<h2>Empresa</h2>
-<form action="#" th:action="@{/empresa/update}"
-      th:object="${empresa}" method="post">
-    <table style="margin:auto">
+<div  layout:fragment="content" >
+    <table  class="table table-striped" border="5" bordercolor="#0973ba" >
+        <tr >
+        <h2> En estos momentos no tienes los datos de tu empresa, debes esperar dos días desde que te dan el usuario, hasta poder gestionar la empresa</h2>
+        <br>
+        <h2> Gracias por tu colaboracion en Mayores en casa</h2>
+        <br>
+            <td><img src="https://www.b2brouter.net/es/wp-content/uploads/sites/2/2018/05/facturas-electronicas-generalitat-valenciana.png" width="600" height="300" ></td>
         <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" /></td>
-        </tr>
-        <tr>
-            <td><label>Cif</label></td>
-            <td><input type="text" th:field="*{cif}" /></td>
-        </tr>
-        <tr>
-            <td><label>Persona de contacto</label></td>
-            <td><input type="text" th:field="*{persona_contacto}" /></td>
-        </tr>
-        <tr>
-            <td><label>Usuario</label></td>
-            <td><input type="text" th:field="*{usuario}" /></td>
-        </tr>
-        <tr>
-            <td><label>Contraseña</label></td>
-            <td><input type="text" th:field="*{contraseña}" /></td>
-        </tr>
-        <tr>
-            <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" /></td>
-        </tr>
-        <tr>
-            <td><label>Direccion</label></td>
-            <td><input type="text" th:field="*{direccion}" /></td>
-        </tr>
-        <tr>
-            <td><label>Teléfono</label></td>
-            <td><input type="number" th:field="*{numero_telefono}" /></td>
-        </tr>
-        <tr>
-            <td><label>Tipo Servicio</label></td>
-            <td><input type="text" th:field="*{servicio}" /></td>
-        </tr>
-        <tr>
-        <tr>
-            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Edita empresa" /></td>
         </tr>
     </table>
-    <br>
-    <a th:href="@{/empresa/list}" class="boton_personalizado1" role="button" >Volver</a>
-</form>
+    <a th:href="@{/empresa/index}" class="boton_personalizado1" role="button" >Volver</a>
+
 </div>
 </body>
 </html>
