@@ -212,6 +212,10 @@ public class PeticionController {
                 System.out.println("Tipo de servicio: " + pet.getTiposervicio());
                 System.out.println("************************************************");
                 peticionDao.updateFactura(fac.getPrecio()+pet.getPrecioservicio(),pet.getBeneficiario(),fac.getCod_fac());
+                System.out.println("Correo destinatario: "+empresaDao.getEmpresa(empresa).getEmail()+"\n" +
+                        "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                        "Empresa, "+empresaDao.getEmpresa(empresa).getNombre()+", tiene un nuevo encargo para don/doña, "+pet.getBeneficiario()+".\n" +
+                        "Gracias por la ayuda");
                 return "redirect:list";
             }catch (NullPointerException e){
                 return "redirect:../contrato/add";
