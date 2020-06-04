@@ -115,4 +115,28 @@ public class UsuarioDao {
             return  new ArrayList<Usuario>();
         }
     }
+
+    public List<Usuario> getUsuariosVoluntarios() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM usuario WHERE tipoUsuario='Voluntario'", new
+                    UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Usuario>();
+        }
+    }
+
+    public Voluntario getVoluntario(String dni){
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM voluntario WHERE dni=?", new VoluntarioRowMapper(), dni);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public void updateEstadoVoluntario(Voluntario voluntario){
+        jdbcTemplate.update("UPDATE Voluntario SET estado=? WHERE dni = ?", voluntario.getEstado(), voluntario.getDni());
+    }
+
+
 }

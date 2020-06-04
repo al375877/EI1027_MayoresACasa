@@ -3,6 +3,13 @@ package es.uji.ei1027.Mayorescasa.model;
 import java.util.List;
 
 public class TempUsuarioComentario {
+
+
+    public Usuario usuario;
+    public String comentario;
+    public String nombre,email, direccion;
+    public int telefono;
+
     public String getComentario() {
         return comentario;
     }
@@ -23,16 +30,9 @@ public class TempUsuarioComentario {
         return telefono;
     }
 
-    public Usuario usuario;
-    public String comentario;
-
     public Usuario getUsuario() {
         return usuario;
     }
-
-    public String nombre,email, direccion;
-    public int telefono;
-
 
     public void setUsuario(Usuario user){
         this.usuario=user;
@@ -44,7 +44,6 @@ public class TempUsuarioComentario {
     public void setComentario(String comentario){
         this.comentario=comentario;
     }
-
     public void setNombre(){
         this.nombre=usuario.getNombre();
     }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Voluntario  extends Usuario {
 
-    private String dni, hobbies;
+    private String dni, hobbies, estado, visible;
 
     private String dias_semana;
 
@@ -27,7 +27,21 @@ public class Voluntario  extends Usuario {
     }
 
 
+    public String getEstado() {
+        return estado;
+    }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setVisible(String visible) {
+        this.visible = visible;
+    }
+
+    public String getVisible() {
+        return visible;
+    }
 
     public String getDias_semana() {
         return dias_semana;

@@ -11,13 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/voluntario")
@@ -37,7 +36,15 @@ public class VoluntarioController {
 
     @RequestMapping("/list")
     public String listvoluntarios(Model model) {
-        model.addAttribute("usuarios", usuarioDao.getUsuarios());
+
+        List<Usuario> listUser =  usuarioDao.getUsuariosVoluntarios();
+        Map<Usuario, String> map = new HashMap();
+        for (Usuario user:listUser){
+            map.put(user, usuarioDao.getVoluntario(user.getDni()).getEstado());
+            System.out.println(usuarioDao.getVoluntario(user.getDni()).getEstado());
+        }
+        model.addAttribute("map",map);
+
         return "voluntario/list";
     }
     //Llamada de la peticion add
@@ -50,6 +57,22 @@ public class VoluntarioController {
         generoList.add("Masculino");
         model.addAttribute("generoList", generoList);
         return "voluntario/add";
+    }
+
+    @RequestMapping(value = "/rechazar/{dni}")
+    public String rechazarVoluntario(@PathVariable String dni){
+        Voluntario voluntario = usuarioDao.getVoluntario(dni);
+        voluntario.setEstado("Rechazado");
+        usuarioDao.updateEstadoVoluntario(voluntario);
+        return "redirect:../list";
+    }
+
+    @RequestMapping(value = "/aceptar/{dni}")
+    public String aceptarVoluntario(@PathVariable String dni){
+        Voluntario voluntario = usuarioDao.getVoluntario(dni);
+        voluntario.setEstado("Aceptado");
+        usuarioDao.updateEstadoVoluntario(voluntario);
+        return "redirect:../list";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)

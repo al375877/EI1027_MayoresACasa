@@ -6,6 +6,7 @@ public class Disponibilidad {
     private String usuario_ben;
     private String usuario_vol;
     private String comentario;
+    private String estado;
 
     public String getComentario() {
         return comentario;
@@ -61,4 +62,14 @@ public class Disponibilidad {
     public void setFechafinal(Date fechafinal) {
         this.fechafinal = fechafinal;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }
+
+
