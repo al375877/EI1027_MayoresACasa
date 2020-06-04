@@ -65,6 +65,10 @@ public class VoluntarioController {
         if(voluntario.getEstado().equals("Pendiente")){
             voluntario.setEstado("Rechazado");
             usuarioDao.updateEstadoVoluntario(voluntario);
+            System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
+                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                    "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
+                    "Gracias por su colaboración.\n");
         }
 
         return "redirect:../list";
@@ -78,6 +82,10 @@ public class VoluntarioController {
         if(voluntario.getEstado().equals("Pendiente")){
             voluntario.setEstado("Aceptado");
             usuarioDao.updateEstadoVoluntario(voluntario);
+            System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
+                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                    "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
+                    "Gracias por su colaboración.\n");
         }
 
         return "redirect:../list";
@@ -239,6 +247,10 @@ public class VoluntarioController {
                 dis.setEstado("Rechazada");
                 disponibilidadDao.updateEstado(dis);
             }
+            System.out.println("Correo destinatario:"+usuarioDao.getUsuarioDni(dniBen).getEmail()+"\n" +
+                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                    "Don/Doña "+usuarioDao.getUsuarioDni(dniBen).getNombre()+", lamentamos comunicarle que el voluntario/a"+user.getNombre()+" por motivos personales no podrá seguir prestano servicio. \n" +
+                    "Esperemos que esto no le cause problemas y pueda encontrar otro voluntario rápido con nuestra aplicación");
 
 
         return "redirect:../beneficiarios";
@@ -255,6 +267,10 @@ public class VoluntarioController {
             disponibilidadDao.updateEstado(dis);
 
         }
+        System.out.println("Correo destinatario: "+usuarioDao.getUsuarioDni(dniBen).getEmail()+"\n" +
+                "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                "Don/Doña "+usuarioDao.getUsuarioDni(dniBen).getNombre()+", le confirmamos que el voluntario que solicitaste, "+user.getNombre()+",  ha aceptado su petición.\n" +
+                "Esperemos que sea de su agrado y podais construir una buena relación.");
 
         return "redirect:../beneficiarios";
     }
@@ -351,6 +367,10 @@ public class VoluntarioController {
         dis.setFechafinal(fecha);
         dis.setEstado("Finalizada");
         disponibilidadDao.finalizarDis(dis);
+        System.out.println("Correo destinatario:"+usuarioDao.getUsuarioDni(dniVol).getEmail()+"\n" +
+                "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                "Estimado/a "+usuarioDao.getUsuarioDni(dniVol).getNombre()+", lamentamos comunicarle que el beneficiario/a "+user.getNombre()+", por motivos personales ha decido que no quiere que vuelvas.\n" +
+                " Puedes consultar tus peticiones y elegir otro beneficiario al que ayudar. Gracias por la colaboración.\n");
         return "redirect:../solicitar";
     }
 
