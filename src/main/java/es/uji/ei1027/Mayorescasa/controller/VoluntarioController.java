@@ -41,7 +41,6 @@ public class VoluntarioController {
         Map<Usuario, String> map = new HashMap();
         for (Usuario user:listUser){
             map.put(user, usuarioDao.getVoluntario(user.getDni()).getEstado());
-            System.out.println(usuarioDao.getVoluntario(user.getDni()).getEstado());
         }
         model.addAttribute("map",map);
 
@@ -74,6 +73,13 @@ public class VoluntarioController {
         usuarioDao.updateEstadoVoluntario(voluntario);
         return "redirect:../list";
     }
+
+    @RequestMapping(value ="/delete/{dni}")
+    public String eliminarVoluntario(@PathVariable String dni){
+        usuarioDao.deleteUsuario(dni);
+        return "redirect:../list";
+    }
+
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("voluntario") Voluntario voluntario,
