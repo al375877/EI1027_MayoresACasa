@@ -24,29 +24,50 @@ public class DisponibilidadDao {
     UsuarioDao usuarioDao;
 
     public void addDisponibilidad(Disponibilidad disponibilidad){
-        jdbcTemplate.update("INSERT INTO Disponibilidad VALUES (?,?,?,?)",
-               disponibilidad.getUsuario_ben(),disponibilidad.getUsuario_vol(),disponibilidad.getFechainicial(),disponibilidad.getComentario());
+        jdbcTemplate.update("INSERT INTO Disponibilidad VALUES (?,?,?,?,?)",
+               disponibilidad.getUsuario_ben(),disponibilidad.getUsuario_vol(),disponibilidad.getFechainicial(),disponibilidad.getComentario(),disponibilidad.getEstado());
 
     }
-//si existe una relacion entre el usuario beneficiario y cualquier voluntario, los devuelve
-    public List<Usuario> consultaDisponibilidad(String dni){
+    public void updateEstado(Disponibilidad disponibilidad){
+        jdbcTemplate.update("UPDATE Disponibilidad  set estado=? where dni_vol=? AND dni_ben=?",
+                disponibilidad.getEstado(),disponibilidad.getUsuario_vol(),disponibilidad.getUsuario_ben());
+    }
+    public void finalizarDis(Disponibilidad disponibilidad){
+        jdbcTemplate.update("UPDATE Disponibilidad  set estado=?, fechafinal=? where dni_vol=? AND dni_ben=?",
+                disponibilidad.getEstado(),disponibilidad.getFechafinal(),disponibilidad.getUsuario_vol(),disponibilidad.getUsuario_ben());
+    }
+
+//si existe una relacion entre el usuario beneficiario y cualquier voluntario, los devuelve. ESTE O NO ACEPTADA esto lo tratare en el controller
+    public List<Disponibilidad> consultaDisponibilidad(String dni){
         try{
-            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_ben=?",
+            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_ben=? ",
                     new DisponibildadRowMapper(), dni);
 
-            ArrayList<Usuario> listaDnis= new ArrayList<>();
+         return lista;
 
-            for(Disponibilidad dis : lista){
-                listaDnis.add(usuarioDao.getUsuarioDni(dis.getUsuario_vol()));
-                System.out.println("DNI--------VOLUNTARIO________ASIGNADO----------"+usuarioDao.getUsuarioDni(dis.getUsuario_vol()).getDni());
-            }
-            return listaDnis;
+
 
         }catch (EmptyResultDataAccessException e){
-            return new ArrayList<Usuario>();
+            return new ArrayList<>();
         }
 
     }
+
+
+    //devuelve una lista de todas las asignaciones de beneficiaros
+    public List<Disponibilidad> consultaBeneficiarios(String dni){
+        try{
+            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_vol=?",
+                    new DisponibildadRowMapper(), dni);
+
+            return lista;
+
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+
+    }
+
     public String getComentario(String dniV){
         String comentario="";
         try{
@@ -59,6 +80,21 @@ public class DisponibilidadDao {
             return comentario;
         }
 
+    }
+
+    public Disponibilidad getDisponibilidad(String dniBen, String dniVol){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM Disponibilidad WHERE dni_ben=? AND dni_vol=?",
+                    new DisponibildadRowMapper(), dniBen, dniVol);
+
+
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    //BORRAMOS Peticion
+    public void deleteDisponibilidad(Disponibilidad dis) {
+        jdbcTemplate.update("DELETE FROM Disponibilidad WHERE dni_ben=? AND dni_vol=?", dis.getUsuario_ben(), dis.getUsuario_vol());
     }
 
 

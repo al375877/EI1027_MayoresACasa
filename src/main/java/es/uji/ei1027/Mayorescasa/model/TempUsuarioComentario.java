@@ -7,8 +7,26 @@ public class TempUsuarioComentario {
 
     public Usuario usuario;
     public String comentario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
     public String nombre,email, direccion;
     public int telefono;
+
+
+    public void setUsuario(Usuario user){
+        this.usuario=user;
+        setNombre();
+        setDireccion();
+        setTelefono();
+        setEmail();
+    }
+    public void setComentario(String comentario){
+
+        this.comentario=comentario;
+    }
 
     public String getComentario() {
         return comentario;
@@ -28,21 +46,6 @@ public class TempUsuarioComentario {
 
     public int getTelefono() {
         return telefono;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario user){
-        this.usuario=user;
-        setNombre();
-        setDireccion();
-        setTelefono();
-        setEmail();
-    }
-    public void setComentario(String comentario){
-        this.comentario=comentario;
     }
     public void setNombre(){
         this.nombre=usuario.getNombre();

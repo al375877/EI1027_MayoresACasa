@@ -15,6 +15,7 @@ public class VoluntarioRowMapper implements RowMapper<Voluntario> {
         vol.setHobbies(rs.getString("hobbies"));
         vol.setDias_semana(rs.getString("dias_semana"));
         vol.setEstado(rs.getString("estado"));
+        vol.setVisible(rs.getString("visible"));
         return vol;
 
     }

@@ -108,8 +108,7 @@ public class LoginController {
             }else{
                 session.setAttribute("existeS",false);
             }
-            List<Usuario> listaVoluntarios=disponibilidadDao.consultaDisponibilidad(user.getDni());
-            session.setAttribute("volAsignados",listaVoluntarios);
+
 
         }
 

@@ -14,6 +14,7 @@ public class DisponibildadRowMapper implements RowMapper<Disponibilidad> {
         disponibilidad.setFechainicial(rs.getDate("fechainicial"));
         disponibilidad.setFechafinal(rs.getDate("fechafinal"));
         disponibilidad.setComentario(rs.getString("comentario"));
+        disponibilidad.setEstado(rs.getString("estado"));
         return disponibilidad;
     }
 }

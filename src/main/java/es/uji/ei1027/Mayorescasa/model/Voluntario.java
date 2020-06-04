@@ -26,7 +26,6 @@ public class Voluntario  extends Usuario {
         this.hobbies = hobbies;
     }
 
-
     public String getEstado() {
         return estado;
     }
@@ -35,13 +34,16 @@ public class Voluntario  extends Usuario {
         this.estado = estado;
     }
 
+    public String getVisible() {
+        return visible;
+    }
+
     public void setVisible(String visible) {
         this.visible = visible;
     }
 
-    public String getVisible() {
-        return visible;
-    }
+
+
 
     public String getDias_semana() {
         return dias_semana;

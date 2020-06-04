@@ -87,6 +87,28 @@ public class UsuarioDao {
             return  new ArrayList<Voluntario>();
         }
     }
+    public List<Voluntario> getVoluntariosVisibles() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM voluntario where visible='si'", new
+                    VoluntarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Voluntario>();
+        }
+    }
+    public String getVisibilidad(String dni) {
+        Voluntario voluntario;
+        try{
+            voluntario= jdbcTemplate.queryForObject("SELECT * FROM voluntario where dni=?", new
+                    VoluntarioRowMapper(),dni);
+
+            return voluntario.getVisible();
+        }
+        catch (EmptyResultDataAccessException e){
+            return  null;
+        }
+    }
+
 
     //LISTAMOS Beneficiarios
     public List<Usuario> getBeneficiarios() {
@@ -99,9 +121,9 @@ public class UsuarioDao {
         }
     }
 
-    public void setDisponibilidad(String dniVol){
-        jdbcTemplate.update("UPDATE Voluntario SET esta_disponible=? WHERE dni=?",
-                "no", dniVol);
+    public void setVisibilidad(String dniVol,String visible){
+        jdbcTemplate.update("UPDATE Voluntario SET visible=? WHERE dni=?",
+                visible, dniVol);
 
     }
 

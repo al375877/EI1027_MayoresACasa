@@ -36,7 +36,7 @@
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/servicios}">Solicitar Servicio |</a>
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='cas'}" th:href="@{/peticion/list}">Peticion Servicios |</a>
 
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/beneficiarios}">Consultar listado de beneficiarios|</a>
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/beneficiarios}">Consultar mis mayores|</a>
 
                     <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>
 

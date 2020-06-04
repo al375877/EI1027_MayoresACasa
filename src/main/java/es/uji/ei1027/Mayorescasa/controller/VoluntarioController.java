@@ -94,35 +94,57 @@ public class VoluntarioController {
 
     @RequestMapping("/index")
     public String index(HttpSession session, Model model) {
+
         return "voluntario/index";
     }
     @RequestMapping("/perfil")
     public String perfil(HttpSession session, Model model) {
+        Usuario user=(Usuario) session.getAttribute("user");
+        Voluntario vol=usuarioDao.getVoluntario(user.getDni());
+        String visible=vol.getVisible();
+        String estado=vol.getEstado();
+        System.out.println("ESTADOOOOOOOOOOO= "+estado+"VISIBLEEEEEEEEE= "+visible);
+        model.addAttribute("visibilidad",visible);
+        model.addAttribute("estado",estado);
         return "voluntario/perfil";
     }
 
 
     @RequestMapping("/solicitar")
     public String solicitar(Model model,HttpSession session) {
-        List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntarios();
-        List<Usuario> asignados= (List<Usuario>) session.getAttribute("volAsignados");
+        Usuario user=(Usuario) session.getAttribute("user");
+        List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntariosVisibles();
+        List<Disponibilidad> asignados= disponibilidadDao.consultaDisponibilidad(user.getDni());
         List<TempUsuarioComentario> listaTemporal= new ArrayList<>();
-        //si ya tiene uno de los voluntarios asignado, lo elimina de los disponibles.
-        System.out.println("SIZE:"+asignados.size());
+
+        //si ya tiene uno de los voluntarios asignado, y está aceptada, lo elimina de los disponibles.
         if (asignados.size()>0) {
-            for(Usuario asignado:asignados) {
-                for(Voluntario vol:voluntariosDisponibles) {
-                    if (vol.getDni().equals(asignado.getDni())) {
-                        voluntariosDisponibles.remove(vol);
-                        break;//solo hace el break en el for de dentro
+            for(Disponibilidad dis:asignados) {
+                if(dis.getEstado().equals("Finalizada") || dis.getEstado().equals("Rechazada") ){
+
+                }else{
+                    for(Voluntario vol:voluntariosDisponibles) {
+                        if ( vol.getDni().equals(dis.getUsuario_vol())) {
+                            voluntariosDisponibles.remove(vol);
+                            break;//solo hace el break en el for de dentro
+                        }
                     }
+
                 }
-                TempUsuarioComentario temporal = new TempUsuarioComentario();
-                temporal.setUsuario(asignado);
-                temporal.setComentario(disponibilidadDao.getComentario(asignado.getDni()));
-                listaTemporal.add(temporal);
+
+                //si está aceptada, la añado a la lista de asignados
+                if (dis.getEstado().equals("Aceptada")){
+                    TempUsuarioComentario temporal = new TempUsuarioComentario();
+                    temporal.setUsuario(usuarioDao.getUsuarioDni(dis.getUsuario_vol()));
+                    temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol()));
+                    listaTemporal.add(temporal);
+                }
+
             }
 
+
+        }
+        if(listaTemporal.size()>0){
             model.addAttribute("temp",listaTemporal);
         }
         if(voluntariosDisponibles.size()>0){
@@ -138,7 +160,7 @@ public class VoluntarioController {
 
         Usuario user= (Usuario) session.getAttribute("user");
         List<TempUsuarioComentario> listaTemporal= new ArrayList<>();
-        List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntarios();
+        List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntariosVisibles();
 
         //añado la relacion entre ben y vol
         Disponibilidad disponibilidad=new Disponibilidad();
@@ -147,33 +169,153 @@ public class VoluntarioController {
         Date fecha = new Date();
         disponibilidad.setFechainicial(fecha);
         disponibilidad.setComentario(comment);
+        disponibilidad.setEstado("Pendiente");
         disponibilidadDao.addDisponibilidad(disponibilidad);
 
         //recojo los voluntarios asignados al beneficiario
-        List<Usuario> asignados= disponibilidadDao.consultaDisponibilidad(user.getDni());
+        List<Disponibilidad> asignados= disponibilidadDao.consultaDisponibilidad(user.getDni());
         session.setAttribute("volAsignados",asignados);
 
 
 
         //si ya tiene uno de los voluntarios asignado, lo elimina de los disponibles.
-        for(Usuario asignado:asignados) {
-            for(Voluntario vol:voluntariosDisponibles) {
-                if(vol.getDni().equals(asignado.getDni())){
-                    voluntariosDisponibles.remove(vol);
-                    break;//solo hace el break en el for de dentro
-                }
-            }
-            TempUsuarioComentario temporal = new TempUsuarioComentario();
-            temporal.setUsuario(asignado);
-            temporal.setComentario(disponibilidadDao.getComentario(asignado.getDni()));
-            listaTemporal.add(temporal);
+        for(Disponibilidad dis:asignados) {
+            if(dis.getEstado().equals("Finalizada") || dis.getEstado().equals("Rechazada") ){
 
+            }else{
+                for(Voluntario vol:voluntariosDisponibles) {
+                    if ( vol.getDni().equals(dis.getUsuario_vol())) {
+                        voluntariosDisponibles.remove(vol);
+                        break;//solo hace el break en el for de dentro
+                    }
+                }
+
+            }
+            //si está aceptada, la añado a la lista de asignados
+            if (dis.getEstado().equals("Aceptada")){
+                TempUsuarioComentario temporal = new TempUsuarioComentario();
+                temporal.setUsuario(usuarioDao.getUsuarioDni(dis.getUsuario_vol()));
+                temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol()));
+                listaTemporal.add(temporal);
+            }
         }
-        model.addAttribute("temp",listaTemporal);
+        if(listaTemporal.size()>0){
+            model.addAttribute("temp",listaTemporal);
+        }
 
         if(voluntariosDisponibles.size()>0){
             model.addAttribute("voluntarios", voluntariosDisponibles);
         }
         return "voluntario/solicitar";
     }
+    @RequestMapping(value="/rechazarBen/{dni}", method = RequestMethod.GET)
+    public String rechazarBeneficiario( @PathVariable("dni") String dniBen, HttpSession session) {
+
+            Usuario user=(Usuario)  session.getAttribute("user");
+            Disponibilidad dis=disponibilidadDao.getDisponibilidad(dniBen,user.getDni());
+            dis.setEstado("Rechazada");
+            disponibilidadDao.updateEstado(dis);
+            Date fecha = new Date();
+            dis.setFechafinal(fecha);
+            disponibilidadDao.finalizarDis(dis);
+
+        return "redirect:../beneficiarios";
+    }
+
+    @RequestMapping(value="/aceptarBen/{dni}", method = RequestMethod.GET)
+    public String aceptarBeneficiario( @PathVariable("dni") String dniBen,HttpSession session) {
+
+        Usuario user=(Usuario)  session.getAttribute("user");
+        Disponibilidad dis=disponibilidadDao.getDisponibilidad(dniBen,user.getDni());
+        dis.setEstado("Aceptada");
+        disponibilidadDao.updateEstado(dis);
+
+        return "redirect:../beneficiarios";
+    }
+    @RequestMapping(value="/deleteBen/{dni}", method = RequestMethod.GET)
+    public String deleteBeneficiario( @PathVariable("dni") String dniBen,HttpSession session) {
+
+        Usuario user=(Usuario)  session.getAttribute("user");
+        Disponibilidad dis=disponibilidadDao.getDisponibilidad(dniBen,user.getDni());
+
+        disponibilidadDao.deleteDisponibilidad(dis);
+
+        return "redirect:../beneficiarios";
+    }
+
+
+    @RequestMapping("/beneficiarios")
+    public String beneficiarios(Model model,HttpSession session) {
+
+        Usuario user=(Usuario) session.getAttribute("user");
+
+        //lista de disponilidades de los beneficiarios
+        List<Disponibilidad> listaDis= disponibilidadDao.consultaBeneficiarios(user.getDni());
+
+        //mapa de key usuario y valor la disponibilidad
+        Map<Usuario,Disponibilidad> map=new HashMap<>();
+
+        for(Disponibilidad dis:listaDis){
+
+            map.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+        }
+
+        model.addAttribute("map",map);
+        return "voluntario/beneficiarios";
+    }
+
+    @RequestMapping("/quitarVisibilidad")
+    public String quitarVisibilidad(Model model,HttpSession session) {
+
+        Usuario user=(Usuario) session.getAttribute("user");
+
+        usuarioDao.setVisibilidad(user.getDni(),"no");
+
+        return "redirect:./perfil";
+    }
+    @RequestMapping("/ponerVisibilidad")
+    public String ponerVisibilidad(Model model,HttpSession session) {
+
+        Usuario user=(Usuario) session.getAttribute("user");
+        usuarioDao.setVisibilidad(user.getDni(),"si");
+
+        return "redirect:./perfil";
+    }
+    @RequestMapping("/baja")
+    public String baja(Model model,HttpSession session) {
+
+        Usuario user=(Usuario) session.getAttribute("user");
+        Voluntario actual=usuarioDao.getVoluntario(user.getDni());
+        actual.setEstado("Baja");
+        usuarioDao.updateEstadoVoluntario(actual);
+
+        usuarioDao.setVisibilidad(user.getDni(),"no");
+
+        List<Disponibilidad> listaDisp=disponibilidadDao.consultaBeneficiarios(user.getDni());
+
+        for(Disponibilidad disp:listaDisp){
+            Date fecha=new Date();
+            disp.setFechafinal(fecha);
+            disp.setEstado("Finalizada");
+            disponibilidadDao.finalizarDis(disp);
+        }
+
+        return "redirect:./perfil";
+    }
+    @RequestMapping("/alta")
+    public String alta(Model model,HttpSession session) {
+
+        Usuario user=(Usuario) session.getAttribute("user");
+        Voluntario actual=usuarioDao.getVoluntario(user.getDni());
+        actual.setEstado("Aceptado");
+        usuarioDao.updateEstadoVoluntario(actual);
+
+        usuarioDao.setVisibilidad(user.getDni(),"si");
+
+
+
+        return "redirect:./perfil";
+    }
+
+
 }

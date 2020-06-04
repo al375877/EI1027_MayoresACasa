@@ -8,6 +8,8 @@ public class Disponibilidad {
     private String comentario;
     private String estado;
 
+
+
     public String getComentario() {
         return comentario;
     }
@@ -18,19 +20,17 @@ public class Disponibilidad {
 
 
     private Date fechainicial//el día de hoy
-            , fechafinal;//el día
+            , fechafinal;//el día que deciden de estar asiganados
 
 
-    @Override
-    public String toString() {
-        return "reservaHorarios{" +
-                "usuario_ben='" + usuario_ben + '\'' +
-                ", usuario_vol='" + usuario_vol + '\'' +
-                ", fechainicial=" + fechainicial +
-                ", fechafinal=" + fechafinal +
-                '}';
+
+    public String getEstado() {
+        return estado;
     }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
     public String getUsuario_ben() {
         return usuario_ben;
     }
@@ -63,13 +63,7 @@ public class Disponibilidad {
         this.fechafinal = fechafinal;
     }
 
-    public String getEstado() {
-        return estado;
-    }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }
 
 

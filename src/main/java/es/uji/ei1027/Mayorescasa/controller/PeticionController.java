@@ -40,15 +40,15 @@ public class PeticionController {
     public String listpeticiones(Model model, HttpSession session) {
 
         Usuario user= (Usuario) session.getAttribute("user");
+
+        //mapa para enlazar la peticion con las empresas de ese tipo de servicio
         Map<Peticion, List<String>> peticionEmpresas= new HashMap();
+
         for(Peticion pet:peticionDao.getPeticiones()){
             List<String> empresas= contratoDao.getEmpresasC(pet.getTiposervicio());
             peticionEmpresas.put(pet,empresas);
-            for(String empresa: empresas){
-                System.out.println("PETICIOON: "+pet.getCod_pet()+" empresas: "+empresa);
-            }
 
-        }
+            }
         model.addAttribute("map",peticionEmpresas);
 
         return "peticion/list";
