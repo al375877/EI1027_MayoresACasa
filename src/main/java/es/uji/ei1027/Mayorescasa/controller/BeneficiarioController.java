@@ -1,6 +1,8 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
+import es.uji.ei1027.Mayorescasa.dao.FacturaDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+import es.uji.ei1027.Mayorescasa.model.Factura;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.UsesSunMisc;
@@ -16,12 +18,14 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/beneficiario")
 public class BeneficiarioController {
 
     private UsuarioDao usuarioDao;
+    private FacturaDao facturaDao;
 
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao) {
@@ -85,8 +89,8 @@ public class BeneficiarioController {
     public String addbeneficiario(Model model) {
         model.addAttribute("usuario", new Usuario());
         List<String> generoList = new ArrayList<>();
-        generoList.add("Femenino");
-        generoList.add("Masculino");
+        generoList.add("Mujer");
+        generoList.add("Hombre");
         model.addAttribute("generoList", generoList);
         return "beneficiario/add";
     }
@@ -102,8 +106,22 @@ public class BeneficiarioController {
         }
         usuario.setTipoUsuario("Beneficiario");
         usuarioDao.addUsuario(usuario);
-        usuarioDao.addBeneficiario(usuario.getDni(),usuario.getTipodieta(),"PENDIENTE");
-        return "redirect:../login";
+        usuarioDao.addBeneficiario(usuario.getDni(),usuario.getTipodieta());
+        //Añadimos factura vacía
+        usuarioDao.addFactura(aleatorio(),null,0.0,null,usuario.getDni());
+        return "beneficiario/add";
+    }
+
+    private String aleatorio(){
+        Random aleatorio = new Random();
+        String alfa = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
+        String cadena = "";
+        int numero;
+        int forma;
+        forma=(int)(aleatorio.nextDouble() * alfa.length()-1+0);
+        numero=(int)(aleatorio.nextDouble() * 99+100);
+        cadena=cadena+alfa.charAt(forma)+numero;
+        return cadena;
     }
 
 }

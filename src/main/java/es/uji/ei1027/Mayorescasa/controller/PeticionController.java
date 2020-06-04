@@ -1,12 +1,7 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
-import es.uji.ei1027.Mayorescasa.dao.ContratoDao;
-import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
-import es.uji.ei1027.Mayorescasa.dao.PeticionDao;
-import es.uji.ei1027.Mayorescasa.model.Contrato;
-import es.uji.ei1027.Mayorescasa.model.Empresa;
-import es.uji.ei1027.Mayorescasa.model.Peticion;
-import es.uji.ei1027.Mayorescasa.model.Usuario;
+import es.uji.ei1027.Mayorescasa.dao.*;
+import es.uji.ei1027.Mayorescasa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +20,10 @@ public class PeticionController {
     @Autowired
     private PeticionDao peticionDao;
     private int codigo;
+//    @Autowired
+//    private Lineas_facDao lineas_facDao;
+//    @Autowired
+//    private FacturaDao facDao;
     @Autowired
     private ContratoDao contratoDao;
     @Autowired
@@ -120,8 +119,8 @@ public class PeticionController {
         }else{
             peticionDao.addPeticion(pet);
             session.setAttribute("existeL",true);
+            return "peticion/solicitada";
         }
-        return "peticion/servicios";
     }
 
 
@@ -147,8 +146,8 @@ public class PeticionController {
         }else{
             peticionDao.addPeticion(pet);
             session.setAttribute("existeC",true);
+            return "peticion/solicitada";
         }
-        return "peticion/servicios";
     }
 
     @RequestMapping(value = "/addComentarioS", method = RequestMethod.POST)
@@ -174,8 +173,8 @@ public class PeticionController {
         }else{
             peticionDao.addPeticion(pet);
             session.setAttribute("existeS",true);
+            return "peticion/solicitada";
         }
-        return "peticion/servicios";
     }
 
     private String aleatorio(){
@@ -192,19 +191,21 @@ public class PeticionController {
     @RequestMapping(value = "/aceptar", method = RequestMethod.POST)
     public String aceptarPeticion(@ModelAttribute("cod") String cod,@ModelAttribute("empresa") String empresa) {
 
-
         Contrato contrato=contratoDao.getContratoE(empresa);
         Peticion pet;
-
+        Factura fac;
         pet = peticionDao.getPeticion(cod);
-
-        pet.setCodcontrato(contrato.getCodcontrato());
+        //pet.setCodcontrato(contrato.getCodcontrato());
         Date fecha = new Date();
         pet.setFechaaceptada(fecha);
         pet.setEmpresa(empresa);
         pet.setEstado("ACEPTADA");
         peticionDao.updatePeticion(pet);
-
+        //********************************************************************
+        fac = peticionDao.getFactura(pet.getDni_ben());
+        System.out.println(fac.getCod_fac());
+        peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
+        System.out.println(peticionDao.getLineas_fac(fac.getCod_fac()));
         return "redirect:list";
     }
 
@@ -227,6 +228,11 @@ public class PeticionController {
         Usuario user= (Usuario) session.getAttribute("user");
         model.addAttribute("peticiones", peticionDao.getPeticionesPropias(user.getDni()));
         return "peticion/misPeticiones";
+    }
+
+    @RequestMapping("/info")
+    public String limpieza(Model model) {
+        return "peticion/info";
     }
 
 }

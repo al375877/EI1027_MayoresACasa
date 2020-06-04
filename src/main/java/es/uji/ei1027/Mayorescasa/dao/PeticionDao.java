@@ -1,5 +1,7 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
+import es.uji.ei1027.Mayorescasa.model.Factura;
+import es.uji.ei1027.Mayorescasa.model.Lineas_fac;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -82,5 +84,30 @@ public class PeticionDao {
             peticion=null;
         }
         return peticion!=null;
+    }
+
+    public void addLineas_fac(String codFac, String codPet, int linea, String tipoServicio, double precioServicio) {
+        jdbcTemplate.update("INSERT INTO lineas_fac VALUES (?,?,?,?,?)",
+               codFac, codPet, linea, tipoServicio, precioServicio
+        );
+    }
+
+    public Factura getFactura(String dni_ben) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM Factura WHERE dni_ben=?", new FacturaRowMapper(), dni_ben);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    //LISTAMOS lineas_fac
+    public List<Lineas_fac> getLineas_fac( String cod_fac) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM lineas_fac WHERE cod_fac", new
+                    Lineas_facRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Lineas_fac>();
+        }
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository  //En Spring los DAOs van anotados con @Repository
@@ -35,9 +36,9 @@ public class UsuarioDao {
     }
 
     //AÑADIMOS Beneficiario
-    public void addBeneficiario(String dni, String tipoDieta, String registro) {
-        jdbcTemplate.update("INSERT INTO Beneficiario VALUES (?,?,?)",
-                dni, tipoDieta, registro);
+    public void addBeneficiario(String dni, String tipoDieta) {
+        jdbcTemplate.update("INSERT INTO Beneficiario VALUES (?,?)",
+                dni, tipoDieta);
     }
 
     //ACTUALIZAMOS Beneficiario
@@ -158,6 +159,12 @@ public class UsuarioDao {
 
     public void updateEstadoVoluntario(Voluntario voluntario){
         jdbcTemplate.update("UPDATE Voluntario SET estado=? WHERE dni = ?", voluntario.getEstado(), voluntario.getDni());
+    }
+
+    //AÑADIMOS Factura
+    public void addFactura(String codigo, Date fecha, double precio, String concepto, String dniBen) {
+        jdbcTemplate.update("INSERT INTO Factura VALUES (?,?,?,?,?)",
+                codigo, fecha, precio, concepto, dniBen);
     }
 
 

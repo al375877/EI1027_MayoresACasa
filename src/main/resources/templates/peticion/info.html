@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Info Empresa</title>
+    <style>
+    img {
+    max-width: 100%;
+    max-height: 100%;
+}
+</style>
+</head>
+<body>
+<div  layout:fragment="content" >
+    <!--width="30" height="30"-->
+    <td><img src="http://imgfz.com/i/e7PBQJp.jpeg"></td>
+    <br>
+    La Consejeria de Asuntos Sociales (CAS) ha puesto en marcha un proyecto para mejorar la calidad de vida de las personas mayores que quieran estar en su domicilio con cierta independencia.
+    Mayores a casa tiene como objetivo ofrecer servicios de ayuda y compañía a las personas mayores, actualmente tenemos tres prestaciones:
+    <br>
+    <h2>Servicio de Limpieza</h2>
+    <td><img src="https://www.holidayretirement.com/wp-content/uploads/2016/04/young-Nurse-cleaning-for-senior-woman-in-a-care-home1.jpg"></td>
+    <br>
+    En este servicio contamos con una plantilla de trabajadores que han sido previamente seleccionados, donde te ofrecemos un servicio de calidad, con el que ahorraras tiempo y esfuerzo.
+    En este servicio contaras de una persona que irá a tu casa de Lunes a Domingo de 16 a 18 horas, se ha escogido este horario, porque son las horas en las que las personas, suelen estar en casa.
+    <hr>
+    Si no quisieras el servicio todos los días, debes de informarnos de esto en "Añade información extra", antes de solicitar el servicio. Aunque no se rebajara el precio mensual.
+    <br>
+    <hr>
+    <img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="80" height="80">
+    <br>
+    <h3>Precio: 6 euros al día, haciendo un total de 168 euros al més.</h3>
+    <br>
+    <h2>Servicio de Catering</h2>
+    <td><img src="https://www.dussmann.hu/fileadmin/contentImages/Header/Double_Header_970x295/970x295_Catering_Senioren.jpg"></td>
+    <br>
+    Este servicio consiste en un cattering diario, en el que nos adaptamos a ti, solo tienes que comunicarnos si necesitas un menu especial, como puede ser sin sal, vegana o vegetariano.
+    Informanos de tus preferencias en "Añade información extra", antes de solicitar el servicio.
+    El servicio de catering se desplazara a tu casa, llevandote la comida todos los días de Lunes a Domingo de 14 a 15 horas y la cena de 21 a 22 horas.
+    <hr>
+    Si no quisieras la comida todos los días, se descontara esos días del precio, debes de informarnos de esto en "Añade información extra", antes de solicitar el servicio.
+    <br>
+    <hr>
+    <img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="80" height="80">
+    <br>
+    <h3>Precio: 6 euros por cada servicio (2 al día), haciendo un total de 336 euros al més si son todos los días, comida y cena.</h3>
+    <br>
+    <h2>Servicio de Salud</h2>
+    <td><img src="https://www.total-care.org.uk/wp-content/uploads/2015/08/3.1a.jpg"></td>
+    <br>
+    En Mayores en casa, sabemos que lo más importante para las personas mayores es que envejezcan en su hogar activamente, para ello creamos este servicio.
+    Este servicio consiste en un servicio de salud básica, en el que nos adaptamos a ti, solo tienes que mostrarnos un informe medico donde nos indique que medicamentos
+    o que control de salud necesitas. El servicio de catering se desplazara a tu casa, cada dia, en cualquier momento de 10 a 12 de la mañana, para asegurarse de que llevas al dia control de salud que necesitas
+    <hr>
+    Si no quisieras el servicio todos los días, debes de informarnos de esto en "Añade información extra", antes de solicitar el servicio. Aunque no se rebajara el precio mensual.
+    <br>
+    <hr>
+    <img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="80" height="80">
+    <br>
+    <h3> Precio: 10 euros a la semana, haciendo un total de 40 euros al més.</h3>
+    <br>
+    <br>
+    Para más información acerca de los servicios, pueden entrar directamente en la página web de la Generalitat Valenciana y buscar el apartado dedicado a esta aplicación.
+    <br>
+    <br>
+    <br>
+    <a th:href="@{/peticion/servicios}" class="boton_personalizado1" role="button" >Volver</a>
+    <a th:href="@{https://www.gva.es/}" class="boton_personalizado1" role="button" >Generalitat Valenciana</a>
+</div>
+</body>
+</html>

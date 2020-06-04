@@ -7,7 +7,7 @@ public class Factura {
     private Date fecha;
     private float precio;
     private String concepto;
-    private String usuBen;
+    private String dniBen;
 
     public String getConcepto() {
         return concepto;
@@ -17,12 +17,12 @@ public class Factura {
         this.concepto = concepto;
     }
 
-    public String getUsuBen() {
-        return usuBen;
+    public String getdniBen() {
+        return dniBen;
     }
 
-    public void setUsuBen(String usuBen) {
-        this.usuBen = usuBen;
+    public void setdniBen(String dniBen) {
+        this.dniBen = dniBen;
     }
 
     public String getCod_fac() {
