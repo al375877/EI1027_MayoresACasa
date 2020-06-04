@@ -109,7 +109,6 @@ public class LoginController {
                 session.setAttribute("existeS",false);
             }
 
-
         }
 
         if(user.getTipoUsuario().equals("Voluntario")){

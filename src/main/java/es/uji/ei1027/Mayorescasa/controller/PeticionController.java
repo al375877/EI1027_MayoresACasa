@@ -110,11 +110,11 @@ public class PeticionController {
         pet.setLinea(codigo);
         pet.setPrecioservicio(200);
         pet.setComentarios(comentario);
-        pet.setEstado("PENDIENTE");
+        pet.setEstado("Pendiente");
 
         boolean existe= (boolean) session.getAttribute("existeL");
         if(existe){
-            System.out.println("EXISTE");
+
             return "peticion/existe";
         }else{
             peticionDao.addPeticion(pet);
@@ -137,11 +137,11 @@ public class PeticionController {
         pet.setLinea(codigo);
         pet.setPrecioservicio(300);
         pet.setComentarios(comentario);
-        pet.setEstado("PENDIENTE");
+        pet.setEstado("Pendiente");
 
         boolean existe= (boolean) session.getAttribute("existeC");
         if(existe){
-            System.out.println("EXISTE");
+
             return "peticion/existe";
         }else{
             peticionDao.addPeticion(pet);
@@ -164,11 +164,11 @@ public class PeticionController {
         pet.setLinea(codigo);
         pet.setPrecioservicio(150);
         pet.setComentarios(comentario);
-        pet.setEstado("PENDIENTE");
+        pet.setEstado("Pendiente");
 
         boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
-            System.out.println("EXISTE");
+
             return "peticion/existe";
         }else{
             peticionDao.addPeticion(pet);
@@ -195,17 +195,20 @@ public class PeticionController {
         Peticion pet;
         Factura fac;
         pet = peticionDao.getPeticion(cod);
-        //pet.setCodcontrato(contrato.getCodcontrato());
-        Date fecha = new Date();
-        pet.setFechaaceptada(fecha);
-        pet.setEmpresa(empresa);
-        pet.setEstado("ACEPTADA");
-        peticionDao.updatePeticion(pet);
-        //********************************************************************
-        fac = peticionDao.getFactura(pet.getDni_ben());
-        System.out.println(fac.getCod_fac());
-        peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
-        System.out.println(peticionDao.getLineas_fac(fac.getCod_fac()));
+        if(pet.getEstado().equals("Pendiente")){
+
+            //pet.setCodcontrato(contrato.getCodcontrato());
+            Date fecha = new Date();
+            pet.setFechaaceptada(fecha);
+            pet.setEmpresa(empresa);
+            pet.setEstado("Aceptada");
+            peticionDao.updatePeticion(pet);
+            //********************************************************************
+            fac = peticionDao.getFactura(pet.getDni_ben());
+            peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
+
+        }
+
         return "redirect:list";
     }
 
@@ -213,11 +216,14 @@ public class PeticionController {
     public String rechazarPeticion(@PathVariable String cod, Model model) {
         Peticion pet;
         pet = peticionDao.getPeticion(cod);
-        Date fecha = new Date();
-        System.out.println(fecha);
-        pet.setFecharechazada(fecha);
-        pet.setEstado("RECHAZADA");
-        peticionDao.updatePeticion(pet);
+        if(pet.getEstado().equals("Pendiente")){
+            Date fecha = new Date();
+            System.out.println(fecha);
+            pet.setFecharechazada(fecha);
+            pet.setEstado("Rechazada");
+            peticionDao.updatePeticion(pet);
+        }
+
 
         return "redirect:../list";
     }

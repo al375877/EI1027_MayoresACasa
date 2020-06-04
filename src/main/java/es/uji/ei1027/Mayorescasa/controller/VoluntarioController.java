@@ -61,16 +61,24 @@ public class VoluntarioController {
     @RequestMapping(value = "/rechazar/{dni}")
     public String rechazarVoluntario(@PathVariable String dni){
         Voluntario voluntario = usuarioDao.getVoluntario(dni);
-        voluntario.setEstado("Rechazado");
-        usuarioDao.updateEstadoVoluntario(voluntario);
+        if(voluntario.getEstado().equals("Pendiente")){
+            voluntario.setEstado("Rechazado");
+            usuarioDao.updateEstadoVoluntario(voluntario);
+        }
+
         return "redirect:../list";
     }
 
     @RequestMapping(value = "/aceptar/{dni}")
     public String aceptarVoluntario(@PathVariable String dni){
+
         Voluntario voluntario = usuarioDao.getVoluntario(dni);
-        voluntario.setEstado("Aceptado");
-        usuarioDao.updateEstadoVoluntario(voluntario);
+
+        if(voluntario.getEstado().equals("Pendiente")){
+            voluntario.setEstado("Aceptado");
+            usuarioDao.updateEstadoVoluntario(voluntario);
+        }
+
         return "redirect:../list";
     }
 
@@ -219,22 +227,33 @@ public class VoluntarioController {
 
             Usuario user=(Usuario)  session.getAttribute("user");
             Disponibilidad dis=disponibilidadDao.getDisponibilidad(dniBen,user.getDni());
-            dis.setEstado("Rechazada");
-            disponibilidadDao.updateEstado(dis);
-            Date fecha = new Date();
-            dis.setFechafinal(fecha);
-            disponibilidadDao.finalizarDis(dis);
+
+            //si ya estaba aceptada, se finaliza
+            if(dis.getEstado().equals("Aceptada")){
+                dis.setEstado("Finalizada");
+                Date fecha = new Date();
+                dis.setFechafinal(fecha);
+                disponibilidadDao.finalizarDis(dis);
+            }else if(dis.getEstado().equals("Pendiente")){
+                dis.setEstado("Rechazada");
+                disponibilidadDao.updateEstado(dis);
+            }
+
 
         return "redirect:../beneficiarios";
     }
 
     @RequestMapping(value="/aceptarBen/{dni}", method = RequestMethod.GET)
-    public String aceptarBeneficiario( @PathVariable("dni") String dniBen,HttpSession session) {
+    public String aceptarBeneficiario( @PathVariable("dni") String dniBen,HttpSession session, Model model) {
 
         Usuario user=(Usuario)  session.getAttribute("user");
         Disponibilidad dis=disponibilidadDao.getDisponibilidad(dniBen,user.getDni());
-        dis.setEstado("Aceptada");
-        disponibilidadDao.updateEstado(dis);
+        //si ya está finaliza o rechaza, no puedes volver a aceptarla
+        if(dis.getEstado().equals("Pendiente")){
+            dis.setEstado("Aceptada");
+            disponibilidadDao.updateEstado(dis);
+
+        }
 
         return "redirect:../beneficiarios";
     }
