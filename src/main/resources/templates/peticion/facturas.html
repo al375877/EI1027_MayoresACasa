@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Generar facturas</title>
+
+    <style>
+        th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
+    </style>
+</head>
+<body>
+<div  layout:fragment="content" >
+    <h2>Lista de las facturas pendientes</h2>
+    <table  class="table table-striped" border="5" bordercolor="#0973ba" >
+        <thead>
+        <tr >
+            <th style="text-align: center" scope="col">Codigo</th>
+            <th style="text-align: center" scope="col">Cliente</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="element:${facturas}" th:unless="*{facturas == null}">
+            <td th:text="${element.cod_fac}"></td>
+            <td th:text="${element.concepto}"></td>
+            <td><a type="button"
+                   th:href="@{/peticion/genFactura/{cod}(cod=${element.cod_fac})}">
+                <input type="button" class="boton_añadir" value="Generar factura"></a>
+            </td>
+        </tr>
+
+        <tr>
+
+        </tr>
+        </tbody>
+
+    </table>
+    <a th:href="@{/cas/index}" class="boton_personalizado1" role="button" >Volver</a>
+
+</div>
+</body>
+</html>

@@ -108,7 +108,7 @@ public class BeneficiarioController {
         usuarioDao.addUsuario(usuario);
         usuarioDao.addBeneficiario(usuario.getDni(),usuario.getTipodieta());
         //Añadimos factura vacía
-        usuarioDao.addFactura(aleatorio(),null,0.0,null,usuario.getDni());
+        usuarioDao.addFactura(aleatorio(),null,0.0,usuario.getNombre(),usuario.getDni());
         return "beneficiario/add";
     }
 

@@ -44,7 +44,7 @@ public class FacturaDao {
     }
 
     //LISTAMOS Facturas
-    public List<Factura> getFactura() {
+    public List<Factura> getFacturas() {
         try {
             return jdbcTemplate.query("SELECT * FROM Factura", new
                     FacturaRowMapper());

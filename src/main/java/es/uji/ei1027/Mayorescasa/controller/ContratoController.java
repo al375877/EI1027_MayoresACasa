@@ -83,11 +83,11 @@ public class ContratoController {
             System.out.println(contrato.getTiposervicio());
             System.out.println("*****************************");
             if (contrato.getTiposervicio().equals("Limpieza")){
-                contratoDao.updateAdd(fecha,null,200,contrato.getCodcontrato()); }
+                contratoDao.updateAdd(fecha,null,168,contrato.getCodcontrato()); }
             if (contrato.getTiposervicio().equals("Cattering")){
-                contratoDao.updateAdd(fecha,null,300,contrato.getCodcontrato()); }
+                contratoDao.updateAdd(fecha,null,336,contrato.getCodcontrato()); }
             if (contrato.getTiposervicio().equals("Sanitario")){
-                contratoDao.updateAdd(fecha,null,150,contrato.getCodcontrato()); }
+                contratoDao.updateAdd(fecha,null,40,contrato.getCodcontrato()); }
 
             List<Empresa> empresas=empresaDao.getEmpresas();
             List<String> usersEmpresas=new ArrayList<>();

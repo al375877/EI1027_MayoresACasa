@@ -100,14 +100,38 @@ public class PeticionDao {
         }
     }
 
+    public Factura getFacturaCod(String cod_fac) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM Factura WHERE cod_fac=?", new FacturaRowMapper(), cod_fac);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
     //LISTAMOS lineas_fac
     public List<Lineas_fac> getLineas_fac( String cod_fac) {
         try{
-            return jdbcTemplate.query("SELECT * FROM lineas_fac WHERE cod_fac", new
-                    Lineas_facRowMapper());
+            return jdbcTemplate.query("SELECT * FROM lineas_fac WHERE cod_fac=?", new
+                    Lineas_facRowMapper(), cod_fac);
         }
         catch (EmptyResultDataAccessException e){
             return  new ArrayList<Lineas_fac>();
         }
     }
+
+    //LISTAMOS Facturas
+    public List<Factura> getFacturas() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Factura", new
+                    FacturaRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Factura>();
+        }
+    }
+    //ACTUALIZAMOS Factura
+    public void updateFactura(double precio, String concepto, String cod_fac) {
+        jdbcTemplate.update("UPDATE Factura SET preciototal=?, concepto=? WHERE cod_fac=?",
+                precio, concepto, cod_fac);
+    }
+
 }

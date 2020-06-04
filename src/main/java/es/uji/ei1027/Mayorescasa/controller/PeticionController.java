@@ -20,10 +20,6 @@ public class PeticionController {
     @Autowired
     private PeticionDao peticionDao;
     private int codigo;
-//    @Autowired
-//    private Lineas_facDao lineas_facDao;
-//    @Autowired
-//    private FacturaDao facDao;
     @Autowired
     private ContratoDao contratoDao;
     @Autowired
@@ -108,7 +104,7 @@ public class PeticionController {
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
-        pet.setPrecioservicio(200);
+        pet.setPrecioservicio(168);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
 
@@ -135,7 +131,7 @@ public class PeticionController {
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
-        pet.setPrecioservicio(300);
+        pet.setPrecioservicio(336);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
 
@@ -162,7 +158,7 @@ public class PeticionController {
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
-        pet.setPrecioservicio(150);
+        pet.setPrecioservicio(40);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
 
@@ -196,8 +192,7 @@ public class PeticionController {
         Factura fac;
         pet = peticionDao.getPeticion(cod);
         if(pet.getEstado().equals("Pendiente")){
-
-            //pet.setCodcontrato(contrato.getCodcontrato());
+            pet.setCodcontrato(contrato.getCodcontrato());
             Date fecha = new Date();
             pet.setFechaaceptada(fecha);
             pet.setEmpresa(empresa);
@@ -206,7 +201,16 @@ public class PeticionController {
             //********************************************************************
             fac = peticionDao.getFactura(pet.getDni_ben());
             peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
-
+            System.out.println("************************************************");
+            System.out.println("LINEA DE FACTURA AÑADIDA");
+            System.out.println("Factura: " + fac.getCod_fac() );
+            System.out.println("Cliente: " + pet.getBeneficiario() );
+            System.out.println("DNI: " + pet.getDni_ben());
+            System.out.println("Precio del servicio: " + pet.getPrecioservicio());
+            System.out.println("Tipo de servicio: " + pet.getTiposervicio());
+            System.out.println("************************************************");
+            peticionDao.updateFactura(fac.getPrecio()+pet.getPrecioservicio(),pet.getBeneficiario(),fac.getCod_fac());
+            return "redirect:list";
         }
 
         return "redirect:list";
@@ -240,5 +244,40 @@ public class PeticionController {
     public String limpieza(Model model) {
         return "peticion/info";
     }
+
+
+    @RequestMapping("/facturas")
+    public String facturas(Model model) {
+        model.addAttribute("facturas", peticionDao.getFacturas());
+        return "peticion/facturas";
+    }
+
+    @RequestMapping(value = "/genFactura/{cod}")
+    public String genFactura(@PathVariable String cod, Model model) {
+
+        Factura fac;
+        ArrayList<Lineas_fac> lineas;
+        fac = peticionDao.getFacturaCod(cod);
+        lineas = (ArrayList) peticionDao.getLineas_fac(cod);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("FACTURA GENERADA");
+        System.out.println("****************************************");
+        System.out.println("CODIGO DE FACTURA: " + fac.getCod_fac());
+        System.out.println("****************************************");
+        System.out.println("Cliente: " + fac.getConcepto() + "      DNI: " + fac.getdniBen());
+        System.out.println("");
+        System.out.println("TIPO DE SERVICIO      PRECIO");
+        for (Lineas_fac linea:lineas){
+            System.out.println("   " + linea.getTiposervicio() + "          " + linea.getPrecioservicio());
+        }
+        System.out.println("");
+        System.out.println("");
+        System.out.println("                      TOTAL: " + fac.getPrecio() + " EUROS");
+        System.out.println("****************************************");
+
+        return "redirect:../facturas";
+    }
+
 
 }
