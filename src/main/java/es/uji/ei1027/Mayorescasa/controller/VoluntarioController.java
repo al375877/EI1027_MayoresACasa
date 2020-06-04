@@ -126,7 +126,7 @@ public class VoluntarioController {
         Voluntario vol=usuarioDao.getVoluntario(user.getDni());
         String visible=vol.getVisible();
         String estado=vol.getEstado();
-        System.out.println("ESTADOOOOOOOOOOO= "+estado+"VISIBLEEEEEEEEE= "+visible);
+
         model.addAttribute("visibilidad",visible);
         model.addAttribute("estado",estado);
         return "voluntario/perfil";
@@ -143,9 +143,9 @@ public class VoluntarioController {
         //si ya tiene uno de los voluntarios asignado, y está aceptada, lo elimina de los disponibles.
         if (asignados.size()>0) {
             for(Disponibilidad dis:asignados) {
-                if(dis.getEstado().equals("Finalizada") || dis.getEstado().equals("Rechazada") ){
 
-                }else{
+
+
                     for(Voluntario vol:voluntariosDisponibles) {
                         if ( vol.getDni().equals(dis.getUsuario_vol())) {
                             voluntariosDisponibles.remove(vol);
@@ -153,7 +153,6 @@ public class VoluntarioController {
                         }
                     }
 
-                }
 
                 //si está aceptada, la añado a la lista de asignados
                 if (dis.getEstado().equals("Aceptada")){
@@ -203,9 +202,8 @@ public class VoluntarioController {
 
         //si ya tiene uno de los voluntarios asignado, lo elimina de los disponibles.
         for(Disponibilidad dis:asignados) {
-            if(dis.getEstado().equals("Finalizada") || dis.getEstado().equals("Rechazada") ){
 
-            }else{
+
                 for(Voluntario vol:voluntariosDisponibles) {
                     if ( vol.getDni().equals(dis.getUsuario_vol())) {
                         voluntariosDisponibles.remove(vol);
@@ -213,7 +211,7 @@ public class VoluntarioController {
                     }
                 }
 
-            }
+
             //si está aceptada, la añado a la lista de asignados
             if (dis.getEstado().equals("Aceptada")){
                 TempUsuarioComentario temporal = new TempUsuarioComentario();

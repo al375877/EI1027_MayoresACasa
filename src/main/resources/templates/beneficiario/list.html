@@ -24,9 +24,9 @@
 <!--style="overflow: hidden;-->
 <div   layout:fragment="content">
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h2 style="color:black;" >Mayores en casa | CAS | Solicitudes Pendientes </h2>
+        <h2 style="color:black;" >Mayores en casa | CAS | Beneficiarios </h2>
     </div>
-    <h2>Lista de los beneficiarios registrados (o pendientes)</h2>
+    <h2>Lista de los beneficiarios registrados </h2>
     <table class="table table-striped" border="5" bordercolor="#0973ba"  style=" width:80%">
         <thead>
             <tr>
@@ -53,7 +53,7 @@
                 <td th:text="${user.nacimiento}"></td>
                 <td th:text="${user.tipodieta}"></td>
 
-                <td><a type="button" class="boton_eliminar" style="width:70px; height:25px font-weight: 100; font-size: 10px;" th:href="@{/beneficiario/delete/{dni}(dni=${user.dni})}">BORRAR</a></td>
+
             </tr>
         </tbody>
     </table>

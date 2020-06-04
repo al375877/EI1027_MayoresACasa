@@ -192,25 +192,31 @@ public class PeticionController {
         Factura fac;
         pet = peticionDao.getPeticion(cod);
         if(pet.getEstado().equals("Pendiente")){
-            pet.setCodcontrato(contrato.getCodcontrato());
-            Date fecha = new Date();
-            pet.setFechaaceptada(fecha);
-            pet.setEmpresa(empresa);
-            pet.setEstado("Aceptada");
-            peticionDao.updatePeticion(pet);
-            //********************************************************************
-            fac = peticionDao.getFactura(pet.getDni_ben());
-            peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
-            System.out.println("************************************************");
-            System.out.println("LINEA DE FACTURA AÑADIDA");
-            System.out.println("Factura: " + fac.getCod_fac() );
-            System.out.println("Cliente: " + pet.getBeneficiario() );
-            System.out.println("DNI: " + pet.getDni_ben());
-            System.out.println("Precio del servicio: " + pet.getPrecioservicio());
-            System.out.println("Tipo de servicio: " + pet.getTiposervicio());
-            System.out.println("************************************************");
-            peticionDao.updateFactura(fac.getPrecio()+pet.getPrecioservicio(),pet.getBeneficiario(),fac.getCod_fac());
-            return "redirect:list";
+            try{
+
+                pet.setCodcontrato(contrato.getCodcontrato());
+                Date fecha = new Date();
+                pet.setFechaaceptada(fecha);
+                pet.setEmpresa(empresa);
+                pet.setEstado("Aceptada");
+                peticionDao.updatePeticion(pet);
+                //********************************************************************
+                fac = peticionDao.getFactura(pet.getDni_ben());
+                peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
+                System.out.println("************************************************");
+                System.out.println("LINEA DE FACTURA AÑADIDA");
+                System.out.println("Factura: " + fac.getCod_fac() );
+                System.out.println("Cliente: " + pet.getBeneficiario() );
+                System.out.println("DNI: " + pet.getDni_ben());
+                System.out.println("Precio del servicio: " + pet.getPrecioservicio());
+                System.out.println("Tipo de servicio: " + pet.getTiposervicio());
+                System.out.println("************************************************");
+                peticionDao.updateFactura(fac.getPrecio()+pet.getPrecioservicio(),pet.getBeneficiario(),fac.getCod_fac());
+                return "redirect:list";
+            }catch (NullPointerException e){
+                return "redirect:../contrato/add";
+            }
+
         }
 
         return "redirect:list";
