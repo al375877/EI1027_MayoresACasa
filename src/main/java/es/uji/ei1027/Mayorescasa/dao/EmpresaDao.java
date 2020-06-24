@@ -1,4 +1,5 @@
 package es.uji.ei1027.Mayorescasa.dao;
+import es.uji.ei1027.Mayorescasa.model.Contrato;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,6 @@ public class EmpresaDao {
                 empresa.getContraseña(), empresa.getEmail(),empresa.getDireccion(),
                 empresa.getTelefono(),empresa.getTiposervicio(),empresa.getCont_nif(),
                 empresa.getCont_tlf(),empresa.getCont_mail(),  empresa.getUsuario());
-        System.out.print(empresa.getContacto());
-        System.out.println();
-        System.out.print(empresa.getUsuario());
     }
 
     public Empresa getEmpresa (String empresa ){
@@ -63,6 +61,15 @@ public class EmpresaDao {
         }
         catch (EmptyResultDataAccessException e){
             return  new ArrayList<Empresa>();
+        }
+    }
+
+    //Busca Contrato
+    public List<Contrato> buscaContrato(String empresa){
+        try {
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE empresa=?", new ContratoRowMapper(), empresa);
+        } catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Contrato>();
         }
     }
 
@@ -86,5 +93,6 @@ public class EmpresaDao {
     public void deleteUsuario(String usuario) {
         jdbcTemplate.update("DELETE FROM Usuario WHERE usuario=?", usuario);
     }
+
 
 }

@@ -24,10 +24,11 @@ public class ContratoDao {
     }
     //AÑADIMOS Contrato
     public void addContrato(Contrato contrato) {
-        jdbcTemplate.update("INSERT INTO contrato VALUES (?,?,?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO contrato VALUES (?,?,?,?,?,?,?,?,?)",
                 contrato.getEmpresa(),contrato.getCodcontrato(),
-                contrato.getTiposervicio(),contrato.getFechafinal(),contrato.getFechafinal(),
-                contrato.getCantidadservicios(),contrato.getPreciounidad()
+                contrato.getTiposervicio(),contrato.getFechainicial(),contrato.getFechafinal(),
+                contrato.getPreciounidad(),contrato.getDias_semana(),contrato.getHorainicial(),
+                contrato.getHorafinal()
         );
     }
 
@@ -39,11 +40,11 @@ public class ContratoDao {
     //ACTUALIZAMOS Contrato (No se actualiza usuario y dni por claves primaria)
     public void updateContrato(Contrato contrato){
         jdbcTemplate.update("UPDATE contrato SET codcontrato=?, tiposervicio=?, " +
-                        "fechainicial=?, fechafinal=?, cantidadservicios=?, preciounidad=?" +
-                        "WHERE empresa=? ",
-                contrato.getCodcontrato(),
-                contrato.getTiposervicio(),contrato.getFechafinal(),contrato.getFechafinal(),
-                contrato.getCantidadservicios(),contrato.getPreciounidad(), contrato.getEmpresa()
+                        "fechainicial=?, fechafinal=?, preciounidad=?, dias_semana=?, " +
+                        "horainicial=?, horafinal=? WHERE empresa=? ",
+                contrato.getCodcontrato(), contrato.getTiposervicio(),contrato.getFechainicial(),
+                contrato.getFechafinal(), contrato.getPreciounidad(),contrato.getDias_semana(),
+                contrato.getHorainicial(), contrato.getHorafinal(), contrato.getEmpresa()
         );
 
     }

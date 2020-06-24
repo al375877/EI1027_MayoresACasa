@@ -3,6 +3,7 @@ package es.uji.ei1027.Mayorescasa.controller;
 
 import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+import es.uji.ei1027.Mayorescasa.model.Contrato;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,6 @@ public class EmpresaController {
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "empresa/update";
-        System.out.println(empresa.getContacto());
-        System.out.println();
-        System.out.println(empresa.getUsuario());
         empresaDao.updateEmpresa(empresa);
         return "redirect:list";
     }
@@ -87,30 +85,49 @@ public class EmpresaController {
         System.out.println("");
         System.out.println("EMAIL ENVIADO");
         System.out.println("*************************************************************************");
-        System.out.println("Correo destinatario: " +empresaDao.getUsuarioDni(empresa.getCif()).getEmail()+ "\n"+
+        System.out.println("Correo destinatario: " +empresa.getCont_mail() + "\n"+
                 "Correo del que envia: mayoresEnCasa@gva.es\n" +
                 "Estimado/a señor/a "+ empresa.getContacto() + ":");
-        System.out.println("Desde MAYORES EN CASA le comunicamos que ha sido registrada su empresa. Debe tener");
-        System.out.println("en cuenta que este usuario caduca a los 30 días, lo podrá cambiar en 2 días");
+        System.out.println("Desde MAYORES EN CASA le comunicamos que ha sido registrada su empresa.");
+        System.out.println("Le mandamos un usuario y una contraseña provisional, para que pueda acceder a la web.");
+        System.out.println("Debe tener en cuenta que este usuario caduca a los 30 días.");
         System.out.println("Su usuario y contraseña son:  ");
         System.out.println("   Usuario: " + empresa.getUsuario());
         System.out.println("   Contraseña: " + empresa.getContraseña());
         System.out.println("Gracias por su colaboración.\n");
         System.out.println("Mayores en casa.\n");
         System.out.println("*************************************************************************");
-        return "redirect:../empresa/list";
+        return "empresa/empRegistrada";
     }
 
     @RequestMapping(value="/delete/{usuario}")
     public String processDelete(@PathVariable String usuario) {
-        empresaDao.deleteEmpresa(usuario);
-        empresaDao.deleteUsuario(usuario);
+        Empresa empresa = empresaDao.getEmpresa(usuario);
+        List<Contrato> lista= empresaDao.buscaContrato(empresa.getNombre());
+        System.out.println(lista);
+        if (lista.size()==0){
+            empresaDao.deleteEmpresa(usuario);
+            empresaDao.deleteUsuario(usuario);
+        } else {
+            return "empresa/contActivo";
+        }
+
         return "redirect:../list";
     }
 
     @RequestMapping("/index")
     public String index(Model model) {
         return "empresa/index";
+    }
+
+    @RequestMapping("/contActivo")
+    public String contActivo(Model model) {
+        return "empresa/contActivo";
+    }
+
+    @RequestMapping("/empRegistrada")
+    public String empRegistrada(Model model) {
+        return "empresa/empRegistrada";
     }
 
 

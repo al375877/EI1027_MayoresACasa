@@ -34,11 +34,6 @@ public class ContratoValidator implements Validator {
             errors.rejectValue("empresa", "obligatorio",
                     " Hay que introducir un valor");
 
-
-        if (contrato.getCantidadservicios()<1)
-            errors.rejectValue("cantidadservicios", "obligatorio",
-                    " Hay que introducir un valor");
-
         try{
             Empresa empresa=empresaDao.getEmpresa(contrato.getEmpresa());
             if(!contrato.getTiposervicio().equals(empresa.getTiposervicio())){

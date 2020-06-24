@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Nuevo empresa</title>
+    <title>Nueva empresa</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
@@ -25,7 +25,7 @@
 <body>
 <div   layout:fragment="content">
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h1 style="color:black;" >Mayores en casa |  Pedir Registro</h1>
+        <h3 style="color:black;" >Mayores en casa | CAS Manager | Registrar empresa</h3>
     </div>
 
     <header><h2>Registra una empresa<br>
@@ -33,7 +33,9 @@
     <form action="#" th:action="@{/empresa/add}"
           th:object="${empresa}" method="post">
         <table style="margin:auto">
-
+            <tr><td><hr></td></tr>
+            <tr><td>Datos de la empresa</td></tr>
+            <tr><td><hr></td></tr>
             <tr>
                 <td><img src="https://image.flaticon.com/icons/svg/126/126496.svg"width="30" height="30"></td>
                 <td>&nbsp;Nombre:&nbsp;</td>
@@ -81,17 +83,9 @@
             </tr>
             <tr><td><br></td></tr>
             <tr>
-                <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
-                <td>&nbsp;Contacto:&nbsp;</td>
-                <td><input type="text" th:field="*{persona_contacto}" placeholder="Persona de contacto"/></td>
-                <td th:if="${#fields.hasErrors('persona_contacto')}" th:errors="*{persona_contacto}"></td>
-            </tr>
-            <tr><td><br></td></tr>
-            <tr>
                 <td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td>
                 <td>&nbsp;Teléfono:&nbsp;</td>
-                <td><input type="tel" pattern="[0-9]{9}" th:field="*{telefono}"
-                           placeholder="612345678"/></td>
+                <td><input type="tel" placeholder="612345678" th:field="*{telefono}"/></td>
                 <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
             </tr>
             <tr><td><br></td></tr>
@@ -106,21 +100,43 @@
                 <td th:if="${#fields.hasErrors('tiposervicio')}" th:errors="*{tiposervicio}"></td>
                 </td>
             </tr>
+            <tr><td><hr></td></tr>
+            <tr><td>Datos del contacto de la empresa</td></tr>
+            <tr><td><hr></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
+                <td>&nbsp;Nombre:&nbsp;</td>
+                <td><input type="text" th:field="*{contacto}" placeholder="Persona de contacto"/></td>
+                <td th:if="${#fields.hasErrors('contacto')}" th:errors="*{contacto}"></td>
+            </tr>
             <tr><td><br></td></tr>
-<!--            <tr><td><br></td></tr>-->
-<!--            <tr>-->
-<!--                <td><img src="https://image.flaticon.com/icons/svg/126/126141.svg"width="30" height="30"></td>-->
-<!--                <td>&nbsp;Servicio:&nbsp;</td>-->
-<!--                <td><input type="text" th:field="*{tiposervicio}" placeholder="Cattering, Salud, Limpieza" /></td>-->
-<!--                <td th:if="${#fields.hasErrors('tiposervicio')}" th:errors="*{tiposervicio}"></td>-->
-<!--            </tr>-->
-<!--            <tr><td><br></td></tr>-->
-
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126109.svg"width="30" height="30"></td>
+                <td>&nbsp;NIF:&nbsp;</td>
+                <td><input type="text" th:field="*{cont_nif}" placeholder="11111111P"/></td>
+                <td th:if="${#fields.hasErrors('cont_nif')}" th:errors="*{cont_nif}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td>
+                <td>&nbsp;Telefono:&nbsp;</td>
+                <td><input type="tel" th:field="*{cont_tlf}" placeholder="611611611"/></td>
+                <td th:if="${#fields.hasErrors('cont_tlf')}" th:errors="*{cont_tlf}"></td>
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td><img src="https://image.flaticon.com/icons/svg/126/126516.svg"width="30" height="30"></td>
+                <td>&nbsp;Email:&nbsp;</td>
+                <td><input type="text" th:field="*{cont_mail}" placeholder="persona@empresa.es"/></td>
+                <td th:if="${#fields.hasErrors('cont_mail')}" th:errors="*{cont_mail}"></td>
+            </tr>
+            <tr><td><br></td></tr>
             <td><br></td><td><br></td><td colspan="2"><input type="submit" class="boton_añadir" role="button" value="REGISTRAR" />
             <input class="boton_personalizado1" id="borrar" type="reset" value="BORRAR"></td>
             </tr>
         </table>
         <br>
+        <a href="/casmanager/index" class="boton_personalizado1" role="button" >Volver</a>
     </form>
 </div>
 <a th:href="@{/}" class="boton_personalizado1" role="button" >Volver</a>
