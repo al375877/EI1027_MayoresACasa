@@ -1,11 +1,35 @@
 package es.uji.ei1027.Mayorescasa.model;
 
 public class Empresa {
-    String nombre,cif,persona_contacto,usuario,contraseña,email,direccion,tiposervicio;
-    int telefono;
+    String nombre,cif,contacto,usuario,contraseña,email,direccion,tiposervicio, cont_nif, cont_mail;
+    int cont_tlf, telefono;
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getCont_nif() {
+        return cont_nif;
+    }
+
+    public void setCont_nif(String cont_nif) {
+        this.cont_nif = cont_nif;
+    }
+
+    public int getCont_tlf() {
+        return cont_tlf;
+    }
+
+    public void setCont_tlf(int cont_tlf) {
+        this.cont_tlf = cont_tlf;
+    }
+
+    public String getCont_mail() {
+        return cont_mail;
+    }
+
+    public void setCont_mail(String cont_mail) {
+        this.cont_mail = cont_mail;
     }
 
     public void setNombre(String nombre) {
@@ -20,12 +44,12 @@ public class Empresa {
         this.cif = cif;
     }
 
-    public String getPersona_contacto() {
-        return persona_contacto;
+    public String getContacto() {
+        return contacto;
     }
 
-    public void setPersona_contacto(String persona_contacto) {
-        this.persona_contacto = persona_contacto;
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
     }
 
     public String getUsuario() {
@@ -81,12 +105,15 @@ public class Empresa {
         return "Empresa{" +
                 "nombre='" + nombre + '\'' +
                 ", cif='" + cif + '\'' +
-                ", persona_contacto='" + persona_contacto + '\'' +
+                ", contacto='" + contacto + '\'' +
                 ", usuario='" + usuario + '\'' +
                 ", contraseña='" + contraseña + '\'' +
                 ", email='" + email + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", tiposervicio='" + tiposervicio + '\'' +
+                ", cont_nif='" + cont_nif + '\'' +
+                ", cont_tlf='" + cont_tlf + '\'' +
+                ", cont_mail='" + cont_mail + '\'' +
                 ", telefono=" + telefono +
                 '}';
     }

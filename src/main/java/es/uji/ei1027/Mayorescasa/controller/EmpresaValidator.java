@@ -22,8 +22,8 @@ public class EmpresaValidator implements Validator {
         if (empresa.getUsuario().trim().equals(""))
             errors.rejectValue("usuario", "obligatorio",
                     " Hay que introducir un valor");
-        if (empresa.getPersona_contacto().trim().equals(""))
-            errors.rejectValue("persona_contacto", "obligatorio",
+        if (empresa.getContacto().trim().equals(""))
+            errors.rejectValue("contacto", "obligatorio",
                     " Hay que introducir un valor");
         if (empresa.getTelefono()<600000000)
             errors.rejectValue("telefono", "obligatorio",

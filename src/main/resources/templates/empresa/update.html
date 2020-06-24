@@ -3,34 +3,80 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <link rel="stylesheet" type="text/css"
-          href="/css/estils.css"
+    <title>Actualizar Empresa</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
-    <meta charset="UTF-8"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-    <title>Gestionar empresa</title>
-
-    <style>
-        th, td, tr{
-            text-align: center;
-            border:black 1;
-        }
-    </style>
 </head>
 <body>
-<div  layout:fragment="content" >
-    <table  class="table table-striped" border="5" bordercolor="#0973ba" >
-        <tr >
-        <h2> En estos momentos no tienes los datos de tu empresa, debes esperar dos días desde que te dan el usuario, hasta poder gestionar la empresa</h2>
-        <br>
-        <h2> Gracias por tu colaboracion en Mayores en casa</h2>
-        <br>
-            <td><img src="https://www.b2brouter.net/es/wp-content/uploads/sites/2/2018/05/facturas-electronicas-generalitat-valenciana.png" width="600" height="300" ></td>
-        <tr>
-        </tr>
-    </table>
-    <a th:href="@{/empresa/index}" class="boton_personalizado1" role="button" >Volver</a>
+<div layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h3 style="color:black;" >Mayores en casa | CAS Manager | Modificar empresa</h3>
+    </div>
+    <br>
+    <form action="#" th:action="@{/empresa/update}"
+          th:object="${empresa}" method="post">
+        <h2><td th:text="*{nombre}" ></td></h2>
+        <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+            <tr>
+                <td><label>Nombre</label></td>
+                <td><input type="text" th:field="*{nombre}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td><label>CIF</label></td>
+                <td><input type="text" th:field="*{cif}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td><label>Contacto</label></td>
+                <td><input type="text" th:field="*{contacto}" /></td>
+            </tr>
+            <tr>
+                <td><label>Usuario</label></td>
+                <td><input type="text" th:field="*{usuario}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td><label>Contraseña</label></td>
+                <td><input type="text" th:field="*{contraseña}" /></td>
+            </tr>
+            <tr>
+                <td><label>Email</label></td>
+                <td><input type="text" th:field="*{email}" /></td>
+            </tr>
+            <tr>
+                <td><label>Direccion</label></td>
+                <td><input type="text" th:field="*{direccion}" /></td>
+            </tr>
 
+            <tr>
+                <td><label>Telefono</label></td>
+                <td><input type="number" th:field="*{telefono}" /></td>
+            </tr>
+            <tr>
+                <td><label>Servicio</label></td>
+                <td><input type="text" th:field="*{tiposervicio}" /></td>
+            </tr>
+            <tr>
+                <td><label>Nif Contacto</label></td>
+                <td><input type="text" th:field="*{cont_nif}" /></td>
+            </tr>
+            <tr>
+                <td><label>Telefono Contacto</label></td>
+                <td><input type="number" th:field="*{cont_tlf}" /></td>
+            </tr>
+            <tr>
+                <td><label>Email Contacto</label></td>
+                <td><input type="text" th:field="*{cont_mail}" /></td>
+            </tr>
+            <tr>
+
+            <tr>
+                <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>
+            </tr>
+        </table>
+        <br>
+        <a th:href="@{/empresa/unilist/{usuario}(usuario=*{usuario})}" class="boton_personalizado1" role="button" >Volver</a>
+    </form>
 </div>
 </body>
 </html>

@@ -21,10 +21,10 @@ public class EmpresaDao {
     }
     //AÑADIMOS Empresa
     public void addEmpresa(Empresa empresa) {
-        jdbcTemplate.update("INSERT INTO empresa VALUES (?,?,?,?,?,?,?,?,?)",
-                empresa.getNombre(),empresa.getCif(),empresa.getPersona_contacto(),
+        jdbcTemplate.update("INSERT INTO empresa VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                empresa.getNombre(),empresa.getCif(),empresa.getContacto(),
                 empresa.getUsuario(),empresa.getContraseña(),empresa.getEmail(),empresa.getDireccion(),
-                empresa.getTelefono(),empresa.getTiposervicio());
+                empresa.getTelefono(),empresa.getTiposervicio(),empresa.getCont_nif(),empresa.getCont_tlf(),empresa.getCont_mail());
     }
 
     //BORRAMOS empresa
@@ -34,12 +34,16 @@ public class EmpresaDao {
 
     //ACTUALIZAMOS empresa (No se actualiza usuario y dni por claves primaria)
     public void updateEmpresa(Empresa empresa){
-        jdbcTemplate.update("UPDATE empresa SET nombre=?, cif=?, persona_contacto=?, contraseña=?, " +
-                        "email=?, direccion=?, telefono=? ,tiposervicio=?" +
+        jdbcTemplate.update("UPDATE empresa SET nombre=?, cif=?, contacto=?, contraseña=?, " +
+                        "email=?, direccion=?, telefono=? ,tiposervicio=?,cont_nif=?,cont_tlf=?,cont_mail=?" +
                         "WHERE usuario=? ",
-                empresa.getNombre(),empresa.getCif(), empresa.getPersona_contacto(),
+                empresa.getNombre(),empresa.getCif(), empresa.getContacto(),
                 empresa.getContraseña(), empresa.getEmail(),empresa.getDireccion(),
-                empresa.getTelefono(),empresa.getTiposervicio(), empresa.getUsuario());
+                empresa.getTelefono(),empresa.getTiposervicio(),empresa.getCont_nif(),
+                empresa.getCont_tlf(),empresa.getCont_mail(),  empresa.getUsuario());
+        System.out.print(empresa.getContacto());
+        System.out.println();
+        System.out.print(empresa.getUsuario());
     }
 
     public Empresa getEmpresa (String empresa ){

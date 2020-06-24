@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+          th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
+    </style>
+</head>
+<body>
+<!--style="overflow: hidden;-->
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Mayores en casa | CAS Manager | Empresa</h2>
+    </div>
+    <br>
+    <h2><img src="https://image.flaticon.com/icons/svg/2905/2905064.svg"width="70" height="70">&nbsp;&nbsp;<td th:text="${empresa.nombre}"></td></h2>
+    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+        <br>
+            <tr><th scope="col" style="text-align: right" >CIF</th>
+                <td th:text="${empresa.cif}" ></td></tr>
+            <tr><th scope="col" style="text-align: right">Usuario</th>
+                <td th:text="${empresa.usuario}"></td></tr>
+            <tr><th scope="col" style="text-align: right">Email</th>
+                <td th:text="${empresa.email}"></td></tr>
+            <tr><th scope="col" style="text-align: right">Direccion</th>
+                <td th:text="${empresa.direccion}"></td></tr>
+            <tr><th scope="col" style="text-align: right">Teléfono</th>
+                <td th:text="${empresa.telefono}"></td></tr>
+            <tr><th scope="col" style="text-align: right">Servicio</th>
+                <td th:text="${empresa.tiposervicio}"></td></tr>
+        </tr>
+    </table>
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+        <h3><img src="https://image.flaticon.com/icons/svg/3050/3050236.svg"width="60" height="60">&nbsp;&nbsp;Persona de contacto</h3>
+        <tr><th scope="col" style="text-align: right">Contacto</th>
+            <td th:text="${empresa.contacto}"></td></tr>
+        <tr><th scope="col" style="text-align: right">NIF</th>
+            <td th:text="${empresa.cont_nif}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Teléfono</th>
+            <td th:text="${empresa.cont_tlf}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Email</th>
+            <td th:text="${empresa.cont_mail}"></td></tr>
+    </table>
+    <br>
+    <table>
+        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/empresa/update/{usuario}(usuario=${empresa.usuario})}">Modificar Información</a></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:href="@{/empresa/delete/{usuario}(usuario=${empresa.usuario})}">Dar de baja</a></td>
+        <td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;">&nbsp;Acción Irreversible</a></td></tr>
+    </table>
+    <br>
+    <a href="/empresa/list" class="boton_personalizado1" role="button" >Volver</a>
+
+</div>
+</body>
+</html>

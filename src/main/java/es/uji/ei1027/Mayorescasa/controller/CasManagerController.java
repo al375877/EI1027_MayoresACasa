@@ -5,11 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/cas")
-public class CasController {
+@RequestMapping("/casmanager")
+public class CasManagerController {
 
     @RequestMapping("/index")
     public String index(Model model) {
-        return "cas/index";
+        return "casmanager/index";
     }
 }

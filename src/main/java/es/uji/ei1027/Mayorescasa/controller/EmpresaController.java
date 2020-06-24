@@ -35,15 +35,36 @@ public class EmpresaController {
         return "empresa/info";
     }
 
-    @RequestMapping("/update")
-    public String update(Model model) {
+    @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
+    public String editempresa(Model model, @PathVariable String usuario) {
+        System.out.println(usuario);
+        model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
         return "empresa/update";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String processUpdateSubmit(
+            @ModelAttribute("empresa") Empresa empresa,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "empresa/update";
+        System.out.println(empresa.getContacto());
+        System.out.println();
+        System.out.println(empresa.getUsuario());
+        empresaDao.updateEmpresa(empresa);
+        return "redirect:list";
     }
 
     @RequestMapping("/list")
     public String listEmpresas(Model model) {
         model.addAttribute("empresas", empresaDao.getEmpresas());
         return "empresa/list";
+    }
+
+    @RequestMapping("/unilist/{usuario}")
+    public String unilistEmpresas(Model model, @PathVariable String usuario) {
+        model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
+        return "empresa/unilist";
     }
     //Llamada de la peticion add
     @RequestMapping(value="/add")
@@ -68,7 +89,7 @@ public class EmpresaController {
         System.out.println("*************************************************************************");
         System.out.println("Correo destinatario: " +empresaDao.getUsuarioDni(empresa.getCif()).getEmail()+ "\n"+
                 "Correo del que envia: mayoresEnCasa@gva.es\n" +
-                "Estimado/a señor/a "+ empresa.getPersona_contacto() + ":");
+                "Estimado/a señor/a "+ empresa.getContacto() + ":");
         System.out.println("Desde MAYORES EN CASA le comunicamos que ha sido registrada su empresa. Debe tener");
         System.out.println("en cuenta que este usuario caduca a los 30 días, lo podrá cambiar en 2 días");
         System.out.println("Su usuario y contraseña son:  ");
