@@ -7,16 +7,7 @@ public class Asistente {
     private String email;
     private String usuario;
     private String contraseña;
-    private String beneficiario;
     private int telefono;
-
-    public String getBeneficiario() {
-        return beneficiario;
-    }
-
-    public void setBeneficiario(String beneficiario) {
-        this.beneficiario = beneficiario;
-    }
 
     public String getNombre() {
         return nombre;

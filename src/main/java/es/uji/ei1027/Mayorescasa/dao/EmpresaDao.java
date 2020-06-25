@@ -44,9 +44,9 @@ public class EmpresaDao {
                 empresa.getCont_tlf(),empresa.getCont_mail(),  empresa.getUsuario());
     }
 
-    public Empresa getEmpresa (String empresa ){
+    public Empresa getEmpresa (String usuario ){
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE usuario=?", new EmpresaRowMapper(),empresa);
+            return jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE usuario=?", new EmpresaRowMapper(),usuario);
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -92,6 +92,14 @@ public class EmpresaDao {
     //BORRAMOS Usuario
     public void deleteUsuario(String usuario) {
         jdbcTemplate.update("DELETE FROM Usuario WHERE usuario=?", usuario);
+    }
+
+    //Existe
+    public Empresa existe (String usuario, String nombre, String cif){
+        try{
+            return  jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE usuario=? OR nombre=? OR cif=?",
+                    new EmpresaRowMapper(),usuario, nombre, cif);
+        } catch ( EmptyResultDataAccessException e) { return null; }
     }
 
 

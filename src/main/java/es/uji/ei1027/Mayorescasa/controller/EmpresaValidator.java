@@ -27,7 +27,7 @@ public class EmpresaValidator implements Validator {
                     " Hay que introducir un valor");
         if (empresa.getTelefono()<600000000)
             errors.rejectValue("telefono", "obligatorio",
-                    " Hay que introducir un valor");
+                    "No es un número válido");
         if (empresa.getCif().trim().equals(""))
             errors.rejectValue("cif", "obligatorio",
                     " Hay que introducir un valor");
@@ -40,6 +40,17 @@ public class EmpresaValidator implements Validator {
         if (empresa.getTiposervicio().trim().equals(""))
             errors.rejectValue("tiposervicio", "obligatorio",
                     " Hay que introducir un valor");
+        if (empresa.getCont_nif().trim().equals(""))
+            errors.rejectValue("cont_nif", "obligatorio",
+                    " Hay que introducir un valor");
+        if (empresa.getCont_mail().trim().equals(""))
+            errors.rejectValue("cont_mail", "obligatorio",
+                    " Hay que introducir un valor");
+        if (empresa.getCont_tlf()<600000000)
+            errors.rejectValue("cont_tlf", "obligatorio",
+                    "No es un número válido");
+
+
 
 
     }

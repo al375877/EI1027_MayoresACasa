@@ -9,7 +9,7 @@
 
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-    <title>Info Empresa</title>
+    <title>Empresa</title>
     <style>
     img {
     max-width: 100%;
@@ -21,15 +21,14 @@
 <div  layout:fragment="content" >
     <table>
         <tr><td><img src="https://image.flaticon.com/icons/svg/753/753345.svg" width="90" height="90"></td></tr>
-        <tr><td><h4>No se pueda dar de baja la empresa debido a que hay contratos registrados a su nombre</h4></td></tr>
+        <tr><td><h4>No se puede registrar la empresa. El usuario, nombre o CIF existe en la base de datos</h4></td></tr>
         <tr><td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="60" height="60"><a style="font-size: 15px;"></a></td></tr>
-        <tr><td>En caso de querer dar de baja la empresa, debes eliminar antes sus contratos.</td></tr>
-        <tr><td>Recuerda hacer una copia de seguridad de los contratos si los necesitas, después no los podrás recuperar.</td></tr>
+        <tr><td>Por favor revisa que no tengas la empresa ya registrada. Gracias</td></tr>
     </table>
     <br>
     <br>
     <br>
-    <a th:href="@{/empresa/list}" class="boton_personalizado1" role="button" >Volver al listado</a>
+    <a th:href="@{/empresa/add}" class="boton_personalizado1" role="button" >Atrás</a>
 </div>
 </body>
 </html>

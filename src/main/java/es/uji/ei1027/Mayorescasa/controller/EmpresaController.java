@@ -78,6 +78,9 @@ public class EmpresaController {
         emrpesaValidator.validate(empresa, bindingResult);
         if (bindingResult.hasErrors())
             return "empresa/add";
+        if (empresaDao.existe(empresa.getUsuario(),empresa.getNombre(),empresa.getCif())!=null){
+            return "empresa/empExiste";
+        }
         empresaDao.addEmpresa(empresa);
         empresaDao.addUsuario(empresa.getNombre(),empresa.getUsuario(), empresa.getContraseña(), empresa.getEmail(), empresa.getDireccion(),
                 empresa.getCif(), null, null, empresa.getTelefono(), "Empresa", null);
@@ -104,7 +107,6 @@ public class EmpresaController {
     public String processDelete(@PathVariable String usuario) {
         Empresa empresa = empresaDao.getEmpresa(usuario);
         List<Contrato> lista= empresaDao.buscaContrato(empresa.getNombre());
-        System.out.println(lista);
         if (lista.size()==0){
             empresaDao.deleteEmpresa(usuario);
             empresaDao.deleteUsuario(usuario);
@@ -129,6 +131,13 @@ public class EmpresaController {
     public String empRegistrada(Model model) {
         return "empresa/empRegistrada";
     }
+
+    @RequestMapping("/empExiste")
+    public String empExiste(Model model) {
+        return "empresa/empExiste";
+    }
+
+
 
 
 

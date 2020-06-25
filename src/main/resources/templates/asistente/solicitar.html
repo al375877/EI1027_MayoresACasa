@@ -20,24 +20,25 @@
 <div layout:fragment="content">
     <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Lista de los asistentes disponibles</h1></div>
     <br>
-        <table class="table table-striped" border="5" bordercolor="#0973ba">
-            <thead>
-            <tr>
-                <th style="text-align: center" scope="col">Nombre</th>
-                <th style="text-align: center" scope="col">Email</th>
-                <th style="text-align: center" scope="col">Telefono</th>
-            </tr>
-            </thead>
-            <tbody>
+        Si necesitas ayuda personalizada, contacta con uno de nuestros asistentes.
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#0973ba">
+        <thead>
+        <tr>
+            <th style="text-align: center" scope="col">Nombre</th>
+            <th style="text-align: center" scope="col">Email</th>
+            <th style="text-align: center" scope="col">Telefono</th>
+        </tr>
+        </thead>
+        <tbody>
 
-            <tr th:each="asistente: ${asistentes}">
-                <td th:text="${asistente.nombre}"></td>
-                <td th:text="${asistente.email}"></td>
-                <td th:text="${asistente.telefono}"></td>
-                <td><a class="boton_personalizado1" href="/asistente/contacto" role="button" >Contacta</a></td>
-            </tr>
-            </tbody>
-        </table>
+        <tr th:each="asistente: ${asistentes}">
+            <td th:text="${asistente.nombre}"></td>
+            <td><a th:text="${asistente.email}" th:href="'mailto:' + ${asistente.email}"></a></td>
+            <td th:text="${asistente.telefono}"></td>
+        </tr>
+        </tbody>
+    </table>
     <br>
     <br>
     <a href="/" class="boton_personalizado1" role="button" >Página Principal</a>

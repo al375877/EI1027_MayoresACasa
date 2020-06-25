@@ -21,9 +21,9 @@ public class AsistenteDao {
     }
     //AÑADIMOS Asistente
     public void addAsistente(Asistente asistente) {
-        jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?,?)",
-                asistente.getNombre(),asistente.getDni(),asistente.getUsuario(),asistente.getContraseña(),
-                asistente.getEmail(),asistente.getBeneficiario(), asistente.getTelefono());
+        jdbcTemplate.update("INSERT INTO Asistente VALUES (?,?,?,?,?,?)",
+                asistente.getNombre(),asistente.getDni(),asistente.getUsuario(),
+                asistente.getContraseña(), asistente.getEmail(), asistente.getTelefono());
     }
 
     //BORRAMOS Asistente
@@ -34,11 +34,10 @@ public class AsistenteDao {
     //ACTUALIZAMOS Asistente (No se actualiza usuario y dni por claves primaria)
     public void updateAsistente(Asistente asistente){
         jdbcTemplate.update("UPDATE Asistente SET nombre=?, dni=?, " +
-                        "contraseña=?, email=?, beneficiario=?, telefono=? " +
+                        "contraseña=?, email=?, telefono=? " +
                         "WHERE usuario=? ",
                 asistente.getNombre(),asistente.getDni(),asistente.getContraseña(),
-                asistente.getEmail(),asistente.getBeneficiario(), asistente.getTelefono(),
-                asistente.getUsuario());
+                asistente.getEmail(), asistente.getTelefono(), asistente.getUsuario());
     }
     public Asistente getAsistente (String usuario ){
         try{
