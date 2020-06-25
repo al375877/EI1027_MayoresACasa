@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -115,6 +117,29 @@ public class EmpresaController {
         }
 
         return "redirect:../list";
+    }
+
+    @RequestMapping(value="/misContratosActivo")
+    public String misContratos(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        Date fecha = new Date();
+        model.addAttribute("contratos", empresaDao.getContratoActivo(user.getNombre(),fecha));
+        return "empresa/misContratosActivo";
+    }
+
+    @RequestMapping(value="/misContratosPasados")
+    public String misContratosPasados(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        Date fecha = new Date();
+        model.addAttribute("pasados", empresaDao.getContratoPasado(user.getNombre(),fecha));
+        return "empresa/misContratosPasados";
+    }
+
+    @RequestMapping(value="/misDatos")
+    public String misDatos(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        model.addAttribute("datos", empresaDao.getEmpresa(user.getUsuario()));
+        return "empresa/misDatos";
     }
 
     @RequestMapping("/index")

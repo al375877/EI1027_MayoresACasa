@@ -244,7 +244,6 @@ public class PeticionController {
 
     @RequestMapping("/misPeticiones")
     public String misPeticiones(HttpSession session, Model model) {
-
         Usuario user= (Usuario) session.getAttribute("user");
         model.addAttribute("peticiones", peticionDao.getPeticionesPropias(user.getDni()));
         return "peticion/misPeticiones";

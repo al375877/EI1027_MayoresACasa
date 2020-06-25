@@ -24,29 +24,31 @@
         <thead>
         <tr >
             <th style="text-align: center" scope="col">Empresa</th>
-<!--            <th style="text-align: center"  scope="col">Codigo:</th>-->
             <th style="text-align: center"  scope="col">Servicio:</th>
             <th style="text-align: center"  scope="col">Fecha Inicial:</th>
             <th style="text-align: center"  scope="col">Fecha Final:</th>
-            <th style="text-align: center"  scope="col">Cant. Servicios:</th>
             <th style="text-align: center"  scope="col">Precio unidad</th>
+            <th style="text-align: center"  scope="col">Dias semanales:</th>
+            <th style="text-align: center"  scope="col">Hora inicial:</th>
+            <th style="text-align: center"  scope="col">Hora final:</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="contrato: ${contratos}">
             <td th:text="${contrato.empresa}"></td>
-<!--            <td th:text="${contrato.codcontrato}"></td>-->
             <td th:text="${contrato.tiposervicio}"></td>
             <td th:text="${contrato.fechainicial}"></td>
             <td th:text="${contrato.fechafinal}"></td>
-            <td th:text="${contrato.cantidadservicios}"></td>
             <td th:text="${contrato.preciounidad}"></td>
+            <td th:text="${contrato.dias_semana}"></td>
+            <td th:text="${contrato.horainicial}"></td>
+            <td th:text="${contrato.horafinal}"></td>
 
-            <td><a type="button" class="boton_eliminar" style="width:100px; height:25px font-weight: 100; font-size: 14px;" th:href="@{/contrato/delete/{codcontrato}(codcontrato=${contrato.codcontrato})}">BORRAR</a></td>
+<!--            <td><a type="button" class="boton_eliminar" style="width:100px; height:25px font-weight: 100; font-size: 14px;" th:href="@{/contrato/delete/{codcontrato}(codcontrato=${contrato.codcontrato})}">BORRAR</a></td>-->
         </tr>
         </tbody>
     </table>
-    &nbsp;<a href="/cas/index" class="boton_personalizado1" role="button" >Volver</a><a th:href="@{/contrato/add}" class="boton_personalizado1" role="button" >Alta Contrato</a>&nbsp;
+    &nbsp;<a href="/casmanager/index" class="boton_personalizado1" role="button" >Volver</a>&nbsp;&nbsp;<a th:href="@{/contrato/add}" class="boton_personalizado1" role="button" >Alta Contrato</a>&nbsp;
 </div>
 </body>
 </html>

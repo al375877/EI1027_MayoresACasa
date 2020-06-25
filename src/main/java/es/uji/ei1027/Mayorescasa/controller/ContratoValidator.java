@@ -3,7 +3,7 @@ package es.uji.ei1027.Mayorescasa.controller;
 import es.uji.ei1027.Mayorescasa.dao.ContratoDao;
 import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
 import es.uji.ei1027.Mayorescasa.model.Contrato;
-import es.uji.ei1027.Mayorescasa.model.Empresa;
+import es.uji.ei1027.Mayorescasa.model.Contrato;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -18,40 +18,44 @@ public class ContratoValidator implements Validator {
     @Override
     public boolean supports(Class<?> cls) {
         return Contrato.class.equals(cls);
-        // o, si volguérem tractar també les subclasses:
-        // return Contrato.class.isAssignableFrom(cls);
     }
 
     @Override
     public void validate(Object obj, Errors errors) {
         Contrato contrato = (Contrato)obj;
         String emp=contrato.getEmpresa();
-        System.out.println("Empresaaaaa "+emp);
-
-
 
         if (contrato.getEmpresa().trim().equals(""))
             errors.rejectValue("empresa", "obligatorio",
                     " Hay que introducir un valor");
+        if (contrato.getTiposervicio().trim().equals(""))
+            errors.rejectValue("tiposervicio", "obligatorio",
+                    " Hay que introducir un valor");
+        if (contrato.getFechainicial()==null)
+            errors.rejectValue("fechainicial", "obligatorio",
+                    " Hay que introducir un valor");
+        if (contrato.getFechafinal()==null)
+            errors.rejectValue("fechafinal", "obligatorio",
+                    " Hay que introducir un valor");
+        if (contrato.getFechafinal()!=null && contrato.getFechafinal().compareTo(contrato.getFechainicial())<0)
+            errors.rejectValue("fechafinal", "menor",
+                    " La fecha final debe ser mayor que la inicial");
+        if (contrato.getDias_semana().trim().equals(""))
+            errors.rejectValue("dias_semana", "obligatorio",
+                    " Hay que introducir un valor");
+        if (contrato.getHorainicial()==null)
+            errors.rejectValue("horainicial", "obligatorio",
+                    " Hay que introducir un valor");
+        if (contrato.getHorafinal()==null)
+            errors.rejectValue("horafinal", "obligatorio",
+                    " Hay que introducir un valor");
+        if (contrato.getHorafinal()!=null && contrato.getHorafinal().compareTo(contrato.getHorainicial())<0)
+            errors.rejectValue("horafinal", "menor",
+                    " La hora final debe ser mas tarde que la inicial");
+        if (contrato.getPreciounidad()<=0)
+            errors.rejectValue("preciounidad", "obligatorio",
+                    " Hay que introducir un valor correcto");
 
-        try{
-            Empresa empresa=empresaDao.getEmpresa(contrato.getEmpresa());
-            if(!contrato.getTiposervicio().equals(empresa.getTiposervicio())){
-                errors.rejectValue("tiposervicio", "obligatorio",
-                        "No coinciden los tipos de servicios");
-            }
-        }catch (NullPointerException e){
-
-        }
-
-        try{
-            Contrato contratoExistente=contratoDao.getContratoE(emp);
-            if(contratoExistente!=null)
-                errors.rejectValue("empresa", "obligatorio",
-                        "Ya existe un contrato para esa empresa") ;
-        }catch (NullPointerException e){
-
-        }
 
     }
 }

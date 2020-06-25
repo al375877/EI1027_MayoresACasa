@@ -1,13 +1,18 @@
 package es.uji.ei1027.Mayorescasa.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class Contrato {
     private String empresa, codcontrato, tiposervicio, dias_semana;
-    private Date fechainicial, fechafinal;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate fechainicial, fechafinal;
     private double preciounidad;
-    private Time horainicial, horafinal;
+    private LocalTime horainicial, horafinal;
 
     public String getDias_semana() {
         return dias_semana;
@@ -32,19 +37,19 @@ public class Contrato {
                 '}';
     }
 
-    public Time getHorainicial() {
+    public LocalTime getHorainicial() {
         return horainicial;
     }
 
-    public void setHorainicial(Time horainicial) {
+    public void setHorainicial(LocalTime horainicial) {
         this.horainicial = horainicial;
     }
 
-    public Time getHorafinal() {
+    public LocalTime getHorafinal() {
         return horafinal;
     }
 
-    public void setHorafinal(Time horafinal) {
+    public void setHorafinal(LocalTime horafinal) {
         this.horafinal = horafinal;
     }
 
@@ -72,19 +77,19 @@ public class Contrato {
         this.tiposervicio = tiposervicio;
     }
 
-    public Date getFechainicial() {
+    public LocalDate getFechainicial() {
         return fechainicial;
     }
 
-    public void setFechainicial(Date fechainicial) {
+    public void setFechainicial(LocalDate fechainicial) {
         this.fechainicial = fechainicial;
     }
 
-    public Date getFechafinal() {
+    public LocalDate getFechafinal() {
         return fechafinal;
     }
 
-    public void setFechafinal(Date fechafinal) {
+    public void setFechafinal(LocalDate fechafinal) {
         this.fechafinal = fechafinal;
     }
 

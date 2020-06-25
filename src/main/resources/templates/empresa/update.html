@@ -18,6 +18,9 @@
     <form action="#" th:action="@{/empresa/update}"
           th:object="${empresa}" method="post">
         <h2><td th:text="*{nombre}" ></td></h2>
+        <hr>
+        Datos de la empresa
+        <hr>
         <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
             <tr>
                 <td><label>Nombre</label></td>
@@ -26,10 +29,6 @@
             <tr>
                 <td><label>CIF</label></td>
                 <td><input type="text" th:field="*{cif}" readonly="readonly" /></td>
-            </tr>
-            <tr>
-                <td><label>Contacto</label></td>
-                <td><input type="text" th:field="*{contacto}" /></td>
             </tr>
             <tr>
                 <td><label>Usuario</label></td>
@@ -56,6 +55,15 @@
                 <td><label>Servicio</label></td>
                 <td><input type="text" th:field="*{tiposervicio}" /></td>
             </tr>
+        </table>
+            <hr>
+            Datos del contacto de la empresa
+            <hr>
+        <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+            <tr>
+                <td><label>Contacto</label></td>
+                <td><input type="text" th:field="*{contacto}" /></td>
+            </tr>
             <tr>
                 <td><label>Nif Contacto</label></td>
                 <td><input type="text" th:field="*{cont_nif}" /></td>
@@ -69,11 +77,9 @@
                 <td><input type="text" th:field="*{cont_mail}" /></td>
             </tr>
             <tr>
-
-            <tr>
-                <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>
-            </tr>
         </table>
+        <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>
+        <br>
         <br>
         <a th:href="@{/empresa/unilist/{usuario}(usuario=*{usuario})}" class="boton_personalizado1" role="button" >Volver</a>
     </form>

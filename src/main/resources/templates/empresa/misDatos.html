@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+          th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
+    </style>
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Mayores en casa | Empresa | Mis datos</h2>
+    </div>
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:100%" th:each="empresa: ${datos}">
+        <br>
+        <h2><img src="https://image.flaticon.com/icons/svg/2905/2905064.svg"width="70" height="70">&nbsp;&nbsp;<a th:text="${empresa.nombre}"></a></h2>
+        <tr><th scope="col" style="text-align: right" >CIF</th>
+            <td th:text="${empresa.cif}" ></td></tr>
+        <tr><th scope="col" style="text-align: right">Usuario</th>
+            <td th:text="${empresa.usuario}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Email</th>
+            <td th:text="${empresa.email}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Direccion</th>
+            <td th:text="${empresa.direccion}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Teléfono</th>
+            <td th:text="${empresa.telefono}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Servicio</th>
+            <td th:text="${empresa.tiposervicio}"></td></tr>
+        </tr>
+    </table>
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:100%" th:each="empresa: ${datos}">
+        <h3><img src="https://image.flaticon.com/icons/svg/3050/3050236.svg"width="60" height="60">&nbsp;&nbsp;Persona de contacto</h3>
+        <tr><th scope="col" style="text-align: right">Contacto</th>
+            <td th:text="${empresa.contacto}"></td></tr>
+        <tr><th scope="col" style="text-align: right">NIF</th>
+            <td th:text="${empresa.cont_nif}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Teléfono</th>
+            <td th:text="${empresa.cont_tlf}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Email</th>
+            <td th:text="${empresa.cont_mail}"></td></tr>
+    </table>
+    <br>
+    <hr>
+    Si algún dato no es correcto, por favor ponte en contacto con el CAS Manager para editarlo.
+    <br>
+    <br>
+    <a href="/empresa/index" class="boton_personalizado1" role="button" >Volver</a>
+</div>
+</body>
+</html>

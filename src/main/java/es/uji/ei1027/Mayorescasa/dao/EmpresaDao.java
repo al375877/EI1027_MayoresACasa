@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository  //En Spring los DAOs van anotados con @Repository
@@ -68,6 +69,24 @@ public class EmpresaDao {
     public List<Contrato> buscaContrato(String empresa){
         try {
             return jdbcTemplate.query("SELECT * FROM contrato WHERE empresa=?", new ContratoRowMapper(), empresa);
+        } catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Contrato>();
+        }
+    }
+
+    //Busca Contrato
+    public List<Contrato> getContratoPasado(String empresa, Date fecha){
+        try {
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE empresa=? AND fechafinal<?", new ContratoRowMapper(), empresa, fecha);
+        } catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Contrato>();
+        }
+    }
+
+    //Busca Contrato
+    public List<Contrato> getContratoActivo(String empresa, Date fecha){
+        try {
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE empresa=? AND fechafinal>=?", new ContratoRowMapper(), empresa, fecha);
         } catch (EmptyResultDataAccessException e){
             return  new ArrayList<Contrato>();
         }

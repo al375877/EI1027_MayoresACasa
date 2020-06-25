@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository  //En Spring los DAOs van anotados con @Repository
@@ -48,11 +47,6 @@ public class ContratoDao {
         );
 
     }
-    //ACTUALIZAR FECHAS
-    public void  updateAdd(Date fechaInicial, Date fechaFinal, int preciounidad, String codcontrato){
-        jdbcTemplate.update("UPDATE contrato SET fechainicial=?, fechafinal=?, preciounidad=? WHERE codcontrato=? ",
-                fechaInicial, fechaFinal, preciounidad, codcontrato);
-    }
 
     public Contrato getContrato (String cod ){
         try{
@@ -62,6 +56,32 @@ public class ContratoDao {
             return null;
         }
     }
+    //Get Empresa
+    public Empresa getEmpresa (String empresa ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE nombre=?", new EmpresaRowMapper(), empresa);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    //Existe Servicio-Empresa
+    public boolean existeServicio(String nombre, String servicio){
+        List<String> empServicios= new ArrayList<>();
+        try{
+            List<Empresa> empresas=jdbcTemplate.query("SELECT * FROM empresa WHERE nombre=?", new
+                    EmpresaRowMapper(), nombre);
+            for(Empresa empresa : empresas){
+                empServicios.add(empresa.getTiposervicio());
+            }
+            if (empServicios.contains(servicio)) return true;
+        }
+        catch (EmptyResultDataAccessException e){
+            return  false;
+        }
+        return false;
+    }
+
     //get a partir de una empresa
     public Contrato getContratoE (String empresa ){
         try{
@@ -82,16 +102,6 @@ public class ContratoDao {
         }
     }
 
-    //LISTAMOS empresa
-    public List<Empresa> getEmpresas() {
-        try{
-            return jdbcTemplate.query("SELECT * FROM empresa", new
-                    EmpresaRowMapper());
-        }
-        catch (EmptyResultDataAccessException e){
-            return  new ArrayList<Empresa>();
-        }
-    }
     //LISTAMOS empresa por categoria
     public List<String> getEmpresasC(String categoria) {
         List<String> empresasNombre= new ArrayList<>();

@@ -33,28 +33,29 @@
         <h3>Como dar de alta un contrato</h3>
         <ul>
             <li>Añade el contrato a una empresa, si no existe la empresa debes registrarla primero.</li>
-            <li>Debes poner el usuario de la empresa en cuestion (No nombre ni contacto). </li>
-            <li>Abajo tienes un link para copiar el usuario y pegarlo en la casilla "Usuario empresa".</li>
+            <li>Recuerda que los días de la semana debes ponerlos con el formato que indica: </li>
+                <ul><li>Lunes=L, Martes=M, Miercoles=X, Jueves=J, Viernes=V, Sabado=S, Domingo=D. </li></ul>
+            <li>Precios de los servicios actuales:</li>
+                <ul><li>Catering: 6€ - Sanitario: 5€ - Limpieza: 7€</li></ul>
         </ul>
         <hr>
         <table style="margin:auto">
                 <tr>
                     <td><img src="https://image.flaticon.com/icons/svg/126/126496.svg"width="30" height="30"></td>
-                    <td>&nbsp;Usuario empresa:&nbsp;</td>
+                    <td>&nbsp;&nbsp;Empresa:&nbsp;</td>
                     <td>
                         <select class="form_control" th:field="*{empresa}" >
                             <option th:each="empresa:${empresas}"
                                     th:value="${empresa}"
-                                    th:text="${empresa}"
-                                ></option>
-
+                                    th:text="${empresa}">
+                            </option>
                         </select>
                     <td th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
                     <td><img src="https://image.flaticon.com/icons/svg/126/126141.svg"width="30" height="30"></td>
-                    <td>&nbsp;Tipo de Servicio:&nbsp;</td>
+                    <td>&nbsp;&nbsp;Servicio:&nbsp;</td>
                     <td><select class="form_control" th:field="*{tiposervicio}">
                         <option value="Cattering">Cattering</option>
                         <option value="Sanitario">Sanitario</option>
@@ -65,10 +66,49 @@
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
-                    <td><img src="https://image.flaticon.com/icons/svg/126/126151.svg"width="30" height="30"></td>
-                    <td>&nbsp;Cantidad Servicios:&nbsp;</td>
-                    <td><input type="number" th:field="*{cantidadservicios}" placeholder="2,4,5,.."/></td>
-                    <td th:if="${#fields.hasErrors('cantidadservicios')}" th:errors="*{cantidadservicios}"></td>
+                    <td><img src="https://image.flaticon.com/icons/svg/747/747310.svg"width="30" height="30"></td>
+                    <td>&nbsp;Fecha de inicio:&nbsp;</td>
+                    <td><input type="text" th:field="*{fechainicial}" required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+                               title="Formato:DD/MM/YYYY"  placeholder="DD/MM/YYYY"></td>
+                    <td th:if="${#fields.hasErrors('fechainicial')}" th:errors="*{fechainicial}"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/747/747310.svg"width="30" height="30"></td>
+                    <td>&nbsp;Fecha final:&nbsp;</td>
+                    <td><input type="text" th:field="*{fechafinal}" required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
+                               title="Formato:DD/MM/YYYY"  placeholder="DD/MM/YYYY"></td>
+                    <td th:if="${#fields.hasErrors('fechafinal')}" th:errors="*{fechafinal}"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/126/126516.svg"width="30" height="30"></td>
+                    <td>&nbsp;Dias semana:&nbsp;</td>
+                    <td><input type="text" th:field="*{dias_semana}" placeholder="L-M-X-J-V-S-D"/></td>
+                    <td th:if="${#fields.hasErrors('dias_semana')}" th:errors="*{dias_semana}"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/2919/2919788.svg"width="30" height="30"></td>
+                    <td>&nbsp;Hora de inicio:&nbsp;</td>
+                    <td><input type="text" th:field="*{horainicial}" required pattern="[0-9]{2}:[0-9]{2}"
+                               title="Formato:HH:MM"  placeholder="HH:MM"></td>
+                    <td th:if="${#fields.hasErrors('horainicial')}" th:errors="*{horainicial}"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/2919/2919788.svg"width="30" height="30"></td>
+                    <td>&nbsp;Hora final:&nbsp;</td>
+                    <td><input type="text" th:field="*{horafinal}" required pattern="[0-9]{2}:[0-9]{2}"
+                               title="Formato:HH:MM"  placeholder="HH:MM"></td>
+                    <td th:if="${#fields.hasErrors('horafinal')}" th:errors="*{horafinal}"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><img src="https://image.flaticon.com/icons/svg/3037/3037158.svg"width="30" height="30"></td>
+                    <td>&nbsp;Precio unidad:&nbsp;</td>
+                    <td><input type="number" th:field="*{preciounidad}"></td>
+                    <td th:if="${#fields.hasErrors('preciounidad')}" th:errors="*{preciounidad}"></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <td><br></td><td><br></td><td colspan="2"><input type="submit" class="boton_añadir" role="button" value="AÑADIR"/></td>
@@ -76,7 +116,7 @@
         </table>
     </form>
     <br>
-    <a class="boton_personalizado1" th:href="@{/empresa/list}" role="button">Lista de Empresas</a>
+    <a class="boton_personalizado1" th:href="@{/casmanager/index}" role="button">Atrás</a>
     <a class="boton_personalizado1" th:href="@{/contrato/list}" role="button">Ver/Eliminar Contratos</a>
 </div>
 </body>

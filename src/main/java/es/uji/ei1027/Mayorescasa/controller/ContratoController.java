@@ -6,6 +6,7 @@ import es.uji.ei1027.Mayorescasa.model.Contrato;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +35,6 @@ public class ContratoController {
     @RequestMapping("/list")
     public String listcontratos(Model model) {
         model.addAttribute("contratos", contratoDao.getContratos());
-        System.out.println(contratoDao.getContratos());
         return "contrato/list";
     }
 
@@ -57,48 +56,47 @@ public class ContratoController {
         List<Empresa> empresas=empresaDao.getEmpresas();
         List<String> usersEmpresas=new ArrayList<>();
         for(Empresa empresa: empresas){
-            usersEmpresas.add(empresa.getUsuario());
+            usersEmpresas.add(empresa.getNombre());
         }
         model.addAttribute("empresas",usersEmpresas);
         return "contrato/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("contrato") Contrato contrato,
-                                   BindingResult bindingResult, Model model) {
+    public String processAddSubmit(@ModelAttribute("contrato") Contrato contrato, BindingResult bindingResult) {
         ContratoValidator contratoValidator = new ContratoValidator();
         contratoValidator.validate(contrato, bindingResult);
         if (bindingResult.hasErrors()) {
             System.out.println("Error al añadir el contrato");
             return "contrato/add";
         }
-        List<Empresa>lista=contratoDao.getEmpresas();
-        List<Peticion>listaPet=contratoDao.getPeticiones();
-        List<String> usuEmpresas = new ArrayList<>();
-        for(Empresa empresa:lista) usuEmpresas.add(empresa.getUsuario());
-        if(usuEmpresas.contains(contrato.getEmpresa())) {
+        if(contratoDao.existeServicio(contrato.getEmpresa(),contrato.getTiposervicio())) {
             contrato.setCodcontrato(aleatorio()+"CNT");
             contratoDao.addContrato(contrato);
-            Date fecha = new Date();
-            System.out.println(contrato.getTiposervicio());
-            System.out.println("*****************************");
-            if (contrato.getTiposervicio().equals("Limpieza")){
-                contratoDao.updateAdd(fecha,null,168,contrato.getCodcontrato()); }
-            if (contrato.getTiposervicio().equals("Cattering")){
-                contratoDao.updateAdd(fecha,null,336,contrato.getCodcontrato()); }
-            if (contrato.getTiposervicio().equals("Sanitario")){
-                contratoDao.updateAdd(fecha,null,40,contrato.getCodcontrato()); }
-
-            List<Empresa> empresas=empresaDao.getEmpresas();
-            List<String> usersEmpresas=new ArrayList<>();
-            for(Empresa empresa: empresas){
-                usersEmpresas.add(empresa.getUsuario());
-            }
-            model.addAttribute("empresas",usersEmpresas);
-            return "contrato/add";
+        } else {
+            return "contrato/existe";
         }
+        Empresa empresa = contratoDao.getEmpresa(contrato.getEmpresa());
+        System.out.println("");
+        System.out.println("");
+        System.out.println("EMAIL ENVIADO");
+        System.out.println("*************************************************************************");
+        System.out.println("Correo destinatario: " +empresa.getCont_mail() + "\n"+
+                "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                "Estimado/a señor/a "+ empresa.getContacto() + ":");
+        System.out.println("Desde MAYORES EN CASA le comunicamos que se ha añadido un contrato a su empresa.");
+        System.out.println("Si usted no está de acuerdo con esto, o no entiende este email, por favor pongase");
+        System.out.println("en contacto con nosotros respondiendo a este correo o al numero de tlf: 920 14 58 74");
+        System.out.println("");
+        System.out.println("Gracias por su colaboración.\n");
+        System.out.println("Mayores en casa.\n");
+        System.out.println("*************************************************************************");
+        return "contrato/contAñadido";
+    }
 
-        return "contrato/existe";
+    @RequestMapping("/contAñadiddo")
+    public String contAñadiddo(Model model) {
+        return "contrato/contAñadiddo";
     }
 
     private String aleatorio(){

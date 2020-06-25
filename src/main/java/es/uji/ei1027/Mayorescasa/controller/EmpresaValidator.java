@@ -50,8 +50,5 @@ public class EmpresaValidator implements Validator {
             errors.rejectValue("cont_tlf", "obligatorio",
                     "No es un número válido");
 
-
-
-
     }
 }
