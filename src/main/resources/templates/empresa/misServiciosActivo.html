@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+          th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
+    </style>
+</head>
+<body>
+<!--style="overflow: hidden;-->
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h3 style="color:black;" >Mayores en casa | Empresa | Servicios en activo </h3>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:100%">
+        <thead>
+        <tr>
+            <th scope="col">Beneficiario</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Contrato</th>
+            <th scope="col">Fecha aceptada</th>
+            <th scope="col">Fecha final</th>
+<!--            <th scope="col">Dias</th>-->
+<!--            <th scope="col">Hora inicial</th>-->
+<!--            <th scope="col">Hora final</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="servicio: ${servicios}">
+            <td th:text="${servicio.beneficiario}"></td>
+            <td th:text="${servicio.tiposervicio}"></td>
+            <td th:text="${servicio.codcontrato}"></td>
+            <td th:text="${servicio.fechaaceptada}"></td>
+            <td th:text="${servicio.fechafinal}"></td>
+<!--            <td th:text="${servicio.dias_semana}"></td>-->
+<!--            <td th:text="${servicio.horainicial}"></td>-->
+<!--            <td th:text="${servicio.horafinal}"></td>-->
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <a href="/empresa/index" class="boton_personalizado1" role="button" >Volver</a>
+
+</div>
+</body>
+</html>

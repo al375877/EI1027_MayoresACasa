@@ -1,7 +1,9 @@
 package es.uji.ei1027.Mayorescasa.controller;
 
+import es.uji.ei1027.Mayorescasa.dao.AsistenteDao;
 import es.uji.ei1027.Mayorescasa.dao.FacturaDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
+import es.uji.ei1027.Mayorescasa.model.Beneficiario;
 import es.uji.ei1027.Mayorescasa.model.Factura;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,6 @@ import java.util.Random;
 public class BeneficiarioController {
 
     private UsuarioDao usuarioDao;
-    private FacturaDao facturaDao;
 
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao) {
@@ -35,6 +36,16 @@ public class BeneficiarioController {
     @RequestMapping("/index")
     public String index(HttpSession session, Model model) {
         return "beneficiario/index";
+    }
+
+    @RequestMapping(value="/contacta")
+    public String asistente(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        String dniBen=user.getDni();
+        Beneficiario ben = usuarioDao.getBeneficiario(dniBen);
+        System.out.println(ben.getAsistente());
+        model.addAttribute("asistentes", usuarioDao.getAsistenteBenef(ben.getAsistente()));
+        return "beneficiario/contacta";
     }
 
     @RequestMapping("/info")
@@ -111,6 +122,7 @@ public class BeneficiarioController {
         usuarioDao.addFactura(aleatorio(),null,0.0,usuario.getNombre(),usuario.getDni());
         return "redirect:../beneficiario/list";
     }
+
 
     private String aleatorio(){
         Random aleatorio = new Random();

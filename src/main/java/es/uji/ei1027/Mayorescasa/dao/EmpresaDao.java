@@ -1,6 +1,7 @@
 package es.uji.ei1027.Mayorescasa.dao;
 import es.uji.ei1027.Mayorescasa.model.Contrato;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
+import es.uji.ei1027.Mayorescasa.model.Peticion;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -119,6 +120,15 @@ public class EmpresaDao {
             return  jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE usuario=? OR nombre=? OR cif=?",
                     new EmpresaRowMapper(),usuario, nombre, cif);
         } catch ( EmptyResultDataAccessException e) { return null; }
+    }
+
+    //Busca Peticion
+    public List<Peticion> getServiciosActivo(String nombre){
+        try {
+            return jdbcTemplate.query("SELECT * FROM peticion WHERE empresa=?", new PeticionRowMapper(), nombre);
+        } catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Peticion>();
+        }
     }
 
 

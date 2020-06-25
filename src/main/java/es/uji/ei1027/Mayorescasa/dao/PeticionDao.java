@@ -55,10 +55,20 @@ public class PeticionDao {
         }
     }
 
-    //LISTAMOS Peticion
-    public List<Peticion> getPeticiones() {
+    //LISTAMOS Peticion Pendientes
+    public List<Peticion> getPeticionesPendientes() {
         try {
-            return jdbcTemplate.query("SELECT * FROM Peticion", new
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE estado='Pendiente'", new
+                    PeticionRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Peticion>();
+        }
+    }
+
+    //LISTAMOS Peticion Resueltas
+    public List<Peticion> getPeticionesResueltas() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE estado='Aceptada' OR estado='Rechazada' ", new
                     PeticionRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Peticion>();

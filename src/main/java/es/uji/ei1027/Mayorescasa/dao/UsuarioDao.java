@@ -1,5 +1,7 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
+import es.uji.ei1027.Mayorescasa.model.Asistente;
+import es.uji.ei1027.Mayorescasa.model.Beneficiario;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import es.uji.ei1027.Mayorescasa.model.Voluntario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +112,16 @@ public class UsuarioDao {
         }
     }
 
+    //Get Beneficiario
+    public Beneficiario getBeneficiario (String dni ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM beneficiario WHERE dni=?", new BeneficiarioRowMapper(), dni);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
 
     //LISTAMOS Beneficiarios
     public List<Usuario> getBeneficiarios() {
@@ -165,6 +177,16 @@ public class UsuarioDao {
     public void addFactura(String codigo, Date fecha, double precio, String concepto, String dniBen) {
         jdbcTemplate.update("INSERT INTO Factura VALUES (?,?,?,?,?)",
                 codigo, fecha, precio, concepto, dniBen);
+    }
+
+    public List<Asistente> getAsistenteBenef (String nombre ){
+        try{
+            System.out.println(nombre);
+            return jdbcTemplate.query("SELECT * FROM asistente WHERE nombre=?", new AsistenteRowMapper(), nombre);
+        }
+        catch (EmptyResultDataAccessException e){
+            return new ArrayList<Asistente>();
+        }
     }
 
 

@@ -110,7 +110,7 @@ public class ContratoDao {
             List<Empresa> empresas=jdbcTemplate.query("SELECT * FROM empresa where tiposervicio=?", new
                     EmpresaRowMapper(),categoria);
             for(Empresa empresa : empresas){
-                empresasNombre.add(empresa.getUsuario());
+                empresasNombre.add(empresa.getNombre());
 
             }
             return empresasNombre;

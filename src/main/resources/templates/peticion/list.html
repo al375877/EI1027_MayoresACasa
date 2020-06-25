@@ -19,7 +19,9 @@
 </head>
 <body>
 <div  layout:fragment="content" >
-<h2>Lista de las peticiones pendientes</h2>
+    <div style="padding: 25px 50px;background-color:#B0E0E6;"><h3 style="color:black;">Mayores en casa | CAS Commitee | Peticiones pendientes</h3></div>
+    <br>
+    <br>
 <table  class="table table-striped" border="5" bordercolor="#0973ba" >
     <thead>
     <tr >
@@ -27,7 +29,6 @@
         <th style="text-align: center" scope="col">Estado</th>
         <th style="text-align: center" scope="col">Comentario</th>
         <th style="text-align: center" scope="col">Beneficiario</th>
-        <th style="text-align: center" scope="col">DNI</th>
         <th style="text-align: center" scope="col">Empresa</th>
     </tr>
     </thead>
@@ -38,14 +39,12 @@
          <td th:text="${element.key.estado}"></td>
         <td th:text="${element.key.comentarios}"></td>
         <td th:text="${element.key.beneficiario}"></td>
-        <td th:text="${element.key.dni_ben}"></td>
         <td >
             <select form="añadir" name="empresa">
                 <option th:each="empresa:${map.get(element.key)}"
                         th:value="${empresa}"
                         th:text="${empresa}"></option>
             </select>
-
         </td>
 
         <td>
@@ -58,17 +57,14 @@
         <td><a type="button"
                th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.key.cod_pet})}">
                <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
-        <td><a type="button"
-               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${element.key.cod_pet})}">
-               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>
-    </tr>
-
-    <tr>
-
-    </tr>
+<!--        <td><a type="button"-->
+<!--               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${element.key.cod_pet})}">-->
+<!--               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>-->
     </tbody>
-
 </table>
+    <br>
+    <br>
+    <a href="/cascommitee/index" class="boton_personalizado1" role="button" >Atrás</a>
 
 </div>
 </body>

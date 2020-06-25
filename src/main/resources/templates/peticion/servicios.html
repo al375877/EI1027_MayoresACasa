@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body >
+<body>
 <div  layout:fragment="content"  th:object="${session}">
     <div  style="padding: 25px 50px;background-color:#B0E0E6; "class="container">
         <h2 style="color:black">Mayores en casa | Beneficiaros | Servicios</h2>
@@ -25,67 +25,70 @@
 
 <br>
 <h2>¿Que servicio o servicios necesitas?</h2>
-<table style=" font-family: arial, sans-serif;table-layout: auto; width: 100%;  "  class="table table-striped" border="5" bordercolor="#0973ba">
-        <thead>
-        <tr>
-            <th style="text-align: center" scope="col">Nombre</th>
-            <th style="text-align: center" scope="col">Precio</th>
-            <th style="text-align: center" scope="col">Descripcion</th>
-            <th style="text-align: center" scope="col">Añade información extra</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div style="background-image: url('http://imgfz.com/i/XzgN6ab.jpeg'); background-size: 100% 100%;">
+        <h2><img src="http://imgfz.com/i/lnKg3US.png"width="100" height="100"> Servicio de Limpieza</h2>
+        <br>
+        <img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="80" height="80">
+        <br>
+        <h3>Precio: 7 euros cada servicio/día.</h3>
+        <br>
+        En este servicio contamos con una plantilla de trabajadores que han sido previamente seleccionados, donde te ofrecemos un servicio de calidad, con el que ahorraras tiempo y esfuerzo.
+        En este servicio contaras de una persona que irá a tu casa en el horario y los días acordados ha realizar el servicio de limpieza de su hogar.
+        <hr>
+        Servicio mínimo de una semana, en el cuadro que hay a continuacíon debera indicar cualquier preferencia que tenga en cuanto a días y horas, o cualquier otra cosa que nos quiera informar
+        para ajustarnos lo máximo a sus deseos. Si tenemos cualquier duda, contactaremos con usted. Gracias.
+        <hr>
+        <form th:action="@{/peticion/addComentarioL}" method="POST" id="addComentL">
+            <textarea rows="4" cols="50" name="comment" form="addComentL" placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)"
+                      style="height: 4em; width:30em;"></textarea><br>
+            <input class="boton_personalizado1" href="limpieza" role="button" type="submit" value="Solicitar ahora">
+        </form>
+    </div>
+    <br>
+    <div style="background-image: url('http://imgfz.com/i/NAU3P1p.jpeg'); background-size: 100% 100%;">
+        <h2><img src="http://imgfz.com/i/kle6Sbi.png"width="100" height="100"> Servicio de Catering</h2>
+        <br>
+        <img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="80" height="80">
+        <br>
+        <h3>Precio: 6 euros por cada servicio</h3>
+        <br>
+        Este servicio consiste en un cattering diario, en el que nos adaptamos a ti, solo tienes que comunicarnos si necesitas un menu especial, como puede ser sin sal, vegana o vegetariano.
+        El servicio de catering se desplazara a tu casa, llevandote la comida todos los días de Lunes a Domingo en el horario que se ajuste lo máximo a usted.
+        <hr>
+        No hay servicio mínimo, en el cuadro que hay a continuacíon debera indicar cualquier preferencia que tenga en cuanto a días y horas, o cualquier otra cosa que nos quiera informar
+        para ajustarnos lo máximo a sus deseos. Si tenemos cualquier duda, contactaremos con usted. Gracias.
+        <hr>
+        <form th:action="@{/peticion/addComentarioC}" method="POST" id="addComentC">
+            <textarea rows="4" cols="50" name="comment" form="addComentC" placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)"
+                      style="height: 4em; width:30em;"></textarea><br>
+            <input class="boton_personalizado1" href="cattering" role="button" type="submit" value="Solicitar ahora">
+        </form>
+    </div>
+    <br>
+    <div style="background-image: url('http://imgfz.com/i/3dpV1er.jpeg'); background-size: 100% 100%;">
+        <h2><img src="http://imgfz.com/i/aF56bJl.png"width="100" height="100">Servicio Sanitario</h2>
+        <br>
+        <img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="80" height="80">
+        <br>
+        <h3>Precio: 5 euros por cada servicio</h3>
+        <br>
+        En Mayores en casa, sabemos que lo más importante para las personas mayores es que envejezcan en su hogar activamente, para ello creamos este servicio.
+        Este servicio consiste en un servicio de salud básica, en el que nos adaptamos a ti, solo tienes que mostrarnos un informe medico donde nos indique que medicamentos
+        o que control de salud necesitas. El servicio de salud se desplazara a su casa, en cualquier momento, para asegurarse de que lleve al dia el control de salud que necesite
+        <hr>
+        No hay servicio mínimo, en el cuadro que hay a continuacíon debera indicar cualquier preferencia que tenga en cuanto a días y horas, o cualquier otra cosa que nos quiera informar
+        para ajustarnos lo máximo a sus deseos. Si tenemos cualquier duda, contactaremos con usted. Gracias.
+        <hr>
+        <form th:action="@{/peticion/addComentarioS}" method="POST" id="addComentS">
+            <td><textarea rows="4" cols="50" name="comment" form="addComentS" placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)"
+                          style="height: 4em; width:30em; placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)""></textarea> </td><br>
+            <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="sanitario" role="button" type="submit" value="Solicitar ahora">
+        </form>
+    </div>
+    <br>
 
-        <tr>
-            <td><img src="http://imgfz.com/i/lnKg3US.png"width="100" height="100">
-                <img src="http://imgfz.com/i/gOSxctk.png"width="300" height="80"></td>
-            <td><br/><br/>168€/MES</td>
-            <td>De Lunes a Domingo   <br/> De 16 a 18 horas</td>
-            <form th:action="@{/peticion/addComentarioL}" method="POST" id="addComentL">
-                <td><textarea rows="4" cols="50" name="comment" form="addComentL" style="height: 8em; width:20em;"></textarea> </td>
-                <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="limpieza" role="button" type="submit"  value="Solicitar ahora">
-                    </br>
-                    </br>
-                    </br>
-                    <a class="boton_personalizado1" th:href="@{/peticion/info}" role="button">+ Información</a></td>
-            </form>
-        </tr>
-          </td>
-        </tr>
-
-        <tr>
-            <td><img src="http://imgfz.com/i/kle6Sbi.png"width="100" height="100">
-                  <img src="http://imgfz.com/i/LYZAI50.png"width="300" height="80"></td>
-            <td><br/><br/>336€/MES</td>
-            <td>De Lunes a Domingo   <br/>De 14 a 15 horas <br/>De 21 a 22 horas</td>
-            <form th:action="@{/peticion/addComentarioC}" method="POST" id="addComentC">
-                <td><textarea rows="4" cols="50" name="comment" form="addComentC" style="height: 8em; width:20em;"></textarea> </td>
-            <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="cattering" role="button" type="submit" value="Solicitar ahora">
-                </br>
-                </br>
-                </br>
-                <a class="boton_personalizado1" th:href="@{/peticion/info}" role="button">+ Información</a></td>
-            </form>
-        </tr>
-
-        <tr>
-            <td><img src="http://imgfz.com/i/aF56bJl.png"width="100" height="100">
-                <img src="http://imgfz.com/i/O4tbkIv.png"width="300" height="70"></td>
-            <td><br/><br/>40€/MES</td>
-            <td>De Lunes a Domingo   <br/>De 10 a 12 horas</td>
-            <form th:action="@{/peticion/addComentarioS}" method="POST" id="addComentS">
-                <td><textarea rows="4" cols="50" name="comment" form="addComentS" style="height: 8em; width:20em;"></textarea> </td>
-                <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="sanitario" role="button" type="submit" value="Solicitar ahora">
-                    </br>
-                    </br>
-                    </br>
-                    <a class="boton_personalizado1" th:href="@{/peticion/info}" role="button">+ Información</a></td>
-            </form>
-        </tr>
-        </tbody>
-</table>
 <h3>¿No sabes como utilizar nuestra página?</h3>
-<a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
+<a class="boton_personalizado1" th:href="@{/beneficiario/contacta}" role="button">Contacta con tu asistente</a>
 
 
 

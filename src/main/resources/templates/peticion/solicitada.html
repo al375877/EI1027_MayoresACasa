@@ -14,13 +14,19 @@
 <body>
 <div  layout:fragment="content">
     <div style="padding: 25px 50px;background-color:#B0E0E6;"><h2 style="color:black;">Mayores en casa | Beneficiaros | Servicios</h2></div>
-
     <br>
-    <h2>Servicio solicitado, muchas gracias.</h2>
-    <h3>Si desea ver los servicios ha solicitado hasta ahora, acceda a "Mis Peticiones"</h3>
+    <br>
+    <table>
+        <tr><td><img src="https://image.flaticon.com/icons/svg/845/845646.svg" width="90" height="90"></td></tr>
+        <tr><td><h4>Servicio solicitado con exito.</h4></td></tr>
+        <tr><td><br></a></td></tr>
+        <tr><td>Si desea ver los servicios ha solicitado hasta ahora, acceda a "Mis Peticiones".</td></tr>
+    </table>
+    <br>
+    <br>
     <br>
     <a class="boton_personalizado1" th:href="@{/peticion/misPeticiones}" role="button">Mis Peticiones</a>
-    <a class="boton_personalizado1" th:href="@{/peticion/servicios}" role="button">Atras</a>
+    <a class="boton_personalizado1" th:href="@{/peticion/servicios}" role="button">Atrás</a>
     <a class="boton_personalizado1" th:href="@{/beneficiario/index}" role="button">Página Principal</a>
 </div>
 </body>

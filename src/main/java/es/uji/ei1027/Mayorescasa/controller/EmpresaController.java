@@ -127,6 +127,13 @@ public class EmpresaController {
         return "empresa/misContratosActivo";
     }
 
+    @RequestMapping(value="/misServiciosActivo")
+    public String misServiciosActivo(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        model.addAttribute("servicios", empresaDao.getServiciosActivo(user.getNombre()));
+        return "empresa/misServiciosActivo";
+    }
+
     @RequestMapping(value="/misContratosPasados")
     public String misContratosPasados(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");

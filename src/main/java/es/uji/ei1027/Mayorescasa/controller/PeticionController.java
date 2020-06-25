@@ -33,21 +33,25 @@ public class PeticionController {
 
     @RequestMapping("/list")
     public String listpeticiones(Model model, HttpSession session) {
-
         Usuario user= (Usuario) session.getAttribute("user");
-
         //mapa para enlazar la peticion con las empresas de ese tipo de servicio
         Map<Peticion, List<String>> peticionEmpresas= new HashMap();
 
-        for(Peticion pet:peticionDao.getPeticiones()){
+        for(Peticion pet:peticionDao.getPeticionesPendientes()){
             List<String> empresas= contratoDao.getEmpresasC(pet.getTiposervicio());
             peticionEmpresas.put(pet,empresas);
-
             }
         model.addAttribute("map",peticionEmpresas);
-
         return "peticion/list";
     }
+
+    @RequestMapping("/listAcepRech")
+    public String listAcepRech(Model model, HttpSession session) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        model.addAttribute("listAcepRech",peticionDao.getPeticionesResueltas());
+        return "peticion/listAcepRech";
+    }
+
 
     //Llamada de la peticion add
     @RequestMapping(value = "/add")
@@ -193,7 +197,6 @@ public class PeticionController {
         pet = peticionDao.getPeticion(cod);
         if(pet.getEstado().equals("Pendiente")){
             try{
-
                 pet.setCodcontrato(contrato.getCodcontrato());
                 Date fecha = new Date();
                 pet.setFechaaceptada(fecha);
@@ -237,8 +240,6 @@ public class PeticionController {
             pet.setEstado("Rechazada");
             peticionDao.updatePeticion(pet);
         }
-
-
         return "redirect:../list";
     }
 
