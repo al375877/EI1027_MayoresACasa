@@ -26,8 +26,8 @@ public class PeticionDao {
 
     //AÑADIMOS Peticion
     public void addPeticion(Peticion peticion) {
-        jdbcTemplate.update("INSERT INTO Peticion VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                peticion.getCod_pet(), peticion.getTiposervicio(), peticion.getPrecioservicio(), peticion.getLinea(),
+        jdbcTemplate.update("INSERT INTO Peticion VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                peticion.getCod_pet(), peticion.getTiposervicio(), peticion.getPrecioservicio(),
                 peticion.getFechaaceptada(), peticion.getFecharechazada(), peticion.getFechafinal(),peticion.getEstado(), peticion.getComentarios(),
                 peticion.getDni_ben(),peticion.getBeneficiario(),peticion.getCodcontrato(),peticion.getEmpresa()
         );

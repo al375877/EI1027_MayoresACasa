@@ -32,51 +32,55 @@
     <img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"> ATENCIÓN<br>
     Si tienes que añadir una fecha final, o modificar el comentario para que la empresa lo vea más claro, por favor, hazlo antes de aceptar le petición, una vez aceptada ya no podrás hacerlo.
     <hr>
-<table  class="table table-striped" border="5" bordercolor="#0973ba" >
-    <thead>
-    <tr >
-        <th scope="col">Servicio</th>
-        <th scope="col">Estado</th>
-        <th scope="col">Beneficiario</th>
-        <th style="background-color:#ffebb5" scope="col">Comentarios</th>
-        <th style="background-color:#ffebb5" scope="col">Fecha final</th>
-        <th style="background-color:#ffebb5" scope="col"></th>
-        <th scope="col">Empresa</th>
-<!--        <th scope="col"></th>-->
-<!--        <th scope="col"></th>-->
+    <table  class="table table-striped" border="5" bordercolor="#0973ba" >
+        <thead>
+        <tr >
+            <th scope="col">Servicio</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Beneficiario</th>
+            <th style="background-color:#ffebb5" scope="col">Comentarios</th>
+            <th style="background-color:#ffebb5" scope="col">Fecha final</th>
+            <th style="background-color:#ffebb5" scope="col"></th>
+            <th scope="col">Empresa</th>
+    <!--        <th scope="col"></th>-->
+    <!--        <th scope="col"></th>-->
 
-    </tr>
-    </thead>
-    <tbody>
+        </tr>
+        </thead>
+        <tbody>
 
-    <tr th:each="element:${map}" th:unless="*{map == null}">
-        <td th:text="${element.key.tiposervicio}"></td>
-        <td th:text="${element.key.estado}"></td>
-        <td th:text="${element.key.beneficiario}"></td>
-        <td style="background-color:#ffebb5" th:text="${element.key.comentarios}"></td>
-        <td style="background-color:#ffebb5" th:text="${element.key.fechafinal}"></td>
-        <td style="background-color:#ffebb5"><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/peticion/update/{codigo}(codigo=${element.key.cod_pet})}">Editar/Añadir</a></td>
-        <td >
-            <select form="añadir" name="empresa">
-                <option th:each="empresa:${map.get(element.key)}"
-                        th:value="${empresa}"
-                        th:text="${empresa}"></option>
-            </select>
-        </td>
-        <td>
-            <form action="#" th:action="@{/peticion/aceptar}" method="POST" id="añadir">
-                <input type="hidden" name="cod" th:value="${element.key.cod_pet}">
-                <input type="image" class="boton_añadir"  src="https://image.flaticon.com/icons/svg/159/159767.svg" alt="Submit" width="50"  >
-            </form>
-        </td>
-        <td><a type="button"
-               th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.key.cod_pet})}">
-               <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
-<!--        <td><a type="button"-->
-<!--               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${element.key.cod_pet})}">-->
-<!--               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>-->
-    </tbody>
-</table>
+        <tr th:each="element:${map}" th:unless="*{map == null}">
+            <td th:text="${element.key.tiposervicio}"></td>
+            <td th:text="${element.key.estado}"></td>
+            <td th:text="${element.key.beneficiario}"></td>
+            <td style="background-color:#ffebb5" th:text="${element.key.comentarios}"></td>
+            <td style="background-color:#ffebb5" th:text="${element.key.fechafinal}"></td>
+            <td style="background-color:#ffebb5"><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/peticion/update/{codigo}(codigo=${element.key.cod_pet})}">Editar/Añadir</a></td>
+            <td >
+                <select form="añadir" name="empresa">
+                    <option th:each="empresa:${map.get(element.key)}"
+                            th:value="${empresa}"
+                            th:text="${empresa}"></option>
+                </select>
+            </td>
+            <td>
+                <form action="#" th:action="@{/peticion/aceptar}" method="POST" id="añadir">
+                    <input type="hidden" name="cod" th:value="${element.key.cod_pet}">
+                    <input type="image" class="boton_añadir"  src="https://image.flaticon.com/icons/svg/159/159767.svg" alt="Submit" width="50"  >
+                </form>
+            </td>
+            <td><a type="button"
+                   th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.key.cod_pet})}">
+                   <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
+    <!--        <td><a type="button"-->
+    <!--               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${element.key.cod_pet})}">-->
+    <!--               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>-->
+        </tbody>
+    </table>
+
+
+
+
     <br>
     <br>
     <a onClick="history.back()" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>

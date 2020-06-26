@@ -14,7 +14,6 @@ public class Peticion {
     private String estado;
     private String codcontrato;
     private String empresa;
-    private int linea;
     private double precioservicio;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaaceptada,fecharechazada,fechafinal;
@@ -26,7 +25,6 @@ public class Peticion {
                 ", tiposervicio='" + tiposervicio + '\'' +
                 ", comentarios='" + comentarios + '\'' +
                 ", dni_ben='" + dni_ben + '\'' +
-                ", linea=" + linea +
                 ", precioservicio=" + precioservicio +
                 ", fechaaceptada=" + fechaaceptada +
                 ", fecharechazada=" + fecharechazada +
@@ -86,14 +84,6 @@ public class Peticion {
 
     public void setDni_ben(String usuario_ben) {
         this.dni_ben = usuario_ben;
-    }
-
-    public int getLinea() {
-        return linea;
-    }
-
-    public void setLinea(int linea) {
-        this.linea = linea;
     }
 
     public double getPrecioservicio() {

@@ -21,7 +21,6 @@ import java.util.*;
 public class PeticionController {
     @Autowired
     private PeticionDao peticionDao;
-    private int codigo;
     @Autowired
     private ContratoDao contratoDao;
     @Autowired
@@ -102,21 +101,17 @@ public class PeticionController {
     public String limpieza(@ModelAttribute("comment") String comentario, HttpSession session) {
         if (comentario==null) comentario="";
         Usuario user = (Usuario) session.getAttribute("user");
-        codigo++;
-
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio() + "LIMP");
         pet.setTiposervicio("Limpieza");
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
-        pet.setLinea(codigo);
         pet.setPrecioservicio(7);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
-
-        boolean existe= (boolean) session.getAttribute("existeL");
+        boolean existe= peticionDao.consultaPeticion(pet.getDni_ben(),pet.getTiposervicio());
         if(existe){
-
+            System.out.println("Ya solicitado");
             return "peticion/existe";
         }else{
             peticionDao.addPeticion(pet);
@@ -130,18 +125,17 @@ public class PeticionController {
     public String catering(@ModelAttribute("comment") String comentario, HttpSession session) {
         if (comentario==null) comentario="";
         Usuario user= (Usuario) session.getAttribute("user");
-        codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "CAT");
         pet.setTiposervicio("Catering");
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
-        pet.setLinea(codigo);
         pet.setPrecioservicio(6);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
-        boolean existe= (boolean) session.getAttribute("existeC");
+        boolean existe= peticionDao.consultaPeticion(pet.getDni_ben(),pet.getTiposervicio());
         if(existe){
+            System.out.println("Ya solicitado");
             return "peticion/existe";
         }else{
             peticionDao.addPeticion(pet);
@@ -154,20 +148,18 @@ public class PeticionController {
     public String sanitario(@ModelAttribute("comment") String comentario, HttpSession session) {
         if (comentario==null) comentario="";
         Usuario user= (Usuario) session.getAttribute("user");
-        codigo++;
         Peticion pet = new Peticion();
         pet.setCod_pet(aleatorio()  + "SAN");
         pet.setTiposervicio("Sanitario");
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
-        pet.setLinea(codigo);
         pet.setPrecioservicio(5);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
-
-        boolean existe= (boolean) session.getAttribute("existeS");
+        boolean existe= peticionDao.consultaPeticion(pet.getDni_ben(),pet.getTiposervicio());
+//        boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
-
+            System.out.println("Ya solicitado");
             return "peticion/existe";
         }else{
             peticionDao.addPeticion(pet);

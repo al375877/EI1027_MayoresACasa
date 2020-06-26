@@ -12,7 +12,6 @@ public final class PeticionRowMapper implements RowMapper<Peticion> {
         peticion.setCod_pet(rs.getString("cod_pet"));
         peticion.setTiposervicio(rs.getString("tiposervicio"));
         peticion.setPrecioservicio(rs.getDouble("precioservicio"));
-        peticion.setLinea(rs.getInt(("linea")));
         peticion.setFechaaceptada(rs.getDate("fechaaceptada"));
         peticion.setFecharechazada(rs.getDate("fecharechazada"));
         peticion.setFechafinal(rs.getDate("fechafinal"));
