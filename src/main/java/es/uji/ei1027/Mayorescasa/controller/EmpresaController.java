@@ -40,7 +40,6 @@ public class EmpresaController {
 
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editempresa(Model model, @PathVariable String usuario) {
-        System.out.println(usuario);
         model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
         return "empresa/update";
     }

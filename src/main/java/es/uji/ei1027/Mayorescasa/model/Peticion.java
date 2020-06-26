@@ -1,5 +1,8 @@
 package es.uji.ei1027.Mayorescasa.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Peticion {
@@ -8,16 +11,12 @@ public class Peticion {
     private String comentarios;
     private String dni_ben;
     private String beneficiario;
-
-
-
     private String estado;
     private String codcontrato;
-
-
     private String empresa;
     private int linea;
     private double precioservicio;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaaceptada,fecharechazada,fechafinal;
 
     @Override

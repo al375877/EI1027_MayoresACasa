@@ -29,35 +29,84 @@
     <div  style="padding: 10px 50px;background-color:#B0E0E6;">
         <h2 style="color:black">Mayores en casa | Beneficiaros | Tus Peticiones</h2>
     </div>
-    <h2>Lista de las peticiones</h2>
+    <br>
+    Compruebe periodicamente las peticiones, para saber si su peticion ha sido aceptada o rechazada y comprobar que los datos expuestos son correctos. Si tiene cualquier duda, contacte con su asistente.
+    <hr>
+    <h2>Lista de las peticiones pendientes</h2>
+    <br>
     <table class="table table-striped" border="5" bordercolor="#0973ba"   >
         <thead>
         <tr>
-
+            <th scope="col">Código</th>
             <th scope="col">Servicio</th>
             <th scope="col">Precio Servicio</th>
-            <th scope="col">Fecha aceptada</th>
-            <th scope="col">Fecha rechazada</th>
-            <th scope="col">Fecha final</th>
             <th scope="col">Comentarios</th>
-            <th  scope="col">Empresa</th>
         </tr>
         </thead>
         <tbody>
-
         <tr th:each="peticion: ${peticiones}">
-
+            <td th:text="${peticion.cod_pet}"></td>
             <td th:text="${peticion.tiposervicio}"></td>
             <td th:text="${peticion.precioservicio}"></td>
-            <td th:text="${peticion.fechaaceptada}"></td>
-            <td th:text="${peticion.fecharechazada}"></td>
-            <td th:text="${peticion.fechafinal}"></td>
             <td th:text="${peticion.comentarios}"></td>
-            <td  th:text="${peticion.empresa}"></td>
         </tr>
         </tbody>
     </table>
-    <a href="/beneficiario/index" class="boton_personalizado1" role="button" >Página Principal</a>
+    <br>
+    <hr>
+    <h2 style="color:green">Lista de las peticiones aceptadas</h2>
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#00db0b"   >
+        <thead>
+        <tr>
+            <th scope="col">Servicio</th>
+            <th scope="col">Precio Servicio</th>
+            <th scope="col">Inicio Servicio</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Fin Servicio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="peticionA: ${petAceptadas}">
+            <td th:text="${peticionA.tiposervicio}"></td>
+            <td th:text="${peticionA.precioservicio}"></td>
+            <td th:text="${peticionA.fechaaceptada}"></td>
+            <td th:text="${peticionA.empresa}"></td>
+            <td th:text="${peticionA.comentarios}"></td>
+            <td th:text="${peticionA.fechafinal}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <h2 style="color:red">Lista de las peticiones rechazadas</h2>
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#ff0000"   >
+        <thead>
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Precio Servicio</th>
+            <th scope="col">Rechazada</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="peticionR: ${petRechazadas}">
+            <td th:text="${peticionR.cod_pet}"></td>
+            <td th:text="${peticionR.tiposervicio}"></td>
+            <td th:text="${peticionR.precioservicio}"></td>
+            <td th:text="${peticionR.fecharechazada}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <table>
+        <td><a onClick="history.back()" class="boton_añadir" role="button" >Atrás</a></td>
+        <td>&nbsp;&nbsp;</td>
+        <td><a href="/beneficiario/contacta" class="boton_personalizado1" role="button" >Contacta con tu asistente</a></td>
+    </table>
 </div>
 </body>
 </html>

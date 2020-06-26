@@ -5,6 +5,7 @@ import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
 import es.uji.ei1027.Mayorescasa.model.Contrato;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
+import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,12 @@ public class ContratoController {
         return "contrato/list";
     }
 
+    @RequestMapping("/listPasados")
+    public String listPasados(Model model) {
+        model.addAttribute("listPasados", contratoDao.getPasados());
+        return "contrato/listPasados";
+    }
+
     @RequestMapping(value="/delete/{codcontrato}")
     public String processDelete(@PathVariable String codcontrato) {
         contratoDao.deleteContrato(codcontrato);
@@ -51,14 +58,17 @@ public class ContratoController {
 
     //Llamada de la contrato add
     @RequestMapping(value="/add")
-    public String addcontrato(Model model) {
+    public String addcontrato(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        if(!user.getTipoUsuario().equals("casManager")) return "error/error";
+
         model.addAttribute("contrato", new Contrato());
-        List<Empresa> empresas=empresaDao.getEmpresas();
-        List<String> usersEmpresas=new ArrayList<>();
-        for(Empresa empresa: empresas){
+        List<Empresa> empresas = empresaDao.getEmpresas();
+        List<String> usersEmpresas = new ArrayList<>();
+        for (Empresa empresa : empresas) {
             usersEmpresas.add(empresa.getNombre());
         }
-        model.addAttribute("empresas",usersEmpresas);
+        model.addAttribute("empresas", usersEmpresas);
         return "contrato/add";
     }
 

@@ -20,14 +20,15 @@
 <body>
 <div  layout:fragment="content" >
     <table>
-        <tr><td><img src="https://image.flaticon.com/icons/svg/753/753345.svg" width="180" height="180"></td></tr>
-        <tr><td><h1>No tienes acceso a está página. Inicia sesión con el usuario correcto</h1></td></tr>
+        <tr><td><img src="https://image.flaticon.com/icons/svg/753/753345.svg" width="90" height="90"></td></tr>
+        <tr><td><h4>No se puede aceptar la petición. La empresa que has introducido no tiene contrato actualmente.</h4></td></tr>
+        <tr><td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="60" height="60"><a style="font-size: 15px;"></a></td></tr>
+        <tr><td>Por favor revisa que la empresa tenga contrato, o contacte con el CAS Manager para añadirlo. Gracias</td></tr>
     </table>
     <br>
     <br>
     <br>
-    <a onClick="history.back()" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
-    &nbsp;&nbsp;<a th:href="@{/}" class="boton_personalizado1" role="button" >Página principal</a>
+    <a th:href="@{/peticion/list}" class="boton_personalizado1" role="button" >Atrás</a>
 </div>
 </body>
 </html>

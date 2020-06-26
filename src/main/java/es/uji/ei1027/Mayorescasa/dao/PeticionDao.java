@@ -1,5 +1,6 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
+import es.uji.ei1027.Mayorescasa.model.Empresa;
 import es.uji.ei1027.Mayorescasa.model.Factura;
 import es.uji.ei1027.Mayorescasa.model.Lineas_fac;
 import es.uji.ei1027.Mayorescasa.model.Peticion;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository  //En Spring los DAOs van anotados con @Repository
@@ -39,11 +41,16 @@ public class PeticionDao {
 
     //ACTUALIZAMOS Peticion
     public void updatePeticion(Peticion peticion) {
-        jdbcTemplate.update("UPDATE peticion SET tiposervicio=?, precioservicio=?, linea=?, fechaaceptada=?, fecharechazada=?," +
-                        "fechafinal=?, estado=?,comentarios=?, dni_ben=?, beneficiario=?,codcontrato=?,empresa=? WHERE cod_pet=? ",
-                peticion.getTiposervicio(), peticion.getPrecioservicio(), peticion.getLinea(),
-                peticion.getFechaaceptada(), peticion.getFecharechazada(), peticion.getFechafinal(), peticion.getEstado(),
-                peticion.getComentarios(), peticion.getDni_ben(),peticion.getBeneficiario(), peticion.getCodcontrato(),peticion.getEmpresa(),peticion.getCod_pet()
+        jdbcTemplate.update("UPDATE peticion SET fechafinal=?, comentarios=? WHERE cod_pet=? ",
+                peticion.getFechafinal(), peticion.getComentarios(), peticion.getCod_pet()
+        );
+    }
+    public void updateEstadoFechaEmpresa(String estado, Date fecha, String empresa, String codigo) {
+        jdbcTemplate.update("UPDATE peticion SET estado=?, fechaaceptada=?, empresa=? WHERE cod_pet=? ", estado, fecha, empresa, codigo
+        );
+    }
+    public void updateEstado(String estado, String codigo) {
+        jdbcTemplate.update("UPDATE peticion SET estado=? WHERE cod_pet=? ", estado, codigo
         );
     }
 
@@ -76,9 +83,25 @@ public class PeticionDao {
     }
 
     //LISTAMOS Peticion
-    public List<Peticion> getPeticionesPropias(String dni) {
+    public List<Peticion> getPeticionesPropiasPendientes(String dni) {
         try {
-            return jdbcTemplate.query("SELECT * FROM Peticion WHERE dni_ben=?", new
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE dni_ben=? AND estado='Pendiente'", new
+                    PeticionRowMapper(), dni);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Peticion>();
+        }
+    }
+    public List<Peticion> getPeticionesPropiasAceptadas(String dni) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE dni_ben=? AND estado='Aceptada'", new
+                    PeticionRowMapper(), dni);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Peticion>();
+        }
+    }
+    public List<Peticion> getPeticionesPropiasRechazadas(String dni) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE dni_ben=? AND estado='Rechazada'", new
                     PeticionRowMapper(), dni);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Peticion>();
@@ -142,6 +165,15 @@ public class PeticionDao {
     public void updateFactura(double precio, String concepto, String cod_fac) {
         jdbcTemplate.update("UPDATE Factura SET preciototal=?, concepto=? WHERE cod_fac=?",
                 precio, concepto, cod_fac);
+    }
+
+    public Empresa getEmpresa (String nombre ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE nombre=?", new EmpresaRowMapper(), nombre);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
 }

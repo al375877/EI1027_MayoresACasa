@@ -1,8 +1,5 @@
 package es.uji.ei1027.Mayorescasa.dao;
-import es.uji.ei1027.Mayorescasa.model.Contrato;
-import es.uji.ei1027.Mayorescasa.model.Empresa;
-import es.uji.ei1027.Mayorescasa.model.Peticion;
-import es.uji.ei1027.Mayorescasa.model.Usuario;
+import es.uji.ei1027.Mayorescasa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -52,17 +49,6 @@ public class EmpresaDao {
         }
         catch (EmptyResultDataAccessException e){
             return null;
-        }
-    }
-
-    //LISTAMOS empresa
-    public List<Empresa> getEmpresas() {
-        try{
-            return jdbcTemplate.query("SELECT * FROM empresa", new
-                    EmpresaRowMapper());
-        }
-        catch (EmptyResultDataAccessException e){
-            return  new ArrayList<Empresa>();
         }
     }
 
@@ -122,12 +108,26 @@ public class EmpresaDao {
         } catch ( EmptyResultDataAccessException e) { return null; }
     }
 
-    //Busca Peticion
-    public List<Peticion> getServiciosActivo(String nombre){
+    //LISTAMOS empresa
+    public List<Empresa> getEmpresas() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM empresa", new
+                    EmpresaRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Empresa>();
+        }
+    }
+
+    //Busca Servicio
+    public List<Servicio> getServiciosActivo(String nombre){
         try {
-            return jdbcTemplate.query("SELECT * FROM peticion WHERE empresa=?", new PeticionRowMapper(), nombre);
+            return jdbcTemplate.query("SELECT peticion.beneficiario, usuario.dni, peticion.tiposervicio, " +
+                    "beneficiario.tipodieta, usuario.direccion, usuario.telefono, peticion.comentarios FROM peticion " +
+                    "JOIN beneficiario ON peticion.dni_ben = beneficiario.dni JOIN usuario USING(dni) " +
+                    "WHERE peticion.empresa=?;", new ServicioRowMapper(), nombre);
         } catch (EmptyResultDataAccessException e){
-            return  new ArrayList<Peticion>();
+            return new ArrayList<Servicio>();
         }
     }
 

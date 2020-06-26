@@ -30,16 +30,17 @@
         <br>
         <img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="80" height="80">
         <br>
-        <h3>Precio: 7 euros cada servicio/día.</h3>
+        <h3>Precio: 7 euros cada hora.</h3>
         <br>
         En este servicio contamos con una plantilla de trabajadores que han sido previamente seleccionados, donde te ofrecemos un servicio de calidad, con el que ahorraras tiempo y esfuerzo.
         En este servicio contaras de una persona que irá a tu casa en el horario y los días acordados ha realizar el servicio de limpieza de su hogar.
+        <hr><h4>Horario predefinido: <br> De Lunes a Viernes de 10:00 a 13:00 en cualquier momento.</h4>
         <hr>
         Servicio mínimo de una semana, en el cuadro que hay a continuacíon debera indicar cualquier preferencia que tenga en cuanto a días y horas, o cualquier otra cosa que nos quiera informar
         para ajustarnos lo máximo a sus deseos. Si tenemos cualquier duda, contactaremos con usted. Gracias.
         <hr>
         <form th:action="@{/peticion/addComentarioL}" method="POST" id="addComentL">
-            <textarea rows="4" cols="50" name="comment" form="addComentL" placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)"
+            <textarea rows="4" cols="50" name="comment" form="addComentL" placeholder="Lunes a Viernes de 12 a 13, durante 1 mes"
                       style="height: 4em; width:30em;"></textarea><br>
             <input class="boton_personalizado1" href="limpieza" role="button" type="submit" value="Solicitar ahora">
         </form>
@@ -54,14 +55,15 @@
         <br>
         Este servicio consiste en un cattering diario, en el que nos adaptamos a ti, solo tienes que comunicarnos si necesitas un menu especial, como puede ser sin sal, vegana o vegetariano.
         El servicio de catering se desplazara a tu casa, llevandote la comida todos los días de Lunes a Domingo en el horario que se ajuste lo máximo a usted.
+        <hr><h4>Horario predefinido: <br> De Lunes a Domingo de 14:00 a 15:00 y con una dieta normal.</h4>
         <hr>
         No hay servicio mínimo, en el cuadro que hay a continuacíon debera indicar cualquier preferencia que tenga en cuanto a días y horas, o cualquier otra cosa que nos quiera informar
         para ajustarnos lo máximo a sus deseos. Si tenemos cualquier duda, contactaremos con usted. Gracias.
         <hr>
         <form th:action="@{/peticion/addComentarioC}" method="POST" id="addComentC">
-            <textarea rows="4" cols="50" name="comment" form="addComentC" placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)"
+            <textarea rows="4" cols="50" name="comment" form="addComentC" placeholder="Lunes a Domingo de 14 a 15. Del 10 al 17 de Marzo"
                       style="height: 4em; width:30em;"></textarea><br>
-            <input class="boton_personalizado1" href="cattering" role="button" type="submit" value="Solicitar ahora">
+            <input class="boton_personalizado1" href="catering" role="button" type="submit" value="Solicitar ahora">
         </form>
     </div>
     <br>
@@ -76,12 +78,14 @@
         Este servicio consiste en un servicio de salud básica, en el que nos adaptamos a ti, solo tienes que mostrarnos un informe medico donde nos indique que medicamentos
         o que control de salud necesitas. El servicio de salud se desplazara a su casa, en cualquier momento, para asegurarse de que lleve al dia el control de salud que necesite
         <hr>
+        <h4>Horario predefinido: <br> De Lunes a Domingo de 10:00 a 13:00 en cualquier momento.</h4>
+        <hr>
         No hay servicio mínimo, en el cuadro que hay a continuacíon debera indicar cualquier preferencia que tenga en cuanto a días y horas, o cualquier otra cosa que nos quiera informar
         para ajustarnos lo máximo a sus deseos. Si tenemos cualquier duda, contactaremos con usted. Gracias.
         <hr>
         <form th:action="@{/peticion/addComentarioS}" method="POST" id="addComentS">
-            <td><textarea rows="4" cols="50" name="comment" form="addComentS" placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)"
-                          style="height: 4em; width:30em; placeholder="Incluya aqui la información que deseé para ajustarnos a usted. (Horarios, dias, ...)""></textarea> </td><br>
+            <td><textarea rows="4" cols="50" name="comment" form="addComentS" placeholder="Lunes a Domingo de 11 a 12, durante 1 mes"
+                          style="height: 4em; width:30em;"></textarea> </td><br>
             <td style=" padding: 15px;height: 60px;"><input class="boton_personalizado1" href="sanitario" role="button" type="submit" value="Solicitar ahora">
         </form>
     </div>

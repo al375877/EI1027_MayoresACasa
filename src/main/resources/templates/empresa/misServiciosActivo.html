@@ -14,7 +14,7 @@
 
     <style>
           th, td, tr{
-            text-align: center;
+            text-align: left;
             border:black 1;
         }
     </style>
@@ -23,7 +23,7 @@
 <!--style="overflow: hidden;-->
 <div   layout:fragment="content">
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h3 style="color:black;" >Mayores en casa | Empresa | Servicios en activo </h3>
+        <h3 style="color:black;" >Mayores en casa | Empresa | Clientes | Servicios activos </h3>
     </div>
     <br>
     <br>
@@ -31,25 +31,23 @@
         <thead>
         <tr>
             <th scope="col">Beneficiario</th>
+            <th scope="col">Dni</th>
             <th scope="col">Servicio</th>
-            <th scope="col">Contrato</th>
-            <th scope="col">Fecha aceptada</th>
-            <th scope="col">Fecha final</th>
-<!--            <th scope="col">Dias</th>-->
-<!--            <th scope="col">Hora inicial</th>-->
-<!--            <th scope="col">Hora final</th>-->
+            <th scope="col">Telefono</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Dieta</th>
+            <th scope="col">Comentarios</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="servicio: ${servicios}">
             <td th:text="${servicio.beneficiario}"></td>
+            <td th:text="${servicio.dni}"></td>
             <td th:text="${servicio.tiposervicio}"></td>
-            <td th:text="${servicio.codcontrato}"></td>
-            <td th:text="${servicio.fechaaceptada}"></td>
-            <td th:text="${servicio.fechafinal}"></td>
-<!--            <td th:text="${servicio.dias_semana}"></td>-->
-<!--            <td th:text="${servicio.horainicial}"></td>-->
-<!--            <td th:text="${servicio.horafinal}"></td>-->
+            <td th:text="${servicio.telefono}"></td>
+            <td th:text="${servicio.direccion}"></td>
+            <td th:text="${servicio.tipodieta}"></td>
+            <td th:text="${servicio.comentarios}"></td>
         </tr>
         </tbody>
     </table>

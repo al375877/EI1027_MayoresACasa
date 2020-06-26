@@ -85,7 +85,7 @@ public class ContratoDao {
     //get a partir de una empresa
     public Contrato getContratoE (String empresa ){
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE empresa=?", new ContratoRowMapper(),empresa);
+            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE empresa=? AND fechafinal>CURRENT_DATE", new ContratoRowMapper(),empresa);
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -94,7 +94,17 @@ public class ContratoDao {
     //LISTAMOS contrato
     public List<Contrato> getContratos() {
         try{
-            return jdbcTemplate.query("SELECT * FROM contrato", new
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE fechafinal>=CURRENT_DATE", new
+                    ContratoRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Contrato>();
+        }
+    }
+    //LISTAMOS contrato
+    public List<Contrato> getPasados() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE fechafinal<CURRENT_DATE", new
                     ContratoRowMapper());
         }
         catch (EmptyResultDataAccessException e){

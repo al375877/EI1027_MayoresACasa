@@ -3,6 +3,7 @@ package es.uji.ei1027.Mayorescasa.controller;
 import es.uji.ei1027.Mayorescasa.dao.*;
 import es.uji.ei1027.Mayorescasa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -69,10 +71,10 @@ public class PeticionController {
         return "redirect:list";
     }
 
-    @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
-    public String editpeticion(Model model, @PathVariable String usuario) {
-        model.addAttribute("peticion", peticionDao.getPeticion(usuario));
-        return "peticiones/update";
+    @RequestMapping(value = "/update/{codigo}", method = RequestMethod.GET)
+    public String editpeticion(Model model, @PathVariable String codigo) {
+        model.addAttribute("peticion", peticionDao.getPeticion(codigo));
+        return "peticion/update";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -108,7 +110,7 @@ public class PeticionController {
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
-        pet.setPrecioservicio(168);
+        pet.setPrecioservicio(7);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
 
@@ -125,23 +127,21 @@ public class PeticionController {
 
 
     @RequestMapping(value = "/addComentarioC", method = RequestMethod.POST)
-    public String cattering(@ModelAttribute("comment") String comentario, HttpSession session) {
+    public String catering(@ModelAttribute("comment") String comentario, HttpSession session) {
         if (comentario==null) comentario="";
         Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
-        pet.setCod_pet(aleatorio()  + "CATT");
-        pet.setTiposervicio("Cattering");
+        pet.setCod_pet(aleatorio()  + "CAT");
+        pet.setTiposervicio("Catering");
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
-        pet.setPrecioservicio(336);
+        pet.setPrecioservicio(6);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
-
         boolean existe= (boolean) session.getAttribute("existeC");
         if(existe){
-
             return "peticion/existe";
         }else{
             peticionDao.addPeticion(pet);
@@ -153,7 +153,6 @@ public class PeticionController {
     @RequestMapping(value = "/addComentarioS", method = RequestMethod.POST)
     public String sanitario(@ModelAttribute("comment") String comentario, HttpSession session) {
         if (comentario==null) comentario="";
-        
         Usuario user= (Usuario) session.getAttribute("user");
         codigo++;
         Peticion pet = new Peticion();
@@ -162,7 +161,7 @@ public class PeticionController {
         pet.setDni_ben(user.getDni());
         pet.setBeneficiario(user.getNombre());
         pet.setLinea(codigo);
-        pet.setPrecioservicio(40);
+        pet.setPrecioservicio(5);
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
 
@@ -190,69 +189,72 @@ public class PeticionController {
     }
     @RequestMapping(value = "/aceptar", method = RequestMethod.POST)
     public String aceptarPeticion(@ModelAttribute("cod") String cod,@ModelAttribute("empresa") String empresa) {
-
         Contrato contrato=contratoDao.getContratoE(empresa);
         Peticion pet;
         Factura fac;
         pet = peticionDao.getPeticion(cod);
-        if(pet.getEstado().equals("Pendiente")){
-            try{
-                pet.setCodcontrato(contrato.getCodcontrato());
-                Date fecha = new Date();
-                pet.setFechaaceptada(fecha);
-                pet.setEmpresa(empresa);
-                pet.setEstado("Aceptada");
-                peticionDao.updatePeticion(pet);
-                //********************************************************************
-                fac = peticionDao.getFactura(pet.getDni_ben());
-                peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
-                System.out.println("************************************************");
-                System.out.println("LINEA DE FACTURA AÑADIDA");
-                System.out.println("Factura: " + fac.getCod_fac() );
-                System.out.println("Cliente: " + pet.getBeneficiario() );
-                System.out.println("DNI: " + pet.getDni_ben());
-                System.out.println("Precio del servicio: " + pet.getPrecioservicio());
-                System.out.println("Tipo de servicio: " + pet.getTiposervicio());
-                System.out.println("************************************************");
-                peticionDao.updateFactura(fac.getPrecio()+pet.getPrecioservicio(),pet.getBeneficiario(),fac.getCod_fac());
-                System.out.println("Correo destinatario: "+empresaDao.getEmpresa(empresa).getEmail()+"\n" +
-                        "Correo del que envia: mayoresEnCasa@gva.es\n" +
-                        "Empresa, "+empresaDao.getEmpresa(empresa).getNombre()+", tiene un nuevo encargo para don/doña, "+pet.getBeneficiario()+".\n" +
-                        "Gracias por la ayuda");
-                return "redirect:list";
-            }catch (NullPointerException e){
-                return "redirect:../contrato/add";
-            }
-
+        if (contrato!=null){
+            pet.setCodcontrato(contrato.getCodcontrato());
+            Date fecha = new Date();
+            peticionDao.updateEstadoFechaEmpresa("Aceptada",fecha,empresa,pet.getCod_pet());
+            //********************************************************************
+            fac = peticionDao.getFactura(pet.getDni_ben());
+            peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
+            System.out.println("************************************************");
+            System.out.println("LINEA DE FACTURA AÑADIDA");
+            System.out.println("Factura: " + fac.getCod_fac() );
+            System.out.println("Cliente: " + pet.getBeneficiario() );
+            System.out.println("DNI: " + pet.getDni_ben());
+            System.out.println("Precio del servicio: " + pet.getPrecioservicio());
+            System.out.println("Tipo de servicio: " + pet.getTiposervicio());
+            System.out.println("************************************************");
+            peticionDao.updateFactura(fac.getPrecio()+pet.getPrecioservicio(),pet.getBeneficiario(),fac.getCod_fac());
+            //********************************************************************
+            System.out.println("");
+            System.out.println("");
+            System.out.println("EMAIL ENVIADO");
+            System.out.println("*************************************************************************");
+            Empresa emp = peticionDao.getEmpresa(empresa);
+            System.out.println("Correo destinatario: "+ emp.getCont_mail() + ", " + emp.getEmail() + "\n" +
+                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                    " \n " +
+                    "Empresa, "+emp.getNombre()+", tiene un nuevo encargo para don/doña, "+pet.getBeneficiario()+".\n" +
+                    "Gracias por la ayuda");
+            System.out.println("*************************************************************************");
+            return "redirect:list";
+        } else {
+            System.out.println("Sin contrato");
+            return "contrato/sinContrato";
         }
 
-        return "redirect:list";
     }
 
     @RequestMapping(value="/rechazar/{cod}")
     public String rechazarPeticion(@PathVariable String cod, Model model) {
         Peticion pet;
         pet = peticionDao.getPeticion(cod);
-        if(pet.getEstado().equals("Pendiente")){
-            Date fecha = new Date();
-            System.out.println(fecha);
-            pet.setFecharechazada(fecha);
-            pet.setEstado("Rechazada");
-            peticionDao.updatePeticion(pet);
-        }
+        Date fecha = new Date();
+        peticionDao.updateEstado("Rechazada", pet.getCod_pet());
         return "redirect:../list";
     }
 
     @RequestMapping("/misPeticiones")
     public String misPeticiones(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        model.addAttribute("peticiones", peticionDao.getPeticionesPropias(user.getDni()));
+        model.addAttribute("peticiones", peticionDao.getPeticionesPropiasPendientes(user.getDni()));
+        model.addAttribute("petAceptadas", peticionDao.getPeticionesPropiasAceptadas(user.getDni()));
+        model.addAttribute("petRechazadas", peticionDao.getPeticionesPropiasRechazadas(user.getDni()));
         return "peticion/misPeticiones";
     }
 
     @RequestMapping("/info")
     public String limpieza(Model model) {
         return "peticion/info";
+    }
+
+    @RequestMapping("/sinContrato")
+    public String sinContrato(Model model) {
+        return "contrato/sinContrato";
     }
 
 
