@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Error Asistente</title>
+    <style>
+    img {
+    max-width: 100%;
+    max-height: 100%;
+}
+</style>
+</head>
+<body>
+<div  layout:fragment="content" >
+    <table>
+        <tr><td><img src="https://image.flaticon.com/icons/svg/753/753345.svg" width="100" height="100"></td></tr>
+        <tr><td><h2>Error añadiendo asistente. Es posible que el asistente no exista, por favor revisa su nombre.</h2></td></tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <a onClick="history.back()" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Actualizar Empresa</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h3 style="color:black;" >Mayores en casa | CAS Commitee | Añadir/Modificar Asistente</h3>
+    </div>
+    <br>
+    <form action="#" th:action="@{/beneficiario/updateAsis}"
+          th:object="${dni}" method="post">
+        <br>
+        <h2><img src="https://image.flaticon.com/icons/svg/3050/3050236.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="*{nombre}" ></td></h2>
+        <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+            <tr>
+                <td><label>Nombre</label></td>
+                <td><input type="text" th:field="*{nombre}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td><label>DNI</label></td>
+                <td><input type="text" th:field="*{dni}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td><label>Nombre asistente</label></td>
+                <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" />&nbsp;&nbsp;<input type="text" th:field="*{asistente}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
+            </tr>
+        </table>
+<!--        <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>-->
+        <br>
+        <hr>
+        <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Lista de los asistentes disponibles</h3>
+        <table class="table table-striped" border="5"  bordercolor="#00db0b" >
+            <thead>
+            <tr >
+                <th style="text-align: center" scope="col">Nombre</th>
+                <th style="text-align: center"  scope="col">DNI</th>
+                <th style="text-align: center"  scope="col">Email</th>
+                <th style="text-align: center"  scope="col">Telefono</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="asistente: ${asistentes}">
+                <td th:text="${asistente.nombre}"></td>
+                <td th:text="${asistente.dni}"></td>
+                <td th:text="${asistente.email}"></td>
+                <td th:text="${asistente.telefono}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <a onClick="history.back()" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
+    </form>
+</div>
+</body>
+</html>

@@ -9,7 +9,6 @@
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
     <title>Gestionar Peticiones</title>
-
     <style>
         th, td, tr{
             text-align: center;
@@ -23,58 +22,78 @@
     <br>
     <br>
     <hr>
-    El comentario es la forma que tiene la empresa de ver que días y hora, el usuario deseea el servicio.<br>
-    Si está vacío, el horario sera el predefinido por el servicio: <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;Catering de Lunes a Domingo de 14:00 a 15:00 y dieta normal<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;Sanitario de Lunes a Domingo de 10:00 a 13:00 en cualquier momento<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;Limpieza de Lunes a Viernes de 10:00 a 13:00 en cualquier momento<br>
-    <hr>
     <img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"> ATENCIÓN<br>
     Si tienes que añadir una fecha final, o modificar el comentario para que la empresa lo vea más claro, por favor, hazlo antes de aceptar le petición, una vez aceptada ya no podrás hacerlo.
     <hr>
+    <h3>Lista de las peticiones pendientes</h3>
+    <br>
     <table  class="table table-striped" border="5" bordercolor="#0973ba" >
         <thead>
         <tr >
             <th scope="col">Servicio</th>
-            <th scope="col">Estado</th>
             <th scope="col">Beneficiario</th>
             <th style="background-color:#ffebb5" scope="col">Comentarios</th>
             <th style="background-color:#ffebb5" scope="col">Fecha final</th>
-            <th style="background-color:#ffebb5" scope="col"></th>
-            <th scope="col">Empresa</th>
-    <!--        <th scope="col"></th>-->
-    <!--        <th scope="col"></th>-->
-
+            <th style="background-color:#ffebb5" scope="col">Empresa</th>
         </tr>
         </thead>
         <tbody>
-
-        <tr th:each="element:${map}" th:unless="*{map == null}">
-            <td th:text="${element.key.tiposervicio}"></td>
-            <td th:text="${element.key.estado}"></td>
-            <td th:text="${element.key.beneficiario}"></td>
-            <td style="background-color:#ffebb5" th:text="${element.key.comentarios}"></td>
-            <td style="background-color:#ffebb5" th:text="${element.key.fechafinal}"></td>
-            <td style="background-color:#ffebb5"><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/peticion/update/{codigo}(codigo=${element.key.cod_pet})}">Editar/Añadir</a></td>
-            <td >
-                <select form="añadir" name="empresa">
-                    <option th:each="empresa:${map.get(element.key)}"
-                            th:value="${empresa}"
-                            th:text="${empresa}"></option>
-                </select>
-            </td>
+        <tr th:each="element:${map}">
+            <td th:text="${element.tiposervicio}"></td>
+            <td th:text="${element.beneficiario}"></td>
+            <td style="background-color:#ffebb5" th:text="${element.comentarios}"></td>
+            <td style="background-color:#ffebb5" th:text="${{element.fechafinal}}"></td>
+            <td style="background-color:#ffebb5" th:text="${element.empresa}"></td>
+            <td style="background-color:#ffebb5"><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/peticion/update/{codigo}(codigo=${element.cod_pet})}">Editar/Añadir</a></td>
+<!--            <td >-->
+<!--                <select form="añadir" name="empresa">-->
+<!--                    <option th:each="empresa:${map.get(element.key)}"-->
+<!--                            th:value="${empresa}"-->
+<!--                            th:text="${empresa}"></option>-->
+<!--                </select>-->
+<!--            </td>-->
             <td>
                 <form action="#" th:action="@{/peticion/aceptar}" method="POST" id="añadir">
-                    <input type="hidden" name="cod" th:value="${element.key.cod_pet}">
+                    <input type="hidden" name="cod" th:value="${element.cod_pet}">
                     <input type="image" class="boton_añadir"  src="https://image.flaticon.com/icons/svg/159/159767.svg" alt="Submit" width="50"  >
                 </form>
             </td>
             <td><a type="button"
-                   th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.key.cod_pet})}">
-                   <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
+                   th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.cod_pet})}">
+                   <img  class="boton_eliminar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
     <!--        <td><a type="button"-->
     <!--               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${element.key.cod_pet})}">-->
     <!--               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>-->
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Lista de los contratos activos</h3>
+    <table class="table table-striped" border="5"  bordercolor="#00db0b" >
+        <thead>
+        <tr >
+            <th style="text-align: center" scope="col">Empresa</th>
+            <th style="text-align: center"  scope="col">Servicio</th>
+            <th style="text-align: center"  scope="col">Fecha Inicial</th>
+            <th style="text-align: center"  scope="col">Fecha Final</th>
+            <th style="text-align: center"  scope="col">Dias semanales</th>
+            <th style="text-align: center"  scope="col">Hora inicial</th>
+            <th style="text-align: center"  scope="col">Hora final</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contrato: ${contratos}">
+            <td th:text="${contrato.empresa}"></td>
+            <td th:text="${contrato.tiposervicio}"></td>
+            <td th:text="${{contrato.fechainicial}}"></td>
+            <td th:text="${{contrato.fechafinal}}"></td>
+            <td th:text="${contrato.dias_semana}"></td>
+            <td th:text="${contrato.horainicial}"></td>
+            <td th:text="${contrato.horafinal}"></td>
+
+            <!--            <td><a type="button" class="boton_eliminar" style="width:100px; height:25px font-weight: 100; font-size: 14px;" th:href="@{/contrato/delete/{codcontrato}(codcontrato=${contrato.codcontrato})}">BORRAR</a></td>-->
+        </tr>
         </tbody>
     </table>
 
@@ -83,8 +102,8 @@
 
     <br>
     <br>
-    <a onClick="history.back()" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
-    <a href="/contrato/list" class="boton_personalizado1" role="button" >Ver contratos activos</a>
+    <a href="/cascommitee/index" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
+<!--    <a href="/contrato/list" class="boton_personalizado1" role="button" >Ver contratos activos</a>-->
 
 </div>
 </body>

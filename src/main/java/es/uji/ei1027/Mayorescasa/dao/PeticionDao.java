@@ -1,9 +1,6 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
-import es.uji.ei1027.Mayorescasa.model.Empresa;
-import es.uji.ei1027.Mayorescasa.model.Factura;
-import es.uji.ei1027.Mayorescasa.model.Lineas_fac;
-import es.uji.ei1027.Mayorescasa.model.Peticion;
+import es.uji.ei1027.Mayorescasa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,16 +38,16 @@ public class PeticionDao {
 
     //ACTUALIZAMOS Peticion
     public void updatePeticion(Peticion peticion) {
-        jdbcTemplate.update("UPDATE peticion SET fechafinal=?, comentarios=? WHERE cod_pet=? ",
-                peticion.getFechafinal(), peticion.getComentarios(), peticion.getCod_pet()
+        jdbcTemplate.update("UPDATE peticion SET fechafinal=?, comentarios=?, empresa=? WHERE cod_pet=? ",
+                peticion.getFechafinal(), peticion.getComentarios(), peticion.getEmpresa(), peticion.getCod_pet()
         );
     }
     public void updateEstadoFechaEmpresa(String estado, Date fecha, String empresa, String codigo) {
         jdbcTemplate.update("UPDATE peticion SET estado=?, fechaaceptada=?, empresa=? WHERE cod_pet=? ", estado, fecha, empresa, codigo
         );
     }
-    public void updateEstado(String estado, String codigo) {
-        jdbcTemplate.update("UPDATE peticion SET estado=? WHERE cod_pet=? ", estado, codigo
+    public void updateEstadoFecha(String estado, Date fecha, String codigo) {
+        jdbcTemplate.update("UPDATE peticion SET estado=?, fecharechazada=? WHERE cod_pet=? ", estado, fecha, codigo
         );
     }
 
@@ -73,9 +70,17 @@ public class PeticionDao {
     }
 
     //LISTAMOS Peticion Resueltas
-    public List<Peticion> getPeticionesResueltas() {
+    public List<Peticion> getPeticionesAceptadas() {
         try {
-            return jdbcTemplate.query("SELECT * FROM Peticion WHERE estado='Aceptada' OR estado='Rechazada' ", new
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE estado='Aceptada'", new
+                    PeticionRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Peticion>();
+        }
+    }
+    public List<Peticion> getPeticionesRechazadas() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE estado='Rechazada'", new
                     PeticionRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Peticion>();
@@ -111,7 +116,7 @@ public class PeticionDao {
     public boolean consultaPeticion(String dni,String tipoPeticion){
         Peticion peticion;
         try {
-             peticion = jdbcTemplate.queryForObject("SELECT * FROM Peticion WHERE dni_ben=? and tiposervicio=?",
+             peticion = jdbcTemplate.queryForObject("SELECT * FROM Peticion WHERE dni_ben=? and tiposervicio=? and (estado='Pendiente' or estado='Aceptada')",
                     new PeticionRowMapper(), dni, tipoPeticion);
         }catch (EmptyResultDataAccessException e){
             peticion=null;
@@ -170,6 +175,14 @@ public class PeticionDao {
     public Empresa getEmpresa (String nombre ){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE nombre=?", new EmpresaRowMapper(), nombre);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    public Usuario getUsuario (String dni ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE dni=?", new UsuarioRowMapper(), dni);
         }
         catch (EmptyResultDataAccessException e){
             return null;

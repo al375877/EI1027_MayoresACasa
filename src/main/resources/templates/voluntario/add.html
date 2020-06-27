@@ -9,11 +9,6 @@
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
     <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
         form {
           font-family: arial, sans-serif;
           border-collapse: collapse;
@@ -35,7 +30,7 @@
     <table style="margin:auto">
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
-            <td>Nombre:&nbsp;</td>
+            <td>&nbsp;Nombre:&nbsp;</td>
             <td><input type="text" th:field="*{nombre}"
                        placeholder="Nombre y apellidos" maxlength="50"/></td>
             <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></td>
@@ -44,7 +39,7 @@
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126109.svg"width="30" height="30"></td>
-            <td>DNI:&nbsp;</td>
+            <td>&nbsp;DNI:&nbsp;</td>
             <td><input type="text" th:field="*{dni}" maxlength="10"
                        placeholder="12345678X"/></td>
             <td th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></td>
@@ -52,32 +47,33 @@
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126491.svg"width="30" height="30"></td>
-            <td>Genero:&nbsp;</td>
+            <td>&nbsp;Genero:&nbsp;</td>
             <td><select class="form_control" type="text" th:field="*{genero}">
                 <option value="No seleccionado">Selecciona el genero</option>
-                <option value="Femeni">Femenino</option>
-                <option value="Masculi">Masculino</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
             </select>
+            <td th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></td>
             </td>
         </tr>
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126485.svg"width="30" height="30"></td>
-            <td>Usuario:&nbsp;</td>
+            <td>&nbsp;Usuario:&nbsp;</td>
             <td><input type="text" th:field="*{usuario}" maxlength="50"/></td>
             <td th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></td>
         </tr>
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126479.svg"width="30" height="30"></td>
-            <td>Contraseña:&nbsp;</td>
+            <td>&nbsp;Contraseña:&nbsp;</td>
             <td><input type="password" th:field="*{contraseña}" maxlength="50"/></td>
             <td th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></td>
         </tr>
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126516.svg"width="30" height="30"></td>
-            <td>Email:&nbsp;</td>
+            <td>&nbsp;Email:&nbsp;</td>
             <td><input type="text" th:field="*{email}" maxlength="100"
                        placeholder="ejemplo@email.com"/></td>
             <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
@@ -85,50 +81,56 @@
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126470.svg"width="30" height="30"></td>
-            <td>Direccion:&nbsp;</td>
+            <td>&nbsp;Direccion:&nbsp;</td>
             <td><input type="text" th:field="*{direccion}" maxlength="100"
                        placeholder="Calle Teruel, 23 (Castellón)"/></td>
         </tr>
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/159/159224.svg"width="30" height="30"></td>
-            <td>Año Nacim.:&nbsp;</td>
+            <td>&nbsp;Año Nacim.:&nbsp;</td>
             <td><input type="number" th:field="*{nacimiento}" /></td>
             <td th:if="${#fields.hasErrors('nacimiento')}" th:errors="*{nacimiento}"></td>
         </tr>
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126509.svg"width="30" height="30"></td>
-            <td>Teléfono:&nbsp;</td>
-            <td><input type="tel" name="phone" pattern="[0-9]{9}" th:field="*{telefono}" maxlength="9"
+            <td>&nbsp;Teléfono:&nbsp;</td>
+            <td><input type="tel" name="phone" th:field="*{telefono}" maxlength="9"
                        placeholder="612345678"/></td>
             <td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></td>
         </tr>
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/png/512/159/159717.png"width="30" height="30"></td>
-            <td>Hobbies:&nbsp;</td>
-            <td><input type="text" name="hobbies"  th:field="*{hobbies}"
+            <td>&nbsp;Hobbies:&nbsp;</td>
+            <td><input type="text" name="hobbies"  th:field="*{hobbies}" size="30"
                        placeholder="limpieza, cocinar, jugar a futbol..."/></td>
-            <td th:if="${#fields.hasErrors('hobbies')}" th:errors="*{hobbies}"></td>
         </tr>
+    </table>
+    <hr>
+    <h3 style="color=black">Disponibilidad</h3>
+    <hr>
+    <img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><br>
+    <ul>
+        <li>Indica los días y las horas que estés disponible para que las personas mayores puedan ver tu disponibilidad.
+        <li>Si no añades disponibilidad, se asignara el horario predefinido:
+            <ul><li>Predefinido: Lunes a Domingo de 10:00 a 14:00 en cualquier momento de la mañana.
+            </ul>
+    </ul>
+    <hr>
+    <table style="margin:auto">
         <tr><td><br></td></tr>
         <tr>
             <td><img src="https://image.flaticon.com/icons/png/512/159/159221.png"width="30" height="30"></td>
-            <td>Disponibilidad:&nbsp;</td>
-            <td><input type="text" name="disp"  th:field="*{dias_semana}"
-                       /></td>
-            <td th:if="${#fields.hasErrors('dias_semana')}" th:errors="*{dias_semana}"></td>
+            <td>&nbsp;Disponibilidad:&nbsp;</td>
+            <td><input type="text" name="disp"  th:field="*{dias_semana}" placeholder="Lunes a Viernes de 10 a 12" size="50"/></td>
         </tr>
         <tr><td><br></td></tr>
-        <tr>
-
-            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Registrate" /></td>
-        </tr>
     </table>
+    <a th:href="@{/}" class="boton_personalizado1" role="button" >Volver</a>&nbsp;&nbsp;<td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Registrate" /></td>
     <br>
 </form>
 </div>
-<a th:href="@{/}" class="boton_personalizado1" role="button" >Volver</a>
 </body>
 </html>

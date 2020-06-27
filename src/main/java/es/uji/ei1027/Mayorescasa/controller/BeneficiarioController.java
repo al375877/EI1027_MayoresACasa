@@ -43,7 +43,6 @@ public class BeneficiarioController {
         Usuario user= (Usuario) session.getAttribute("user");
         String dniBen=user.getDni();
         Beneficiario ben = usuarioDao.getBeneficiario(dniBen);
-        System.out.println(ben.getAsistente());
         model.addAttribute("asistentes", usuarioDao.getAsistenteBenef(ben.getAsistente()));
         return "beneficiario/contacta";
     }
@@ -76,7 +75,7 @@ public class BeneficiarioController {
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editusuario(Model model, @PathVariable String usuario) {
         model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
-        return "usuarios/update";
+        return "beneficiario/update";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -85,6 +84,7 @@ public class BeneficiarioController {
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "usuario/update";
+        usuario.setTipoUsuario("Beneficiario");
         usuarioDao.updateUsuario(usuario);
         return "redirect:list";
     }
@@ -93,6 +93,40 @@ public class BeneficiarioController {
     public String processDelete(@PathVariable String usuario) {
         usuarioDao.deleteUsuario(usuario);
         return "redirect:../list";
+    }
+
+    @RequestMapping(value = "/updateAsis/{dni}", method = RequestMethod.GET)
+    public String usuarioAsis(Model model, @PathVariable String dni) {
+        model.addAttribute("dni", usuarioDao.getBeneficiario(dni));
+        model.addAttribute("asistentes", usuarioDao.getAsistentes());
+        return "beneficiario/updateAsis";
+    }
+    @RequestMapping(value = "/updateAsis", method = RequestMethod.POST)
+    public String processUpdateSubmitAsis(
+            @ModelAttribute("dni") Beneficiario beneficiario,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "beneficiario/update";
+        try {
+            usuarioDao.updateBeneficiario(beneficiario);
+        } catch (Exception e){
+            System.out.println("Error añadir asistente");
+            return "beneficiario/errorAsis";
+        }
+        return "redirect:list";
+    }
+
+    @RequestMapping("/unilist/{usuario}")
+    public String unilistEmpresas(Model model, @PathVariable String usuario) {
+        model.addAttribute("user", usuarioDao.getUsuario(usuario));
+        String dniBen = usuarioDao.getUsuario(usuario).getDni();
+        Beneficiario beneficiario = usuarioDao.getBeneficiario(dniBen);
+        try{
+            model.addAttribute("asistenteUni", usuarioDao.getAsistenteBenef(beneficiario.getAsistente()));
+        } catch (Exception e){
+            System.out.println("Sin asistente");
+        }
+        return "beneficiario/unilist";
     }
 
     //Llamada de la usuario add
@@ -117,7 +151,7 @@ public class BeneficiarioController {
         }
         usuario.setTipoUsuario("Beneficiario");
         usuarioDao.addUsuario(usuario);
-        usuarioDao.addBeneficiario(usuario.getDni(),usuario.getTipodieta());
+        usuarioDao.addBeneficiario(usuario.getNombre(),usuario.getDni(),usuario.getTipodieta());
         //Añadimos factura vacía
         usuarioDao.addFactura(aleatorio(),null,0.0,usuario.getNombre(),usuario.getDni());
         return "redirect:../beneficiario/list";
@@ -135,6 +169,13 @@ public class BeneficiarioController {
         cadena=cadena+alfa.charAt(forma)+numero;
         return cadena;
     }
+
+//    @RequestMapping("/listAsis")
+//    public String listpeticiones(Model model, HttpSession session) {
+//        Usuario user= (Usuario) session.getAttribute("user");
+//        model.addAttribute("asistentes", usuarioDao.getAsistentes());
+//        return "beneficiario/listAsis";
+//    }
 
 }
 

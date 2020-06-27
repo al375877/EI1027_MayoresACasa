@@ -12,7 +12,7 @@
 
     <style>
         th, td, tr{
-            text-align: center;
+            text-align: left;
             border:black 1;
         }
     </style>
@@ -24,25 +24,25 @@
         <thead>
         <tr >
             <th style="text-align: center" scope="col">Empresa</th>
-            <th style="text-align: center"  scope="col">Servicio:</th>
-            <th style="text-align: center"  scope="col">Fecha Inicial:</th>
-            <th style="text-align: center"  scope="col">Fecha Final:</th>
-            <th style="text-align: center"  scope="col">Precio unidad</th>
-            <th style="text-align: center"  scope="col">Dias semanales:</th>
-            <th style="text-align: center"  scope="col">Hora inicial:</th>
-            <th style="text-align: center"  scope="col">Hora final:</th>
+            <th style="text-align: center"  scope="col">Servicio</th>
+            <th style="text-align: center"  scope="col">Fecha Inicial</th>
+            <th style="text-align: center"  scope="col">Fecha Final</th>
+<!--            <th style="text-align: center"  scope="col">Precio unidad</th>-->
+            <th style="text-align: center"  scope="col">Días</th>
+            <th style="text-align: center"  scope="col">Inicio</th>
+            <th style="text-align: center"  scope="col">Fin</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="contrato: ${listPasados}">
             <td th:text="${contrato.empresa}"></td>
             <td th:text="${contrato.tiposervicio}"></td>
-            <td th:text="${contrato.fechainicial}"></td>
-            <td th:text="${contrato.fechafinal}"></td>
-            <td th:text="${contrato.preciounidad}"></td>
+            <td style="text-align: center" th:text="${{contrato.fechainicial}}"></td>
+            <td style="text-align: center" th:text="${{contrato.fechafinal}}"></td>
+<!--            <td th:text="${contrato.preciounidad}"></td>-->
             <td th:text="${contrato.dias_semana}"></td>
-            <td th:text="${contrato.horainicial}"></td>
-            <td th:text="${contrato.horafinal}"></td>
+            <td style="text-align: center" th:text="${contrato.horainicial}"></td>
+            <td style="text-align: center" th:text="${contrato.horafinal}"></td>
 
             <!--            <td><a type="button" class="boton_eliminar" style="width:100px; height:25px font-weight: 100; font-size: 14px;" th:href="@{/contrato/delete/{codcontrato}(codcontrato=${contrato.codcontrato})}">BORRAR</a></td>-->
         </tr>

@@ -1,6 +1,7 @@
 package es.uji.ei1027.Mayorescasa.model;
 
 public class Beneficiario extends Usuario {
+    private String nombre;
     private String dni;
     private String tipodieta;
     private String asistente;
@@ -19,6 +20,16 @@ public class Beneficiario extends Usuario {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTipodieta() {

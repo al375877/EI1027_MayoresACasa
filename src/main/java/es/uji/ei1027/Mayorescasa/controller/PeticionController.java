@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -35,21 +36,24 @@ public class PeticionController {
     @RequestMapping("/list")
     public String listpeticiones(Model model, HttpSession session) {
         Usuario user= (Usuario) session.getAttribute("user");
-        //mapa para enlazar la peticion con las empresas de ese tipo de servicio
-        Map<Peticion, List<String>> peticionEmpresas= new HashMap();
-
-        for(Peticion pet:peticionDao.getPeticionesPendientes()){
-            List<String> empresas= contratoDao.getEmpresasC(pet.getTiposervicio());
-            peticionEmpresas.put(pet,empresas);
-            }
-        model.addAttribute("map",peticionEmpresas);
+//        //mapa para enlazar la peticion con las empresas de ese tipo de servicio
+//        Map<Peticion, List<String>> peticionEmpresas= new HashMap();
+//
+//        for(Peticion pet:peticionDao.getPeticionesPendientes()){
+//            List<String> empresas= contratoDao.getEmpresasC(pet.getTiposervicio());
+//            peticionEmpresas.put(pet,empresas);
+//            }
+//        model.addAttribute("map",peticionEmpresas);
+        model.addAttribute("map",peticionDao.getPeticionesPendientes());
+        model.addAttribute("contratos", contratoDao.getContratos());
         return "peticion/list";
     }
 
     @RequestMapping("/listAcepRech")
     public String listAcepRech(Model model, HttpSession session) {
         Usuario user= (Usuario) session.getAttribute("user");
-        model.addAttribute("listAcepRech",peticionDao.getPeticionesResueltas());
+        model.addAttribute("aceptadas",peticionDao.getPeticionesAceptadas());
+        model.addAttribute("rechazadas",peticionDao.getPeticionesRechazadas());
         return "peticion/listAcepRech";
     }
 
@@ -73,6 +77,7 @@ public class PeticionController {
     @RequestMapping(value = "/update/{codigo}", method = RequestMethod.GET)
     public String editpeticion(Model model, @PathVariable String codigo) {
         model.addAttribute("peticion", peticionDao.getPeticion(codigo));
+        model.addAttribute("contratos", contratoDao.getContratos());
         return "peticion/update";
     }
 
@@ -180,11 +185,12 @@ public class PeticionController {
         return cadena;
     }
     @RequestMapping(value = "/aceptar", method = RequestMethod.POST)
-    public String aceptarPeticion(@ModelAttribute("cod") String cod,@ModelAttribute("empresa") String empresa) {
-        Contrato contrato=contratoDao.getContratoE(empresa);
-        Peticion pet;
+    public String aceptarPeticion(@ModelAttribute("cod") String cod) {
+        Peticion pet = peticionDao.getPeticion(cod);
+        String empresa = pet.getEmpresa();
+        String servicio = pet.getTiposervicio();
+        Contrato contrato=contratoDao.getContratoE(empresa,servicio);
         Factura fac;
-        pet = peticionDao.getPeticion(cod);
         if (contrato!=null){
             pet.setCodcontrato(contrato.getCodcontrato());
             Date fecha = new Date();
@@ -204,7 +210,7 @@ public class PeticionController {
             //********************************************************************
             System.out.println("");
             System.out.println("");
-            System.out.println("EMAIL ENVIADO");
+            System.out.println("EMAIL EMPRESA ENVIADO");
             System.out.println("*************************************************************************");
             Empresa emp = peticionDao.getEmpresa(empresa);
             System.out.println("Correo destinatario: "+ emp.getCont_mail() + ", " + emp.getEmail() + "\n" +
@@ -212,6 +218,25 @@ public class PeticionController {
                     " \n " +
                     "Empresa, "+emp.getNombre()+", tiene un nuevo encargo para don/doña, "+pet.getBeneficiario()+".\n" +
                     "Gracias por la ayuda");
+            System.out.println("*************************************************************************");
+            //********************************************************************
+            String pattern = "dd MMMM yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(pet.getFechafinal());
+            System.out.println(date);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("EMAIL CLIENTE ENVIADO");
+            System.out.println("*************************************************************************");
+            Usuario usu = peticionDao.getUsuario(pet.getDni_ben());
+            System.out.println("Correo destinatario: "+ usu.getEmail() + "\n" +
+                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                    " \n " +
+                    "Sr/a, "+usu.getNombre()+", su solicitud de servicio ha sido aceptada. \n " +
+                    "La empresa que le ofrecera el servicio sera:" + pet.getEmpresa() +".\n" +
+                    "Su servicio finaliza el " + date +".\n" +
+                    "Puede consultar el estado de su peticion en su perfil de usuario.\n" +
+                    "Gracias por elegir Mayores en casa");
             System.out.println("*************************************************************************");
             return "redirect:list";
         } else {
@@ -226,7 +251,21 @@ public class PeticionController {
         Peticion pet;
         pet = peticionDao.getPeticion(cod);
         Date fecha = new Date();
-        peticionDao.updateEstado("Rechazada", pet.getCod_pet());
+        peticionDao.updateEstadoFecha("Rechazada", fecha, pet.getCod_pet());
+        //********************************************************************
+        System.out.println("");
+        System.out.println("");
+        System.out.println("EMAIL CLIENTE ENVIADO");
+        System.out.println("*************************************************************************");
+        Usuario usu = peticionDao.getUsuario(pet.getDni_ben());
+        System.out.println("Correo destinatario: "+ usu.getEmail() + "\n" +
+                "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                " \n " +
+                "Sr/a, "+usu.getNombre()+", su solicitud de servicio ha sido RECHAZADA. \n " +
+                "Debido a que no tenemos empresas que ofrezcan el servico solicitado con sus restricciones"+".\n" +
+                "Puede consultar el estado de su peticion en su perfil de usuario.\n" +
+                "Gracias por elegir Mayores en casa");
+        System.out.println("*************************************************************************");
         return "redirect:../list";
     }
 

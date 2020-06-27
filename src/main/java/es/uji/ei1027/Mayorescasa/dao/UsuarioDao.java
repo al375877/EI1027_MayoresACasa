@@ -1,9 +1,6 @@
 package es.uji.ei1027.Mayorescasa.dao;
 
-import es.uji.ei1027.Mayorescasa.model.Asistente;
-import es.uji.ei1027.Mayorescasa.model.Beneficiario;
-import es.uji.ei1027.Mayorescasa.model.Usuario;
-import es.uji.ei1027.Mayorescasa.model.Voluntario;
+import es.uji.ei1027.Mayorescasa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -38,20 +35,21 @@ public class UsuarioDao {
     }
 
     //AÑADIMOS Beneficiario
-    public void addBeneficiario(String dni, String tipoDieta) {
-        jdbcTemplate.update("INSERT INTO Beneficiario VALUES (?,?)",
-                dni, tipoDieta);
+    public void addBeneficiario(String nombre, String dni, String tipoDieta) {
+        jdbcTemplate.update("INSERT INTO Beneficiario VALUES (?,?,?,?)",
+                nombre, dni, tipoDieta, null);
     }
 
     //ACTUALIZAMOS Beneficiario
-    public void updateBeneficiario(String dni, String registro) {
-        jdbcTemplate.update("UPDATE Beneficiario SET registro=? WHERE dni=?",
-                registro, dni);
+    public void updateBeneficiario(Beneficiario beneficiario) {
+        jdbcTemplate.update("UPDATE Beneficiario SET asistente=? WHERE dni=?",
+                beneficiario.getAsistente(), beneficiario.getDni());
+
     }
 
     //BORRAMOS Usuario
-    public void deleteUsuario(String dni) {
-        jdbcTemplate.update("DELETE FROM Usuario WHERE dni=?", dni);
+    public void deleteUsuario(String usuario) {
+        jdbcTemplate.update("DELETE FROM Usuario WHERE usuario=?", usuario);
     }
 
     //ACTUALIZAMOS Usuario
@@ -188,6 +186,18 @@ public class UsuarioDao {
             return new ArrayList<Asistente>();
         }
     }
+
+    //LISTAMOS asistentes
+    public List<Asistente> getAsistentes() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM asistente", new
+                    AsistenteRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Asistente>();
+        }
+    }
+
 
 
 }

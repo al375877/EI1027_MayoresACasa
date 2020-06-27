@@ -19,15 +19,15 @@ public class BeneficiarioValidator implements Validator {
             errors.rejectValue("nombre", "obligatorio",
                     " Hay que introducir un valor");
         // Afegeix ací la validació per a Edat > 18 anys
-        if (usuario.getNacimiento()>1955)
+        if (usuario.getNacimiento()>1955 || usuario.getNacimiento()<1900)
             errors.rejectValue("nacimiento", "obligatorio",
                     " Mayor de 65 años (o cumplirlos este año)");
-        if (usuario.getDni().trim().equals(""))
+        if (usuario.getDni().length()!=9)
             errors.rejectValue("dni", "obligatorio",
-                    " Hay que introducir un valor");
-        if (usuario.getTelefono()<600000000)
+                    " Introduce un valor valido");
+        if (usuario.getTelefono()<600000000 || usuario.getTelefono()>750000000)
             errors.rejectValue("telefono", "obligatorio",
-                    " Hay que introducir un valor");
+                    " Introduce un valor valido");
         if (usuario.getUsuario().trim().equals(""))
             errors.rejectValue("usuario", "obligatorio",
                     " Hay que introducir un valor");
@@ -40,6 +40,10 @@ public class BeneficiarioValidator implements Validator {
         if (usuario.getDireccion().trim().equals(""))
             errors.rejectValue("direccion", "obligatorio",
                     " Hay que introducir un valor");
+        if (usuario.getGenero().length()>9)
+            errors.rejectValue("genero", "obligatorio",
+                    " Selecciona un genero correcto");
+
 
 
     }

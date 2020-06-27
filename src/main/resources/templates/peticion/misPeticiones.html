@@ -13,11 +13,6 @@
     <title>Mayores a casa</title>
 
     <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
            th, td, tr{
             text-align: center;
             border:black 1;
@@ -27,12 +22,49 @@
 <body>
 <div   layout:fragment="content">
     <div  style="padding: 10px 50px;background-color:#B0E0E6;">
-        <h2 style="color:black">Mayores en casa | Beneficiaros | Tus Peticiones</h2>
+        <h3 style="color:black">Mayores en casa | Beneficiaros | Servicios/Peticiones</h3>
     </div>
     <br>
-    Compruebe periodicamente las peticiones, para saber si su peticion ha sido aceptada o rechazada y comprobar que los datos expuestos son correctos. Si tiene cualquier duda, contacte con su asistente.
+    <br>
+    <ul>
+        <li>Compruebe periodicamente las peticiones, para saber si su peticion ha sido
+            aceptada o rechazada y comprobar que los datos expuestos son correctos.
+            Si tiene cualquier duda, contacte con su asistente.
+        <li>Horario predefinido de los servicios:
+            <ul><li>Catering de Lunes a Domingo de 14:00 a 15:00 y dieta normal durante un més.
+                <li>Sanitario de Lunes a Domingo de 10:00 a 13:00 en cualquier momento durante un més.
+                <li>Limpieza de Lunes a Viernes de 10:00 a 13:00 en cualquier momento durante un més.
+            </ul>
+    </ul>
+    <br>
     <hr>
-    <h2>Lista de las peticiones pendientes</h2>
+    <h2 style="color:green">Servicios activos / Peticiones aceptadas</h2>
+    <br>
+    <table class="table table-striped" border="5" bordercolor="#00db0b"   >
+        <thead>
+        <tr>
+            <th scope="col">Servicio</th>
+            <th scope="col">€/Servicio</th>
+            <th scope="col">Inicio Servicio</th>
+            <th scope="col">Fin Servicio</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Empresa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="peticionA: ${petAceptadas}">
+            <td th:text="${peticionA.tiposervicio}"></td>
+            <td th:text="${peticionA.precioservicio}"></td>
+            <td th:text="${{peticionA.fechaaceptada}}"></td>
+            <td th:text="${{peticionA.fechafinal}}"></td>
+            <td th:text="${peticionA.comentarios}"></td>
+            <td th:text="${peticionA.empresa}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <h3>Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Peticiones pendientes</h3>
     <br>
     <table class="table table-striped" border="5" bordercolor="#0973ba"   >
         <thead>
@@ -54,40 +86,14 @@
     </table>
     <br>
     <hr>
-    <h2 style="color:green">Lista de las peticiones aceptadas</h2>
-    <br>
-    <table class="table table-striped" border="5" bordercolor="#00db0b"   >
-        <thead>
-        <tr>
-            <th scope="col">Servicio</th>
-            <th scope="col">Precio Servicio</th>
-            <th scope="col">Inicio Servicio</th>
-            <th scope="col">Empresa</th>
-            <th scope="col">Horario</th>
-            <th scope="col">Fin Servicio</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="peticionA: ${petAceptadas}">
-            <td th:text="${peticionA.tiposervicio}"></td>
-            <td th:text="${peticionA.precioservicio}"></td>
-            <td th:text="${peticionA.fechaaceptada}"></td>
-            <td th:text="${peticionA.empresa}"></td>
-            <td th:text="${peticionA.comentarios}"></td>
-            <td th:text="${peticionA.fechafinal}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <br>
-    <hr>
-    <h2 style="color:red">Lista de las peticiones rechazadas</h2>
+    <h3 style="color:red" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Peticiones rechazadas</h3>
     <br>
     <table class="table table-striped" border="5" bordercolor="#ff0000"   >
         <thead>
         <tr>
             <th scope="col">Código</th>
             <th scope="col">Servicio</th>
-            <th scope="col">Precio Servicio</th>
+            <th scope="col">Estado</th>
             <th scope="col">Rechazada</th>
         </tr>
         </thead>
@@ -95,8 +101,8 @@
         <tr th:each="peticionR: ${petRechazadas}">
             <td th:text="${peticionR.cod_pet}"></td>
             <td th:text="${peticionR.tiposervicio}"></td>
-            <td th:text="${peticionR.precioservicio}"></td>
-            <td th:text="${peticionR.fecharechazada}"></td>
+            <td th:text="${peticionR.estado}"></td>
+            <td th:text="${{peticionR.fecharechazada}}"></td>
         </tr>
         </tbody>
     </table>

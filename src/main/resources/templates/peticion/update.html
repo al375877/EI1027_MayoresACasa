@@ -19,38 +19,74 @@
           th:object="${peticion}" method="post">
         <hr>
         <img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"> ATENCIÓN<br>
-        El comentario es la forma que tiene la empresa de ver que días y hora, el usuario deseea el servicio.
-        Modificalo si no ves clara la información para la empresa <br>
-        Si no ha indicado la fecha final, se hará contrato de 1 mes, a partir de hoy,
+        <ul>
+            <li>El comentario es la forma que tiene la empresa de ver que días y hora el usuario deseea el servicio, editalo si no ves clara la información <br>
+            <li>Horario Predefinido:
+            <ul><li>Catering de Lunes a Domingo de 14:00 a 15:00 y dieta normal durante un més.
+                <li>Sanitario de Lunes a Domingo de 10:00 a 13:00 en cualquier momento durante un més.
+                <li>Limpieza de Lunes a Viernes de 10:00 a 13:00 en cualquier momento durante un més.
+                </ul>
+        </ul>
         <hr>
         <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
             <tr>
-                <td><label>Codigo</label></td>
-                <td><input type="text" th:field="*{cod_pet}" readonly="readonly" /></td>
+                <td><label>Codigo petición</label></td>
+                <td><input type="text" th:field="*{cod_pet}" readonly="readonly" size="10"/></td>
             </tr>
             <tr>
-                <td><label>Servicio</label></td>
-                <td><input type="text" th:field="*{tiposervicio}" readonly="readonly" /></td>
+                <td><label>Tipo de servicio</label></td>
+                <td><input type="text" th:field="*{tiposervicio}" readonly="readonly" size="10"/></td>
             </tr>
             <tr>
-                <td><label>Precio</label></td>
-                <td><input type="text" th:field="*{precioservicio}" readonly="readonly" /></td>
+                <td><label>Precio por servicio</label></td>
+                <td><input type="text" th:field="*{precioservicio}" readonly="readonly" size="3" />&nbsp;€</td>
             </tr>
             <tr>
-                <td><label>Fecha final</label></td>
+                <td><label>Fecha final servicio</label></td>
                 <td><input type="text" th:field="*{fechafinal}" required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
-                           title="Formato:DD/MM/YYYY"  placeholder="DD/MM/YYYY"></td>
+                           title="Formato:DD/MM/YYYY"  placeholder="DD/MM/YYYY" size="10"></td>
             </tr>
             <tr>
                 <td><label>Comentario -> Horario</label></td>
-                <td><input type="text" th:field="*{comentarios}" /></td>
+                <td><input type="text" size="40" th:field="*{comentarios}" /></td>
+            </tr>
+            <tr>
+                <td><label>Empresa</label></td>
+                <td><input type="text" th:field="*{empresa}" /></td>
             </tr>
 
         </table>
-        <td colspan="2"><input type="submit" class="boton_añadir" value="Actualizar" /></td>
+        <td colspan="2"><input type="submit" class="boton_añadir" value="Editar/Añadir" /></td>
         <br>
+        <hr>
+        <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Lista de los contratos activos</h3>
+        <table class="table table-striped" border="5"  bordercolor="#00db0b" >
+            <thead>
+            <tr >
+                <th style="text-align: center" scope="col">Empresa</th>
+                <th style="text-align: center"  scope="col">Servicio</th>
+                <th style="text-align: center"  scope="col">Fecha Inicial</th>
+                <th style="text-align: center"  scope="col">Fecha Final</th>
+                <th style="text-align: center"  scope="col">Dias semanales</th>
+                <th style="text-align: center"  scope="col">Hora inicial</th>
+                <th style="text-align: center"  scope="col">Hora final</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contrato: ${contratos}">
+                <td th:text="${contrato.empresa}"></td>
+                <td th:text="${contrato.tiposervicio}"></td>
+                <td th:text="${{contrato.fechainicial}}"></td>
+                <td th:text="${{contrato.fechafinal}}"></td>
+                <td th:text="${contrato.dias_semana}"></td>
+                <td th:text="${contrato.horainicial}"></td>
+                <td th:text="${contrato.horafinal}"></td>
+                <!--            <td><a type="button" class="boton_eliminar" style="width:100px; height:25px font-weight: 100; font-size: 14px;" th:href="@{/contrato/delete/{codcontrato}(codcontrato=${contrato.codcontrato})}">BORRAR</a></td>-->
+            </tr>
+            </tbody>
+        </table>
         <br>
-        <a onClick="history.back()" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
+        <a th:href="@{/peticion/list}" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
     </form>
 </div>
 </body>
