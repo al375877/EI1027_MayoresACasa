@@ -12,15 +12,18 @@
           th:href="@{/css/estils.css}"/>
 </head>
 <body>
+<div style="background: rgba(63, 72, 204, 1"><h6 class="mb-0"><br><br><br></h6>
 <div  th:object="${session}" >
     <nav class="navbar navbar-expand-sm  navbar-dark barra_azul" >
 
         <div align="center">
-            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{user == null}" href="/"><b>Mayores en casa</b></a>
-            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='casManager'}" th:href="@{/}"><b>Mayores en casa</b></a>
-            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Mayores en casa</b></a>
-            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/index}"><b>Mayores en casa</b></a>
-            <a class="navbar-brand" style="font-family:rondalo;" th:if="*{tipo=='Empresa'}" th:href="@{/empresa/index}"><b>Mayores en casa</b></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{user == null}" href="/"><b>Mayores en casa</b><br></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casManager'}" th:href="@{/cassmanager/index}"><b>CAS Manager</b><br></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casCommitee'}" th:href="@{/cassmanager/index}"><b>CAS Commitee</b><br></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casVolunteer'}" th:href="@{/cassmanager/index}"><b>CAS Volunteer</b><br></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Beneficiario</b></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/index}"><b>Voluntario</b></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='Empresa'}" th:href="@{/empresa/index}"><b>Empresa</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -74,12 +77,11 @@
 
 
             </div>
-
+            <br>
         </div>
-
     </nav>
 </div>
-
+</div>
 </body>
 </html>
 

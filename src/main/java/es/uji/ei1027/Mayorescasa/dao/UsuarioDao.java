@@ -29,9 +29,9 @@ public class UsuarioDao {
                 usuario.getTipoUsuario(),usuario.getTipodieta());
     }
     //AÑADIMOS Voluntario
-    public void addVoluntario(String dni, String hobbies, String dias_semana) {
-        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?)",
-                dni,hobbies,dias_semana);
+    public void addVoluntario(String dni, String hobbies, String dias_semana, String estado) {
+        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?,?)",
+                dni,hobbies,dias_semana, estado);
     }
 
     //AÑADIMOS Beneficiario
@@ -79,6 +79,16 @@ public class UsuarioDao {
         }
     }
     //LISTAMOS Voluntarios
+    public List<Usuario> getVoluntariosUsers() {
+        try{
+            return jdbcTemplate.query("SELECT * FROM usuario WHERE tipousuario='Voluntario'", new
+                    UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Usuario>();
+        }
+    }
+
     public List<Voluntario> getVoluntarios() {
         try{
            return jdbcTemplate.query("SELECT * FROM voluntario", new

@@ -73,7 +73,9 @@ public class BeneficiarioController {
     }
 
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
-    public String editusuario(Model model, @PathVariable String usuario) {
+    public String editusuario(HttpSession session, Model model, @PathVariable String usuario) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        if (!user.getTipoUsuario().equals("casCommitee")) return "error/error";
         model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
         return "beneficiario/update";
     }
@@ -96,7 +98,9 @@ public class BeneficiarioController {
     }
 
     @RequestMapping(value = "/updateAsis/{dni}", method = RequestMethod.GET)
-    public String usuarioAsis(Model model, @PathVariable String dni) {
+    public String usuarioAsis(HttpSession session, Model model, @PathVariable String dni) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        if (!user.getTipoUsuario().equals("casCommitee")) return "error/error";
         model.addAttribute("dni", usuarioDao.getBeneficiario(dni));
         model.addAttribute("asistentes", usuarioDao.getAsistentes());
         return "beneficiario/updateAsis";
@@ -170,12 +174,13 @@ public class BeneficiarioController {
         return cadena;
     }
 
-//    @RequestMapping("/listAsis")
-//    public String listpeticiones(Model model, HttpSession session) {
-//        Usuario user= (Usuario) session.getAttribute("user");
-//        model.addAttribute("asistentes", usuarioDao.getAsistentes());
-//        return "beneficiario/listAsis";
-//    }
+    @RequestMapping("/atras")
+    public String atras(Model model, HttpSession session) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        if (user.getTipoUsuario().equals("casVolunteer")) return "casvolunteer/index";
+        if (user.getTipoUsuario().equals("casCommitee")) return "cascommitee/index";
+        return "/";
+    }
 
 }
 

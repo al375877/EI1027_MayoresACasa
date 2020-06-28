@@ -35,17 +35,11 @@ public class VoluntarioController {
     // Operaciones: Crear, listar, actualizar, borrar
 
     @RequestMapping("/list")
-    public String listvoluntarios(Model model) {
-
-        List<Usuario> listUser =  usuarioDao.getUsuariosVoluntarios();
-        Map<Usuario, String> map = new HashMap();
-        for (Usuario user:listUser){
-            map.put(user, usuarioDao.getVoluntario(user.getDni()).getEstado());
-        }
-        model.addAttribute("map",map);
-
+    public String listusuarios(Model model) {
+        model.addAttribute("usuarios", usuarioDao.getVoluntariosUsers());
         return "voluntario/list";
     }
+
     //Llamada de la peticion add
     @RequestMapping(value="/add")
     public String addvoluntario(Model model) {
@@ -105,29 +99,31 @@ public class VoluntarioController {
         return "redirect:../list";
     }
 
-
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("voluntario") Voluntario voluntario,
                                    BindingResult bindingResult) {
-        VoluntarioValidator nadadorValidator = new VoluntarioValidator();
-        nadadorValidator.validate(voluntario, bindingResult);
+        VoluntarioValidator voluntarioValidator = new VoluntarioValidator();
+        voluntarioValidator.validate(voluntario, bindingResult);
         if (bindingResult.hasErrors()) {
             System.out.println("Error al añadir el voluntario");
             return "voluntario/add";
         }
         voluntario.setTipoUsuario("Voluntario");
         usuarioDao.addUsuario(voluntario);
+        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"Pendiente");
+        return "redirect:../voluntario/altaEnviada";
+    }
 
-
-        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana());
-        return "redirect:../login";
+    @RequestMapping("/altaEnviada")
+    public String altaEnviada(HttpSession session, Model model) {
+        return "voluntario/altaEnviada";
     }
 
     @RequestMapping("/index")
     public String index(HttpSession session, Model model) {
-
         return "voluntario/index";
     }
+
     @RequestMapping("/perfil")
     public String perfil(HttpSession session, Model model) {
         Usuario user=(Usuario) session.getAttribute("user");
@@ -390,6 +386,32 @@ public class VoluntarioController {
                 "Estimado/a "+usuarioDao.getUsuarioDni(dniVol).getNombre()+", lamentamos comunicarle que el beneficiario/a "+user.getNombre()+", por motivos personales ha decido que no quiere que vuelvas.\n" +
                 " Puedes consultar tus peticiones y elegir otro beneficiario al que ayudar. Gracias por la colaboración.\n");
         return "redirect:../solicitar";
+    }
+
+    //Llamada de la peticion add
+    @RequestMapping(value="/addCas")
+    public String addCasvoluntario(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("voluntario", new Voluntario());
+        List<String> generoList = new ArrayList<>();
+        generoList.add("Femenino");
+        generoList.add("Masculino");
+        model.addAttribute("generoList", generoList);
+        return "voluntario/addCas";
+    }
+    @RequestMapping(value="/addCas", method= RequestMethod.POST)
+    public String processAddSubmitCas(@ModelAttribute("voluntario") Voluntario voluntario,
+                                   BindingResult bindingResult) {
+        VoluntarioValidator voluntarioValidator = new VoluntarioValidator();
+        voluntarioValidator.validate(voluntario, bindingResult);
+        if (bindingResult.hasErrors()) {
+            System.out.println("Error al añadir el voluntario por CAS");
+            return "voluntario/addCas";
+        }
+        voluntario.setTipoUsuario("Voluntario");
+        usuarioDao.addUsuario(voluntario);
+        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"Aceptado");
+        return "redirect:../voluntario/list";
     }
 
 }

@@ -14,6 +14,10 @@
             text-align: center;
             border:black 1;
         }
+<!--        div {-->
+<!--          background-color: blue;-->
+<!--          opacity: 0.3;-->
+<!--        }-->
     </style>
 </head>
 <body>
@@ -27,24 +31,25 @@
     <hr>
     <h3>Lista de las peticiones pendientes</h3>
     <br>
-    <table  class="table table-striped" border="5" bordercolor="#0973ba" >
+    <table class="table" border="5" bordercolor="#0973ba">
         <thead>
         <tr >
-            <th scope="col">Servicio</th>
-            <th scope="col">Beneficiario</th>
-            <th style="background-color:#ffebb5" scope="col">Comentarios</th>
-            <th style="background-color:#ffebb5" scope="col">Fecha final</th>
-            <th style="background-color:#ffebb5" scope="col">Empresa</th>
+            <th style="background: rgba(105, 124, 224, 0.2" scope="col">Servicio</th>
+            <th style="background: rgba(105, 124, 224, 0.2" scope="col">Beneficiario</th>
+            <th style="background: rgba(105, 124, 224, 0.2" scope="col">Comentarios</th>
+            <th style="background: rgba(105, 124, 224, 0.2" scope="col">Fecha final</th>
+            <th style="background: rgba(105, 124, 224, 0.2" scope="col">Empresa</th>
         </tr>
         </thead>
         <tbody>
+<!--        style="background-color:#ffebb5"-->
         <tr th:each="element:${map}">
-            <td th:text="${element.tiposervicio}"></td>
-            <td th:text="${element.beneficiario}"></td>
-            <td style="background-color:#ffebb5" th:text="${element.comentarios}"></td>
-            <td style="background-color:#ffebb5" th:text="${{element.fechafinal}}"></td>
-            <td style="background-color:#ffebb5" th:text="${element.empresa}"></td>
-            <td style="background-color:#ffebb5"><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/peticion/update/{codigo}(codigo=${element.cod_pet})}">Editar/Añadir</a></td>
+            <td style="background: rgba(105, 124, 224, 0.2" th:text="${element.tiposervicio}"></td>
+            <td style="background: rgba(105, 124, 224, 0.2" th:text="${element.beneficiario}"></td>
+            <td style="background: rgba(105, 124, 224, 0.2" th:text="${element.comentarios}"></td>
+            <td style="background: rgba(105, 124, 224, 0.2" th:text="${{element.fechafinal}}"></td>
+            <td style="background: rgba(105, 124, 224, 0.2" th:text="${element.empresa}"></td>
+            <td style="background: rgba(105, 124, 224, 0.2"><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/peticion/update/{codigo}(codigo=${element.cod_pet})}">Editar/Añadir</a></td>
 <!--            <td >-->
 <!--                <select form="añadir" name="empresa">-->
 <!--                    <option th:each="empresa:${map.get(element.key)}"-->
@@ -52,13 +57,13 @@
 <!--                            th:text="${empresa}"></option>-->
 <!--                </select>-->
 <!--            </td>-->
-            <td>
+            <td style="background: rgba(105, 124, 224, 0.2">
                 <form action="#" th:action="@{/peticion/aceptar}" method="POST" id="añadir">
                     <input type="hidden" name="cod" th:value="${element.cod_pet}">
                     <input type="image" class="boton_añadir"  src="https://image.flaticon.com/icons/svg/159/159767.svg" alt="Submit" width="50"  >
                 </form>
             </td>
-            <td><a type="button"
+            <td style="background: rgba(105, 124, 224, 0.2"><a type="button"
                    th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.cod_pet})}">
                    <img  class="boton_eliminar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
     <!--        <td><a type="button"-->
@@ -70,7 +75,7 @@
     <hr>
 
     <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Lista de los contratos activos</h3>
-    <table class="table table-striped" border="5"  bordercolor="#00db0b" >
+    <table class="table" border="5"  bordercolor="#00db0b" style="background: rgba(123, 224, 105, 0.2" >
         <thead>
         <tr >
             <th style="text-align: center" scope="col">Empresa</th>

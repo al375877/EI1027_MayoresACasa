@@ -4,6 +4,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+<!--    background-color: #120e0e;-->
+    <style>
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      text-align: center;
+    }
+        table{
+            background-color: #d4d5d9;
+        }
+    </style>
     <!-- Required meta tags -->
     <meta charset="UTF-8"/>
     <meta name="viewport"
@@ -21,35 +35,41 @@
     <title layout:title-pattern="$CONTENT_TITLE">Mayores en casa</title>
 </head>
 
-<body  >
-<div th:replace="fragments/nav" ></div>
-<div class="container">
+<body background="https://wallpapersmug.com/download/3840x2400/3b795e/gray-triangles-geometry-abstract.jpg">
+<div th:replace="fragments/nav"></div>
+<!--background="https://wallpapercave.com/wp/wp2479026.jpg"-->
+<div class="container" style="background: rgba(255, 255, 255, 0.2">
+    <br>
+<div class="container" style="background: rgba(255, 255, 255, 0.3">
+
 
 <header class="page-header">
 </header>
 
 <!--<div th:replace="fragments/logininfo"></div>-->
 <div layout:fragment="content"></div>
-
 </div>
-<footer style="position: bottom;" >
+</div>
 
+
+<footer>
     <div align="center" style="width:100%;background-color:#4169E1;color:white;"><p class="body">
-        <p class="h3">Mayores en casa</p>
+<!--        <p class="h3">Mayores en casa</p>-->
+        <div style="background: rgba(17, 21, 82, 0.3"><h6 class="mb-0"><br><br></h6></div>
         <br>
-        Telefono: 920 14 58 74 - Email: <a style="color:white" href="mailto:al375877@uji.es">mayorescasa@gva.es</a><br>
-        © Copyright 2020.  Todos los derechos reservados. √ Usamos Cookies<br>
+        <img src="http://imgfz.com/i/XY5DGUv.png"width="160" height="90"><br>
+        <a style="font-size:14px" > Telefono: 920 14 58 74 - Email: </a><a style="color:white; font-size:14px;" href="mailto:al375877@uji.es">mayorescasa@gva.es</a><br>
+            <a style="font-size:14px" >© Copyright 2020.  Todos los derechos reservados. √ Usamos Cookies</a><br>
         <br>
         <table align="center" border="0">
-            <td><a href="https://www.facebook.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145802.svg" width="50" height="50"></a></td><td>&nbsp;</td>
-            <td><a href="https://twitter.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145812.svg" width="50" height="50"></a></td><td>&nbsp;</td>
-            <td><a href="https://www.instagram.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145805.svg" width="50" height="50"></a></td><td>&nbsp;</td>
+            <td><a href="https://www.facebook.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145802.svg" width="40" height="40"></a></td><td>&nbsp;</td>
+            <td><a href="https://twitter.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145812.svg" width="40" height="40"></a></td><td>&nbsp;</td>
+            <td><a href="https://www.instagram.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145805.svg" width="40" height="40"></a></td><td>&nbsp;</td>
         </table>
         <br>
     </div>
 </footer>
 </body>
-
 </html>
 
 

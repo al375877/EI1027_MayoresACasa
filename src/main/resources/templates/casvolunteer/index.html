@@ -15,25 +15,38 @@
         display:block;
         margin:auto;
         }
+        td
     </style>
 </head>
 <body>
-<div  layout:fragment="content">
-    <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores en casa | CAS VOLUNTEER </h1></div>
-
+<div layout:fragment="content">
+<!--    <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1>Mayores en casa | CAS VOLUNTEER </h1></div>-->
     <br>
-    <img src="http://imgfz.com/i/XRATq0B.png"width="900" height="300">
+    <img src="http://imgfz.com/i/E0kj8YO.png"width="800" height="200">
     <table>
+        <td></td>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><h3>Gestión de Voluntarios</h3></td></tr>
+        <tr><td><h3>Beneficiarios</h3></td></tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_personalizado1" th:href="@{/voluntario/list}" role="button">Lista Voluntarios</a></td></tr>
+        <tr>
+            <td><a type="button" class="boton_editar" th:href="@{/beneficiario/list}"> <img src="https://image.flaticon.com/icons/svg/2910/2910777.svg"width="40" height="40" />Lista Beneficiarios</a></td>
+        </tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_personalizado1" th:href="@{/voluntario/list}" role="button">Registros pendientes</a></td></tr>
+        <tr><td><h3>Voluntarios</h3></td></tr>
         <tr><td>&nbsp;</td></tr>
-
+        <tr>
+            <td><a type="button" class="boton_añadir" th:href="@{/voluntario/list}"> <img src="https://image.flaticon.com/icons/svg/2910/2910777.svg"width="40" height="40" />Lista voluntarios</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><a type="button" class="boton_editar" th:href="@{/voluntario/list}"> <img src="https://image.flaticon.com/icons/svg/2910/2910762.svg"width="40" height="40" />Altas pendientes</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><a type="button" class="boton_añadir" th:href="@{/voluntario/addCas}"> <img src="https://image.flaticon.com/icons/svg/2910/2910769.svg"width="40" height="40" />Registrar voluntario</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
     </table>
-
 </div>
 </body>
 </html>
