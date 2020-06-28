@@ -48,8 +48,13 @@ public class UsuarioDao {
     }
 
     //BORRAMOS Usuario
-    public void deleteUsuario(String usuario) {
-        jdbcTemplate.update("DELETE FROM Usuario WHERE usuario=?", usuario);
+    public void deleteUsuario(String dni) {
+        jdbcTemplate.update("DELETE FROM Usuario WHERE dni=?", dni);
+    }
+
+    //BORRAMOS Voluntario
+    public void deleteVoluntario(String dni) {
+        jdbcTemplate.update("DELETE FROM Voluntario WHERE dni=?", dni);
     }
 
     //ACTUALIZAMOS Usuario

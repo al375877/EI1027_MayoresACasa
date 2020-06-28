@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Actualizar voluntario</title>
+    <title>Actualizar Empresa</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
@@ -11,53 +11,61 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>voluntario</h2>
-<form action="#" th:action="@{/voluntario/update}"
-      th:object="${voluntario}" method="post">
-    <table style="margin:auto">
-        <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" /></td>
-        </tr>
-        <tr>
-            <td><label>Genero</label></td>
-            <td><input type="text" th:field="*{genero}" /></td>
-        </tr>
-
-        <tr>
-            <td><label>Usuario</label></td>
-            <td><input type="text" th:field="*{usuario}" /></td>
-        </tr>
-        <tr>
-            <td><label>Contraseña</label></td>
-            <td><input type="text" th:field="*{contraseña}" /></td>
-        </tr>
-        <tr>
-            <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" /></td>
-        </tr>
-        <tr>
-            <td><label>Direccion</label></td>
-            <td><input type="text" th:field="*{direccion}" /></td>
-        </tr>
-
-        <tr>
-            <td><label>Fecha de nacimiento</label></td>
-            <td><input type="date" th:field="*{fechanacimiento}" /></td>
-        </tr>
-        <tr>
-            <td><label>Teléfono</label></td>
-            <td><input type="number" th:field="*{numero_telefono}" /></td>
-        </tr>
-        <tr>
-
-        <tr>
-            <td colspan="2"><input type="submit" class="boton_añadir" role="button" value="Edita voluntario" /></td>
-        </tr>
-    </table>
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h3 style="color:black;" >Mayores en casa | CAS Volunteer | Modificar voluntario</h3>
+    </div>
     <br>
-    <a th:href="@{/empresa/list}" class="boton_personalizado1" role="button" >Volver</a>
-</form>
+    <form action="#" th:action="@{/voluntario/update}"
+          th:object="${usuario}" method="post">
+        <br>
+        <h2><img src="https://image.flaticon.com/icons/svg/3050/3050236.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="*{nombre}" ></td></h2>
+        <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+            <tr>
+                <td style="text-align: right"><label>Nombre</label></td>
+                <td><input type="text" th:field="*{nombre}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>DNI</label></td>
+                <td><input type="text" th:field="*{dni}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Usuario</label></td>
+                <td><input type="text" th:field="*{usuario}" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Contraseña</label></td>
+                <td><input type="text" th:field="*{contraseña}" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Email</label></td>
+                <td><input type="text" th:field="*{email}" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Dirección</label></td>
+                <td><input type="text" th:field="*{direccion}" /></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: right"><label>Telefono</label></td>
+                <td><input type="number" th:field="*{telefono}" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Genero</label></td>
+                <td><input type="text" th:field="*{genero}" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Año de nacimiento</label></td>
+                <td><input type="text" th:field="*{nacimiento}" /></td>
+            </tr>
+        </table>
+        <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>
+        <br>
+        <br>
+        <br>
+        <a th:href="@{/voluntario/unilist/{usuario}(usuario=*{usuario})}" class="boton_personalizado1" role="button" >Atrás</a>
+        <br>
+        <br>
+    </form>
 </div>
 </body>
 </html>

@@ -2,10 +2,7 @@ package es.uji.ei1027.Mayorescasa.controller;
 
 import es.uji.ei1027.Mayorescasa.dao.DisponibilidadDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
-import es.uji.ei1027.Mayorescasa.model.Disponibilidad;
-import es.uji.ei1027.Mayorescasa.model.TempUsuarioComentario;
-import es.uji.ei1027.Mayorescasa.model.Usuario;
-import es.uji.ei1027.Mayorescasa.model.Voluntario;
+import es.uji.ei1027.Mayorescasa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,6 +93,7 @@ public class VoluntarioController {
     @RequestMapping(value ="/delete/{dni}")
     public String eliminarVoluntario(@PathVariable String dni){
         usuarioDao.deleteUsuario(dni);
+        usuarioDao.deleteVoluntario(dni);
         return "redirect:../list";
     }
 
@@ -412,6 +410,29 @@ public class VoluntarioController {
         usuarioDao.addUsuario(voluntario);
         usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"Aceptado");
         return "redirect:../voluntario/list";
+    }
+
+    @RequestMapping("/unilist/{usuario}")
+    public String unilistEmpresas(Model model, @PathVariable String usuario) {
+        model.addAttribute("user", usuarioDao.getUsuario(usuario));
+        return "voluntario/unilist";
+    }
+
+    @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
+    public String editusuario(HttpSession session, Model model, @PathVariable String usuario) {
+        model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
+        return "voluntario/update";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String processUpdateSubmit(
+            @ModelAttribute("usuario") Usuario usuario,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "voluntario/update";
+        usuario.setTipoUsuario("Voluntario");
+        usuarioDao.updateUsuario(usuario);
+        return "redirect:list";
     }
 
 }

@@ -29,25 +29,26 @@
     <br>
     <h2><img src="https://image.flaticon.com/icons/svg/3003/3003148.svg"width="70" height="70">&nbsp;&nbsp;Lista de los voluntarios registrados </h2>
     <br>
-    <table class="table table-striped" border="5" bordercolor="#0973ba"  style=" width:80%">
+    <table class="table" border="5" bordercolor="#0973ba">
         <thead>
         <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Email</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Nombre</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Telefono</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Email</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user: ${usuarios}">
-            <td th:text="${user.nombre}"></td>
-            <td th:text="${user.telefono}"></td>
-            <td th:text="${user.email}"></td>
-            <td><a type="button" class="boton_editar" style="font-size: 14px;" th:href="@{/voluntario/unilist/{usuario}(usuario=${user.usuario})}">Más Información</a></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${user.nombre}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${user.telefono}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${user.email}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1"><a type="button" class="boton_editar" style="font-size: 14px;" th:href="@{/voluntario/unilist/{usuario}(usuario=${user.usuario})}">Más Información</a></td>
         </tr>
         </tbody>
     </table>
     <br>
     <a href="/casvolunteer/index" class="boton_personalizado1" role="button" >Atrás</a>
+    <br><br>
 
 </div>
 </body>

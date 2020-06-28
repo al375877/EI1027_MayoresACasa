@@ -22,37 +22,31 @@
 </head>
 <body>
 <div   layout:fragment="content">
-<div  style="padding: 25px 50px;background-color:#B0E0E6;">
-    <h1>Mayores en casa | Beneficiaros</h1>
-</div>
-
-<br>
+<!--<div  style="padding: 25px 50px;background-color:#B0E0E6;">-->
+<!--    <h1>Mayores en casa | Beneficiaros</h1>-->
+<!--</div>-->
 <h2>Hola, ¿En que puedo ayudarte?</h2>
-    <br>
-<table style="margin:auto">
-    <tr>
-        <td><a class="boton_personalizado1" th:href="@{/voluntario/solicitar}" role="button">Ver/Solicitar Voluntarios</a></td>
-        <td>&nbsp;</td>
-        <td><a class="boton_personalizado1" th:href="@{/peticion/servicios}" role="button">Contratar Servicios</a></td>
-        <td>&nbsp;</td>
-        <td><a class="boton_personalizado1" th:href="@{/peticion/misPeticiones}" role="button">Mis Servicios/Peticiones</a></td>
-        <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    </tr>
-</table>
-    <br>
 <table>
-    <tr><img src="https://www.thorigny.fr/sites/default/files/styles/image_entete_pi/public/seniors-ok.jpg?h=bf287e83&itok=jZhh_k2q" width="1000" height="333"></tr>
+    <tr><td><br></td></tr>
+    <tr><td><h3>Mi Perfil</h3></td></tr>
+    <tr th:each="user: ${perfil}">
+        <td><a class="boton_añadir" th:href="@{/beneficiario/unilist/{usuario}(usuario=${user.usuario})}" role="button">Ver mis datos</a></td></tr>
+    <tr><td><br></td></tr>
+    <tr><td><h3>Voluntarios</h3></td></tr>
+    <tr><td><a class="boton_añadir" th:href="@{/voluntario/solicitar}" role="button">Ver/Solicitar Voluntarios</a></td></tr>
+    <tr><td><br></td></tr>
+    <tr><td><h3>Servicios</h3></td></tr>
+    <tr><td><a class="boton_añadir" th:href="@{/peticion/servicios}" role="button">Contratar Servicios</a></td></tr>
+    <tr><td><br></td></tr>
+    <tr><td><a class="boton_añadir" th:href="@{/peticion/misPeticiones}" role="button">Mis Servicios/Peticiones</a></td></tr>
+    <tr><td><br></td></tr>
 </table>
+    <br>
+    <tr><img src="http://imgfz.com/i/aX06UOP.png" width="500" height="333"></tr>
     <br>
 <h3>¿No sabes como utilizar nuestra página?</h3>
 <a class="boton_personalizado1" th:href="@{/beneficiario/contacta}" role="button">Contacta con tu asistente</a>
+    <br><br><br><br>
 </div>
 </body>
 </html>

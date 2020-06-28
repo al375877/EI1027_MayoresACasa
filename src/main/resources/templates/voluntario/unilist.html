@@ -23,7 +23,7 @@
 <!--style="overflow: hidden;-->
 <div   layout:fragment="content">
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h2 style="color:black;" >Mayores en casa | Beneficiario</h2>
+        <h2 style="color:black;" >Mayores en casa | Voluntario</h2>
     </div>
     <br>
     <h2><img src="https://image.flaticon.com/icons/svg/3039/3039084.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="${user.nombre}"></td></h2>
@@ -43,43 +43,19 @@
             <td th:text="${user.nacimiento}"></td></tr>
         <tr><th scope="col" style="text-align: right">Teléfono</th>
             <td th:text="${user.telefono}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Tipo de dieta</th>
-            <td th:text="${user.tipodieta}"></td></tr>
     </table>
     <table>
-        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/beneficiario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
+        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/voluntario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/beneficiario/updateAsis/{dni}(dni=${user.dni})}">Añadir/Modificar asistente</a></td>
-<!--        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:href="@{/beneficiario/delete/{usuario}(usuario=${user.usuario})}">Dar de baja</a></td>-->
-<!--        <td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;">&nbsp;Acción Irreversible</a></td></tr>-->
-    </table>
-    <br>
-    <hr>
-    <h3 style="color:green" >&nbsp;Asistente asignado</h3>
-    <table class="table" border="5"  bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2" >
-        <thead>
-        <tr >
-            <th style="text-align: center" scope="col">Nombre</th>
-            <th style="text-align: center"  scope="col">DNI</th>
-            <th style="text-align: center"  scope="col">Email</th>
-            <th style="text-align: center"  scope="col">Telefono</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="asistente: ${asistenteUni}">
-            <td th:text="${asistente.nombre}"></td>
-            <td th:text="${asistente.dni}"></td>
-            <td th:text="${asistente.email}"></td>
-            <td th:text="${asistente.telefono}"></td>
-        </tr>
-        </tbody>
+        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:href="@{/voluntario/delete/{dni}(dni=${user.dni})}">Dar de baja</a></td>
+        <td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;">&nbsp;Acción Irreversible</a></td></tr>
     </table>
     <br>
     <br>
-<!--    <a href="/beneficiario/atras2" class="boton_personalizado1" role="button" >Atrás</a>-->
-<!--    <br>-->
-<!--    <br>-->
-
+    <br>
+    <a th:href="@{/casvolunteer/index}" class="boton_personalizado1" role="button" >Atrás</a>
+    <br>
+    <br>
 </div>
 </body>
 </html>

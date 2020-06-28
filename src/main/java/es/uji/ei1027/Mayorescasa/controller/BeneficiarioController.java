@@ -33,8 +33,10 @@ public class BeneficiarioController {
         this.usuarioDao=usuarioDao;
     }
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index")
     public String index(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        model.addAttribute("perfil", usuarioDao.getUsuario(user.getUsuario()));
         return "beneficiario/index";
     }
 
@@ -85,7 +87,7 @@ public class BeneficiarioController {
             @ModelAttribute("usuario") Usuario usuario,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "usuario/update";
+            return "beneficiario/update";
         usuario.setTipoUsuario("Beneficiario");
         usuarioDao.updateUsuario(usuario);
         return "redirect:list";
@@ -181,7 +183,6 @@ public class BeneficiarioController {
         if (user.getTipoUsuario().equals("casCommitee")) return "cascommitee/index";
         return "/";
     }
-
 }
 
 
