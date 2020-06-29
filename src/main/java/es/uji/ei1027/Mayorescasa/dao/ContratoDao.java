@@ -12,11 +12,10 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository  //En Spring los DAOs van anotados con @Repository
+@Repository
 public class ContratoDao {
     private JdbcTemplate jdbcTemplate;
 
-    //Obtenermos el jbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate=new JdbcTemplate(dataSource);
@@ -39,31 +38,6 @@ public class ContratoDao {
         }
     }
 
-    //BORRAMOS Contrato
-    public void deleteContrato(String codcontrato) {
-        jdbcTemplate.update("DELETE FROM contrato WHERE codcontrato=?", codcontrato);
-    }
-
-    //ACTUALIZAMOS Contrato (No se actualiza usuario y dni por claves primaria)
-    public void updateContrato(Contrato contrato){
-        jdbcTemplate.update("UPDATE contrato SET codcontrato=?, tiposervicio=?, " +
-                        "fechainicial=?, fechafinal=?, preciounidad=?, dias_semana=?, " +
-                        "horainicial=?, horafinal=? WHERE empresa=? ",
-                contrato.getCodcontrato(), contrato.getTiposervicio(),contrato.getFechainicial(),
-                contrato.getFechafinal(), contrato.getPreciounidad(),contrato.getDias_semana(),
-                contrato.getHorainicial(), contrato.getHorafinal(), contrato.getEmpresa()
-        );
-
-    }
-
-    public Contrato getContrato (String cod ){
-        try{
-            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE codcontrato=?", new ContratoRowMapper(),cod);
-        }
-        catch (EmptyResultDataAccessException e){
-            return null;
-        }
-    }
     //Get Empresa
     public Empresa getEmpresa (String empresa ){
         try{
@@ -73,32 +47,17 @@ public class ContratoDao {
             return null;
         }
     }
-    //Existe Servicio-Empresa
-    public boolean existeServicio(String nombre, String servicio){
-        List<String> empServicios= new ArrayList<>();
-        try{
-            List<Empresa> empresas=jdbcTemplate.query("SELECT * FROM empresa WHERE nombre=?", new
-                    EmpresaRowMapper(), nombre);
-            for(Empresa empresa : empresas){
-                empServicios.add(empresa.getTiposervicio());
-            }
-            if (empServicios.contains(servicio)) return true;
-        }
-        catch (EmptyResultDataAccessException e){
-            return  false;
-        }
-        return false;
-    }
 
-    //get a partir de una empresa
-    public Contrato getContratoE (String empresa, String servicio ){
+    //Busca contrato
+    public Contrato getContrato(String empresa){
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE empresa=? AND fechafinal>CURRENT_DATE AND tiposervicio=?", new ContratoRowMapper(),empresa,servicio);
+            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE empresa=? AND fechafinal>=CURRENT_DATE", new ContratoRowMapper(), empresa);
         }
         catch (EmptyResultDataAccessException e){
             return null;
         }
     }
+
     //LISTAMOS contrato
     public List<Contrato> getContratos() {
         try{
@@ -120,23 +79,6 @@ public class ContratoDao {
         }
     }
 
-    //LISTAMOS empresa por categoria
-    public List<String> getEmpresasC(String categoria) {
-        List<String> empresasNombre= new ArrayList<>();
-
-        try{
-            List<Empresa> empresas=jdbcTemplate.query("SELECT * FROM empresa where tiposervicio=?", new
-                    EmpresaRowMapper(),categoria);
-            for(Empresa empresa : empresas){
-                empresasNombre.add(empresa.getNombre());
-
-            }
-            return empresasNombre;
-        }
-        catch (EmptyResultDataAccessException e){
-            return  empresasNombre;
-        }
-    }
     //LISTAMOS Peticion
     public List<Peticion> getPeticiones() {
         try {

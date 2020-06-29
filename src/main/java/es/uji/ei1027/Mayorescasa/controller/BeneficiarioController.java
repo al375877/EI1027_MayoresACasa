@@ -58,16 +58,6 @@ public class BeneficiarioController {
         return "beneficiario/info2";
     }
 
-    @RequestMapping("/info2")
-    public String info2(HttpSession session, Model model) {
-        return "beneficiario/info2";
-    }
-
-    @RequestMapping("/pedirRegistro")
-    public String pedirRegistro(Model model) {
-        return "beneficiario/pedirRegistro";
-    }
-
     @RequestMapping("/list")
     public String listusuarios(Model model) {
         model.addAttribute("usuarios", usuarioDao.getBeneficiarios());
@@ -135,7 +125,6 @@ public class BeneficiarioController {
         return "beneficiario/unilist";
     }
 
-    //Llamada de la usuario add
     @RequestMapping(value="/add")
     public String addbeneficiario(Model model) {
         model.addAttribute("usuario", new Usuario());
@@ -163,6 +152,13 @@ public class BeneficiarioController {
         return "redirect:../beneficiario/list";
     }
 
+    @RequestMapping("/atras")
+    public String atras(Model model, HttpSession session) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        if (user.getTipoUsuario().equals("casVolunteer")) return "casvolunteer/index";
+        if (user.getTipoUsuario().equals("casCommitee")) return "cascommitee/index";
+        return "/";
+    }
 
     private String aleatorio(){
         Random aleatorio = new Random();
@@ -174,14 +170,6 @@ public class BeneficiarioController {
         numero=(int)(aleatorio.nextDouble() * 99+100);
         cadena=cadena+alfa.charAt(forma)+numero;
         return cadena;
-    }
-
-    @RequestMapping("/atras")
-    public String atras(Model model, HttpSession session) {
-        Usuario user= (Usuario) session.getAttribute("user");
-        if (user.getTipoUsuario().equals("casVolunteer")) return "casvolunteer/index";
-        if (user.getTipoUsuario().equals("casCommitee")) return "cascommitee/index";
-        return "/";
     }
 }
 

@@ -31,19 +31,14 @@ public class PeticionDao {
 
     }
 
-    //BORRAMOS Peticion
-    public void deletePeticion(String cod) {
-        jdbcTemplate.update("DELETE FROM Peticion WHERE cod_pet=?", cod);
-    }
-
     //ACTUALIZAMOS Peticion
     public void updatePeticion(Peticion peticion) {
         jdbcTemplate.update("UPDATE peticion SET fechafinal=?, comentarios=?, empresa=? WHERE cod_pet=? ",
                 peticion.getFechafinal(), peticion.getComentarios(), peticion.getEmpresa(), peticion.getCod_pet()
         );
     }
-    public void updateEstadoFechaEmpresa(String estado, Date fecha, String empresa, String codigo) {
-        jdbcTemplate.update("UPDATE peticion SET estado=?, fechaaceptada=?, empresa=? WHERE cod_pet=? ", estado, fecha, empresa, codigo
+    public void updateEstadoFechaEmpresa(String estado, Date fecha, String empresa, String codigo, String codcontrato) {
+        jdbcTemplate.update("UPDATE peticion SET estado=?, fechaaceptada=?, empresa=?, codcontrato=? WHERE cod_pet=? ", estado, fecha, empresa, codcontrato, codigo
         );
     }
     public void updateEstadoFecha(String estado, Date fecha, String codigo) {

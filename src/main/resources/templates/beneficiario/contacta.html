@@ -27,19 +27,19 @@
     </div>
     <br>
     <br>
-    <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.2">
+    <table class="table" border="5" bordercolor="#0973ba" style="width:80%;">
         <thead>
         <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Email</th>
-            <th scope="col">Telefono</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Nombre</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Email</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Telefono</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="asistente: ${asistentes}">
-            <td th:text="${asistente.nombre}"></td>
-            <td><a th:text="${asistente.email}" th:href="'mailto:' + ${asistente.email}"></a></td>
-            <td th:text="${asistente.telefono}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${asistente.nombre}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" ><a th:text="${asistente.email}" th:href="'mailto:' + ${asistente.email}"></a></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${asistente.telefono}"></td>
         </tr>
         </tbody>
     </table>

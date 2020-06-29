@@ -12,7 +12,6 @@ import java.util.List;
 public class FacturaDao {
     private JdbcTemplate jdbcTemplate;
 
-    //Obtenermos el jbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);

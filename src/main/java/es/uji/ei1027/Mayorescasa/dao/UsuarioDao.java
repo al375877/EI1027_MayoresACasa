@@ -101,16 +101,6 @@ public class UsuarioDao {
         }
     }
 
-    public List<Voluntario> getVoluntarios() {
-        try{
-           return jdbcTemplate.query("SELECT * FROM voluntario", new
-                    VoluntarioRowMapper());
-        }
-        catch (EmptyResultDataAccessException e){
-            return  new ArrayList<Voluntario>();
-        }
-    }
-
     public List<Usuario> getVoluntariosPendientes() {
         try{
             return jdbcTemplate.query("SELECT usuario.* FROM voluntario FULL JOIN usuario USING(dni) WHERE voluntario.estado='Pendiente'", new
@@ -152,18 +142,6 @@ public class UsuarioDao {
             return  new ArrayList<Voluntario>();
         }
     }
-    public String getVisibilidad(String dni) {
-        Voluntario voluntario;
-        try{
-            voluntario= jdbcTemplate.queryForObject("SELECT * FROM voluntario where dni=?", new
-                    VoluntarioRowMapper(),dni);
-
-            return voluntario.getVisible();
-        }
-        catch (EmptyResultDataAccessException e){
-            return  null;
-        }
-    }
 
     //Get Beneficiario
     public Beneficiario getBeneficiario (String dni ){
@@ -191,27 +169,6 @@ public class UsuarioDao {
         jdbcTemplate.update("UPDATE Voluntario SET visible=? WHERE dni=?",
                 visible, dniVol);
 
-    }
-
-    //LISTAMOS Usuario
-    public List<Usuario> getUsuarios() {
-        try{
-            return jdbcTemplate.query("SELECT * FROM usuario", new
-                    UsuarioRowMapper());
-        }
-        catch (EmptyResultDataAccessException e){
-            return  new ArrayList<Usuario>();
-        }
-    }
-
-    public List<Usuario> getUsuariosVoluntarios() {
-        try{
-            return jdbcTemplate.query("SELECT * FROM usuario WHERE tipoUsuario='Voluntario'", new
-                    UsuarioRowMapper());
-        }
-        catch (EmptyResultDataAccessException e){
-            return  new ArrayList<Usuario>();
-        }
     }
 
     public Voluntario getVoluntario(String dni){

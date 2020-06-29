@@ -15,7 +15,6 @@ import java.util.List;
 public class DisponibilidadDao {
     private JdbcTemplate jdbcTemplate;
 
-    //Obtenermos el jbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate=new JdbcTemplate(dataSource);
@@ -52,7 +51,6 @@ public class DisponibilidadDao {
         }
 
     }
-
 
     //devuelve una lista de todas las asignaciones de beneficiaros
     public List<Disponibilidad> consultaBeneficiarios(String dni){

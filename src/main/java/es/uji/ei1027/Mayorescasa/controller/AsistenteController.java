@@ -26,71 +26,10 @@ public class AsistenteController {
         this.asistenteDao=asistenteDao;
     }
 
-    // Operaciones: Crear, listar, actualizar, borrar
-
-    @RequestMapping("/list")
-    public String listasistentes(Model model) {
-        model.addAttribute("asistentes", asistenteDao.getAsistentes());
-        return "asistente/list";
-    }
-    //Llamada de la peticion add
-    @RequestMapping(value="/add")
-    public String addasistente(Model model) {
-        model.addAttribute("asistente", new Asistente());
-        List<String> generoList = new ArrayList<>();
-        generoList.add("Femenini");
-        generoList.add("Masculino");
-        model.addAttribute("generoList", generoList);
-        return "asistente/add";
-    }
-
-    @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("asistente") Asistente asistente,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "asistente/add";
-        asistenteDao.addAsistente(asistente);
-        return "redirect:list";
-    }
-
-    @RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
-    public String editasistente(Model model, @PathVariable String usuario) {
-        model.addAttribute("asistente", asistenteDao.getAsistente(usuario));
-        return "asistentes/update";
-    }
-
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("asistente") Asistente asistente,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "asistente/update";
-        asistenteDao.updateAsistente(asistente);
-        return "redirect:list";
-    }
-
-    @RequestMapping(value="/delete/{usuario}")
-    public String processDelete(@PathVariable String usuario) {
-        asistenteDao.deleteAsistente(usuario);
-        return "redirect:../list";
-    }
-
-    @RequestMapping("/index")
-    public String index(HttpSession session, Model model) {
-        return "asistente/index";
-    }
-
     @RequestMapping("/solicitar")
     public String solicitar(Model model) {
         model.addAttribute("asistentes", asistenteDao.getAsistentes());
         return "asistente/solicitar";
     }
-
-    @RequestMapping("/contacto")
-    public String contacto(HttpSession session, Model model) {
-        return "asistente/contacto";
-    }
-
-
 
 }

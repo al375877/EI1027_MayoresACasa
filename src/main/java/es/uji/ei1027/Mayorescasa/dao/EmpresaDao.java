@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Repository  //En Spring los DAOs van anotados con @Repository
+@Repository
 public class EmpresaDao {
     private JdbcTemplate jdbcTemplate;
 
-    //Obtenermos el jbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate=new JdbcTemplate(dataSource);
@@ -84,15 +83,6 @@ public class EmpresaDao {
     String dni, String genero, String nacimiento, int telefono, String tipoUsuario, String tipoDieta) {
         jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                 nombre, usuario, contraseña, email, direccion, dni, genero, nacimiento, telefono, tipoUsuario, tipoDieta );
-    }
-
-    public Usuario getUsuarioDni (String dni ){
-        try{
-            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE dni=?", new UsuarioRowMapper(), dni);
-        }
-        catch (EmptyResultDataAccessException e){
-            return null;
-        }
     }
 
     //BORRAMOS Usuario

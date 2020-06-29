@@ -29,8 +29,6 @@ public class VoluntarioController {
     @Autowired
     DisponibilidadDao disponibilidadDao;
 
-    // Operaciones: Crear, listar, actualizar, borrar
-
     @RequestMapping("/list")
     public String listusuarios(Model model) {
         model.addAttribute("usuarios", usuarioDao.getVoluntariosUsers());
@@ -55,6 +53,21 @@ public class VoluntarioController {
         generoList.add("Masculino");
         model.addAttribute("generoList", generoList);
         return "voluntario/add";
+    }
+
+    @RequestMapping(value="/add", method= RequestMethod.POST)
+    public String processAddSubmit(@ModelAttribute("voluntario") Voluntario voluntario,
+                                   BindingResult bindingResult) {
+        VoluntarioValidator voluntarioValidator = new VoluntarioValidator();
+        voluntarioValidator.validate(voluntario, bindingResult);
+        if (bindingResult.hasErrors()) {
+            System.out.println("Error al añadir el voluntario");
+            return "voluntario/add";
+        }
+        voluntario.setTipoUsuario("Voluntario");
+        usuarioDao.addUsuario(voluntario);
+        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"no","Pendiente");
+        return "redirect:../voluntario/altaEnviada";
     }
 
     @RequestMapping(value = "/rechazar/{dni}")
@@ -97,21 +110,6 @@ public class VoluntarioController {
         usuarioDao.deleteUsuario(dni);
         usuarioDao.deleteVoluntario(dni);
         return "voluntario/eliminado";
-    }
-
-    @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("voluntario") Voluntario voluntario,
-                                   BindingResult bindingResult) {
-        VoluntarioValidator voluntarioValidator = new VoluntarioValidator();
-        voluntarioValidator.validate(voluntario, bindingResult);
-        if (bindingResult.hasErrors()) {
-            System.out.println("Error al añadir el voluntario");
-            return "voluntario/add";
-        }
-        voluntario.setTipoUsuario("Voluntario");
-        usuarioDao.addUsuario(voluntario);
-        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"no","Pendiente");
-        return "redirect:../voluntario/altaEnviada";
     }
 
     @RequestMapping("/altaEnviada")
@@ -157,7 +155,6 @@ public class VoluntarioController {
                             break;//solo hace el break en el for de dentro
                         }
                     }
-
                 //si está aceptada, la añado a la lista de asignados
                 if (dis.getEstado().equals("Aceptada")){
                     TempUsuarioComentario temporal = new TempUsuarioComentario();
@@ -165,10 +162,7 @@ public class VoluntarioController {
                     temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol(),dis.getUsuario_ben()));
                     listaTemporal.add(temporal);
                 }
-
             }
-
-
         }
         if(listaTemporal.size()>0){
             model.addAttribute("temp",listaTemporal);
@@ -202,8 +196,6 @@ public class VoluntarioController {
         List<Disponibilidad> asignados= disponibilidadDao.consultaDisponibilidad(user.getDni());
         session.setAttribute("volAsignados",asignados);
 
-
-
         //si ya tiene uno de los voluntarios asignado, lo elimina de los disponibles.
         for(Disponibilidad dis:asignados) {
                 for(Voluntario vol:voluntariosDisponibles) {
@@ -212,7 +204,6 @@ public class VoluntarioController {
                         break;//solo hace el break en el for de dentro
                     }
                 }
-
             //si está aceptada, la añado a la lista de asignados
             if (dis.getEstado().equals("Aceptada")){
                 TempUsuarioComentario temporal = new TempUsuarioComentario();
@@ -224,7 +215,6 @@ public class VoluntarioController {
         if(listaTemporal.size()>0){
             model.addAttribute("temp",listaTemporal);
         }
-
         if(voluntariosDisponibles.size()>0){
             model.addAttribute("voluntarios", voluntariosDisponibles);
         }
@@ -286,9 +276,7 @@ public class VoluntarioController {
 
         Usuario user=(Usuario)  session.getAttribute("user");
         Disponibilidad dis=disponibilidadDao.getDisponibilidad(dniBen,user.getDni());
-
         disponibilidadDao.deleteDisponibilidad(dis);
-
         return "redirect:../beneficiarios";
     }
 
@@ -332,21 +320,18 @@ public class VoluntarioController {
 
     @RequestMapping("/quitarVisibilidad")
     public String quitarVisibilidad(Model model,HttpSession session) {
-
         Usuario user=(Usuario) session.getAttribute("user");
-
         usuarioDao.setVisibilidad(user.getDni(),"no");
-
         return "redirect:./perfil";
     }
+
     @RequestMapping("/ponerVisibilidad")
     public String ponerVisibilidad(Model model,HttpSession session) {
-
         Usuario user=(Usuario) session.getAttribute("user");
         usuarioDao.setVisibilidad(user.getDni(),"si");
-
         return "redirect:./perfil";
     }
+
     @RequestMapping("/baja")
     public String baja(Model model,HttpSession session) {
 
@@ -354,11 +339,8 @@ public class VoluntarioController {
         Voluntario actual=usuarioDao.getVoluntario(user.getDni());
         actual.setEstado("Baja");
         usuarioDao.updateEstadoVoluntario(actual);
-
         usuarioDao.setVisibilidad(user.getDni(),"no");
-
         List<Disponibilidad> listaDisp=disponibilidadDao.consultaBeneficiarios(user.getDni());
-
         for(Disponibilidad disp:listaDisp){
             Date fecha=new Date();
             disp.setFechafinal(fecha);
@@ -370,16 +352,11 @@ public class VoluntarioController {
     }
     @RequestMapping("/alta")
     public String alta(Model model,HttpSession session) {
-
         Usuario user=(Usuario) session.getAttribute("user");
         Voluntario actual=usuarioDao.getVoluntario(user.getDni());
         actual.setEstado("Aceptado");
         usuarioDao.updateEstadoVoluntario(actual);
-
         usuarioDao.setVisibilidad(user.getDni(),"si");
-
-
-
         return "redirect:./perfil";
     }
 

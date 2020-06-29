@@ -153,26 +153,4 @@ public class EmpresaController {
         return "empresa/index";
     }
 
-    @RequestMapping("/contActivo")
-    public String contActivo(Model model) {
-        return "empresa/contActivo";
-    }
-
-    @RequestMapping("/empRegistrada")
-    public String empRegistrada(Model model) {
-        return "empresa/empRegistrada";
-    }
-
-    @RequestMapping("/empExiste")
-    public String empExiste(Model model) {
-        return "empresa/empExiste";
-    }
-
-
-
-
-
-
-
-
 }

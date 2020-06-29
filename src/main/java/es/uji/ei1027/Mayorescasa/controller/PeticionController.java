@@ -31,19 +31,9 @@ public class PeticionController {
         this.peticionDao = peticionDao;
     }
 
-    // Operaciones: Crear, listar, actualizar, borrar
-
     @RequestMapping("/list")
     public String listpeticiones(Model model, HttpSession session) {
         Usuario user= (Usuario) session.getAttribute("user");
-//        //mapa para enlazar la peticion con las empresas de ese tipo de servicio
-//        Map<Peticion, List<String>> peticionEmpresas= new HashMap();
-//
-//        for(Peticion pet:peticionDao.getPeticionesPendientes()){
-//            List<String> empresas= contratoDao.getEmpresasC(pet.getTiposervicio());
-//            peticionEmpresas.put(pet,empresas);
-//            }
-//        model.addAttribute("map",peticionEmpresas);
         model.addAttribute("map",peticionDao.getPeticionesPendientes());
         model.addAttribute("contratos", contratoDao.getContratos());
         return "peticion/list";
@@ -55,23 +45,6 @@ public class PeticionController {
         model.addAttribute("aceptadas",peticionDao.getPeticionesAceptadas());
         model.addAttribute("rechazadas",peticionDao.getPeticionesRechazadas());
         return "peticion/listAcepRech";
-    }
-
-
-    //Llamada de la peticion add
-    @RequestMapping(value = "/add")
-    public String addpeticion(Model model) {
-        model.addAttribute("peticion", new Peticion());
-        return "peticion/add";
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "peticion/add";
-        peticionDao.addPeticion(peticion);
-        return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{codigo}", method = RequestMethod.GET)
@@ -95,12 +68,6 @@ public class PeticionController {
             return "peticion/update";
         peticionDao.updatePeticion(peticion);
         return "redirect:list";
-    }
-
-    @RequestMapping(value = "/delete/{usuario}")
-    public String processDelete(@PathVariable String usuario) {
-        peticionDao.deletePeticion(usuario);
-        return "redirect:../list";
     }
 
     @RequestMapping("/servicios")
@@ -130,7 +97,6 @@ public class PeticionController {
             return "peticion/solicitada";
         }
     }
-
 
     @RequestMapping(value = "/addComentarioC", method = RequestMethod.POST)
     public String catering(@ModelAttribute("comment") String comentario, HttpSession session) {
@@ -168,7 +134,6 @@ public class PeticionController {
         pet.setComentarios(comentario);
         pet.setEstado("Pendiente");
         boolean existe= peticionDao.consultaPeticion(pet.getDni_ben(),pet.getTiposervicio());
-//        boolean existe= (boolean) session.getAttribute("existeS");
         if(existe){
             System.out.println("Ya solicitado");
             return "peticion/existe";
@@ -179,17 +144,6 @@ public class PeticionController {
         }
     }
 
-    private String aleatorio(){
-        Random aleatorio = new Random();
-        String alfa = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
-        String cadena = "";
-        int numero;
-        int forma;
-        forma=(int)(aleatorio.nextDouble() * alfa.length()-1+0);
-        numero=(int)(aleatorio.nextDouble() * 99+100);
-        cadena=cadena+alfa.charAt(forma)+numero;
-        return cadena;
-    }
     @RequestMapping(value = "/aceptar/{cod_pet}", method = RequestMethod.GET)
     public String aceptarPeticion(@PathVariable("cod_pet") String cod_pet, HttpSession session, Model model) {
         Peticion pet = peticionDao.getPeticion(cod_pet);
@@ -198,9 +152,8 @@ public class PeticionController {
         Contrato contrato=peticionDao.getContratoE(empresa,servicio);
         Factura fac;
         if (contrato!=null){
-            pet.setCodcontrato(contrato.getCodcontrato());
             Date fecha = new Date();
-            peticionDao.updateEstadoFechaEmpresa("Aceptada",fecha,empresa,pet.getCod_pet());
+            peticionDao.updateEstadoFechaEmpresa("Aceptada",fecha,empresa,pet.getCod_pet(),contrato.getCodcontrato());
             //********************************************************************
             fac = peticionDao.getFactura(pet.getDni_ben());
             peticionDao.addLineas_fac(fac.getCod_fac(),pet.getCod_pet(),0,pet.getTiposervicio(),pet.getPrecioservicio());
@@ -284,49 +237,49 @@ public class PeticionController {
         return "peticion/misPeticiones";
     }
 
-    @RequestMapping("/info")
-    public String limpieza(Model model) {
-        return "peticion/info";
-    }
+//    @RequestMapping("/facturas")
+//    public String facturas(Model model) {
+//        model.addAttribute("facturas", peticionDao.getFacturas());
+//        return "peticion/facturas";
+//    }
+//
+//    @RequestMapping(value = "/genFactura/{cod}")
+//    public String genFactura(@PathVariable String cod, Model model) {
+//
+//        Factura fac;
+//        ArrayList<Lineas_fac> lineas;
+//        fac = peticionDao.getFacturaCod(cod);
+//        lineas = (ArrayList) peticionDao.getLineas_fac(cod);
+//        System.out.println("");
+//        System.out.println("");
+//        System.out.println("FACTURA GENERADA");
+//        System.out.println("****************************************");
+//        System.out.println("CODIGO DE FACTURA: " + fac.getCod_fac());
+//        System.out.println("****************************************");
+//        System.out.println("Cliente: " + fac.getConcepto() + "      DNI: " + fac.getdniBen());
+//        System.out.println("");
+//        System.out.println("TIPO DE SERVICIO      PRECIO");
+//        for (Lineas_fac linea:lineas){
+//            System.out.println("   " + linea.getTiposervicio() + "          " + linea.getPrecioservicio());
+//        }
+//        System.out.println("");
+//        System.out.println("");
+//        System.out.println("                      TOTAL: " + fac.getPrecio() + " EUROS");
+//        System.out.println("****************************************");
+//
+//        return "redirect:../facturas";
+//    }
 
-    @RequestMapping("/sinContrato")
-    public String sinContrato(Model model) {
-        return "contrato/sinContrato";
-    }
-
-
-    @RequestMapping("/facturas")
-    public String facturas(Model model) {
-        model.addAttribute("facturas", peticionDao.getFacturas());
-        return "peticion/facturas";
-    }
-
-    @RequestMapping(value = "/genFactura/{cod}")
-    public String genFactura(@PathVariable String cod, Model model) {
-
-        Factura fac;
-        ArrayList<Lineas_fac> lineas;
-        fac = peticionDao.getFacturaCod(cod);
-        lineas = (ArrayList) peticionDao.getLineas_fac(cod);
-        System.out.println("");
-        System.out.println("");
-        System.out.println("FACTURA GENERADA");
-        System.out.println("****************************************");
-        System.out.println("CODIGO DE FACTURA: " + fac.getCod_fac());
-        System.out.println("****************************************");
-        System.out.println("Cliente: " + fac.getConcepto() + "      DNI: " + fac.getdniBen());
-        System.out.println("");
-        System.out.println("TIPO DE SERVICIO      PRECIO");
-        for (Lineas_fac linea:lineas){
-            System.out.println("   " + linea.getTiposervicio() + "          " + linea.getPrecioservicio());
+        private String aleatorio(){
+            Random aleatorio = new Random();
+            String alfa = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
+            String cadena = "";
+            int numero;
+            int forma;
+            forma=(int)(aleatorio.nextDouble() * alfa.length()-1+0);
+            numero=(int)(aleatorio.nextDouble() * 99+100);
+            cadena=cadena+alfa.charAt(forma)+numero;
+            return cadena;
         }
-        System.out.println("");
-        System.out.println("");
-        System.out.println("                      TOTAL: " + fac.getPrecio() + " EUROS");
-        System.out.println("****************************************");
-
-        return "redirect:../facturas";
-    }
-
 
 }

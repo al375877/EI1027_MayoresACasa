@@ -45,17 +45,6 @@ public class ContratoController {
         return "contrato/listPasados";
     }
 
-    @RequestMapping(value="/delete/{codcontrato}")
-    public String processDelete(@PathVariable String codcontrato) {
-        contratoDao.deleteContrato(codcontrato);
-        return "redirect:../list";
-    }
-
-    @RequestMapping("/existe")
-    public String index(HttpSession session, Model model) {
-        return "contrato/existe";
-    }
-
     //Llamada de la contrato add
     @RequestMapping(value="/add")
     public String addcontrato(HttpSession session, Model model) {
@@ -82,6 +71,8 @@ public class ContratoController {
             System.out.println("Error al añadir el contrato");
             return "contrato/add";
         }
+        Contrato existeCont = contratoDao.getContrato(contrato.getEmpresa());
+        if (existeCont!=null) return "contrato/existe";
         contrato.setCodcontrato(aleatorio()+"CNT");
         contrato.setTiposervicio(contratoDao.getServicio(contrato.getEmpresa()).getTiposervicio());
         contratoDao.addContrato(contrato);
@@ -101,11 +92,6 @@ public class ContratoController {
         System.out.println("Mayores en casa.\n");
         System.out.println("*************************************************************************");
         return "contrato/contAñadido";
-    }
-
-    @RequestMapping("/contAñadiddo")
-    public String contAñadiddo(Model model) {
-        return "contrato/contAñadiddo";
     }
 
     private String aleatorio(){
