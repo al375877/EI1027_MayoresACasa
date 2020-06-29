@@ -67,9 +67,9 @@ public class UsuarioDao {
                 usuario.getNacimiento(),usuario.getTelefono(), usuario.getTipoUsuario(),
                 usuario.getTipodieta(),usuario.getDni());
     }
-    public Usuario getUsuario (String name ){
+    public Usuario getUsuario (String usuario ){
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE usuario=?", new UsuarioRowMapper(), name);
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE usuario=?", new UsuarioRowMapper(), usuario);
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -86,7 +86,7 @@ public class UsuarioDao {
     //LISTAMOS Voluntarios
     public List<Usuario> getVoluntariosUsers() {
         try{
-            return jdbcTemplate.query("SELECT * FROM usuario WHERE tipousuario='Voluntario'", new
+            return jdbcTemplate.query("SELECT * FROM usuario JOIN voluntario USING(dni) WHERE usuario.tipousuario='Voluntario' AND voluntario.estado='Aceptado'", new
                     UsuarioRowMapper());
         }
         catch (EmptyResultDataAccessException e){
@@ -103,6 +103,39 @@ public class UsuarioDao {
             return  new ArrayList<Voluntario>();
         }
     }
+
+    public List<Usuario> getVoluntariosPendientes() {
+        try{
+            return jdbcTemplate.query("SELECT usuario.* FROM voluntario FULL JOIN usuario USING(dni) WHERE voluntario.estado='Pendiente'", new
+                    UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Usuario>();
+        }
+    }
+
+    public List<Usuario> getVoluntariosAceptados() {
+        try{
+            return jdbcTemplate.query("SELECT usuario.* FROM voluntario FULL JOIN usuario USING(dni) WHERE voluntario.estado='Aceptado'", new
+                    UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Usuario>();
+        }
+    }
+
+    public List<Usuario> getVoluntariosRechazados() {
+        try{
+            return jdbcTemplate.query("SELECT usuario.* FROM voluntario FULL JOIN usuario USING(dni) WHERE voluntario.estado='Rechazado'", new
+                    UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return  new ArrayList<Usuario>();
+        }
+    }
+
+
+
     public List<Voluntario> getVoluntariosVisibles() {
         try{
             return jdbcTemplate.query("SELECT * FROM voluntario where visible='si'", new

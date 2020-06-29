@@ -37,6 +37,14 @@ public class VoluntarioController {
         return "voluntario/list";
     }
 
+    @RequestMapping("/registros")
+    public String registros(Model model) {
+        model.addAttribute("usersVol", usuarioDao.getVoluntariosPendientes());
+        model.addAttribute("usersVolA", usuarioDao.getVoluntariosAceptados());
+        model.addAttribute("usersVolR", usuarioDao.getVoluntariosRechazados());
+        return "voluntario/registros";
+    }
+
     //Llamada de la peticion add
     @RequestMapping(value="/add")
     public String addvoluntario(Model model) {
@@ -52,49 +60,43 @@ public class VoluntarioController {
     @RequestMapping(value = "/rechazar/{dni}")
     public String rechazarVoluntario(@PathVariable String dni){
         Voluntario voluntario = usuarioDao.getVoluntario(dni);
-        if(voluntario.getEstado().equals("Pendiente")){
-            voluntario.setEstado("Rechazado");
-            usuarioDao.updateEstadoVoluntario(voluntario);
-            System.out.println("");
-            System.out.println("");
-            System.out.println("EMAIL ENVIADO");
-            System.out.println("*************************************************************************");
-            System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
-                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
-                    "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
-                    "Gracias por su colaboración.\n");
-            System.out.println("*************************************************************************");
-        }
+        voluntario.setEstado("Rechazado");
+        usuarioDao.updateEstadoVoluntario(voluntario);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("EMAIL ENVIADO");
+        System.out.println("*************************************************************************");
+        System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
+                "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
+                "Gracias por su colaboración.\n");
+        System.out.println("*************************************************************************");
 
-        return "redirect:../list";
+        return "redirect:../registros";
     }
 
     @RequestMapping(value = "/aceptar/{dni}")
     public String aceptarVoluntario(@PathVariable String dni){
-
         Voluntario voluntario = usuarioDao.getVoluntario(dni);
+        voluntario.setEstado("Aceptado");
+        usuarioDao.updateEstadoVoluntario(voluntario);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("EMAIL ENVIADO");
+        System.out.println("*************************************************************************");
+        System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
+                "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
+                "Gracias por su colaboración.\n");
 
-        if(voluntario.getEstado().equals("Pendiente")){
-            voluntario.setEstado("Aceptado");
-            usuarioDao.updateEstadoVoluntario(voluntario);
-            System.out.println("");
-            System.out.println("");
-            System.out.println("EMAIL ENVIADO");
-            System.out.println("*************************************************************************");
-            System.out.println("Correo destinatario: " +usuarioDao.getUsuarioDni(dni).getEmail()+ "\n"+
-                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
-                    "Estimado/a señor/a "+usuarioDao.getUsuarioDni(dni).getNombre()+ " desde mayores en casa le comunicamos que tu solicitud para ser voluntario ha sido "+ voluntario.getEstado()+".\n" +
-                    "Gracias por su colaboración.\n");
-        }
-
-        return "redirect:../list";
+        return "redirect:../registros";
     }
 
     @RequestMapping(value ="/delete/{dni}")
     public String eliminarVoluntario(@PathVariable String dni){
         usuarioDao.deleteUsuario(dni);
         usuarioDao.deleteVoluntario(dni);
-        return "redirect:../list";
+        return "voluntario/eliminado";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
@@ -117,8 +119,10 @@ public class VoluntarioController {
         return "voluntario/altaEnviada";
     }
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index")
     public String index(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        model.addAttribute("perfil", usuarioDao.getUsuario(user.getUsuario()));
         return "voluntario/index";
     }
 
@@ -415,7 +419,17 @@ public class VoluntarioController {
     @RequestMapping("/unilist/{usuario}")
     public String unilistEmpresas(Model model, @PathVariable String usuario) {
         model.addAttribute("user", usuarioDao.getUsuario(usuario));
+        Usuario user = usuarioDao.getUsuario(usuario);
+        model.addAttribute("vol", usuarioDao.getVoluntario(user.getDni()));
         return "voluntario/unilist";
+    }
+
+    @RequestMapping("/unilistPen/{usuario}")
+    public String unilistEmpresasPen(Model model, @PathVariable String usuario) {
+        model.addAttribute("user", usuarioDao.getUsuario(usuario));
+        Usuario user = usuarioDao.getUsuario(usuario);
+        model.addAttribute("vol", usuarioDao.getVoluntario(user.getDni()));
+        return "voluntario/unilistPen";
     }
 
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)

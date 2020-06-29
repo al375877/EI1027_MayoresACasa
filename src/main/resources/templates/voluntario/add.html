@@ -30,7 +30,7 @@
     <table style="margin:auto">
         <tr>
             <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
-            <td>&nbsp;Nombre:&nbsp;</td>
+            <td>&nbsp;Nombre y apellidos:&nbsp;</td>
             <td><input type="text" th:field="*{nombre}"
                        placeholder="Nombre y apellidos" maxlength="50"/></td>
             <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></td>

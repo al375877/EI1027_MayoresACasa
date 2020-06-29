@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+  th, td, tr{
+            text-align: left;
+            border:black 1;
+        }
+
+    </style>
+</head>
+<body>
+<!--style="overflow: hidden;-->
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h3 style="color:black;" >Mayores en casa | CAS Volunteer | Altas de voluntarios </h3>
+    </div>
+    <br>
+    <h3><img src="https://image.flaticon.com/icons/svg/3003/3003148.svg"width="70" height="70">&nbsp;&nbsp;Voluntarios pendientes </h3>
+    <br>
+    <table class="table" border="5" bordercolor="#0973ba">
+        <thead>
+        <tr>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Nombre</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Telefono</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${usersVol}">
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${user.nombre}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${user.telefono}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${user.email}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1"><a type="button" class="boton_editar" style="font-size: 14px;" th:href="@{/voluntario/unilistPen/{usuario}(usuario=${user.usuario})}">Más Información</a></td>
+            <td style="background: rgba(105, 124, 224, 0.2"><a type="button" th:href="@{/voluntario/aceptar/{dni}(dni=${user.dni})}">
+                <img  class="boton_añadir" src="https://image.flaticon.com/icons/svg/159/159767.svg" width="50"  alt="x" /></a></td>
+            <td style="background: rgba(105, 124, 224, 0.2"><a type="button" th:href="@{/voluntario/rechazar/{dni}(dni=${user.dni})}">
+                <img  class="boton_eliminar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Voluntarios aceptados/registrados</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2"  >
+        <th scope="col">Nombre</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userA: ${usersVolA}">
+        <td th:text="${userA.nombre}"></td>
+        <td th:text="${userA.telefono}"></td>
+        <td th:text="${userA.email}"></td>
+    </tr>
+    </tbody>
+    </table>
+    <br>
+    <h3 style="color:red" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Voluntarios rechazados</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#ff0000" style="background: rgba(255, 0, 0, 0.2"  >
+        <th scope="col">Nombre</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Email</th>
+        <th style="text-align: center; vertical-align: middle;" scope="col">Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userR: ${usersVolR}">
+        <td th:text="${userR.nombre}"></td>
+        <td th:text="${userR.telefono}"></td>
+        <td th:text="${userR.email}"></td>
+        <td style="text-align: center; vertical-align: middle;"><a type="button"
+               th:href="@{/voluntario/delete/{dni}(dni=${userR.dni})}">
+               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>
+    </tr>
+    <br>
+    </tbody>
+    </table>
+    <br>
+    <a href="/casvolunteer/index" class="boton_personalizado1" role="button" >Atrás</a>
+<!--    &nbsp;&nbsp;<a href="/voluntario/list" class="boton_personalizado1" role="button" >Más Información</a>-->
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</div>
+</body>
+</html>

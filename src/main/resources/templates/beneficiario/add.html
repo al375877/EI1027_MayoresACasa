@@ -38,7 +38,7 @@
         <table style="margin:auto">
             <tr>
                 <td><img src="https://image.flaticon.com/icons/svg/126/126486.svg"width="30" height="30"></td>
-                <td>Nombre:&nbsp;</td>
+                <td>Nombre y apellidos:&nbsp;</td>
                 <td><input input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder=" Juan Perez Salvador" size="40" maxlength="50" ></td>
                 <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></td>
             <tr><td><br></td></tr>

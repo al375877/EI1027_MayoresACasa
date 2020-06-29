@@ -19,7 +19,7 @@ public class VoluntarioValidator implements Validator {
         Usuario usuario = (Usuario)obj;
         if (usuario.getNombre().length()<12)
             errors.rejectValue("nombre", "obligatorio",
-                    " Introduce un valor valido");
+                    " Introduce un nombre valido");
         if (usuario.getNacimiento()>2002 || usuario.getNacimiento()<1950)
             errors.rejectValue("nacimiento", "obligatorio",
                     " Mayor de 18 años (o cumplirlos este año)");
@@ -35,9 +35,9 @@ public class VoluntarioValidator implements Validator {
         if (usuario.getContraseña().trim().equals(""))
             errors.rejectValue("contraseña", "obligatorio",
                     " Hay que introducir un valor");
-        if (usuario.getEmail().trim().equals(""))
+        if (!usuario.getEmail().trim().contains("@") || !usuario.getEmail().trim().contains("."))
             errors.rejectValue("email", "obligatorio",
-                    " Hay que introducir un valor");
+                    " Introduce un email valido");
         if (usuario.getGenero().length()>9)
             errors.rejectValue("genero", "obligatorio",
                     " Selecciona un genero correcto");

@@ -15,9 +15,9 @@ public class BeneficiarioValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         Usuario usuario = (Usuario)obj;
-        if (usuario.getNombre().trim().equals(""))
+        if (usuario.getNombre().length()<12)
             errors.rejectValue("nombre", "obligatorio",
-                    " Hay que introducir un valor");
+                    " Introduce un valor valido");
         // Afegeix ací la validació per a Edat > 18 anys
         if (usuario.getNacimiento()>1955 || usuario.getNacimiento()<1900)
             errors.rejectValue("nacimiento", "obligatorio",
@@ -34,9 +34,9 @@ public class BeneficiarioValidator implements Validator {
         if (usuario.getContraseña().trim().equals(""))
             errors.rejectValue("contraseña", "obligatorio",
                     " Hay que introducir un valor");
-        if (usuario.getEmail().trim().equals(""))
+        if (!usuario.getEmail().trim().contains("@") || !usuario.getEmail().trim().contains("."))
             errors.rejectValue("email", "obligatorio",
-                    " Hay que introducir un valor");
+                    " Introduce un email valido");
         if (usuario.getDireccion().trim().equals(""))
             errors.rejectValue("direccion", "obligatorio",
                     " Hay que introducir un valor");

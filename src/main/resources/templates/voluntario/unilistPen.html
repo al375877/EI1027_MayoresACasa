@@ -51,15 +51,13 @@
             <td th:text="${vol.estado}"></td></tr>
     </table>
     <table>
-        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/voluntario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:href="@{/voluntario/delete/{dni}(dni=${user.dni})}">Dar de baja</a></td>
-        <td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;">&nbsp;Acción Irreversible</a></td></tr>
+        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:href="@{/voluntario/rechazar/{dni}(dni=${user.dni})}">Rechazar</a></td>
+        <td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;"></a></td></tr>
     </table>
     <br>
     <br>
     <br>
-    <a th:href="@{/voluntario/list}" class="boton_personalizado1" role="button">Atrás</a>
+    <a th:href="@{/voluntario/registros}" class="boton_personalizado1" role="button">Atrás</a>
     <br>
     <br>
 </div>
