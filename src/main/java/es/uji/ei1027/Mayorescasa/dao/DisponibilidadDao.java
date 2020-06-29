@@ -65,14 +65,59 @@ public class DisponibilidadDao {
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<>();
         }
-
     }
 
-    public String getComentario(String dniV){
+    //devuelve una lista de todas las asignaciones de beneficiaros
+    public List<Disponibilidad> consultaBeneficiariosPendiente(String dni){
+        try{
+            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_vol=? AND estado='Pendiente'",
+                    new DisponibildadRowMapper(), dni);
+
+            return lista;
+
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
+    //devuelve una lista de todas las asignaciones de beneficiaros aceptados
+    public List<Disponibilidad> consultaBeneficiariosAceptado(String dni){
+        try{
+            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_vol=? AND estado='Aceptada'",
+                    new DisponibildadRowMapper(), dni);
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
+    //devuelve una lista de todas las asignaciones de beneficiaros rechazados
+    public List<Disponibilidad> consultaBeneficiariosRechazado(String dni){
+        try{
+            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_vol=? AND estado='Rechazada'",
+                    new DisponibildadRowMapper(), dni);
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
+    //devuelve una lista de todas las asignaciones de beneficiaros finalizadas
+    public List<Disponibilidad> consultaBeneficiariosFinalizado(String dni){
+        try{
+            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_vol=? AND estado='Finalizada'",
+                    new DisponibildadRowMapper(), dni);
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
+    public String getComentario(String dniV, String dniB){
         String comentario="";
         try{
-            Disponibilidad disponibilidad= jdbcTemplate.queryForObject("SELECT * FROM Disponibilidad WHERE dni_vol=?",
-                    new DisponibildadRowMapper(), dniV);
+            Disponibilidad disponibilidad= jdbcTemplate.queryForObject("SELECT * FROM Disponibilidad WHERE dni_vol=? AND dni_ben=?",
+                    new DisponibildadRowMapper(), dniV, dniB);
             comentario=disponibilidad.getComentario();
             return comentario;
 

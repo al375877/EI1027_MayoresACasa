@@ -22,20 +22,19 @@
 <body>
 <h1 >Lista de los voluntarios disponibles</h1>
 <div   layout:fragment="content">
-    <div  style="padding: 25px 50px;background-color:#B0E0E6; "class="container">
-        <h2 style="color:black">Mayores en casa | Beneficiaros | Voluntarios</h2>
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2>Mayores en casa | Beneficiaros | Voluntarios</h2>
     </div>
     <br>
     <h3 th:unless="*{temp == null}" >Voluntarios asignados</h3>
-    <table th:unless="*{temp == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;"  class="table table-striped" border="5" bordercolor="#0973ba">
+    <table th:unless="*{temp == null}" class="table" border="5" bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2; text-align: center; vertical-align: middle;">
         <thead>
         <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
             <th scope="col">telefono</th>
-            <th scope="col">direccion</th>
             <th scope="col">Dia de preferencia</th>
-            <th scope="col" >Finalizar la relacion con un voluntario</th>
+            <th scope="col" >Finalizar la relacion con el voluntario</th>
         </tr>
         </thead>
         <tbody>
@@ -43,7 +42,6 @@
                 <td th:text="${obj.nombre}"> </td>
                 <td th:text="${obj.email}"> </td>
                 <td th:text="${obj.telefono}"> </td>
-                <td th:text="${obj.direccion}"> </td>
                 <td th:text="${obj.comentario}"> </td>
                 <td>
                     <a type="button" th:href="@{/voluntario/rechazarVol/{dni}(dni=${obj.usuario.dni})}">
@@ -53,39 +51,33 @@
         </tbody>
     </table>
     <br>
-    <h3   th:unless="*{voluntarios == null}">Voluntarios disponibles</h3>
-    <table  th:unless="*{voluntarios == null}" style="font-family: arial, sans-serif;table-layout: auto; width: 100%;"  class="table table-striped" border="5" bordercolor="#0973ba">
+    <h3   th:unless="*{voluntarios == null}">Voluntarios disponibles para acompañamiento</h3>
+    <table  th:unless="*{voluntarios == null}" class="table" border="5" bordercolor="#0973ba" style="vertical-align: middle;">
         <thead>
             <tr>
-                <th scope="col">Hobbies</th>
-                <th scope="col">Dias semana</th>
-                <th scope="col">Dia de preferencia</th>
+                <th style="background: rgba(9, 115, 186, 0.1" scope="col">Hobbies</th>
+                <th style="background: rgba(9, 115, 186, 0.1" scope="col">Dias semana</th>
+                <th style="background: rgba(9, 115, 186, 0.1" scope="col">Dia de preferencia</th>
 
             </tr>
         </thead>
         <tbody>
-
         <tr th:each="vol: ${voluntarios}">
-            <td th:text="${vol.hobbies}"></td>
-            <td  th:text="${vol.dias_semana}"></td>
-
-            <td >
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${vol.hobbies}"></td>
+            <td  style="background: rgba(9, 115, 186, 0.1" th:text="${vol.dias_semana}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" >
                 <form action="#" th:action="@{/voluntario/solicitar}" method="POST">
-
-                    <textarea rows="4" cols="50" name="comment" style="height: 3em; width:20em;"></textarea>
+                    <textarea rows="4" cols="50" name="comment" style="height: 2em; width:20em;"></textarea>
                     <input type="hidden"  name="dniV" th:value="${vol.dni}">
                     <td><input  type="submit" class="boton_personalizado1" value="Solicitar"></td>
                 </form>
             </td>
-
-
-
         </tr>
-
-
-
         </tbody>
     </table>
+    <br>
+    <a href="/beneficiario/index" class="boton_personalizado1" role="button" >Atrás</a>
+    <br><br>
 </div>
 </body>
 </html>

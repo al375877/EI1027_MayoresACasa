@@ -48,7 +48,7 @@
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misDatos}">Mis datos |</a>
                     <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misContratosActivo}">Mis contratos en activo |</a>
 
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/beneficiarios}">Consultar mis mayores|</a>
+                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/beneficiarios}">Consultar mis mayores |</a>
 
                     <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>
 
@@ -57,7 +57,7 @@
                             <span class="caret"></span>
                         </li>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/perfil}">Mi perfil</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/perfil}">Visibilidad</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/empresa/add}">Añadir empresa</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/contrato/add}">Añadir contratos</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/peticion/facturas}">Generar facturas</a></li>

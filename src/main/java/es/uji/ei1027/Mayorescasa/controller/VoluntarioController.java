@@ -151,22 +151,18 @@ public class VoluntarioController {
         //si ya tiene uno de los voluntarios asignado, y está aceptada, lo elimina de los disponibles.
         if (asignados.size()>0) {
             for(Disponibilidad dis:asignados) {
-
-
-
-                    for(Voluntario vol:voluntariosDisponibles) {
+           for(Voluntario vol:voluntariosDisponibles) {
                         if ( vol.getDni().equals(dis.getUsuario_vol())) {
                             voluntariosDisponibles.remove(vol);
                             break;//solo hace el break en el for de dentro
                         }
                     }
 
-
                 //si está aceptada, la añado a la lista de asignados
                 if (dis.getEstado().equals("Aceptada")){
                     TempUsuarioComentario temporal = new TempUsuarioComentario();
                     temporal.setUsuario(usuarioDao.getUsuarioDni(dis.getUsuario_vol()));
-                    temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol()));
+                    temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol(),dis.getUsuario_ben()));
                     listaTemporal.add(temporal);
                 }
 
@@ -210,8 +206,6 @@ public class VoluntarioController {
 
         //si ya tiene uno de los voluntarios asignado, lo elimina de los disponibles.
         for(Disponibilidad dis:asignados) {
-
-
                 for(Voluntario vol:voluntariosDisponibles) {
                     if ( vol.getDni().equals(dis.getUsuario_vol())) {
                         voluntariosDisponibles.remove(vol);
@@ -219,12 +213,11 @@ public class VoluntarioController {
                     }
                 }
 
-
             //si está aceptada, la añado a la lista de asignados
             if (dis.getEstado().equals("Aceptada")){
                 TempUsuarioComentario temporal = new TempUsuarioComentario();
                 temporal.setUsuario(usuarioDao.getUsuarioDni(dis.getUsuario_vol()));
-                temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol()));
+                temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol(), dis.getUsuario_ben()));
                 listaTemporal.add(temporal);
             }
         }
@@ -302,21 +295,38 @@ public class VoluntarioController {
 
     @RequestMapping("/beneficiarios")
     public String beneficiarios(Model model,HttpSession session) {
-
         Usuario user=(Usuario) session.getAttribute("user");
-
         //lista de disponilidades de los beneficiarios
-        List<Disponibilidad> listaDis= disponibilidadDao.consultaBeneficiarios(user.getDni());
+        List<Disponibilidad> listaDis= disponibilidadDao.consultaBeneficiariosPendiente(user.getDni());
 
         //mapa de key usuario y valor la disponibilidad
         Map<Usuario,Disponibilidad> map=new HashMap<>();
-
         for(Disponibilidad dis:listaDis){
-
             map.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
         }
-
         model.addAttribute("map",map);
+
+        List<Disponibilidad> listaAcep= disponibilidadDao.consultaBeneficiariosAceptado(user.getDni());
+        Map<Usuario,Disponibilidad> mapAcep=new HashMap<>();
+        for(Disponibilidad dis:listaAcep){
+            mapAcep.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+        }
+        model.addAttribute("beneficiariosA",mapAcep);
+
+        List<Disponibilidad> listaRech= disponibilidadDao.consultaBeneficiariosRechazado(user.getDni());
+        Map<Usuario,Disponibilidad> mapRech=new HashMap<>();
+        for(Disponibilidad dis:listaRech){
+            mapRech.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+        }
+        model.addAttribute("beneficiariosR",mapRech);
+
+        List<Disponibilidad> listaFinal= disponibilidadDao.consultaBeneficiariosFinalizado(user.getDni());
+        Map<Usuario,Disponibilidad> mapFinal=new HashMap<>();
+        for(Disponibilidad dis:listaFinal){
+            mapFinal.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+        }
+        model.addAttribute("beneficiariosF",mapFinal);
+
         return "voluntario/beneficiarios";
     }
 

@@ -24,12 +24,10 @@
 <!--style="overflow: hidden;-->
 <div   layout:fragment="content">
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h2 style="color:black;" >Mayores en casa | Voluntario | Beneficiarios </h2>
+        <h2 style="color:black;" >Mayores en casa | Voluntario | Actividades </h2>
     </div>
-    <h2>Lista de los beneficiarios asignados</h2>
-
+    <h3>Actividades pendientes de aceptar/rechazar</h3>
     <br>
-
     <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(105, 124, 224, 0.1">
         <thead>
         <tr>
@@ -39,8 +37,6 @@
             <th scope="col">Email</th>
             <th scope="col">Estado</th>
             <th scope="col">Dia de preferencia</th>
-
-
         </tr>
         </thead>
         <tbody>
@@ -61,12 +57,87 @@
                    th:href="@{/voluntario/rechazarBen/{dni}(dni=${element.key.dni})}">
                     <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a>
             </td>
-
-            <td><a type="button"
-                   th:href="@{/voluntario/deleteBen/{dni}(dni=${element.key.dni})}">
-                <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>
-
-
+<!--            <td><a type="button"-->
+<!--                   th:href="@{/voluntario/deleteBen/{dni}(dni=${element.key.dni})}">-->
+<!--                <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>-->
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Actividades aceptadas</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Dia de preferencia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element:${beneficiariosA}"  th:unless="*{beneficiariosA == null}">
+            <td th:text="${element.key.nombre}"></td>
+            <td th:text="${element.key.direccion}"></td>
+            <td th:text="${element.key.telefono}"></td>
+            <td th:text="${element.key.email}"></td>
+            <td th:text="${beneficiariosA.get(element.key).estado}"></td>
+            <td th:text="${beneficiariosA.get(element.key).comentario}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h3 style="color:red" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Actividades rechazadas</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#ff0000" style="background: rgba(255, 0, 0, 0.2" >
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Dia de preferencia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element:${beneficiariosR}"  th:unless="*{beneficiariosA == null}">
+            <td th:text="${element.key.nombre}"></td>
+            <td th:text="${element.key.direccion}"></td>
+            <td th:text="${element.key.telefono}"></td>
+            <td th:text="${element.key.email}"></td>
+            <td th:text="${beneficiariosR.get(element.key).estado}"></td>
+            <td th:text="${beneficiariosR.get(element.key).comentario}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h3 style="color:#EB9100" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Actividades finalizadas</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#FFA500" style="background: rgba(255, 191, 0, 0.2" >
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Dia de preferencia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element:${beneficiariosF}"  th:unless="*{beneficiariosA == null}">
+            <td th:text="${element.key.nombre}"></td>
+            <td th:text="${element.key.direccion}"></td>
+            <td th:text="${element.key.telefono}"></td>
+            <td th:text="${element.key.email}"></td>
+            <td th:text="${beneficiariosF.get(element.key).estado}"></td>
+            <td th:text="${beneficiariosF.get(element.key).comentario}"></td>
         </tr>
         </tbody>
     </table>
@@ -74,7 +145,7 @@
     <br>
     <a href="/voluntario/index" class="boton_personalizado1" role="button" >Atrás</a>
     <br>
-    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 </div>
 </body>

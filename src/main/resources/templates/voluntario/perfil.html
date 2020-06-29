@@ -34,24 +34,43 @@
     <table style="margin:left">
         <tr>
             <td>
+                <h3>Visibilidad</h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <a>Si no puedes atender a más personas mayores, pulsa "Dejar de estar visible" y no podrán solocitarte citas nuevas, pero podrás seguir atendiendo a los mayores asignados</a>
             </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
             <td><a class="boton_personalizado1"   th:if="*{visibilidad=='si'}" th:href="@{/voluntario/quitarVisibilidad}" role="button">Dejar de estar visible</a>
-            <a class="boton_personalizado1"   th:if="*{visibilidad=='no'}" th:href="@{/voluntario/ponerVisibilidad}" role="button">Ponerse visible</a></td>
+            <a class="boton_añadir"   th:if="*{visibilidad=='no'}" th:href="@{/voluntario/ponerVisibilidad}" role="button">Ponerse visible</a></td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-            <td><a class="boton_personalizado1"   th:if="*{estado=='Aceptado'}" th:href="@{/voluntario/baja}" role="button">Darse de baja</a>
-            <a class="boton_personalizado1"   th:if="*{estado=='Baja'}" th:href="@{/voluntario/alta}" role="button">Darse de alta</a></td>
+            <td>
+                <h3>Alta/Baja en la aplicación</h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a>Si no puedes atender a ninguna persona mayor, aunque la estés atendiendo actualmente, pulsa "Darse de Baja". Podrás darte de alta más adelante.</a>
+                <br>
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><a class="boton_eliminar"   th:if="*{estado=='Aceptado'}" th:href="@{/voluntario/baja}" role="button">Darse de baja</a>
+            <a class="boton_añadir"   th:if="*{estado=='Baja'}" th:href="@{/voluntario/alta}" role="button">Darse de alta</a></td>
         </tr>
     </table>
     <br>
     <br>
-    <a href="/voluntario/index" class="boton_personalizado1" role="button" >Atrás</a>&nbsp;&nbsp;<a th:href="@{/voluntario/unilistPropio/{usuario}(usuario=*{usuario})}" class="boton_personalizado1" role="button" >Atrás</a>
+    <hr>
+    <a href="/voluntario/index" class="boton_personalizado1" role="button" >Atrás</a>
+    <br>
     <br>
     <br>
 </div>
