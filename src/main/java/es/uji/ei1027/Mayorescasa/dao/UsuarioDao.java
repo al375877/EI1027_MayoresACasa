@@ -29,9 +29,9 @@ public class UsuarioDao {
                 usuario.getTipoUsuario(),usuario.getTipodieta());
     }
     //AÑADIMOS Voluntario
-    public void addVoluntario(String dni, String hobbies, String dias_semana, String estado) {
-        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?,?)",
-                dni,hobbies,dias_semana, estado);
+    public void addVoluntario(String dni, String hobbies, String dias_semana, String visible, String estado) {
+        jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?,?,?)",
+                dni, hobbies, dias_semana, estado, visible);
     }
 
     //AÑADIMOS Beneficiario
@@ -44,6 +44,13 @@ public class UsuarioDao {
     public void updateBeneficiario(Beneficiario beneficiario) {
         jdbcTemplate.update("UPDATE Beneficiario SET asistente=? WHERE dni=?",
                 beneficiario.getAsistente(), beneficiario.getDni());
+
+    }
+
+    //ACTUALIZAMOS Voluntario
+    public void updateVoluntario(Voluntario voluntario) {
+        jdbcTemplate.update("UPDATE Voluntario SET hobbies=?, dias_semana=? WHERE dni=?",
+                voluntario.getHobbies(),voluntario.getDias_semana(),voluntario.getDni());
 
     }
 

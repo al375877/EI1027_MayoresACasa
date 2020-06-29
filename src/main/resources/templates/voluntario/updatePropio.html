@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Actualizar Empresa</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h3 style="color:black;" >Mayores en casa | Voluntario | Modificar </h3>
+    </div>
+    <br>
+    <form action="#" th:action="@{/voluntario/updatePropio}"
+          th:object="${voluntario}" method="post">
+        <br>
+        <h3><img src="https://image.flaticon.com/icons/svg/3050/3050236.svg"width="60" height="60">&nbsp;&nbsp;NIF:&nbsp;<td th:text="*{dni}" ></td></h3>
+        <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+            <tr>
+                <td style="text-align: right"><label>NIF</label></td>
+                <td><input type="text" th:field="*{dni}" readonly="readonly" size="8" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Hobbies</label></td>
+                <td><input type="text" th:field="*{hobbies}" size="40" />&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Disponibilidad</label></td>
+                <td><input type="text" th:field="*{dias_semana}" placeholder="Lunes a Viernes de 10 a 12" size="40"/>&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: right"><label>Visible para los mayores</label></td>
+                <td><input type="text" th:field="*{visible}" readonly="readonly" size="1"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Estado de tu alta</label></td>
+                <td><input type="text" th:field="*{estado}" readonly="readonly" size="8"/></td>
+            </tr>
+        </table>
+        <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>
+        <br>
+        <br>
+        <br>
+        <a onClick="history.back()" class="boton_personalizado1" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
+        <br>
+        <br>
+    </form>
+</div>
+</body>
+</html>

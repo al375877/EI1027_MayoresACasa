@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+          th, td, tr{
+            text-align: left;
+            border:black 1;
+        }
+    </style>
+</head>
+<body>
+<!--style="overflow: hidden;-->
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Mayores en casa | Voluntario</h2>
+    </div>
+    <br>
+    <h2><img src="https://image.flaticon.com/icons/svg/3039/3039084.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="${user.nombre}"></td></h2>
+    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+        <br>
+        <tr><th scope="col" style="text-align: right" >NIF</th>
+            <td th:text="${user.dni}" ></td></tr>
+        <tr><th scope="col" style="text-align: right">Usuario</th>
+            <td th:text="${user.usuario}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Email</th>
+            <td th:text="${user.email}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Direccion</th>
+            <td th:text="${user.direccion}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Genero</th>
+            <td th:text="${user.genero}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Año de nacimiento</th>
+            <td th:text="${user.nacimiento}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Teléfono</th>
+            <td th:text="${user.telefono}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Hobbies</th>
+            <td th:text="${vol.hobbies}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Disponibilidad</th>
+            <td th:text="${vol.dias_semana}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Estado de tu alta</th>
+            <td th:text="${vol.estado}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Visible para los mayores</th>
+            <td th:text="${vol.visible}"></td></tr>
+    </table>
+    <table>
+        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/voluntario/updatePropio/{dni}(dni=${user.dni})}">Modificar Hobbies/Disponibilidad</a></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </table>
+    <br>
+    <br>
+    <br>
+    <a th:href="@{/voluntario/index}" class="boton_personalizado1" role="button">Mi página</a>
+    <br>
+    <br>
+</div>
+</body>
+</html>

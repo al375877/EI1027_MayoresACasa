@@ -110,7 +110,7 @@ public class VoluntarioController {
         }
         voluntario.setTipoUsuario("Voluntario");
         usuarioDao.addUsuario(voluntario);
-        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"Pendiente");
+        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"no","Pendiente");
         return "redirect:../voluntario/altaEnviada";
     }
 
@@ -129,10 +129,12 @@ public class VoluntarioController {
     @RequestMapping("/perfil")
     public String perfil(HttpSession session, Model model) {
         Usuario user=(Usuario) session.getAttribute("user");
+        if(usuarioDao.getVoluntario(user.getDni()).getEstado().equals("Pendiente")) return "voluntario/pendiente";
         Voluntario vol=usuarioDao.getVoluntario(user.getDni());
         String visible=vol.getVisible();
         String estado=vol.getEstado();
-
+        String usuario=vol.getUsuario();
+        model.addAttribute("usuario",usuario);
         model.addAttribute("visibilidad",visible);
         model.addAttribute("estado",estado);
         return "voluntario/perfil";
@@ -412,7 +414,7 @@ public class VoluntarioController {
         }
         voluntario.setTipoUsuario("Voluntario");
         usuarioDao.addUsuario(voluntario);
-        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"Aceptado");
+        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"no","Aceptado");
         return "redirect:../voluntario/list";
     }
 
@@ -432,6 +434,14 @@ public class VoluntarioController {
         return "voluntario/unilistPen";
     }
 
+    @RequestMapping("/unilistPropio/{usuario}")
+    public String unilistEmpresasPropio(Model model, @PathVariable String usuario) {
+        model.addAttribute("user", usuarioDao.getUsuario(usuario));
+        Usuario user = usuarioDao.getUsuario(usuario);
+        model.addAttribute("vol", usuarioDao.getVoluntario(user.getDni()));
+        return "voluntario/unilistPropio";
+    }
+
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editusuario(HttpSession session, Model model, @PathVariable String usuario) {
         model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
@@ -447,6 +457,22 @@ public class VoluntarioController {
         usuario.setTipoUsuario("Voluntario");
         usuarioDao.updateUsuario(usuario);
         return "redirect:list";
+    }
+
+    @RequestMapping(value = "/updatePropio/{dni}", method = RequestMethod.GET)
+    public String editVoluntario(HttpSession session, Model model, @PathVariable String dni) {
+        model.addAttribute("voluntario", usuarioDao.getVoluntario(dni));
+        return "voluntario/updatePropio";
+    }
+
+    @RequestMapping(value = "/updatePropio", method = RequestMethod.POST)
+    public String processUpdateSubmitVoluntario(
+            @ModelAttribute("voluntario") Voluntario voluntario,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "voluntario/updatePropio";
+        usuarioDao.updateVoluntario(voluntario);
+        return "redirect:index";
     }
 
 }
