@@ -14,7 +14,6 @@
 
     <style>
   th, td, tr{
-            text-align: center;
             border:black 1;
         }
 
@@ -35,7 +34,6 @@
             <th scope="col">Direccion</th>
             <th scope="col">Telefono</th>
             <th scope="col">Email</th>
-            <th scope="col">Estado</th>
             <th scope="col">Dia de preferencia</th>
         </tr>
         </thead>
@@ -45,7 +43,6 @@
             <td th:text="${element.key.direccion}"></td>
             <td th:text="${element.key.telefono}"></td>
             <td th:text="${element.key.email}"></td>
-            <td th:text="${map.get(element.key).estado}"></td>
             <td th:text="${map.get(element.key).comentario}"></td>
             <td>
                 <a type="button"
@@ -74,7 +71,7 @@
             <th scope="col">Direccion</th>
             <th scope="col">Telefono</th>
             <th scope="col">Email</th>
-            <th scope="col">Estado</th>
+            <th scope="col">Fecha inicio</th>
             <th scope="col">Dia de preferencia</th>
         </tr>
         </thead>
@@ -84,7 +81,7 @@
             <td th:text="${element.key.direccion}"></td>
             <td th:text="${element.key.telefono}"></td>
             <td th:text="${element.key.email}"></td>
-            <td th:text="${beneficiariosA.get(element.key).estado}"></td>
+            <td th:text="${{beneficiariosA.get(element.key).fechainicial}}"></td>
             <td th:text="${beneficiariosA.get(element.key).comentario}"></td>
         </tr>
         </tbody>
@@ -98,9 +95,7 @@
         <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Direccion</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Email</th>
-            <th scope="col">Estado</th>
+            <th scope="col">Teléfono</th>
             <th scope="col">Dia de preferencia</th>
         </tr>
         </thead>
@@ -109,8 +104,6 @@
             <td th:text="${element.key.nombre}"></td>
             <td th:text="${element.key.direccion}"></td>
             <td th:text="${element.key.telefono}"></td>
-            <td th:text="${element.key.email}"></td>
-            <td th:text="${beneficiariosR.get(element.key).estado}"></td>
             <td th:text="${beneficiariosR.get(element.key).comentario}"></td>
         </tr>
         </tbody>
@@ -125,9 +118,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Direccion</th>
             <th scope="col">Telefono</th>
-            <th scope="col">Email</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Dia de preferencia</th>
+            <th scope="col">Fecha final</th>
         </tr>
         </thead>
         <tbody>
@@ -135,9 +126,7 @@
             <td th:text="${element.key.nombre}"></td>
             <td th:text="${element.key.direccion}"></td>
             <td th:text="${element.key.telefono}"></td>
-            <td th:text="${element.key.email}"></td>
-            <td th:text="${beneficiariosF.get(element.key).estado}"></td>
-            <td th:text="${beneficiariosF.get(element.key).comentario}"></td>
+            <td th:text="${{beneficiariosF.get(element.key).fechafinal}}"></td>
         </tr>
         </tbody>
     </table>

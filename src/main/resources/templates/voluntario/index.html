@@ -33,8 +33,8 @@
         <tr th:each="user: ${perfil}">
             <td><a class="boton_añadir" th:href="@{/voluntario/unilistPropio/{usuario}(usuario=${user.usuario})}" role="button">Ver/Modificar datos</a></td></tr>
         <tr><td><br></td></tr>
-        <tr><td><h3>Ocupación</h3></td></tr>
-        <tr><td><a class="boton_personalizado1" th:href="@{/voluntario/beneficiarios}" role="button">Mis Actividades</a></td></tr>
+        <tr><td><h3 style="color:black">Ocupación</h3></td></tr>
+        <tr><td><a class="boton_editar" th:href="@{/voluntario/beneficiarios}" role="button">Mis Actividades</a></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><h3>Visibilidad en la aplicación</h3></td></tr>
         <tr><td><a class="boton_personalizado1" th:href="@{/voluntario/perfil}" role="button">Visibilidad</a></td></tr>

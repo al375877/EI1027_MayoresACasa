@@ -9,11 +9,6 @@
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
     <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
         form {
           font-family: arial, sans-serif;
           border-collapse: collapse;
@@ -51,18 +46,6 @@
                             </option>
                         </select>
                     <td th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}"></td>
-                </tr>
-                <tr><td><br></td></tr>
-                <tr>
-                    <td><img src="https://image.flaticon.com/icons/svg/126/126141.svg"width="30" height="30"></td>
-                    <td>&nbsp;&nbsp;Servicio:&nbsp;</td>
-                    <td><select class="form_control" th:field="*{tiposervicio}">
-                        <option value="Catering">Catering</option>
-                        <option value="Sanitario">Sanitario</option>
-                        <option value="Limpieza">Limpieza</option>
-                    </select>
-                    <td th:if="${#fields.hasErrors('tiposervicio')}" th:errors="*{tiposervicio}"></td>
-                    </td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
@@ -115,11 +98,55 @@
                 </tr>
         </table>
     </form>
-    <br>
+    <br><br>
+    <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Lista de los contratos activos</h3>
+    <table class="table" border="5" bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2" >
+        <thead>
+        <tr >
+            <th style="text-align: center" scope="col">Empresa</th>
+            <th style="text-align: center"  scope="col">Servicio</th>
+            <th style="text-align: center"  scope="col">Días</th>
+            <th style="text-align: center"  scope="col">Inicio</th>
+            <th style="text-align: center"  scope="col">Fin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contrato: ${contratosInfo}">
+            <td th:text="${contrato.empresa}"></td>
+            <td th:text="${contrato.tiposervicio}"></td>
+            <td th:text="${contrato.dias_semana}"></td>
+            <td style="text-align: center" th:text="${contrato.horainicial}"></td>
+            <td style="text-align: center" th:text="${contrato.horafinal}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h3 style="color:blue" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Empresas registradas</h3>
+    <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.1">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">CIF</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Contacto</th>
+            <th scope="col">Email Contacto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="empresa: ${empresasInfo}">
+            <td th:text="${empresa.nombre}"></td>
+            <td th:text="${empresa.cif}"></td>
+            <td th:text="${empresa.tiposervicio}"></td>
+            <td th:text="${empresa.contacto}"></td>
+            <td th:text="${empresa.cont_mail}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br><br>
     <a class="boton_personalizado1" th:href="@{/casmanager/index}" role="button">Atrás</a>
-    <a class="boton_personalizado1" th:href="@{/contrato/list}" role="button">Ver contratos activos</a>
+<!--    <a class="boton_personalizado1" th:href="@{/contrato/list}" role="button">Ver contratos activos</a>-->
+
     <br>
-    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 </body>
 </html>

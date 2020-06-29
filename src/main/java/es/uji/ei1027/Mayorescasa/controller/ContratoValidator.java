@@ -28,9 +28,9 @@ public class ContratoValidator implements Validator {
         if (contrato.getEmpresa().trim().equals(""))
             errors.rejectValue("empresa", "obligatorio",
                     " Hay que introducir un valor");
-        if (contrato.getTiposervicio().trim().equals(""))
-            errors.rejectValue("tiposervicio", "obligatorio",
-                    " Hay que introducir un valor");
+//        if (contrato.getTiposervicio().trim().equals(""))
+//            errors.rejectValue("tiposervicio", "obligatorio",
+//                    " Hay que introducir un valor");
         if (contrato.getFechainicial()==null)
             errors.rejectValue("fechainicial", "obligatorio",
                     " Hay que introducir un valor");

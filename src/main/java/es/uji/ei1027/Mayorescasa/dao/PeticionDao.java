@@ -189,4 +189,14 @@ public class PeticionDao {
         }
     }
 
+    //get a partir de una empresa
+    public Contrato getContratoE (String empresa, String servicio ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE empresa=? AND fechafinal>CURRENT_DATE AND tiposervicio=?", new ContratoRowMapper(),empresa,servicio);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
 }

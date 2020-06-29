@@ -30,6 +30,14 @@ public class ContratoDao {
                 contrato.getHorafinal()
         );
     }
+    //Obtener servicio
+    public Empresa getServicio(String nomEmpresa){
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM empresa WHERE nombre=?", new EmpresaRowMapper(), nomEmpresa );
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 
     //BORRAMOS Contrato
     public void deleteContrato(String codcontrato) {
@@ -138,6 +146,8 @@ public class ContratoDao {
             return new ArrayList<Peticion>();
         }
     }
+
+
 
 
 }

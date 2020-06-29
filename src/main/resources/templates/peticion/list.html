@@ -50,6 +50,10 @@
             <td style="background: rgba(105, 124, 224, 0.2" th:text="${{element.fechafinal}}"></td>
             <td style="background: rgba(105, 124, 224, 0.2" th:text="${element.empresa}"></td>
             <td style="background: rgba(105, 124, 224, 0.2"><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/peticion/update/{codigo}(codigo=${element.cod_pet})}">Editar/Añadir</a></td>
+            <td style="background: rgba(105, 124, 224, 0.2"><a type="button" th:href="@{/peticion/aceptar/{cod_pet}(cod_pet=${element.cod_pet})}">
+                <img  class="boton_añadir" src="https://image.flaticon.com/icons/svg/159/159767.svg" width="50"  alt="x" /></a></td>
+            <td style="background: rgba(105, 124, 224, 0.2"><a type="button" th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.cod_pet})}">
+                <img  class="boton_eliminar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
 <!--            <td >-->
 <!--                <select form="añadir" name="empresa">-->
 <!--                    <option th:each="empresa:${map.get(element.key)}"-->
@@ -57,18 +61,6 @@
 <!--                            th:text="${empresa}"></option>-->
 <!--                </select>-->
 <!--            </td>-->
-            <td style="background: rgba(105, 124, 224, 0.2">
-                <form action="#" th:action="@{/peticion/aceptar}" method="POST" id="añadir">
-                    <input type="hidden" name="cod" th:value="${element.cod_pet}">
-                    <input type="image" class="boton_añadir"  src="https://image.flaticon.com/icons/svg/159/159767.svg" alt="Submit" width="50"  >
-                </form>
-            </td>
-            <td style="background: rgba(105, 124, 224, 0.2"><a type="button"
-                   th:href="@{/peticion/rechazar/{cod_pet}(cod_pet=${element.cod_pet})}">
-                   <img  class="boton_eliminar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a></td>
-    <!--        <td><a type="button"-->
-    <!--               th:href="@{/peticion/delete/{cod_pet}(cod_pet=${element.key.cod_pet})}">-->
-    <!--               <img class="boton_eliminar" src="https://image.flaticon.com/icons/svg/1632/1632602.svg" width="50" alt="x" /></a></td>-->
         </tbody>
     </table>
 

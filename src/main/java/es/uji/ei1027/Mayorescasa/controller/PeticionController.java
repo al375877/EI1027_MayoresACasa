@@ -76,6 +76,12 @@ public class PeticionController {
 
     @RequestMapping(value = "/update/{codigo}", method = RequestMethod.GET)
     public String editpeticion(Model model, @PathVariable String codigo) {
+        List<Contrato> contratos = contratoDao.getContratos();
+        List<String> usersEmpresas = new ArrayList<>();
+        for (Contrato contrato : contratos) {
+            usersEmpresas.add(contrato.getEmpresa());
+        }
+        model.addAttribute("empresas", usersEmpresas);
         model.addAttribute("peticion", peticionDao.getPeticion(codigo));
         model.addAttribute("contratos", contratoDao.getContratos());
         return "peticion/update";
@@ -184,12 +190,12 @@ public class PeticionController {
         cadena=cadena+alfa.charAt(forma)+numero;
         return cadena;
     }
-    @RequestMapping(value = "/aceptar", method = RequestMethod.POST)
-    public String aceptarPeticion(@ModelAttribute("cod") String cod) {
-        Peticion pet = peticionDao.getPeticion(cod);
+    @RequestMapping(value = "/aceptar/{cod_pet}", method = RequestMethod.GET)
+    public String aceptarPeticion(@PathVariable("cod_pet") String cod_pet, HttpSession session, Model model) {
+        Peticion pet = peticionDao.getPeticion(cod_pet);
         String empresa = pet.getEmpresa();
         String servicio = pet.getTiposervicio();
-        Contrato contrato=contratoDao.getContratoE(empresa,servicio);
+        Contrato contrato=peticionDao.getContratoE(empresa,servicio);
         Factura fac;
         if (contrato!=null){
             pet.setCodcontrato(contrato.getCodcontrato());
@@ -238,7 +244,7 @@ public class PeticionController {
                     "Puede consultar el estado de su peticion en su perfil de usuario.\n" +
                     "Gracias por elegir Mayores en casa");
             System.out.println("*************************************************************************");
-            return "redirect:list";
+            return "redirect:../list";
         } else {
             System.out.println("Sin contrato");
             return "contrato/sinContrato";

@@ -28,7 +28,7 @@
                 </ul>
         </ul>
         <hr>
-        <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+        <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.2">
             <tr>
                 <td><label>Codigo petición</label></td>
                 <td><input type="text" th:field="*{cod_pet}" readonly="readonly" size="10"/></td>
@@ -52,15 +52,24 @@
             </tr>
             <tr>
                 <td><label>Empresa</label></td>
-                <td><input type="text" th:field="*{empresa}" /></td>
+<!--                <td><input type="text" th:field="*{empresa}" /></td>-->
+                <td>
+                    <select class="form_control" th:field="*{empresa}" >
+                        <option th:each="empresa:${empresas}"
+                                th:value="${empresa}"
+                                th:text="${empresa}">
+                        </option>
+                    </select>
             </tr>
+
+
 
         </table>
         <td colspan="2"><input type="submit" class="boton_añadir" value="Editar/Añadir" /></td>
         <br>
         <hr>
         <h3 style="color:green" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Lista de los contratos activos</h3>
-        <table class="table table-striped" border="5"  bordercolor="#00db0b" >
+        <table class="table" border="5" bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2" >
             <thead>
             <tr >
                 <th style="text-align: center" scope="col">Empresa</th>

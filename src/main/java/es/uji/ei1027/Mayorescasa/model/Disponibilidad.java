@@ -1,5 +1,7 @@
 package es.uji.ei1027.Mayorescasa.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Disponibilidad {
@@ -7,7 +9,9 @@ public class Disponibilidad {
     private String usuario_vol;
     private String comentario;
     private String estado;
-
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date fechainicial//el día de hoy
+            ,fechafinal;//el día que deciden de estar asiganados
 
 
     public String getComentario() {
@@ -19,8 +23,7 @@ public class Disponibilidad {
     }
 
 
-    private Date fechainicial//el día de hoy
-            , fechafinal;//el día que deciden de estar asiganados
+
 
 
 

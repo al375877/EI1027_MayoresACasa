@@ -69,6 +69,8 @@ public class ContratoController {
             usersEmpresas.add(empresa.getNombre());
         }
         model.addAttribute("empresas", usersEmpresas);
+        model.addAttribute("contratosInfo", contratoDao.getContratos());
+        model.addAttribute("empresasInfo", empresaDao.getEmpresas());
         return "contrato/add";
     }
 
@@ -80,12 +82,9 @@ public class ContratoController {
             System.out.println("Error al añadir el contrato");
             return "contrato/add";
         }
-        if(contratoDao.existeServicio(contrato.getEmpresa(),contrato.getTiposervicio())) {
-            contrato.setCodcontrato(aleatorio()+"CNT");
-            contratoDao.addContrato(contrato);
-        } else {
-            return "contrato/existe";
-        }
+        contrato.setCodcontrato(aleatorio()+"CNT");
+        contrato.setTiposervicio(contratoDao.getServicio(contrato.getEmpresa()).getTiposervicio());
+        contratoDao.addContrato(contrato);
         Empresa empresa = contratoDao.getEmpresa(contrato.getEmpresa());
         System.out.println("");
         System.out.println("");
