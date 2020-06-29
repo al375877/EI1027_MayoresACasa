@@ -34,33 +34,53 @@ public class ContratoController {
     }
 
     @RequestMapping("/list")
-    public String listcontratos(Model model) {
-        model.addAttribute("contratos", contratoDao.getContratos());
-        return "contrato/list";
+    public String listcontratos(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("casCommitee")) {
+                model.addAttribute("contratos", contratoDao.getContratos());
+                return "contrato/list";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/listPasados")
-    public String listPasados(Model model) {
-        model.addAttribute("listPasados", contratoDao.getPasados());
-        return "contrato/listPasados";
+    public String listPasados(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("casCommitee")) {
+                model.addAttribute("listPasados", contratoDao.getPasados());
+                return "contrato/listPasados";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
     }
 
     //Llamada de la contrato add
     @RequestMapping(value="/add")
     public String addcontrato(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        if(!user.getTipoUsuario().equals("casManager")) return "error/error";
+        try{
+            if(!user.getTipoUsuario().equals("casManager")) return "error/error";
 
-        model.addAttribute("contrato", new Contrato());
-        List<Empresa> empresas = empresaDao.getEmpresas();
-        List<String> usersEmpresas = new ArrayList<>();
-        for (Empresa empresa : empresas) {
-            usersEmpresas.add(empresa.getNombre());
+            model.addAttribute("contrato", new Contrato());
+            List<Empresa> empresas = empresaDao.getEmpresas();
+            List<String> usersEmpresas = new ArrayList<>();
+            for (Empresa empresa : empresas) {
+                usersEmpresas.add(empresa.getNombre());
+            }
+            model.addAttribute("empresas", usersEmpresas);
+            model.addAttribute("contratosInfo", contratoDao.getContratos());
+            model.addAttribute("empresasInfo", empresaDao.getEmpresas());
+            return "contrato/add";
+        } catch (Exception e) {
+            return "error/error";
         }
-        model.addAttribute("empresas", usersEmpresas);
-        model.addAttribute("contratosInfo", contratoDao.getContratos());
-        model.addAttribute("empresasInfo", empresaDao.getEmpresas());
-        return "contrato/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)

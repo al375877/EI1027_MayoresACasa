@@ -30,22 +30,38 @@ public class VoluntarioController {
     DisponibilidadDao disponibilidadDao;
 
     @RequestMapping("/list")
-    public String listusuarios(Model model) {
-        model.addAttribute("usuarios", usuarioDao.getVoluntariosUsers());
-        return "voluntario/list";
+    public String listusuarios(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("usuarios", usuarioDao.getVoluntariosUsers());
+                return "voluntario/list";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/registros")
-    public String registros(Model model) {
-        model.addAttribute("usersVol", usuarioDao.getVoluntariosPendientes());
-        model.addAttribute("usersVolA", usuarioDao.getVoluntariosAceptados());
-        model.addAttribute("usersVolR", usuarioDao.getVoluntariosRechazados());
-        return "voluntario/registros";
+    public String registros(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("usersVol", usuarioDao.getVoluntariosPendientes());
+                model.addAttribute("usersVolA", usuarioDao.getVoluntariosAceptados());
+                model.addAttribute("usersVolR", usuarioDao.getVoluntariosRechazados());
+                return "voluntario/registros";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     //Llamada de la peticion add
     @RequestMapping(value="/add")
-    public String addvoluntario(Model model) {
+    public String addvoluntario(HttpSession session, Model model) {
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("voluntario", new Voluntario());
         List<String> generoList = new ArrayList<>();
@@ -114,64 +130,93 @@ public class VoluntarioController {
 
     @RequestMapping("/altaEnviada")
     public String altaEnviada(HttpSession session, Model model) {
-        return "voluntario/altaEnviada";
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                return "voluntario/altaEnviada";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value = "/index")
     public String index(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        model.addAttribute("perfil", usuarioDao.getUsuario(user.getUsuario()));
-        return "voluntario/index";
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                model.addAttribute("perfil", usuarioDao.getUsuario(user.getUsuario()));
+                return "voluntario/index";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/perfil")
     public String perfil(HttpSession session, Model model) {
-        Usuario user=(Usuario) session.getAttribute("user");
-        if(usuarioDao.getVoluntario(user.getDni()).getEstado().equals("Pendiente")) return "voluntario/pendiente";
-        Voluntario vol=usuarioDao.getVoluntario(user.getDni());
-        String visible=vol.getVisible();
-        String estado=vol.getEstado();
-        String usuario=vol.getUsuario();
-        model.addAttribute("usuario",usuario);
-        model.addAttribute("visibilidad",visible);
-        model.addAttribute("estado",estado);
-        return "voluntario/perfil";
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                if(usuarioDao.getVoluntario(user.getDni()).getEstado().equals("Pendiente")) return "voluntario/pendiente";
+                Voluntario vol=usuarioDao.getVoluntario(user.getDni());
+                String visible=vol.getVisible();
+                String estado=vol.getEstado();
+                String usuario=vol.getUsuario();
+                model.addAttribute("usuario",usuario);
+                model.addAttribute("visibilidad",visible);
+                model.addAttribute("estado",estado);
+                return "voluntario/perfil";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
 
     @RequestMapping("/solicitar")
     public String solicitar(Model model,HttpSession session) {
-        Usuario user=(Usuario) session.getAttribute("user");
-        List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntariosVisibles();
-        List<Disponibilidad> asignados= disponibilidadDao.consultaDisponibilidad(user.getDni());
-        List<TempUsuarioComentario> listaTemporal= new ArrayList<>();
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Beneficiario")) {
+                List<Voluntario> voluntariosDisponibles=usuarioDao.getVoluntariosVisibles();
+                List<Disponibilidad> asignados= disponibilidadDao.consultaDisponibilidad(user.getDni());
+                List<TempUsuarioComentario> listaTemporal= new ArrayList<>();
 
-        //si ya tiene uno de los voluntarios asignado, y está aceptada, lo elimina de los disponibles.
-        if (asignados.size()>0) {
-            for(Disponibilidad dis:asignados) {
-           for(Voluntario vol:voluntariosDisponibles) {
-                        if ( vol.getDni().equals(dis.getUsuario_vol())) {
-                            voluntariosDisponibles.remove(vol);
-                            break;//solo hace el break en el for de dentro
+                //si ya tiene uno de los voluntarios asignado, y está aceptada, lo elimina de los disponibles.
+                if (asignados.size()>0) {
+                    for(Disponibilidad dis:asignados) {
+                   for(Voluntario vol:voluntariosDisponibles) {
+                                if ( vol.getDni().equals(dis.getUsuario_vol())) {
+                                    voluntariosDisponibles.remove(vol);
+                                    break;//solo hace el break en el for de dentro
+                                }
+                            }
+                        //si está aceptada, la añado a la lista de asignados
+                        if (dis.getEstado().equals("Aceptada")){
+                            TempUsuarioComentario temporal = new TempUsuarioComentario();
+                            temporal.setUsuario(usuarioDao.getUsuarioDni(dis.getUsuario_vol()));
+                            temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol(),dis.getUsuario_ben()));
+                            listaTemporal.add(temporal);
                         }
                     }
-                //si está aceptada, la añado a la lista de asignados
-                if (dis.getEstado().equals("Aceptada")){
-                    TempUsuarioComentario temporal = new TempUsuarioComentario();
-                    temporal.setUsuario(usuarioDao.getUsuarioDni(dis.getUsuario_vol()));
-                    temporal.setComentario(disponibilidadDao.getComentario(dis.getUsuario_vol(),dis.getUsuario_ben()));
-                    listaTemporal.add(temporal);
                 }
-            }
-        }
-        if(listaTemporal.size()>0){
-            model.addAttribute("temp",listaTemporal);
-        }
-        if(voluntariosDisponibles.size()>0){
-            model.addAttribute("voluntarios", voluntariosDisponibles);
-        }
+                if(listaTemporal.size()>0){
+                    model.addAttribute("temp",listaTemporal);
+                }
+                if(voluntariosDisponibles.size()>0){
+                    model.addAttribute("voluntarios", voluntariosDisponibles);
+                }
 
-        return "voluntario/solicitar";
+                return "voluntario/solicitar";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
 
@@ -283,53 +328,74 @@ public class VoluntarioController {
 
     @RequestMapping("/beneficiarios")
     public String beneficiarios(Model model,HttpSession session) {
-        Usuario user=(Usuario) session.getAttribute("user");
-        //lista de disponilidades de los beneficiarios
-        List<Disponibilidad> listaDis= disponibilidadDao.consultaBeneficiariosPendiente(user.getDni());
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                //lista de disponilidades de los beneficiarios
+                List<Disponibilidad> listaDis= disponibilidadDao.consultaBeneficiariosPendiente(user.getDni());
 
-        //mapa de key usuario y valor la disponibilidad
-        Map<Usuario,Disponibilidad> map=new HashMap<>();
-        for(Disponibilidad dis:listaDis){
-            map.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+                //mapa de key usuario y valor la disponibilidad
+                Map<Usuario,Disponibilidad> map=new HashMap<>();
+                for(Disponibilidad dis:listaDis){
+                    map.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+                }
+                model.addAttribute("map",map);
+
+                List<Disponibilidad> listaAcep= disponibilidadDao.consultaBeneficiariosAceptado(user.getDni());
+                Map<Usuario,Disponibilidad> mapAcep=new HashMap<>();
+                for(Disponibilidad dis:listaAcep){
+                    mapAcep.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+                }
+                model.addAttribute("beneficiariosA",mapAcep);
+
+                List<Disponibilidad> listaRech= disponibilidadDao.consultaBeneficiariosRechazado(user.getDni());
+                Map<Usuario,Disponibilidad> mapRech=new HashMap<>();
+                for(Disponibilidad dis:listaRech){
+                    mapRech.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+                }
+                model.addAttribute("beneficiariosR",mapRech);
+
+                List<Disponibilidad> listaFinal= disponibilidadDao.consultaBeneficiariosFinalizado(user.getDni());
+                Map<Usuario,Disponibilidad> mapFinal=new HashMap<>();
+                for(Disponibilidad dis:listaFinal){
+                    mapFinal.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
+                }
+                model.addAttribute("beneficiariosF",mapFinal);
+
+                return "voluntario/beneficiarios";
+            }
+        } catch (Exception e) {
+            return "error/error";
         }
-        model.addAttribute("map",map);
-
-        List<Disponibilidad> listaAcep= disponibilidadDao.consultaBeneficiariosAceptado(user.getDni());
-        Map<Usuario,Disponibilidad> mapAcep=new HashMap<>();
-        for(Disponibilidad dis:listaAcep){
-            mapAcep.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
-        }
-        model.addAttribute("beneficiariosA",mapAcep);
-
-        List<Disponibilidad> listaRech= disponibilidadDao.consultaBeneficiariosRechazado(user.getDni());
-        Map<Usuario,Disponibilidad> mapRech=new HashMap<>();
-        for(Disponibilidad dis:listaRech){
-            mapRech.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
-        }
-        model.addAttribute("beneficiariosR",mapRech);
-
-        List<Disponibilidad> listaFinal= disponibilidadDao.consultaBeneficiariosFinalizado(user.getDni());
-        Map<Usuario,Disponibilidad> mapFinal=new HashMap<>();
-        for(Disponibilidad dis:listaFinal){
-            mapFinal.put(usuarioDao.getUsuarioDni(dis.getUsuario_ben()),dis);
-        }
-        model.addAttribute("beneficiariosF",mapFinal);
-
-        return "voluntario/beneficiarios";
+        return "error/error";
     }
 
     @RequestMapping("/quitarVisibilidad")
     public String quitarVisibilidad(Model model,HttpSession session) {
-        Usuario user=(Usuario) session.getAttribute("user");
-        usuarioDao.setVisibilidad(user.getDni(),"no");
-        return "redirect:./perfil";
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                usuarioDao.setVisibilidad(user.getDni(),"no");
+                return "redirect:./perfil";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/ponerVisibilidad")
     public String ponerVisibilidad(Model model,HttpSession session) {
-        Usuario user=(Usuario) session.getAttribute("user");
-        usuarioDao.setVisibilidad(user.getDni(),"si");
-        return "redirect:./perfil";
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                usuarioDao.setVisibilidad(user.getDni(),"si");
+                return "redirect:./perfil";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/baja")
@@ -381,14 +447,22 @@ public class VoluntarioController {
 
     //Llamada de la peticion add
     @RequestMapping(value="/addCas")
-    public String addCasvoluntario(Model model) {
-        model.addAttribute("usuario", new Usuario());
-        model.addAttribute("voluntario", new Voluntario());
-        List<String> generoList = new ArrayList<>();
-        generoList.add("Femenino");
-        generoList.add("Masculino");
-        model.addAttribute("generoList", generoList);
-        return "voluntario/addCas";
+    public String addCasvoluntario(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("usuario", new Usuario());
+                model.addAttribute("voluntario", new Voluntario());
+                List<String> generoList = new ArrayList<>();
+                generoList.add("Femenino");
+                generoList.add("Masculino");
+                model.addAttribute("generoList", generoList);
+                return "voluntario/addCas";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
     @RequestMapping(value="/addCas", method= RequestMethod.POST)
     public String processAddSubmitCas(@ModelAttribute("voluntario") Voluntario voluntario,
@@ -406,33 +480,65 @@ public class VoluntarioController {
     }
 
     @RequestMapping("/unilist/{usuario}")
-    public String unilistEmpresas(Model model, @PathVariable String usuario) {
-        model.addAttribute("user", usuarioDao.getUsuario(usuario));
-        Usuario user = usuarioDao.getUsuario(usuario);
-        model.addAttribute("vol", usuarioDao.getVoluntario(user.getDni()));
-        return "voluntario/unilist";
+    public String unilistEmpresas(HttpSession session, Model model, @PathVariable String usuario) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("user", usuarioDao.getUsuario(usuario));
+                Usuario useri = usuarioDao.getUsuario(usuario);
+                model.addAttribute("vol", usuarioDao.getVoluntario(useri.getDni()));
+                return "voluntario/unilist";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/unilistPen/{usuario}")
-    public String unilistEmpresasPen(Model model, @PathVariable String usuario) {
-        model.addAttribute("user", usuarioDao.getUsuario(usuario));
-        Usuario user = usuarioDao.getUsuario(usuario);
-        model.addAttribute("vol", usuarioDao.getVoluntario(user.getDni()));
-        return "voluntario/unilistPen";
+    public String unilistEmpresasPen(HttpSession session, Model model, @PathVariable String usuario) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("user", usuarioDao.getUsuario(usuario));
+                Usuario useri = usuarioDao.getUsuario(usuario);
+                model.addAttribute("vol", usuarioDao.getVoluntario(useri.getDni()));
+                return "voluntario/unilistPen";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/unilistPropio/{usuario}")
-    public String unilistEmpresasPropio(Model model, @PathVariable String usuario) {
-        model.addAttribute("user", usuarioDao.getUsuario(usuario));
-        Usuario user = usuarioDao.getUsuario(usuario);
-        model.addAttribute("vol", usuarioDao.getVoluntario(user.getDni()));
-        return "voluntario/unilistPropio";
+    public String unilistEmpresasPropio(HttpSession session, Model model, @PathVariable String usuario) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                model.addAttribute("user", usuarioDao.getUsuario(usuario));
+                Usuario useri = usuarioDao.getUsuario(usuario);
+                model.addAttribute("vol", usuarioDao.getVoluntario(useri.getDni()));
+                return "voluntario/unilistPropio";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editusuario(HttpSession session, Model model, @PathVariable String usuario) {
-        model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
-        return "voluntario/update";
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
+                return "voluntario/update";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -448,8 +554,16 @@ public class VoluntarioController {
 
     @RequestMapping(value = "/updatePropio/{dni}", method = RequestMethod.GET)
     public String editVoluntario(HttpSession session, Model model, @PathVariable String dni) {
-        model.addAttribute("voluntario", usuarioDao.getVoluntario(dni));
-        return "voluntario/updatePropio";
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                model.addAttribute("voluntario", usuarioDao.getVoluntario(dni));
+                return "voluntario/updatePropio";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value = "/updatePropio", method = RequestMethod.POST)

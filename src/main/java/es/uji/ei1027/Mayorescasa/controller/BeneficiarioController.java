@@ -36,40 +36,63 @@ public class BeneficiarioController {
     @RequestMapping(value = "/index")
     public String index(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        model.addAttribute("perfil", usuarioDao.getUsuario(user.getUsuario()));
-        return "beneficiario/index";
+        try{
+            if(user.getTipoUsuario().equals("Beneficiario")) {
+                model.addAttribute("perfil", usuarioDao.getUsuario(user.getUsuario()));
+                return "beneficiario/index";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value="/contacta")
     public String asistente(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        String dniBen=user.getDni();
-        Beneficiario ben = usuarioDao.getBeneficiario(dniBen);
-        model.addAttribute("asistentes", usuarioDao.getAsistenteBenef(ben.getAsistente()));
-        return "beneficiario/contacta";
+        try{
+            String dniBen=user.getDni();
+            Beneficiario ben = usuarioDao.getBeneficiario(dniBen);
+            model.addAttribute("asistentes", usuarioDao.getAsistenteBenef(ben.getAsistente()));
+            return "beneficiario/contacta";
+        } catch (Exception e){
+            return "error/error";
+        }
     }
 
     @RequestMapping("/info")
     public String info(HttpSession session, Model model) {
         return "beneficiario/info";
     }
-    @RequestMapping(value="/info", method= RequestMethod.POST)
-    public String processAddSubmit() {
-        return "beneficiario/info2";
-    }
+//    @RequestMapping(value="/info", method= RequestMethod.POST)
+//    public String processAddSubmit() {
+//        return "beneficiario/info2";
+//    }
 
     @RequestMapping("/list")
-    public String listusuarios(Model model) {
-        model.addAttribute("usuarios", usuarioDao.getBeneficiarios());
-        return "beneficiario/list";
+    public String listusuarios(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("casCommitee") || user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("usuarios", usuarioDao.getBeneficiarios());
+                return "beneficiario/list";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editusuario(HttpSession session, Model model, @PathVariable String usuario) {
         Usuario user= (Usuario) session.getAttribute("user");
-        if (!user.getTipoUsuario().equals("casCommitee")) return "error/error";
-        model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
-        return "beneficiario/update";
+        try{
+            if (!user.getTipoUsuario().equals("casCommitee")) return "error/error";
+            model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
+            return "beneficiario/update";
+        } catch (Exception e){
+            return "error/error";
+        }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -92,10 +115,16 @@ public class BeneficiarioController {
     @RequestMapping(value = "/updateAsis/{dni}", method = RequestMethod.GET)
     public String usuarioAsis(HttpSession session, Model model, @PathVariable String dni) {
         Usuario user= (Usuario) session.getAttribute("user");
-        if (!user.getTipoUsuario().equals("casCommitee")) return "error/error";
-        model.addAttribute("dni", usuarioDao.getBeneficiario(dni));
-        model.addAttribute("asistentes", usuarioDao.getAsistentes());
-        return "beneficiario/updateAsis";
+        try{
+            if(user.getTipoUsuario().equals("casCommitee")) {
+                model.addAttribute("dni", usuarioDao.getBeneficiario(dni));
+                model.addAttribute("asistentes", usuarioDao.getAsistentes());
+                return "beneficiario/updateAsis";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
     }
     @RequestMapping(value = "/updateAsis", method = RequestMethod.POST)
     public String processUpdateSubmitAsis(
@@ -113,26 +142,41 @@ public class BeneficiarioController {
     }
 
     @RequestMapping("/unilist/{usuario}")
-    public String unilistEmpresas(Model model, @PathVariable String usuario) {
-        model.addAttribute("user", usuarioDao.getUsuario(usuario));
-        String dniBen = usuarioDao.getUsuario(usuario).getDni();
-        Beneficiario beneficiario = usuarioDao.getBeneficiario(dniBen);
+    public String unilistEmpresas(HttpSession session, Model model, @PathVariable String usuario) {
+        Usuario user= (Usuario) session.getAttribute("user");
         try{
-            model.addAttribute("asistenteUni", usuarioDao.getAsistenteBenef(beneficiario.getAsistente()));
+            if (user.getTipoUsuario().equals("casCommitee") || user.getTipoUsuario().equals("casVolunteer") || user.getTipoUsuario().equals("Beneficiario")) {
+                model.addAttribute("user", usuarioDao.getUsuario(usuario));
+                String dniBen = usuarioDao.getUsuario(usuario).getDni();
+                Beneficiario beneficiario = usuarioDao.getBeneficiario(dniBen);
+                try {
+                    model.addAttribute("asistenteUni", usuarioDao.getAsistenteBenef(beneficiario.getAsistente()));
+                } catch (Exception e) {
+                    System.out.println("Sin asistente");
+                }
+            }
+            return "beneficiario/unilist";
         } catch (Exception e){
-            System.out.println("Sin asistente");
+            return "error/error";
         }
-        return "beneficiario/unilist";
     }
 
     @RequestMapping(value="/add")
-    public String addbeneficiario(Model model) {
-        model.addAttribute("usuario", new Usuario());
-        List<String> generoList = new ArrayList<>();
-        generoList.add("Mujer");
-        generoList.add("Hombre");
-        model.addAttribute("generoList", generoList);
-        return "beneficiario/add";
+    public String addbeneficiario(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if (user.getTipoUsuario().equals("casCommitee")) {
+                model.addAttribute("usuario", new Usuario());
+                List<String> generoList = new ArrayList<>();
+                generoList.add("Mujer");
+                generoList.add("Hombre");
+                model.addAttribute("generoList", generoList);
+                return "beneficiario/add";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)

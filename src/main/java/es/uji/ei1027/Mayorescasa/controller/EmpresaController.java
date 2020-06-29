@@ -39,9 +39,15 @@ public class EmpresaController {
     }
 
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
-    public String editempresa(Model model, @PathVariable String usuario) {
-        model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
-        return "empresa/update";
+    public String editempresa(HttpSession session, Model model, @PathVariable String usuario) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(!user.getTipoUsuario().equals("casManager")) return "error/error";
+            model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
+            return "empresa/update";
+        } catch (Exception e) {
+            return "error/error";
+        }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -55,21 +61,45 @@ public class EmpresaController {
     }
 
     @RequestMapping("/list")
-    public String listEmpresas(Model model) {
-        model.addAttribute("empresas", empresaDao.getEmpresas());
-        return "empresa/list";
+    public String listEmpresas(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("casCommitee") || user.getTipoUsuario().equals("casVolunteer")) {
+                model.addAttribute("empresas", empresaDao.getEmpresas());
+                return "empresa/list";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/unilist/{usuario}")
-    public String unilistEmpresas(Model model, @PathVariable String usuario) {
-        model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
-        return "empresa/unilist";
+    public String unilistEmpresas(HttpSession session, Model model, @PathVariable String usuario) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("Empresa")) {
+                model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
+                return "empresa/unilist";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
     //Llamada de la peticion add
     @RequestMapping(value="/add")
-    public String addEmpresa(Model model) {
-        model.addAttribute("empresa", new Empresa());
-        return "empresa/add";
+    public String addEmpresa(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casManager")) {
+                model.addAttribute("empresa", new Empresa());
+                return "empresa/add";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
@@ -114,43 +144,78 @@ public class EmpresaController {
         } else {
             return "empresa/contActivo";
         }
-
         return "redirect:../list";
     }
 
     @RequestMapping(value="/misContratosActivo")
     public String misContratos(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        Date fecha = new Date();
-        model.addAttribute("contratos", empresaDao.getContratoActivo(user.getNombre(),fecha));
-        return "empresa/misContratosActivo";
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                Date fecha = new Date();
+                model.addAttribute("contratos", empresaDao.getContratoActivo(user.getNombre(), fecha));
+                return "empresa/misContratosActivo";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value="/misServiciosActivo")
     public String misServiciosActivo(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        model.addAttribute("servicios", empresaDao.getServiciosActivo(user.getNombre()));
-        return "empresa/misServiciosActivo";
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                model.addAttribute("servicios", empresaDao.getServiciosActivo(user.getNombre()));
+                return "empresa/misServiciosActivo";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value="/misContratosPasados")
     public String misContratosPasados(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        Date fecha = new Date();
-        model.addAttribute("pasados", empresaDao.getContratoPasado(user.getNombre(),fecha));
-        return "empresa/misContratosPasados";
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                Date fecha = new Date();
+                model.addAttribute("pasados", empresaDao.getContratoPasado(user.getNombre(), fecha));
+                return "empresa/misContratosPasados";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value="/misDatos")
     public String misDatos(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        model.addAttribute("datos", empresaDao.getEmpresa(user.getUsuario()));
-        return "empresa/misDatos";
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                model.addAttribute("datos", empresaDao.getEmpresa(user.getUsuario()));
+                return "empresa/misDatos";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping("/index")
-    public String index(Model model) {
-        return "empresa/index";
+    public String index(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                return "empresa/index";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
 }
