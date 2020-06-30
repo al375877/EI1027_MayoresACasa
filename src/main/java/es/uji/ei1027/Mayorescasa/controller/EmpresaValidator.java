@@ -13,16 +13,16 @@ public class EmpresaValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         Empresa empresa = (Empresa)obj;
-        if (empresa.getNombre().trim().equals(""))
+        if (empresa.getNombre().length()<4)
             errors.rejectValue("nombre", "obligatorio",
-                    " Hay que introducir un valor");
+                    " Introduce un valor valido (Mayor que 4 letras)");
         // Afegeix ací la validació per a Edat > 18 anys
         if (empresa.getUsuario().trim().equals(""))
             errors.rejectValue("usuario", "obligatorio",
                     " Hay que introducir un valor");
-        if (empresa.getContacto().trim().equals(""))
-            errors.rejectValue("contacto", "obligatorio",
-                    " Hay que introducir un valor");
+        if (empresa.getContacto().length()<12)
+            errors.rejectValue("nombre", "obligatorio",
+                    " Introduce un valor valido (Nombre y Apellidos)");
         if (empresa.getTelefono()<600000000)
             errors.rejectValue("telefono", "obligatorio",
                     "No es un número válido");

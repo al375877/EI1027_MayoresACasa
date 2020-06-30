@@ -17,7 +17,7 @@ public class BeneficiarioValidator implements Validator {
         Usuario usuario = (Usuario)obj;
         if (usuario.getNombre().length()<12)
             errors.rejectValue("nombre", "obligatorio",
-                    " Introduce un valor valido");
+                    " Introduce un valor valido (Nombre y Apellidos)");
         // Afegeix ací la validació per a Edat > 18 anys
         if (usuario.getNacimiento()>1955 || usuario.getNacimiento()<1900)
             errors.rejectValue("nacimiento", "obligatorio",
