@@ -5,6 +5,7 @@ import es.uji.ei1027.Mayorescasa.dao.EmpresaDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
 import es.uji.ei1027.Mayorescasa.model.Contrato;
 import es.uji.ei1027.Mayorescasa.model.Empresa;
+import es.uji.ei1027.Mayorescasa.model.Peticion;
 import es.uji.ei1027.Mayorescasa.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -211,6 +212,58 @@ public class EmpresaController {
         try{
             if(user.getTipoUsuario().equals("Empresa")) {
                 return "empresa/index";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
+    }
+
+    @RequestMapping("/contactaCas")
+    public String contactaCas(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                model.addAttribute("datos", empresaDao.getCasManager());
+                return "empresa/contactaCas";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error/error";
+        }
+        return "error/error";
+    }
+
+    @RequestMapping(value = "/addComentario", method = RequestMethod.POST)
+    public String limpieza(@ModelAttribute("comment") String comentario, HttpSession session) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if (comentario==null) comentario="";
+            Usuario cas = empresaDao.getCasManager();
+            System.out.println("");
+            System.out.println("");
+            System.out.println("EMAIL ENVIADO");
+            System.out.println("*************************************************************************");
+            System.out.println("Correo destinatario: " +cas.getEmail() + "\n"+
+                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                    "Estimado/a señor/a "+ cas.getNombre() + ":");
+            System.out.println("La empresa " + user.getNombre() + " tiene la siguiente duda: \n");
+            System.out.println(comentario + "\n");
+            System.out.println("");
+            System.out.println("Mayores en casa.\n");
+            System.out.println("*************************************************************************");
+            return "empresa/enviado";
+        } catch (Exception e){
+            return "error/error";
+        }
+    }
+
+    @RequestMapping("/enviado")
+    public String enviado(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                return "empresa/enviado";
             }
         } catch (Exception e) {
             return "error/error";

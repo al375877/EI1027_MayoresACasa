@@ -51,6 +51,16 @@ public class EmpresaDao {
         }
     }
 
+    //Datos CasManager
+    public Usuario getCasManager (){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE tipoUsuario='casManager'", new UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
     //Busca Contrato
     public List<Contrato> buscaContrato(String empresa){
         try {

@@ -22,16 +22,30 @@ public class UsuarioDao {
     }
     //AÑADIMOS Usuario
     public void addUsuario(Usuario usuario) {
-        jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-                usuario.getNombre(),usuario.getUsuario(),usuario.getContraseña(),
-                usuario.getEmail(),usuario.getDireccion(),usuario.getDni(),
-                usuario.getGenero(),usuario.getNacimiento(),usuario.getTelefono(),
-                usuario.getTipoUsuario(),usuario.getTipodieta());
+        try {
+            jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    usuario.getNombre(), usuario.getUsuario(), usuario.getContraseña(),
+                    usuario.getEmail(), usuario.getDireccion(), usuario.getDni(),
+                    usuario.getGenero(), usuario.getNacimiento(), usuario.getTelefono(),
+                    usuario.getTipoUsuario(), usuario.getTipodieta());
+        } catch (EmptyResultDataAccessException e){
+            return;
+        }
     }
     //AÑADIMOS Voluntario
     public void addVoluntario(String dni, String hobbies, String dias_semana, String visible, String estado) {
         jdbcTemplate.update("INSERT INTO Voluntario VALUES (?,?,?,?,?)",
                 dni, hobbies, dias_semana, estado, visible);
+    }
+
+    //Datos CasVolunteer
+    public Usuario getCasVolunteer (){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE tipoUsuario='casVolunteer'", new UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     //AÑADIMOS Beneficiario

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Info Empresa</title>
+    <style>
+    img {
+    max-width: 100%;
+    max-height: 100%;
+}
+</style>
+</head>
+<body>
+<div  layout:fragment="content" >
+    <table>
+        <tr><td><img src="https://image.flaticon.com/icons/svg/845/845646.svg" width="90" height="90"></td></tr>
+        <tr><td><h4>El email con tus dudas se ha enviado al CasManager.</h4></td></tr>
+        <tr><td><br></a></td></tr>
+        <tr><td>Te comunicaremos por email la resolución de tus dudas.</td></tr>
+        <tr><td><br></td></tr>
+        <tr><td>Gracias por ayudar a la gente que lo necesita.</td></tr>
+        <tr><td>Mayores en casa.</td></tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <a th:href="@{/empresa/index}" class="boton_personalizado1" role="button" >Página Principal</a>
+    <br><br>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Contacta</title>
+    <style>
+        th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Datos del CasVolunteer</h1></div>
+    <br>
+    Envía un email con tus dudas o llama a su teléfono personal de la empresa.
+    <br>
+    <br>
+    <table class="table" border="5" bordercolor="#0973ba" style="width:80%;">
+        <thead>
+        <tr>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Nombre</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Email</th>
+            <th style="background: rgba(9, 115, 186, 0.1" scope="col">Telefono</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="casManager: ${datos}">
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${casManager.nombre}"></td>
+            <td style="background: rgba(9, 115, 186, 0.1" ><a th:text="${casManager.email}" th:href="'mailto:' + ${casManager.email}"></a></td>
+            <td style="background: rgba(9, 115, 186, 0.1" th:text="${casManager.telefono}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br><br>
+    Si prefieres mandarle el email desde aquí, escribe a continuación tus dudas.<br><br>
+    <form th:action="@{/voluntario/addComentario}" method="POST" id="addComent">
+        <td><textarea rows="4" cols="50" name="comment" form="addComent" placeholder="Escribe a continuacion que necesitas"
+                      style="height: 10em; width:30em;"></textarea> </td><br>
+        <td style=" padding: 15px;height: 60px;"><input class="boton_añadir" href="duda" role="button" type="submit" value="Enviar email">
+    </form>
+    <br>
+    <br>
+    <a href="/voluntario/index" class="boton_personalizado1" role="button" >Atrás</a>
+    <br><br>
+</div>
+</body>
+</html>

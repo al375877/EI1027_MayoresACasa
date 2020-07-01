@@ -13,11 +13,6 @@
     <title>Mayores en casa</title>
 
     <style>
-         img {
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
-        }
         form {
           font-family: arial, sans-serif;
           border-collapse: collapse;
@@ -27,6 +22,13 @@
 </head>
 <body>
 <div   layout:fragment="content">
+    <table style="width:100%;">
+        <tr>
+            <td><img src="http://imgfz.com/i/XY5DGUv.png"width="150" height="95"></td>
+            <td style="text-align: center;"><h3>Información para personas mayores</h3></td>
+            <td style="text-align: right;"><a href="https://www.gva.es/va/inicio/presentacion"><img src="http://imgfz.com/i/kNUqsPF.png" width="150" height="86" alt="Paisaje">&nbsp;</a></td>
+        </tr>
+    </table>
     <header><h2>Cuidado de mayores a domicilio<br>
         Solicita Información o llámanos al 920 14 58 74<br>
         <hr></h2></header>
@@ -35,17 +37,26 @@
             La Consejeria de Asuntos Sociales (CAS) ha puesto en marcha un proyecto para mejorar la calidad de
             su vida, para que pueda estar en casa y tener su independencia. Nosotros le ofrecemos ayuda y compañia,
             además de servicios a un coste mínimo, como:
-            <img src="http://imgfz.com/i/rq9a27J.png">
+            <img style="display: block; max-width: 100%;  max-height: 100%;" src="http://imgfz.com/i/rq9a27J.png">
             Puede contactar con un asistente para ayudarle a registrarse en nuestro servicio o llamar al telefono 920 14 58 74.
             <br>&nbsp;
             <br>&nbsp;
             <a class="boton_personalizado1" th:href="@{/asistente/solicitar}" role="button">Contacta con un asistente</a>
         </table>
     </form>
-    <table>
-        <br>
-        <br>
+    <br>
+    <br>
+    <table style="width:100%;">
+        <tr>
+            <td>&nbsp;</td>
+            <td style="text-align: right;"><a href="http://infocoronavirus.gva.es/va"><img src="http://imgfz.com/i/NtBqkfG.jpeg" width="300" height="180" alt="Paisaje">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+        </tr>
+        <tr>
+            <td><img src="http://imgfz.com/i/AIOpC7b.png" width="106" height="66"></td><td style="text-align:right; color:red;">Què es por fer en la Nova Normalitat?&nbsp;</td>
+        </tr>
     </table>
+    <br>
+    <br>
     <a href="/" class="boton_personalizado1" role="button" >Volver</a>
     <br>
     <br>

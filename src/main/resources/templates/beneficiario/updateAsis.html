@@ -30,7 +30,17 @@
             </tr>
             <tr>
                 <td><label>Nombre asistente</label></td>
-                <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" />&nbsp;&nbsp;<input type="text" th:field="*{asistente}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
+                <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" />&nbsp;&nbsp;&nbsp;
+                    <select class="form_control" th:field="*{asistente}" >
+                        <option th:each="asistente:${asistentesSel}"
+                                th:value="${asistente}"
+                                th:text="${asistente}">
+                        </option>
+                    </select>
+                    &nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30">
+                </td>
+            </tr>
+                    <img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
         </table>
 <!--        <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>-->

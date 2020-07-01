@@ -3,9 +3,7 @@ package es.uji.ei1027.Mayorescasa.controller;
 import es.uji.ei1027.Mayorescasa.dao.AsistenteDao;
 import es.uji.ei1027.Mayorescasa.dao.FacturaDao;
 import es.uji.ei1027.Mayorescasa.dao.UsuarioDao;
-import es.uji.ei1027.Mayorescasa.model.Beneficiario;
-import es.uji.ei1027.Mayorescasa.model.Factura;
-import es.uji.ei1027.Mayorescasa.model.Usuario;
+import es.uji.ei1027.Mayorescasa.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.UsesSunMisc;
 import org.springframework.stereotype.Controller;
@@ -45,6 +43,11 @@ public class BeneficiarioController {
             return "error/error";
         }
         return "error/error";
+    }
+
+    @RequestMapping(value = "/info2")
+    public String info2(HttpSession session, Model model) {
+        return "beneficiario/info2";
     }
 
     @RequestMapping(value="/contacta")
@@ -117,8 +120,14 @@ public class BeneficiarioController {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
             if(user.getTipoUsuario().equals("casCommitee")) {
+                List<Asistente> asistentes = usuarioDao.getAsistentes();
+                List<String> usersAsis = new ArrayList<>();
+                for (Asistente asistente : asistentes) {
+                    usersAsis.add(asistente.getNombre());
+                }
                 model.addAttribute("dni", usuarioDao.getBeneficiario(dni));
                 model.addAttribute("asistentes", usuarioDao.getAsistentes());
+                model.addAttribute("asistentesSel", usersAsis);
                 return "beneficiario/updateAsis";
             }
         } catch (Exception e){

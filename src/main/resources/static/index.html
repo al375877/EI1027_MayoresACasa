@@ -12,46 +12,104 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
-    <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+<!--    <style>-->
+<!--        img {-->
+<!--            display: block;-->
+<!--            margin-left: auto;-->
+<!--            margin-right: auto;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body background="https://wallpapersmug.com/download/3840x2400/3b795e/gray-triangles-geometry-abstract.jpg">
-<div class="container" style="background: rgba(255, 255, 255, 0.2" >
-    <img src="http://imgfz.com/i/FP9Ngr6.png" width="1000" height="333">
-    <div ALIGN="justify" style=" padding: 25px 50px;background-color:#0973ba;color:white"><p class="body">
-        <p class="h3">¿Que es Mayores en casa?</p>
+<div class="container" style="background: rgba(255, 255, 255, 0.2)" >
+    <img src="http://imgfz.com/i/9vJTdWC.png" width="1000" height="333">
+<!--    <hr style="border: 5px solid #4169e1; border-radius: 5px; border-style: inset;">-->
+<!--    <div ALIGN="justify" style=" padding: 25px 50px;background-color:#0973ba;color:white"><p class="body">-->
+    <div style="width:100%; background-color:#262261;">
         <br>
-        &nbsp;&nbsp;&nbsp;En esta página tenemos como objetivo proporcionar atencion personal y/o domestica en el domicilio a las
-        personas mayores que lo necesiten, cubrimos prestaciones básicas como higiene y cuidado de la persona, tambien
-        un servicio de cattering, para que puedean comer o cenar, asi como un servicio de salud personalizada (ayuda
-        psicomotriz, control de la medicación, masajes musculares, etc.) </p>
-        <br></div>
-    <br>
-    <br>
-        <div><table>
-            <tr><td><img src="https://image.flaticon.com/icons/svg/2843/2843256.svg"width="50" height="50"></td><td><p class="h3">&nbsp;Ya estoy registrado&nbsp;<a class="boton_personalizado1" th:if="*{user == null}"  href="/login" role="button">Entrar</a></p></td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td><img src="https://image.flaticon.com/icons/svg/3047/3047883.svg"width="50" height="50"></td><td><p class="h3">&nbsp;Necesito ayuda en casa. &nbsp;<a class="boton_personalizado1" href="/beneficiario/info" role="button">Pide ayuda ahora</a></p></td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td><img src="https://image.flaticon.com/icons/svg/2843/2843391.svg"width="50" height="50"></td><td><p class="h3">&nbsp;Quiero ayudar a la gente mayor.&nbsp;<a class="boton_personalizado1" href="/voluntario/add" role="button">Hazte Voluntario</a></p></td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td><img src="https://image.flaticon.com/icons/svg/2843/2843289.svg"width="50" height="50"></td><td><p class="h3">&nbsp;Quiero ofrecer mis servicios como &nbsp;<a class="boton_personalizado1" href="/empresa/info" role="button">Empresa</a></p></td></tr>
+    </div>
+    <div style="width:100%; background-color:#0973ba;">
+        <br>
+            <table style="width:100%;">
+                <tr>
+                    <td style="text-align: left;"><button type="button" class="btn btn-danger" onclick="location.href='http://infocoronavirus.gva.es/va'"><img src="https://image.flaticon.com/icons/svg/2950/2950124.svg" width="90" height="50" ><b>Alerta sobre el COVID-19</b></button></td>
+                    <td style="text-align: center;">&nbsp;</td>
+                    <td style="text-align: right;"><a class="boton_personalizado1" th:if="*{user == null}"  href="/login" role="button">Identifícate</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+            </table>
+        <br>
+    </div>
+    <div style="width:100%; background-color:#262261;">
+        <br>
+    </div>
+    <div><a href="/beneficiario/info2"><h3>¿Que es Mayores en casa?</h3></a>
+        <br>
+        <table style="width:100%;">
+            <tr>
+                <td style="text-align: center;"><img src="https://image.flaticon.com/icons/svg/2037/2037611.svg" width="180" height="100" ></td>
+                <td style="text-align: center;">&nbsp;</td>
+                <td style="text-align: center;"><img src="https://image.flaticon.com/icons/svg/3030/3030786.svg" width="180" height="100" ></td>
+            </tr>
+            <tr style="text-align: center;">
+                <td><h4>Catering en tu hogar</h4></td><td style="text-align: center;">&nbsp;</td><td><h4>Limpieza en tu hogar</h4></td>
+            </tr>
         </table>
+        <table style="width:100%;">
+            <tr>
+                <td style="text-align: center;"><img src="https://image.flaticon.com/icons/svg/1142/1142172.svg" width="180" height="100" ></td>
+                <td style="text-align: center;">&nbsp;</td>
+                <td style="text-align: center;"><img src="https://image.flaticon.com/icons/svg/779/779908.svg" width="180" height="100" ></td>
+            </tr>
+            <tr style="text-align: center;">
+                <td><h4>Tu sanidad controlada</h4></td><td style="text-align: center;">&nbsp;</td><td><h4>Paseos con voluntarios</h4></td>
+            </tr>
+        </table>
+        <br>
     </div>
     <br>
-    <tr><img src="http://imgfz.com/i/aX06UOP.png" width="500" height="333"></tr>
-    <br>
-<!--    width="1000" height="333"-->
-<!--    <table>-->
-<!--        <a href="/beneficiario/info" target="_blank"><img src="http://imgfz.com/i/opRAMic.png"></a>-->
-<!--    </table>-->
-    <h3>¿No sabes como utilizar nuestra página?</h3>
-    <a class="boton_personalizado1" href="asistente/solicitar" role="button">Contacta con un asistente</a>
+    <table style="width:100%; text-align: center;">
+        <tr>
+            <td style="text-align: left;"><a class="boton_personalizado1" href="/beneficiario/info" role="button">Necesito ayuda en casa</a></td>
+        </tr>
+    </table>
+    <hr style="border: 3px solid #4169e1; border-style: inset;">
+    <table style="width:100%; text-align: center;">
+        <tr>
+            <td style="text-align: left;"></td>
+            <td style="text-align: center;" rowspan="6"><a href="beneficiario/info2"><img src="http://imgfz.com/i/HoqjP7Z.jpeg" width="420" height="420"></a></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><img src="https://i.dlpng.com/static/png/1341979-flood-relief-volunteer-opportunities-volunteer-png-492_344_preview.png" width="200" height="150" ></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><a class="boton_personalizado1" href="/voluntario/add" role="button">Hazte Voluntario</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td style="text-align: right;"><img src="https://cdn4.iconfinder.com/data/icons/ios7-active-2/512/Company.png" width="200" height="150" ></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><a class="boton_personalizado1" href="/empresa/info" role="button">Soy una empresa</a></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">&nbsp;</td>
+        </tr>
+    </table>
+<!--    <br>-->
+<!--    <tr><img style=" display: block; margin-left: auto; margin-right: auto;" src="http://imgfz.com/i/aX06UOP.png" width="500" height="333"></tr>-->
+<!--    <br>-->
+    <hr style="border: 3px solid #4169e1; border-style: inset;">
+    <br><br><br>
+    <table style="width:100%; text-align: right;">
+        <tr>
+            <td>¿No sabes como utilizar nuestra página?</td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><a class="boton_personalizado1" href="asistente/solicitar" role="button">Contacta con un asistente</a></td>
+        </tr>
+    </table>
+    <td style="text-align: right;"><a href="https://www.gva.es/va/inicio/presentacion"><img src="http://imgfz.com/i/kNUqsPF.png" width="180" height="100" ></a></td>
     <br>
     <br>
 </div>

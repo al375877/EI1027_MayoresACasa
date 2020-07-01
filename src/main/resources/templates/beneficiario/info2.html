@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <style>
+            th, td, tr{
+            text-align: center;
+            border:black 1;
+        }
+    </style>
+</head>
+<body>
+<div  layout:fragment="content"  th:object="${session}">
+    <h2 style="text-align: center;">¿Que ofrece mayores a casa?</h2>
+    <hr>
+    <div style="background: rgba(105, 124, 224, 0.2);" >
+        <h2><img src="https://image.flaticon.com/icons/svg/3030/3030786.svg"width="60" height="60"> Servicio de Limpieza</h2>
+        <hr>
+        <h4><img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="40" height="40">&nbsp;Precio: 7 euros cada hora.</h4>
+        <br>
+        En este servicio contamos con una plantilla de trabajadores que han sido previamente seleccionados, donde te ofrecemos un servicio de calidad, con el que ahorraras tiempo y esfuerzo.
+        En este servicio contaras de una persona que irá a tu casa en el horario y los días acordados ha realizar el servicio de limpieza de su hogar.
+        <hr><b>Horario predefinido: <br> De Lunes a Viernes de 10:00 a 13:00 en cualquier momento durante un més.</b>
+        <hr>
+    </div>
+    <br>
+    <!--    <div style="background-image: url('http://imgfz.com/i/NAU3P1p.jpeg'); background-size: 100% 100%;">-->
+    <div style="background: rgba(105, 124, 224, 0.2">
+        <h2><img src="https://image.flaticon.com/icons/svg/2037/2037611.svg"width="60" height="60"> Servicio de Catering</h2>
+        <hr>
+        <h4><img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="40" height="40">&nbsp;Precio: 6 euros por cada servicio</h4>
+        <br>
+        Este servicio consiste en un cattering diario, en el que nos adaptamos a ti, solo tienes que comunicarnos si necesitas un menu especial, como puede ser sin sal, vegana o vegetariano.
+        El servicio de catering se desplazara a tu casa, llevandote la comida todos los días de Lunes a Domingo en el horario que se ajuste lo máximo a usted.
+        <hr><b>Horario predefinido: <br> De Lunes a Domingo de 14:00 a 15:00 y con una dieta normal durante un més.</b>
+        <hr>
+    </div>
+    <br>
+    <!--    <div style="background-image: url('http://imgfz.com/i/3dpV1er.jpeg'); background-size: 100% 100%;">-->
+    <div style="background: rgba(105, 124, 224, 0.2">
+        <h2><img src="https://image.flaticon.com/icons/svg/1142/1142172.svg"width="60" height="60">Servicio Sanitario</h2>
+        <hr>
+        <h4><img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="40" height="40">&nbsp;Precio: 5 euros por cada servicio</h4>
+        <br>
+        En Mayores en casa, sabemos que lo más importante para las personas mayores es que envejezcan en su hogar activamente, para ello creamos este servicio.
+        Este servicio consiste en un servicio de salud básica, en el que nos adaptamos a ti, solo tienes que mostrarnos un informe medico donde nos indique que medicamentos
+        o que control de salud necesitas. El servicio de salud se desplazara a su casa, en cualquier momento, para asegurarse de que lleve al dia el control de salud que necesite
+        <hr>
+        <b>Horario predefinido: <br> De Lunes a Domingo de 10:00 a 13:00 en cualquier momento durante un més.</b>
+        <hr>
+    </div>
+    <br>
+    <div style="background: rgba(105, 124, 224, 0.2">
+        <h2><img src="https://image.flaticon.com/icons/svg/779/779908.svg"width="60" height="60">Servicio de Acompañamiento</h2>
+        <hr>
+        <h4><img src="https://image.flaticon.com/icons/svg/2916/2916115.svg"width="40" height="40">&nbsp;Precio: Servicio gratuito</h4>
+        <br>
+        El servicio de acompañamiento consiste en que una serie de voluntarios se ofreceran a pasear con las personas mayores para que no pierdan su actividad diaria.
+        Los voluntarios indicaran en la aplicacion las fechas y horas en las que puedan pasear, mientras que las personas mayores verán la disponibilidad
+        de los voluntarios y aceptaran ir con ellos.
+        <hr>
+        <b>Horario predefinido: <br> De Lunes a Domingo de 10:00 a 17:00 en cualquier momento.</b>
+        <hr>
+    </div>
+    <br>
+    <br>
+    <a th:href="@{/}" class="boton_personalizado1" role="button" >Atrás</a>&nbsp;&nbsp;<a class="boton_personalizado1" href="/beneficiario/info" role="button">Pide ayuda ahora</a>
+    <br><br>
+</div>
+</body>
+</html>

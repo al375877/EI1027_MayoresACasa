@@ -18,7 +18,7 @@
 
         <div align="center">
             <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{user == null}" href="/"><b>Mayores en casa</b><br></a>
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casManager'}" th:href="@{/cassmanager/index}"><b>CAS Manager</b><br></a>
+            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casManager'}" th:href="@{/casmanager/index}"><b>CAS Manager</b><br></a>
             <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casCommitee'}" th:href="@{/cassmanager/index}"><b>CAS Commitee</b><br></a>
             <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casVolunteer'}" th:href="@{/cassmanager/index}"><b>CAS Volunteer</b><br></a>
             <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Beneficiario</b></a>
@@ -60,7 +60,7 @@
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/perfil}">Visibilidad</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/empresa/add}">Añadir empresa</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/contrato/add}">Añadir contratos</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/peticion/facturas}">Generar facturas</a></li>
+<!--                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/peticion/facturas}">Generar facturas</a></li>-->
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casCommitee'}" th:href="@{/beneficiario/add}">Añadir beneficiario</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casVolunteer'}" th:href="@{/voluntario/list}">Gestionar voluntarios</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/misPeticiones}">Mis Peticiones</a></li>

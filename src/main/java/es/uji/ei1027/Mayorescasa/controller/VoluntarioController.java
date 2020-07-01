@@ -81,8 +81,13 @@ public class VoluntarioController {
             return "voluntario/add";
         }
         voluntario.setTipoUsuario("Voluntario");
-        usuarioDao.addUsuario(voluntario);
-        usuarioDao.addVoluntario(voluntario.getDni(),voluntario.getHobbies(),voluntario.getDias_semana(),"no","Pendiente");
+        try {
+            usuarioDao.addUsuario(voluntario);
+            usuarioDao.addVoluntario(voluntario.getDni(), voluntario.getHobbies(), voluntario.getDias_semana(), "no", "Pendiente");
+        } catch (Exception e){
+            e.printStackTrace();
+            return "error/existe";
+        }
         return "redirect:../voluntario/altaEnviada";
     }
 
@@ -123,22 +128,15 @@ public class VoluntarioController {
 
     @RequestMapping(value ="/delete/{dni}")
     public String eliminarVoluntario(@PathVariable String dni){
-        usuarioDao.deleteUsuario(dni);
         usuarioDao.deleteVoluntario(dni);
+        usuarioDao.deleteUsuario(dni);
         return "voluntario/eliminado";
     }
 
     @RequestMapping("/altaEnviada")
     public String altaEnviada(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
-        try{
-            if(user.getTipoUsuario().equals("Voluntario")) {
-                return "voluntario/altaEnviada";
-            }
-        } catch (Exception e) {
-            return "error/error";
-        }
-        return "error/error";
+        return "voluntario/altaEnviada";
     }
 
     @RequestMapping(value = "/index")
@@ -574,6 +572,58 @@ public class VoluntarioController {
             return "voluntario/updatePropio";
         usuarioDao.updateVoluntario(voluntario);
         return "redirect:index";
+    }
+
+    @RequestMapping("/contactaCas")
+    public String contactaCas(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Voluntario")) {
+                model.addAttribute("datos", usuarioDao.getCasVolunteer());
+                return "voluntario/contactaCas";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error/error";
+        }
+        return "error/error";
+    }
+
+    @RequestMapping(value = "/addComentario", method = RequestMethod.POST)
+    public String limpieza(@ModelAttribute("comment") String comentario, HttpSession session) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if (comentario==null) comentario="";
+            Usuario cas = usuarioDao.getCasVolunteer();
+            System.out.println("");
+            System.out.println("");
+            System.out.println("EMAIL ENVIADO");
+            System.out.println("*************************************************************************");
+            System.out.println("Correo destinatario: " +cas.getEmail() + "\n"+
+                    "Correo del que envia: mayoresEnCasa@gva.es\n" +
+                    "Estimado/a señor/a "+ cas.getNombre() + ":");
+            System.out.println("El voluntario " + user.getNombre() + " tiene la siguiente duda: \n");
+            System.out.println(comentario + "\n");
+            System.out.println("");
+            System.out.println("Mayores en casa.\n");
+            System.out.println("*************************************************************************");
+            return "voluntario/enviado";
+        } catch (Exception e){
+            return "error/error";
+        }
+    }
+
+    @RequestMapping("/enviado")
+    public String enviado(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Empresa")) {
+                return "voluntario/enviado";
+            }
+        } catch (Exception e) {
+            return "error/error";
+        }
+        return "error/error";
     }
 
 }

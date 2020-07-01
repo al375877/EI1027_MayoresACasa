@@ -20,9 +20,9 @@ public class VoluntarioValidator implements Validator {
         if (usuario.getNombre().length()<12)
             errors.rejectValue("nombre", "obligatorio",
                     " Introduce un valor valido (Nombre y Apellidos)");
-        if (usuario.getNacimiento()>2002 || usuario.getNacimiento()<1950)
+        if (usuario.getNacimiento()>=2002 || usuario.getNacimiento()<1950)
             errors.rejectValue("nacimiento", "obligatorio",
-                    " Mayor de 18 años (o cumplirlos este año)");
+                    " Mayor de 18 años");
         if (usuario.getDni().length()!=9)
             errors.rejectValue("dni", "obligatorio",
                     " Introduce un valor valido");
