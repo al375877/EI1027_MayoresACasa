@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+  th, td, tr{
+            border:black 1;
+        }
+
+    </style>
+</head>
+<body>
+<!--style="overflow: hidden;-->
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Mayores en casa | Voluntario | Actividades </h2>
+    </div>
+    <br>
+    <h3 style="color:green" >En activo</h3>
+    <table class="table" border="5" bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col"></th>
+            <th scope="col">Fecha inicio</th>
+            <th scope="col">Dia de preferencia</th>
+            <th scope="col">Finalizar relación</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element:${beneficiariosA}"  th:unless="*{beneficiariosA == null}">
+            <td th:text="${element.key.nombre}"></td>
+            <td><a type="button" class="boton_editar" style="font-size: 14px;" th:href="@{/beneficiario/unilist/{usuario}(usuario=${element.key.usuario})}">Datos personales</a></td>
+            <td th:text="${{beneficiariosA.get(element.key).fechainicial}}"></td>
+            <td th:text="${beneficiariosA.get(element.key).comentario}"></td>
+            <td style="text-align: center;">
+                <a type="button"
+                   th:href="@{/voluntario/rechazarBen/{dni}(dni=${element.key.dni})}">
+                    <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h3 style="color:#EB9100" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Finalizadas</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#FFA500" style="background: rgba(255, 191, 0, 0.2" >
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Fecha final</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element:${beneficiariosF}"  th:unless="*{beneficiariosA == null}">
+            <td th:text="${element.key.nombre}"></td>
+            <td th:text="${element.key.direccion}"></td>
+            <td th:text="${element.key.telefono}"></td>
+            <td th:text="${{beneficiariosF.get(element.key).fechafinal}}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <a href="/voluntario/index" class="boton_personalizado1" role="button" >Atrás</a>
+    <br>
+    <br><br>
+
+</div>
+</body>
+</html>

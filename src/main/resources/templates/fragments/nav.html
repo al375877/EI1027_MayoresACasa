@@ -12,73 +12,78 @@
           th:href="@{/css/estils.css}"/>
 </head>
 <body>
-<div style="background: rgba(63, 72, 204, 1"><h6 class="mb-0"><br><br><br></h6>
+<!--<div style="background: rgba(63, 72, 204, 1);"><h6 class="mb-0"></h6>-->
+<!--<div style="background: #3f48cc"><h6 class="mb-0"></h6></div>-->
+<div style="background: #3f48cc; ">
+    <table style="width:100%;"><tr><td style="text-align: left;"><a href="https://www.uji.es/"><img src="http://imgfz.com/i/7wYrtfZ.png" width="160" height="30" align="left" ></a></td><td style="text-align: right;"><p style="font-size:70%; color:white;">Idioma: Español | ei102719ptg&nbsp;&nbsp;&nbsp;</p></td></tr></table>
+        
 <div  th:object="${session}" >
     <nav class="navbar navbar-expand-sm  navbar-dark barra_azul" >
+        <table style="width:100%;">
+            <tr>
+                <td style="text-align:left;">
+                    <div style="text-align:center;">
+                        <a class="navbar-brand" style="font-family:rondalo; font-size:40px; color:white;" th:if="*{user == null}"><b>Mayores en casa ► </b></a>
+                        <a class="navbar-brand" style="font-family:rondalo; font-size:40px; color:white;" th:if="*{tipo=='casManager'}"><b>CAS Manager ► </b></a>
+                        <a class="navbar-brand" style="font-family:rondalo; font-size:40px; color:white;" th:if="*{tipo=='casCommitee'}"><b>CAS Commitee ►</b></a>
+                        <a class="navbar-brand" style="font-family:rondalo; font-size:40px; color:white;" th:if="*{tipo=='casVolunteer'}"><b>CAS Volunteer ►</b></a>
+                        <a class="navbar-brand" style="font-family:rondalo; font-size:40px; color:white;" th:if="*{tipo=='Beneficiario'}"><b>Beneficiario ►</b></a>
+                        <a class="navbar-brand" style="font-family:rondalo; font-size:40px; color:white;" th:if="*{tipo=='Voluntario'}"><b>Voluntario ►</b></a>
+                        <a class="navbar-brand" style="font-family:rondalo; font-size:40px; color:white;" th:if="*{tipo=='Empresa'}"><b>Empresa ►</b></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav mr-auto" style="text-align:center;">
+                                <a class="nav-link"  style="font-family:rondalo; font-size:30px;" th:if="*{tipo=='casManager'}" th:href="@{/casmanager/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                                <a class="nav-link"  style="font-family:rondalo; font-size:30px;" th:if="*{tipo=='casCommitee'}" th:href="@{/cascommitee/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                                <a class="nav-link"  style="font-family:rondalo; font-size:30px;" th:if="*{tipo=='casVolunteer'}" th:href="@{/casvolunteer/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                                <a class="nav-link"  style="font-family:rondalo; font-size:30px;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                                <a class="nav-link"  style="font-family:rondalo; font-size:30px;" th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                                <a class="nav-link"  style="font-family:rondalo; font-size:30px;" th:if="*{tipo=='Empresa'}" th:href="@{/empresa/index}">Pagina principal | <span class="sr-only">(current)</span></a>
 
-        <div align="center">
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{user == null}" href="/"><b>Mayores en casa</b><br></a>
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casManager'}" th:href="@{/casmanager/index}"><b>CAS Manager</b><br></a>
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casCommitee'}" th:href="@{/cassmanager/index}"><b>CAS Commitee</b><br></a>
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='casVolunteer'}" th:href="@{/cassmanager/index}"><b>CAS Volunteer</b><br></a>
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}"><b>Beneficiario</b></a>
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/index}"><b>Voluntario</b></a>
-            <a class="navbar-brand" style="font-family:rondalo; font-size:40px;" th:if="*{tipo=='Empresa'}" th:href="@{/empresa/index}"><b>Empresa</b></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/empresa/list}">Ver empresas |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}" th:if="*{tipo=='Beneficiario'}" th:href="@{/voluntario/solicitar}">Ver/Solicitar Voluntario |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/servicios}">Solicitar Servicio |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/contrato/list}">Ver Contratos |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='casCommitee'}" th:href="@{/beneficiario/list}">Ver Beneficiarios |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='casCommitee'}" th:href="@{/peticion/list}">Ver Peticiones |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='casVolunteer'}" th:href="@{/voluntario/list}">Ver Voluntarios |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;"  th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misDatos}">Mis datos |</a>
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misContratosActivo}">Mis contratos en activo |</a>
 
-            <div class="collapse navbar-collapse" id="collapsibleNavbar" >
+                                <a class="nav-link" style="font-family:rondalo; font-size:30px;" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/beneficiarios}">Consultar mis mayores |</a>
 
-                <ul class="navbar-nav mr-auto" style="text-align:center;">
-                    <a class="nav-link"  th:if="*{tipo=='casManager'}" th:href="@{/casmanager/index}">Pagina principal | <span class="sr-only">(current)</span></a>
-                    <a class="nav-link"  th:if="*{tipo=='casCommitee'}" th:href="@{/cascommitee/index}">Pagina principal | <span class="sr-only">(current)</span></a>
-                    <a class="nav-link"  th:if="*{tipo=='casVolunteer'}" th:href="@{/casvolunteer/index}">Pagina principal | <span class="sr-only">(current)</span></a>
-                    <a class="nav-link"  th:if="*{tipo=='Beneficiario'}" th:href="@{/beneficiario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
-                    <a class="nav-link"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/index}">Pagina principal | <span class="sr-only">(current)</span></a>
-                    <a class="nav-link"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/index}">Pagina principal | <span class="sr-only">(current)</span></a>
+                                <a class="boton_personalizado1" th:if="*{user == null}"  href="/login" role="button">Inicia sesión</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <!--                    <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>-->
 
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/empresa/list}">Ver empresas |</a>
-                    <a class="nav-link" th:unless="*{user == null}" th:if="*{tipo=='Beneficiario'}" th:href="@{/voluntario/solicitar}">Ver/Solicitar Voluntario |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/servicios}">Solicitar Servicio |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/contrato/list}">Ver Contratos |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='casCommitee'}" th:href="@{/beneficiario/list}">Ver Beneficiarios |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='casCommitee'}" th:href="@{/peticion/list}">Ver Peticiones |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='casVolunteer'}" th:href="@{/voluntario/list}">Ver Voluntarios |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misDatos}">Mis datos |</a>
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misContratosActivo}">Mis contratos en activo |</a>
+                                <div  th:unless="*{user == null}" class="dropdown">
+                                    <li style="font-family:rondalo; font-size:30px;" type="button" th:text="*{user.usuario}" class="nav-link barra_azul dropdown-toggle"  data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </li>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                        <li style="font-size:20px;" role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/perfil}">Visibilidad</a></li>
+                                        <li style="font-size:20px;" role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/empresa/add}">Añadir empresa</a></li>
+                                        <li style="font-size:20px;" role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/contrato/add}">Añadir contratos</a></li>
+                                        <!--                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/peticion/facturas}">Generar facturas</a></li>-->
+                                        <li style="font-size:20px;" role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casCommitee'}" th:href="@{/beneficiario/add}">Añadir beneficiario</a></li>
+                                        <li style="font-size:20px;" role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casVolunteer'}" th:href="@{/voluntario/list}">Gestionar voluntarios</a></li>
+                                        <li style="font-size:20px;"  role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/misPeticiones}">Mis Peticiones</a></li>
+                                        <li style="font-size:20px;" role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misContratosPasados}">Mis contratos pasados</a></li>
 
-                    <a class="nav-link" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/beneficiarios}">Consultar mis mayores |</a>
-
-                    <a href="/login" th:if="*{user == null}" class="nav-item nav-link " th:href="@{/login}">Iniciar sesion</a>
-
-                    <div  th:unless="*{user == null}" class="dropdown">
-                        <li type="button" th:text="*{user.usuario}" class="nav-link barra_azul dropdown-toggle"  data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </li>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Voluntario'}" th:href="@{/voluntario/perfil}">Visibilidad</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/empresa/add}">Añadir empresa</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/contrato/add}">Añadir contratos</a></li>
-<!--                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casManager'}" th:href="@{/peticion/facturas}">Generar facturas</a></li>-->
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casCommitee'}" th:href="@{/beneficiario/add}">Añadir beneficiario</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='casVolunteer'}" th:href="@{/voluntario/list}">Gestionar voluntarios</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Beneficiario'}" th:href="@{/peticion/misPeticiones}">Mis Peticiones</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:unless="*{user == null}"  th:if="*{tipo=='Empresa'}" th:href="@{/empresa/misContratosPasados}">Mis contratos pasados</a></li>
-
-                            <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" th:href="@{/logout}">Cerrar sesión</a></li>
-                        </ul>
-
+                                        <li style="font-size:20px;" role="presentation" class="divider"></li>
+                                        <li style="font-size:20px;" role="presentation"><a role="menuitem" tabindex="-1" th:href="@{/logout}">Cerrar sesión</a></li>
+                                    </ul>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
-
-
-                </ul>
-
-
-            </div>
-            <br>
-        </div>
+                </td>
+                <td style="text-align: right;"><button type="button" class="btn btn-danger" onclick="location.href='http://infocoronavirus.gva.es/va'"><img src="https://image.flaticon.com/icons/svg/2950/2950124.svg" width="80" height="45" align="left" ><b style="font-size:20px">Alerta sobre el COVID-19</b></button>&nbsp;&nbsp;
+                    <a href="https://www.gva.es/va/inicio/presentacion"><img src="http://imgfz.com/i/i7TLvuZ.png" width="190" height="100" align="right" ></a>
+                </td>
+            </tr>
+        </table>
     </nav>
 </div>
 </div>

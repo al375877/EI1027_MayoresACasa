@@ -29,8 +29,8 @@
         <tr><td>&nbsp;</td></tr>
         <tr><td><h3>Datos de mi empresa</h3></td><td style="text-align: right;" ><h3>¿Necesitas ayuda?&nbsp;&nbsp;&nbsp;</h3></td></tr>
         <tr><td>&nbsp;</td></tr>
-        <tr>
-            <td><a class="boton_personalizado1" th:href="@{/empresa/misDatos}" role="button">Mis datos</a>
+        <tr th:each="user: ${perfil}">
+            <td><a class="boton_personalizado1" th:href="@{/empresa/unilist/{usuario}(usuario=${user.usuario})}" role="button">Ver/Modificar datos</a>
             <td style="text-align: right;" ><a class="boton_añadir" th:href="@{/empresa/contactaCas}" role="button">Contacta con el CasManager</a></td><td>&nbsp;</td><td>&nbsp;</td>
         </tr>
         <tr><td>&nbsp;</td></tr>

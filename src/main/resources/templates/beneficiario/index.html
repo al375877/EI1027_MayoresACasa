@@ -23,19 +23,24 @@
 <body>
 <div   layout:fragment="content">
 <h2>Hola, ¿En que puedo ayudarte?</h2>
-<table>
+<table style="width:100%;">
     <tr><td><br></td></tr>
-    <tr><td><h3>Mi Perfil</h3></td></tr>
+    <tr>
+        <td style="text-align: left;"><h3>Mi Perfil</h3></td>
+        <td style="text-align: left;"><h3>Servicios</h3></td>
+    </tr>
     <tr th:each="user: ${perfil}">
-        <td><a class="boton_añadir" th:href="@{/beneficiario/unilist/{usuario}(usuario=${user.usuario})}" role="button">Ver mis datos</a></td></tr>
-    <tr><td><br></td></tr>
+        <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/beneficiario/unilist/{usuario}(usuario=${user.usuario})}"><img src="https://image.flaticon.com/icons/svg/989/989001.svg"width="36" height="36" align="left">&nbsp;Ver/Modificar datos</a></td>
+        <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/peticion/servicios}"><img src="https://image.flaticon.com/icons/svg/988/988982.svg"width="36" height="36" align="left">&nbsp;Contratar Servicios</a></td>
+    </tr>
+    <tr>
+        <td><br><br><br></td>
+        <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/peticion/misPeticiones}"><img src="https://image.flaticon.com/icons/svg/988/988975.svg"width="36" height="36" align="left">&nbsp;Mis Servicios/Peticiones</a></td>
+    </tr>
     <tr><td><h3>Voluntarios</h3></td></tr>
-    <tr><td><a class="boton_añadir" th:href="@{/voluntario/solicitar}" role="button">Ver/Solicitar Voluntarios</a></td></tr>
-    <tr><td><br></td></tr>
-    <tr><td><h3>Servicios</h3></td></tr>
-    <tr><td><a class="boton_añadir" th:href="@{/peticion/servicios}" role="button">Contratar Servicios</a></td></tr>
-    <tr><td><br></td></tr>
-    <tr><td><a class="boton_añadir" th:href="@{/peticion/misPeticiones}" role="button">Mis Servicios/Peticiones</a></td></tr>
+    <tr><td><a type="button" class="boton_añadir" th:href="@{/voluntario/solicitar}"><img src="https://image.flaticon.com/icons/svg/989/989008.svg"width="36" height="36" align="left">&nbsp;Ver/Solicitar Voluntarios</a></td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td><a type="button" class="boton_añadir" th:href="@{/beneficiario/terminados}"><img src="https://image.flaticon.com/icons/svg/989/989011.svg"width="36" height="36" align="left">&nbsp;Relaciones terminadas</a></td></tr>
     <tr><td><br></td></tr>
 </table>
     <br>

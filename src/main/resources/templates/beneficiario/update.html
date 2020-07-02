@@ -26,40 +26,39 @@
             </tr>
             <tr>
                 <td style="text-align: right"><label>DNI</label></td>
-                <td><input type="text" th:field="*{dni}" readonly="readonly" /></td>
-            </tr>
-            <tr>
-                <td style="text-align: right"><label>Usuario</label></td>
-                <td><input type="text" th:field="*{usuario}" readonly="readonly" /></td>
-            </tr>
-            <tr>
-                <td style="text-align: right"><label>Contraseña</label></td>
-                <td><input type="text" th:field="*{contraseña}" /></td>
-            </tr>
-            <tr>
-                <td style="text-align: right"><label>Email</label></td>
-                <td><input type="text" th:field="*{email}" /></td>
-            </tr>
-            <tr>
-                <td style="text-align: right"><label>Dirección</label></td>
-                <td><input type="text" th:field="*{direccion}" /></td>
-            </tr>
-
-            <tr>
-                <td style="text-align: right"><label>Telefono</label></td>
-                <td><input type="number" th:field="*{telefono}" /></td>
-            </tr>
-            <tr>
-                <td style="text-align: right"><label>Genero</label></td>
-                <td><input type="text" th:field="*{genero}" readonly="readonly"/></td>
+                <td><input type="text" th:field="*{dni}" readonly="readonly" size="10" /></td>
             </tr>
             <tr>
                 <td style="text-align: right"><label>Año de nacimiento</label></td>
-                <td><input type="text" th:field="*{nacimiento}" /></td>
+                <td><input type="text" th:field="*{nacimiento}" readonly="readonly" size="5" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Genero</label></td>
+                <td><input type="text" th:field="*{genero}" readonly="readonly" size="5" /></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Usuario</label></td>
+                <td><input type="text" th:field="*{usuario}" readonly="readonly" size="10"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Contraseña</label></td>
+                <td><input type="text" th:field="*{contraseña}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Email</label></td>
+                <td><input type="text" th:field="*{email}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Dirección</label></td>
+                <td><input type="text" th:field="*{direccion}"  size="30"/>&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><label>Telefono</label></td>
+                <td><input type="number" th:field="*{telefono}"  size="6"/>&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
             <tr>
                 <td style="text-align: right"><label>Tipo de dieta</label></td>
-                <td><input type="text" th:field="*{tipodieta}" /></td>
+                <td><input type="text" th:field="*{tipodieta}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
         </table>
         <td colspan="2"><input type="submit" class="boton_añadir" value="Modificar" /></td>

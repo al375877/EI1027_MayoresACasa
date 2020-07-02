@@ -43,22 +43,25 @@ public class EmpresaController {
     public String editempresa(HttpSession session, Model model, @PathVariable String usuario) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
-            if(!user.getTipoUsuario().equals("casManager")) return "error/error";
-            model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
-            return "empresa/update";
+            if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("Empresa")) {
+                model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
+                return "empresa/update";
+            }
         } catch (Exception e) {
             return "error/error";
         }
+        return "error/error";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("empresa") Empresa empresa,
-            BindingResult bindingResult) {
+    public String processUpdateSubmit(HttpSession session,
+            @ModelAttribute("empresa") Empresa empresa, BindingResult bindingResult) {
+        Usuario user= (Usuario) session.getAttribute("user");
         if (bindingResult.hasErrors())
             return "empresa/update";
         empresaDao.updateEmpresa(empresa);
-        return "redirect:list";
+        if(user.getTipoUsuario().equals("casManager")) return "redirect:list";
+        return "redirect:unilist/" + user.getUsuario();
     }
 
     @RequestMapping("/list")
@@ -81,6 +84,9 @@ public class EmpresaController {
         try{
             if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("Empresa")) {
                 model.addAttribute("empresa", empresaDao.getEmpresa(usuario));
+                if(user.getTipoUsuario().equals("casManager")){
+                    model.addAttribute("tipoUser", "casCommitee");
+                }
                 return "empresa/unilist";
             }
         } catch (Exception e) {
@@ -211,6 +217,7 @@ public class EmpresaController {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
             if(user.getTipoUsuario().equals("Empresa")) {
+                model.addAttribute("perfil", empresaDao.getUsuario(user.getUsuario()));
                 return "empresa/index";
             }
         } catch (Exception e) {

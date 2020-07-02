@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("/beneficiario")
@@ -80,6 +77,26 @@ public class BeneficiarioController {
                 model.addAttribute("usuarios", usuarioDao.getBeneficiarios());
                 return "beneficiario/list";
             }
+
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
+    }
+
+    @RequestMapping("/terminados")
+    public String terminados(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if (user.getTipoUsuario().equals("Beneficiario")) {
+                List<Disponibilidad> listaFinal= usuarioDao.consultaBeneficiariosFinalizado(user.getDni());
+                Map<Usuario,Disponibilidad> mapFinal=new HashMap<>();
+                for(Disponibilidad dis:listaFinal){
+                    mapFinal.put(usuarioDao.getUsuarioDni(dis.getUsuario_vol()),dis);
+                }
+                model.addAttribute("beneficiariosF",mapFinal);
+                return "/beneficiario/terminados";
+            }
         } catch (Exception e){
             return "error/error";
         }
@@ -90,23 +107,27 @@ public class BeneficiarioController {
     public String editusuario(HttpSession session, Model model, @PathVariable String usuario) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
-            if (!user.getTipoUsuario().equals("casCommitee")) return "error/error";
-            model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
-            return "beneficiario/update";
+            if (user.getTipoUsuario().equals("casCommitee") || user.getTipoUsuario().equals("Beneficiario")) {
+                model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
+                return "beneficiario/update";
+            }
         } catch (Exception e){
+            e.printStackTrace();
             return "error/error";
         }
+        return "error/error";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("usuario") Usuario usuario,
-            BindingResult bindingResult) {
+    public String processUpdateSubmit(HttpSession session,
+            @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult) {
+        Usuario user= (Usuario) session.getAttribute("user");
         if (bindingResult.hasErrors())
             return "beneficiario/update";
         usuario.setTipoUsuario("Beneficiario");
         usuarioDao.updateUsuario(usuario);
-        return "redirect:list";
+        if(user.getTipoUsuario().equals("casCommitee")) return "redirect:list";
+        return "redirect:unilist/" + user.getUsuario();
     }
 
     @RequestMapping(value = "/delete/{usuario}")
@@ -154,10 +175,17 @@ public class BeneficiarioController {
     public String unilistEmpresas(HttpSession session, Model model, @PathVariable String usuario) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
-            if (user.getTipoUsuario().equals("casCommitee") || user.getTipoUsuario().equals("casVolunteer") || user.getTipoUsuario().equals("Beneficiario")) {
+            if (user.getTipoUsuario().equals("casCommitee") || user.getTipoUsuario().equals("casVolunteer")
+                    || user.getTipoUsuario().equals("Beneficiario") || user.getTipoUsuario().equals("Voluntario")) {
                 model.addAttribute("user", usuarioDao.getUsuario(usuario));
                 String dniBen = usuarioDao.getUsuario(usuario).getDni();
                 Beneficiario beneficiario = usuarioDao.getBeneficiario(dniBen);
+                if(user.getTipoUsuario().equals("casCommitee") || user.getTipoUsuario().equals("Beneficiario")){
+                    model.addAttribute("tipoUser", "casCommitee");
+                }
+                if(user.getTipoUsuario().equals("casCommitee")){
+                    model.addAttribute("tipoUserAsis", "casCommitee");
+                }
                 try {
                     model.addAttribute("asistenteUni", usuarioDao.getAsistenteBenef(beneficiario.getAsistente()));
                 } catch (Exception e) {

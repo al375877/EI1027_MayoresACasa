@@ -47,9 +47,9 @@
             <td th:text="${user.tipodieta}"></td></tr>
     </table>
     <table>
-        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/beneficiario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
+        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:unless="*{tipoUser == casCommitee}"  th:href="@{/beneficiario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/beneficiario/updateAsis/{dni}(dni=${user.dni})}">Añadir/Modificar asistente</a></td>
+        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:unless="*{tipoUserAsis == casCommitee}" th:href="@{/beneficiario/updateAsis/{dni}(dni=${user.dni})}">Añadir/Modificar asistente</a></td>
 <!--        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:href="@{/beneficiario/delete/{usuario}(usuario=${user.usuario})}">Dar de baja</a></td>-->
 <!--        <td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;">&nbsp;Acción Irreversible</a></td></tr>-->
     </table>

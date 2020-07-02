@@ -39,6 +39,9 @@ public class ContratoController {
         try{
             if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("casCommitee")) {
                 model.addAttribute("contratos", contratoDao.getContratos());
+                if(user.getTipoUsuario().equals("casManager")){
+                    model.addAttribute("tipoUser", "casManager");
+                }
                 return "contrato/list";
             }
         } catch (Exception e){
@@ -53,6 +56,9 @@ public class ContratoController {
         try{
             if(user.getTipoUsuario().equals("casManager") || user.getTipoUsuario().equals("casCommitee")) {
                 model.addAttribute("listPasados", contratoDao.getPasados());
+                if(user.getTipoUsuario().equals("casManager")){
+                    model.addAttribute("tipoUser", "casManager");
+                }
                 return "contrato/listPasados";
             }
         } catch (Exception e){

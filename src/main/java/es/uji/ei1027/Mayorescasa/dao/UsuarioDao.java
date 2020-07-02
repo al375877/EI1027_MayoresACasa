@@ -68,6 +68,17 @@ public class UsuarioDao {
 
     }
 
+    //devuelve una lista de todas las asignaciones de beneficiaros finalizadas
+    public List<Disponibilidad> consultaBeneficiariosFinalizado(String dni){
+        try{
+            List<Disponibilidad>lista= jdbcTemplate.query("SELECT * FROM Disponibilidad WHERE dni_ben=? AND estado='Finalizada'",
+                    new DisponibildadRowMapper(), dni);
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
     //BORRAMOS Usuario
     public void deleteUsuario(String dni) {
         jdbcTemplate.update("DELETE FROM Usuario WHERE dni=?", dni);

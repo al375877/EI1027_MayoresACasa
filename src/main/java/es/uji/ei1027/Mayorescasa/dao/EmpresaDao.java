@@ -125,9 +125,18 @@ public class EmpresaDao {
             return jdbcTemplate.query("SELECT peticion.beneficiario, usuario.dni, peticion.tiposervicio, " +
                     "beneficiario.tipodieta, usuario.direccion, usuario.telefono, peticion.comentarios FROM peticion " +
                     "JOIN beneficiario ON peticion.dni_ben = beneficiario.dni JOIN usuario USING(dni) " +
-                    "WHERE peticion.empresa=?;", new ServicioRowMapper(), nombre);
+                    "WHERE peticion.empresa=? AND peticion.estado='Aceptada'", new ServicioRowMapper(), nombre);
         } catch (EmptyResultDataAccessException e){
             return new ArrayList<Servicio>();
+        }
+    }
+
+    public Usuario getUsuario (String usuario ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE usuario=?", new UsuarioRowMapper(), usuario);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
         }
     }
 

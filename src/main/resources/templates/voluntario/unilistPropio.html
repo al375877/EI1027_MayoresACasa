@@ -53,13 +53,15 @@
             <td th:text="${vol.visible}"></td></tr>
     </table>
     <table>
+        <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/voluntario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
+        <td>&nbsp;</td>
         <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/voluntario/updatePropio/{dni}(dni=${user.dni})}">Modificar Hobbies/Disponibilidad</a></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
     </table>
     <br>
     <br>
     <br>
-    <a th:href="@{/voluntario/index}" class="boton_personalizado1" role="button">Mi página</a>
+    <a th:href="@{/voluntario/index}" class="boton_personalizado1" role="button">Atrás</a>
     <br>
     <br>
 </div>

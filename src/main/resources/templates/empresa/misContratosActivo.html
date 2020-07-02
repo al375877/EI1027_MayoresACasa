@@ -43,8 +43,8 @@
         <tr th:each="contrato: ${contratos}">
             <td th:text="${contrato.codcontrato}"></td>
             <td th:text="${contrato.tiposervicio}"></td>
-            <td th:text="${contrato.fechainicial}"></td>
-            <td th:text="${contrato.fechafinal}"></td>
+            <td th:text="${{contrato.fechainicial}}"></td>
+            <td th:text="${{contrato.fechafinal}}"></td>
             <td th:text="${contrato.dias_semana}"></td>
             <td th:text="${contrato.horainicial}"></td>
             <td th:text="${contrato.horafinal}"></td>

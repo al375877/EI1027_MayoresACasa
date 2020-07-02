@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Mayores en casa</title>
+
+    <style>
+  th, td, tr{
+            border:black 1;
+        }
+
+    </style>
+</head>
+<body>
+<!--style="overflow: hidden;-->
+<div   layout:fragment="content">
+    <br>
+    <br>
+    <h3 style="color:#EB9100" >Relaciones Finalizadas</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#FFA500" style="background: rgba(255, 191, 0, 0.2" >
+        <thead>
+        <tr>
+            <th scope="col">Voluntario</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Fecha inicial</th>
+            <th scope="col">Fecha final</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element:${beneficiariosF}">
+            <td th:text="${element.key.nombre}"></td>
+            <td th:text="${element.key.telefono}"></td>
+            <td th:text="${element.key.email}"></td>
+            <td th:text="${{beneficiariosF.get(element.key).fechainicial}}"></td>
+            <td th:text="${{beneficiariosF.get(element.key).fechafinal}}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <a href="/beneficiario/index" class="boton_personalizado1" role="button" >Atrás</a>
+    <br>
+    <br><br>
+
+</div>
+</body>
+</html>

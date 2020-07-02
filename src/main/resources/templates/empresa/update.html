@@ -12,7 +12,7 @@
 <body>
 <div layout:fragment="content">
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h3 style="color:black;" >Mayores en casa | CAS Manager | Modificar empresa</h3>
+        <h3 style="color:black;" >Mayores en casa | Modificar empresa</h3>
     </div>
     <br>
     <form action="#" th:action="@{/empresa/update}"
@@ -28,32 +28,32 @@
             </tr>
             <tr>
                 <td><label>CIF</label></td>
-                <td><input type="text" th:field="*{cif}" readonly="readonly" /></td>
+                <td><input type="text" th:field="*{cif}" readonly="readonly" size="10"/></td>
             </tr>
             <tr>
                 <td><label>Usuario</label></td>
                 <td><input type="text" th:field="*{usuario}" readonly="readonly" /></td>
             </tr>
             <tr>
+                <td><label>Servicio</label></td>
+                <td><input type="text" th:field="*{tiposervicio}" readonly="readonly" size="10"/></td>
+            </tr>
+            <tr>
                 <td><label>Contraseña</label></td>
-                <td><input type="text" th:field="*{contraseña}" /></td>
+                <td><input type="text" th:field="*{contraseña}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
             <tr>
                 <td><label>Email</label></td>
-                <td><input type="text" th:field="*{email}" /></td>
+                <td><input type="text" th:field="*{email}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
             <tr>
                 <td><label>Direccion</label></td>
-                <td><input type="text" th:field="*{direccion}" /></td>
+                <td><input type="text" th:field="*{direccion}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
 
             <tr>
                 <td><label>Telefono</label></td>
-                <td><input type="number" th:field="*{telefono}" /></td>
-            </tr>
-            <tr>
-                <td><label>Servicio</label></td>
-                <td><input type="text" th:field="*{tiposervicio}" readonly="readonly"/></td>
+                <td><input type="number" th:field="*{telefono}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
         </table>
             <hr>
@@ -62,19 +62,19 @@
         <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
             <tr>
                 <td><label>Contacto</label></td>
-                <td><input type="text" th:field="*{contacto}" /></td>
+                <td><input type="text" th:field="*{contacto}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
             <tr>
                 <td><label>Nif Contacto</label></td>
-                <td><input type="text" th:field="*{cont_nif}" /></td>
+                <td><input type="text" th:field="*{cont_nif}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
             <tr>
                 <td><label>Telefono Contacto</label></td>
-                <td><input type="number" th:field="*{cont_tlf}" /></td>
+                <td><input type="number" th:field="*{cont_tlf}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
             <tr>
                 <td><label>Email Contacto</label></td>
-                <td><input type="text" th:field="*{cont_mail}" /></td>
+                <td><input type="text" th:field="*{cont_mail}" />&nbsp;&nbsp;<img src="https://image.flaticon.com/icons/svg/598/598234.svg"width="30" height="30"></td>
             </tr>
             <tr>
         </table>

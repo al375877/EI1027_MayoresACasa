@@ -23,7 +23,7 @@
 <!--style="overflow: hidden;-->
 <div   layout:fragment="content">
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h2 style="color:black;" >Mayores en casa | CAS Manager | Empresa</h2>
+        <h2 style="color:black;" >Mayores en casa | Empresa</h2>
     </div>
     <br>
     <h2><img src="https://image.flaticon.com/icons/svg/2905/2905064.svg"width="70" height="70">&nbsp;&nbsp;<td th:text="${empresa.nombre}"></td></h2>
@@ -59,11 +59,9 @@
     <table>
         <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/empresa/update/{usuario}(usuario=${empresa.usuario})}">Modificar Información</a></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:href="@{/empresa/delete/{usuario}(usuario=${empresa.usuario})}">Dar de baja</a></td>
-        <td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;">&nbsp;Acción Irreversible</a></td></tr>
+        <td><a type="button" class="boton_eliminar" style="font-size: 16px;" th:unless="*{tipoUser == casCommitee}"  th:href="@{/empresa/delete/{usuario}(usuario=${empresa.usuario})}">Dar de baja</a></td>
+        <td><img th:unless="*{tipoUser == casCommitee}" src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="30" height="30"><a style="font-size: 15px;" th:unless="*{tipoUser == casCommitee}" >&nbsp;Acción Irreversible</a></td></tr>
     </table>
-    <br>
-    <a href="/empresa/list" class="boton_personalizado1" role="button" >Volver</a>
     <br><br>
 
 </div>
