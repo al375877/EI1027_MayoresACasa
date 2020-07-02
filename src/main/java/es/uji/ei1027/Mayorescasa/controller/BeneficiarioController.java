@@ -228,8 +228,6 @@ public class BeneficiarioController {
         usuario.setTipoUsuario("Beneficiario");
         usuarioDao.addUsuario(usuario);
         usuarioDao.addBeneficiario(usuario.getNombre(),usuario.getDni(),usuario.getTipodieta());
-        //Añadimos factura vacía
-        usuarioDao.addFactura(aleatorio(),null,0.0,usuario.getNombre(),usuario.getDni());
         return "redirect:../beneficiario/list";
     }
 

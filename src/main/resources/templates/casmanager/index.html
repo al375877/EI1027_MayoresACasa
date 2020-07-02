@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
+    <title>Indice CasManager</title>
     <link rel="stylesheet" type="text/css"
           href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
@@ -26,27 +27,20 @@
     <h1 style="font-size:100px; text-align:center; color:#4169e1;"><b>CAS Manager</b></h1>
     <table>
         <tr><td><h3>Gestión de Empresa</h3></td></tr>
+        <td><a type="button" class="boton_añadir"  th:href="@{/empresa/list}"><img src="https://image.flaticon.com/icons/svg/994/994268.svg"width="36" height="36" align="left">&nbsp;Lista de Empresas</a></td>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_personalizado1" th:href="@{/empresa/list}" role="button">Lista de Empresas</a></td></tr>
+        <td><a type="button" class="boton_añadir"  th:href="@{/empresa/add}"><img src="https://image.flaticon.com/icons/svg/994/994092.svg"width="36" height="36" align="left">&nbsp;Registrar Empresa</a></td>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_añadir" th:href="@{/empresa/add}" role="button">Registrar Empresa</a></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><h3>Gestión de Contratos</h3></td></tr>
+        <td><a type="button" class="boton_añadir"  th:href="@{/contrato/add}"><img src="https://image.flaticon.com/icons/svg/994/994156.svg"width="36" height="36" align="left">&nbsp;Añadir Contratos de Empresa</a></td>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_añadir" th:href="@{/contrato/add}" role="button">Añadir Contratos de Empresa</a></td></tr>
+        <td><a type="button" class="boton_añadir"  th:href="@{/contrato/list}"><img src="https://image.flaticon.com/icons/svg/1296/1296602.svg"width="36" height="36" align="left">&nbsp;Ver Contratos de Empresa en activo</a></td>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_personalizado1" th:href="@{/contrato/list}" role="button">Ver Contratos de Empresa en activo</a></td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td><a class="boton_personalizado1" th:href="@{/contrato/listPasados}" role="button">Ver Contratos de Empresa pasados</a></td></tr>
-<!--        <tr><td>&nbsp;</td></tr>-->
-<!--        <tr><td><h3>Gestión de Facturas</h3></td></tr>-->
-<!--        <tr><td>&nbsp;</td></tr>-->
-<!--        <tr><td><a class="boton_personalizado1" th:href="@{/peticion/facturas}" role="button">Generar Factura</a></td></tr>-->
+        <td><a type="button" class="boton_añadir"  th:href="@{/contrato/listPasados}"><img src="https://image.flaticon.com/icons/svg/1296/1296603.svg"width="36" height="36" align="left">&nbsp;Ver Contratos de Empresa pasados</a></td>
         <tr><td>&nbsp;</td></tr>
         <tr><td>&nbsp;</td></tr>
     </table>
-<!--    <hr style="border: 5px solid #4169e1; border-radius: 5px; border-style: inset;">-->
-<!--    <img src="http://imgfz.com/i/aeIdtgx.png">-->
     <br><br>
 </div>
 </body>

@@ -208,12 +208,6 @@ public class UsuarioDao {
         jdbcTemplate.update("UPDATE Voluntario SET estado=? WHERE dni = ?", voluntario.getEstado(), voluntario.getDni());
     }
 
-    //AÑADIMOS Factura
-    public void addFactura(String codigo, Date fecha, double precio, String concepto, String dniBen) {
-        jdbcTemplate.update("INSERT INTO Factura VALUES (?,?,?,?,?)",
-                codigo, fecha, precio, concepto, dniBen);
-    }
-
     public List<Asistente> getAsistenteBenef (String nombre ){
         try{
             System.out.println(nombre);
