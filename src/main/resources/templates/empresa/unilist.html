@@ -20,24 +20,25 @@
     </div>
     <br>
     <h2><img src="https://image.flaticon.com/icons/svg/2905/2905064.svg"width="70" height="70">&nbsp;&nbsp;<td th:text="${empresa.nombre}"></td></h2>
-    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+    <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.1); width:70%; margin: 0 auto;">
         <br>
-            <tr><th scope="col" style="text-align: right" >CIF</th>
+        <tr><td rowspan="4" style="text-align: center;"><img src="https://images.vexels.com/media/users/3/137047/isolated/preview/5831a17a290077c646a48c4db78a81bb-perfil-de-usuario-icono-azul-by-vexels.png" width="150" height="150"></td></tr>
+        <tr><th scope="col" style="text-align: right" >CIF</th>
                 <td th:text="${empresa.cif}" ></td></tr>
             <tr><th scope="col" style="text-align: right">Usuario</th>
                 <td th:text="${empresa.usuario}"></td></tr>
             <tr><th scope="col" style="text-align: right">Email</th>
                 <td th:text="${empresa.email}"></td></tr>
-            <tr><th scope="col" style="text-align: right">Direccion</th>
+            <tr><th colspan="2" scope="col" style="text-align: right">Direccion</th>
                 <td th:text="${empresa.direccion}"></td></tr>
-            <tr><th scope="col" style="text-align: right">Teléfono</th>
+            <tr><th colspan="2" scope="col" style="text-align: right">Teléfono</th>
                 <td th:text="${empresa.telefono}"></td></tr>
-            <tr><th scope="col" style="text-align: right">Servicio</th>
+            <tr><th colspan="2" scope="col" style="text-align: right">Servicio</th>
                 <td th:text="${empresa.tiposervicio}"></td></tr>
         </tr>
     </table>
     <br>
-    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+    <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.1); width:70%; margin: 0 auto;">
         <h3><img src="https://image.flaticon.com/icons/svg/3050/3050236.svg"width="60" height="60">&nbsp;&nbsp;Persona de contacto</h3>
         <tr><th scope="col" style="text-align: right">Contacto</th>
             <td th:text="${empresa.contacto}"></td></tr>

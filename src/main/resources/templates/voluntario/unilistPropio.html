@@ -20,31 +20,33 @@
     </div>
     <br>
     <h2><img src="https://image.flaticon.com/icons/svg/3039/3039084.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="${user.nombre}"></td></h2>
-    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+    <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.1); width:70%; margin: 0 auto;">
         <br>
+        <tr><td rowspan="4" style="text-align: center;"><img src="https://images.vexels.com/media/users/3/137047/isolated/preview/5831a17a290077c646a48c4db78a81bb-perfil-de-usuario-icono-azul-by-vexels.png" width="150" height="150"></td></tr>
         <tr><th scope="col" style="text-align: right" >NIF</th>
             <td th:text="${user.dni}" ></td></tr>
         <tr><th scope="col" style="text-align: right">Usuario</th>
             <td th:text="${user.usuario}"></td></tr>
         <tr><th scope="col" style="text-align: right">Email</th>
             <td th:text="${user.email}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Direccion</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Direccion</th>
             <td th:text="${user.direccion}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Genero</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Genero</th>
             <td th:text="${user.genero}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Año de nacimiento</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Año de nacimiento</th>
             <td th:text="${user.nacimiento}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Teléfono</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Teléfono</th>
             <td th:text="${user.telefono}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Hobbies</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Hobbies</th>
             <td th:text="${vol.hobbies}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Disponibilidad</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Disponibilidad</th>
             <td th:text="${vol.dias_semana}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Estado de tu alta</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Estado de tu alta</th>
             <td th:text="${vol.estado}"></td></tr>
-        <tr><th scope="col" style="text-align: right">Visible para los mayores</th>
+        <tr><th colspan="2" scope="col" style="text-align: right">Visible para los mayores</th>
             <td th:text="${vol.visible}"></td></tr>
     </table>
+    <br>
     <table>
         <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:href="@{/voluntario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
         <td>&nbsp;</td>

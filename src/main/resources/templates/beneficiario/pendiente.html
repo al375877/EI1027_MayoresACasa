@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Relaciones pendientes</title>
+</head>
+<body>
+<div   layout:fragment="content">
+    <br>
+    <br>
+    <br>
+    <h3 style="color:green;">Voluntarios asignados</h3>
+    <table class="table" border="5" bordercolor="#00db0b" style="background: rgba(0, 219, 11, 0.2; text-align: center; vertical-align: middle;">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Teléfono</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="obj: ${beneficiariosA}" >
+            <td th:text="${obj.nombre}"> </td>
+            <td th:text="${obj.email}"> </td>
+            <td th:text="${obj.telefono}"> </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <h3 style="color:#EB9100" >Relaciones que has solicitado / Relaciones Pendientes</h3>
+    <br>
+    <table class="table" border="5" bordercolor="#FFA500" style="background: rgba(255, 191, 0, 0.2); width:80%; margin: 0 auto;" >
+        <thead>
+        <tr>
+            <th scope="col">Hobbies</th>
+            <th scope="col">Disponibilidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element:${beneficiariosP}">
+            <td th:text="${element.hobbies}"></td>
+            <td th:text="${element.dias_semana}"></td>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <a href="/beneficiario/index" class="boton_personalizado1" role="button" >Atrás</a>
+    <br>
+    <br><br>
+
+</div>
+</body>
+</html>

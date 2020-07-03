@@ -22,7 +22,8 @@
     <h2><img src="https://image.flaticon.com/icons/svg/3039/3039084.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="${user.nombre}"></td></h2>
     <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.1); width:70%; margin: 0 auto;">
         <br>
-        <tr><td rowspan="4"><img src="http://imgfz.com/i/dhOXRpl.jpeg"width="150" height="150" style="text-align: center;"></td></tr>
+<!--        <tr><td rowspan="4" style="text-align: center;"><img th:src="@{'/images/'+ ${user.usuario} + '.jpg' }" width="180" height="150"></td></tr>-->
+        <tr><td rowspan="4" style="text-align: center;"><img src="https://images.vexels.com/media/users/3/137047/isolated/preview/5831a17a290077c646a48c4db78a81bb-perfil-de-usuario-icono-azul-by-vexels.png" width="150" height="150"></td></tr>
         <tr><th scope="col" style="text-align: right" >NIF</th>
             <td th:text="${user.dni}" ></td></tr>
         <tr><th scope="col" style="text-align: right">Usuario</th>

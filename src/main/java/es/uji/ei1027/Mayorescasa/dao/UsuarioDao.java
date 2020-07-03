@@ -79,6 +79,26 @@ public class UsuarioDao {
         }
     }
 
+    public List<Usuario> consultaBeneficiariosAceptados(String dni){
+        try{
+            List<Usuario>lista= jdbcTemplate.query("SELECT usuario.* FROM disponibilidad JOIN voluntario ON disponibilidad.dni_vol = voluntario.dni JOIN usuario USING(dni) WHERE disponibilidad.dni_ben=? AND disponibilidad.estado='Aceptada'",
+                    new UsuarioRowMapper(), dni);
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Voluntario> consultaBeneficiariosPendientes(String dni){
+        try{
+            List<Voluntario>lista= jdbcTemplate.query("SELECT voluntario.* FROM disponibilidad JOIN voluntario ON disponibilidad.dni_vol = voluntario.dni WHERE disponibilidad.dni_ben=? AND disponibilidad.estado='Pendiente'",
+                    new VoluntarioRowMapper(), dni);
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
     //BORRAMOS Usuario
     public void deleteUsuario(String dni) {
         jdbcTemplate.update("DELETE FROM Usuario WHERE dni=?", dni);

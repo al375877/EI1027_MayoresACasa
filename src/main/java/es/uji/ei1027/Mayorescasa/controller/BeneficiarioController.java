@@ -103,6 +103,22 @@ public class BeneficiarioController {
         return "error/error";
     }
 
+    @RequestMapping("/pendiente")
+    public String pendiente(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if (user.getTipoUsuario().equals("Beneficiario")) {
+                model.addAttribute("beneficiariosP",usuarioDao.consultaBeneficiariosPendientes(user.getDni()));
+                model.addAttribute("beneficiariosA",usuarioDao.consultaBeneficiariosAceptados(user.getDni()));
+                return "/beneficiario/pendiente";
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return "error/error";
+        }
+        return "error/error";
+    }
+
     @RequestMapping(value = "/update/{usuario}", method = RequestMethod.GET)
     public String editusuario(HttpSession session, Model model, @PathVariable String usuario) {
         Usuario user= (Usuario) session.getAttribute("user");

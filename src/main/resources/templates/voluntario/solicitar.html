@@ -28,7 +28,7 @@
             <th scope="col">Correo</th>
             <th scope="col">telefono</th>
             <th scope="col">Dia de preferencia</th>
-            <th scope="col" >Finalizar la relacion con el voluntario</th>
+            <th scope="col" >Finalizar la relacion</th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                 <td th:text="${obj.email}"> </td>
                 <td th:text="${obj.telefono}"> </td>
                 <td th:text="${obj.comentario}"> </td>
-                <td>
+                <td style="text-align: center;">
                     <a type="button" th:href="@{/voluntario/rechazarVol/{dni}(dni=${obj.usuario.dni})}">
                         <img  class="boton_editar" src="https://image.flaticon.com/icons/svg/126/126098.svg" width="50"  alt="x" /></a>
                 </td>
