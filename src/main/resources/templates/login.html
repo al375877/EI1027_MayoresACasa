@@ -1,48 +1,52 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
       layout:decorate="~{fragments/base}">
-<head>
-    <link rel="stylesheet" type="text/css"
-          href="/css/estils.css"
-          th:href="@{/css/estils.css}"/>
-    <meta charset="UTF-8"/>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-    <title>Login</title>
-
-
-</head>
-<body>
-<div layout:fragment="content">
-<h2>Acceso</h2>
-    <br>
-<form action="#" th:action="@{/login}"
-      th:object="${user}" method="post">
-    <p>
-        <label>Nombre de usuario:</label>
-        <input class="form-control" type="text" th:field="*{usuario}"  placeholder="Nombre usuario"/>
-    <div class="error" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></div>
-    </p>
-    <p>
-        <label>Contraseña:</label>
-        <input class="form-control" type="password" th:field="*{contraseña}"/>
-    <div class="error" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}"></div>
-    </p>
-    <br>
-    <input type="submit" class="boton_añadir" role="button" value="Acceder" />
-</form>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-</div>
-
-</body>
+    <head>
+        <link rel="stylesheet" type="text/css"
+              href="/css/estils.css"
+              th:href="@{/css/estils.css}"/>
+        <meta charset="UTF-8"/>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+        <title>Login</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div style="height: 600px; width:400px; text-align:center; margin: auto; background: rgba(9, 115, 186, 0.2);">
+                <br>
+                <h2>Iniciar sesión</h2>
+                <br>
+                <form action="#" th:action="@{/login}"
+                      th:object="${user}" method="post">
+                    <table style="text-align:center; width:100%;">
+                        <tr><td>&nbsp;</td><td><h4>Nombre de usuario</h4></td><td>&nbsp;</td></tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input class="form-control" type="text" th:field="*{usuario}"  placeholder="Nombre usuario" style="font-size:20px"></td>
+                            <td th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" style="font-size:20px"></td>
+                        </tr>
+                        <tr><td>&nbsp;</td><td><h4>Contraseña</h4></td><td>&nbsp;</td></tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input class="form-control" type="password" th:field="*{contraseña}" style="font-size:20px"></td>
+                            <td class="error" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}" style="font-size:20px"></td>
+                        </tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <button type="submit" class="boton_añadir" role="button" value="Acceder" /><img src="https://image.flaticon.com/icons/svg/3014/3014261.svg"width="40" height="40" align="left">&nbsp;Acceder</button>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <br>
+            <br>
+        </div>
+    </body>
 </html>

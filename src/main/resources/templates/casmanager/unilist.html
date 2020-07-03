@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <title>Voluntario</title>
+
+</head>
+<body>
+<div   layout:fragment="content">
+    <div  style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h2 style="color:black;" >Datos del usuario de la Conselleria</h2>
+    </div>
+    <br>
+    <h2><img src="https://image.flaticon.com/icons/svg/3039/3039084.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="${user.usuario}"></td></h2>
+    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+        <br>
+        <tr><th scope="col" style="text-align: right">Email</th>
+            <td th:text="${user.email}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Teléfono</th>
+            <td th:text="${user.telefono}"></td></tr>
+        <tr><th scope="col" style="text-align: right">Fax</th>
+            <td>963 86 60 00</td></tr>
+        <tr><th scope="col" style="text-align: right">Dirección</th>
+            <td>Av. del Mar, 23</td></tr>
+        <tr><th scope="col" style="text-align: right">Codigo Postal</th>
+            <td>12003</td></tr>
+        <tr><th scope="col" style="text-align: right">Ciudad</th>
+            <td>Castelló de la Plana</td></tr>
+        <tr><th scope="col" style="text-align: right">Provincia</th>
+            <td>Castelló de la Plana</td></tr>
+    </table>
+    <br>
+    <br>
+    <br>
+</div>
+</body>
+</html>

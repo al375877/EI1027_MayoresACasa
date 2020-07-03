@@ -23,14 +23,14 @@
     </tr>
     <tr th:each="user: ${perfil}">
         <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/beneficiario/unilist/{usuario}(usuario=${user.usuario})}"><img src="https://image.flaticon.com/icons/svg/989/989001.svg"width="36" height="36" align="left">&nbsp;Ver/Modificar datos</a></td>
-        <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/peticion/servicios}"><img src="https://image.flaticon.com/icons/svg/988/988982.svg"width="36" height="36" align="left">&nbsp;Contratar Servicios</a></td>
+        <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/peticion/servicios}"><img src="https://image.flaticon.com/icons/svg/988/988982.svg"width="36" height="36" align="left">&nbsp;Solicitar Servicio</a></td>
     </tr>
     <tr>
         <td><br><br><br><br> </td>
         <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/peticion/misPeticiones}"><img src="https://image.flaticon.com/icons/svg/988/988975.svg"width="36" height="36" align="left">&nbsp;Mis Servicios/Peticiones</a></td>
     </tr>
     <tr><td><h3>Voluntarios</h3></td></tr>
-    <tr><td><a type="button" class="boton_añadir" th:href="@{/voluntario/solicitar}"><img src="https://image.flaticon.com/icons/svg/989/989008.svg"width="36" height="36" align="left">&nbsp;Ver/Solicitar Voluntarios</a></td></tr>
+    <tr><td><a type="button" class="boton_añadir" th:href="@{/voluntario/solicitar}"><img src="https://image.flaticon.com/icons/svg/989/989008.svg"width="36" height="36" align="left">&nbsp;Ver/Solicitar Voluntario</a></td></tr>
     <tr><td>&nbsp;</td></tr>
     <tr><td><a type="button" class="boton_añadir" th:href="@{/beneficiario/terminados}"><img src="https://image.flaticon.com/icons/svg/989/989011.svg"width="36" height="36" align="left">&nbsp;Relaciones terminadas</a></td></tr>
     <tr><td><br></td></tr>

@@ -23,13 +23,13 @@
         <tr><td><h3>Datos de mi empresa</h3></td><td style="text-align: right;" ><h3>¿Necesitas ayuda?&nbsp;&nbsp;&nbsp;</h3></td></tr>
         <tr th:each="user: ${perfil}">
             <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/empresa/unilist/{usuario}(usuario=${user.usuario})}"><img src="https://image.flaticon.com/icons/svg/989/989017.svg"width="36" height="36" align="left">&nbsp;Ver/Modificar datos</a></td>
-            <td style="text-align: right;" ><a type="button" class="boton_añadir" th:href="@{/empresa/contactaCas}"><img src="https://image.flaticon.com/icons/svg/988/988999.svg"width="36" height="36" align="left">&nbsp;Contacta con el CasManager</a></td>
+            <td style="text-align: right;" ><a type="button" class="boton_añadir" th:href="@{/empresa/contactaCas}"><img src="https://image.flaticon.com/icons/svg/988/988999.svg"width="36" height="36" align="left">&nbsp;Contacta con Conselleria</a></td>
             <td>&nbsp;</td><td>&nbsp;</td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><h3>Contratos</h3></td></tr>
         <tr>
-            <td><a type="button" class="boton_añadir"  th:href="@{/empresa/misContratosActivo}"><img src="https://image.flaticon.com/icons/svg/1296/1296602.svg"width="36" height="36" align="left">&nbsp;Contratos en activo</a></td>
+            <td><a type="button" class="boton_añadir"  th:href="@{/empresa/misContratosActivo}"><img src="https://image.flaticon.com/icons/svg/1296/1296602.svg"width="36" height="36" align="left">&nbsp;Contrato activo</a></td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>

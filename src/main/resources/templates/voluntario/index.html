@@ -23,7 +23,7 @@
         <tr><td><h3>Perfil</h3></td><td style="text-align: right;" ><h3>¿Necesitas ayuda?&nbsp;&nbsp;&nbsp;</h3></td></tr>
         <tr th:each="user: ${perfil}">
             <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/voluntario/unilistPropio/{usuario}(usuario=${user.usuario})}"><img src="https://image.flaticon.com/icons/svg/989/989001.svg"width="36" height="36" align="left">&nbsp;Ver/Modificar datos</a></td>
-            <td style="text-align: right;" ><a type="button" class="boton_añadir" th:href="@{/voluntario/contactaCas}"><img src="https://image.flaticon.com/icons/svg/988/988999.svg"width="36" height="36" align="left">&nbsp;Contacta con el CasVolunteer</a></td>
+            <td style="text-align: right;" ><a type="button" class="boton_añadir" th:href="@{/voluntario/contactaCas}"><img src="https://image.flaticon.com/icons/svg/988/988999.svg"width="36" height="36" align="left">&nbsp;Contacta con Conselleria</a></td>
         <tr><td><br></td></tr>
         <tr><td><h3>Ocupación</h3></td></tr>
         <td style="text-align: left;"><a type="button" class="boton_añadir" th:href="@{/voluntario/beneficiarios}"><img src="https://image.flaticon.com/icons/svg/1296/1296605.svg"width="36" height="36" align="left">&nbsp;Peticiones</a></td>
