@@ -22,7 +22,7 @@ public class BeneficiarioValidator implements Validator {
         if (usuario.getNacimiento()>1955 || usuario.getNacimiento()<1900)
             errors.rejectValue("nacimiento", "obligatorio",
                     " Mayor de 65 años (o cumplirlos este año)");
-        if (usuario.getDni().length()!=9)
+        if (usuario.getDni().length()<9 || usuario.getDni().length()>10)
             errors.rejectValue("dni", "obligatorio",
                     " Introduce un valor valido");
         if (usuario.getTelefono()<600000000 || usuario.getTelefono()>750000000)

@@ -23,7 +23,7 @@ public class VoluntarioValidator implements Validator {
         if (usuario.getNacimiento()>=2002 || usuario.getNacimiento()<1950)
             errors.rejectValue("nacimiento", "obligatorio",
                     " Mayor de 18 años");
-        if (usuario.getDni().length()!=9)
+        if (usuario.getDni().length()<9 || usuario.getDni().length()>10)
             errors.rejectValue("dni", "obligatorio",
                     " Introduce un valor valido");
         if (usuario.getTelefono()<600000000 || usuario.getTelefono()>750000000)

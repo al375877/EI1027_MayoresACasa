@@ -128,6 +128,8 @@ public class VoluntarioController {
 
     @RequestMapping(value ="/delete/{dni}")
     public String eliminarVoluntario(@PathVariable String dni){
+        if(!usuarioDao.consultarDisponibilidad(dni).isEmpty()) return "voluntario/errorRel";
+        usuarioDao.deleteDisponibilidad(dni);
         usuarioDao.deleteVoluntario(dni);
         usuarioDao.deleteUsuario(dni);
         return "voluntario/eliminado";
@@ -572,13 +574,14 @@ public class VoluntarioController {
     }
 
     @RequestMapping(value = "/updatePropio", method = RequestMethod.POST)
-    public String processUpdateSubmitVoluntario(
+    public String processUpdateSubmitVoluntario(HttpSession session,
             @ModelAttribute("voluntario") Voluntario voluntario,
             BindingResult bindingResult) {
+        Usuario user= (Usuario) session.getAttribute("user");
         if (bindingResult.hasErrors())
             return "voluntario/updatePropio";
         usuarioDao.updateVoluntario(voluntario);
-        return "redirect:index";
+        return "redirect:unilistPropio/" + user.getUsuario();
     }
 
     @RequestMapping("/contactaCas")

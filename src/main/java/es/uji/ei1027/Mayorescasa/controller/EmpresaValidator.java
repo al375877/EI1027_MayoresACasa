@@ -37,7 +37,7 @@ public class EmpresaValidator implements Validator {
         if (empresa.getTiposervicio().trim().equals(""))
             errors.rejectValue("tiposervicio", "obligatorio",
                     " Hay que introducir un valor");
-        if (empresa.getCont_nif().trim().length()!=9)
+        if (empresa.getCont_nif().length()<9 || empresa.getCont_nif().length()>10)
             errors.rejectValue("cont_nif", "obligatorio",
                     " Introduce un nif valido");
         if (!empresa.getCont_mail().trim().contains("@") || !empresa.getEmail().trim().contains("."))

@@ -109,6 +109,21 @@ public class UsuarioDao {
         jdbcTemplate.update("DELETE FROM Voluntario WHERE dni=?", dni);
     }
 
+    //Consultar Disponibilidad
+    public List<Disponibilidad> consultarDisponibilidad(String dni) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM disponibilidad WHERE dni_vol=? AND estado='Aceptada'", new DisponibildadRowMapper(), dni);
+        }
+        catch (EmptyResultDataAccessException e){
+            return  null;
+        }
+    }
+
+    //BORRAMOS Disponibilidad
+    public void deleteDisponibilidad(String dni) {
+        jdbcTemplate.update("DELETE FROM Disponibilidad WHERE dni_vol=?", dni);
+    }
+
     //ACTUALIZAMOS Usuario
     public void updateUsuario(Usuario usuario){
         jdbcTemplate.update("UPDATE Usuario SET nombre=?, usuario=?," +
