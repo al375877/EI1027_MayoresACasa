@@ -14,14 +14,15 @@
 </head>
 <body>
 <!--style="overflow: hidden;-->
-<div   layout:fragment="content">
+<div   layout:fragment="content" >
     <div  style="padding: 25px 50px;background-color:#B0E0E6;">
         <h2 style="color:black;" >Mayores en casa | Beneficiario</h2>
     </div>
     <br>
     <h2><img src="https://image.flaticon.com/icons/svg/3039/3039084.svg"width="60" height="60">&nbsp;&nbsp;<td th:text="${user.nombre}"></td></h2>
-    <table class="table table-striped" border="5" bordercolor="#0973ba" style=" width:80%">
+    <table class="table" border="5" bordercolor="#0973ba" style="background: rgba(9, 115, 186, 0.1); width:70%; margin: 0 auto;">
         <br>
+        <tr><td rowspan="4"><img src="http://imgfz.com/i/dhOXRpl.jpeg"width="150" height="150" style="text-align: center;"></td></tr>
         <tr><th scope="col" style="text-align: right" >NIF</th>
             <td th:text="${user.dni}" ></td></tr>
         <tr><th scope="col" style="text-align: right">Usuario</th>
@@ -29,16 +30,17 @@
         <tr><th scope="col" style="text-align: right">Email</th>
             <td th:text="${user.email}"></td></tr>
         <tr><th scope="col" style="text-align: right">Direccion</th>
-            <td th:text="${user.direccion}"></td></tr>
+            <td colspan="2" th:text="${user.direccion}"></td></tr>
         <tr><th scope="col" style="text-align: right">Genero</th>
-            <td th:text="${user.genero}"></td></tr>
+            <td colspan="2" th:text="${user.genero}"></td></tr>
         <tr><th scope="col" style="text-align: right">Año de nacimiento</th>
-            <td th:text="${user.nacimiento}"></td></tr>
+            <td colspan="2" th:text="${user.nacimiento}"></td></tr>
         <tr><th scope="col" style="text-align: right">Teléfono</th>
-            <td th:text="${user.telefono}"></td></tr>
+            <td colspan="2" th:text="${user.telefono}"></td></tr>
         <tr><th scope="col" style="text-align: right">Tipo de dieta</th>
-            <td th:text="${user.tipodieta}"></td></tr>
+            <td colspan="2" th:text="${user.tipodieta}"></td></tr>
     </table>
+    <br><br>
     <table>
         <td><td><a type="button" class="boton_editar" style="font-size: 16px;" th:unless="*{tipoUser == casCommitee}"  th:href="@{/beneficiario/update/{usuario}(usuario=${user.usuario})}">Modificar Información</a></td>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
