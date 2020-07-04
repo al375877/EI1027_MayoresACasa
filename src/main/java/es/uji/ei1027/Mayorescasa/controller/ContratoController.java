@@ -50,6 +50,36 @@ public class ContratoController {
         return "error/error";
     }
 
+    @RequestMapping("/eliminar")
+    public String eliminarcontratos(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("casManager")) {
+                model.addAttribute("contratos", contratoDao.getContratos());
+                if(user.getTipoUsuario().equals("casManager")){
+                    model.addAttribute("tipoUser", "casManager");
+                }
+                return "contrato/eliminar";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
+    }
+
+    @RequestMapping(value="/delete/{codcontrato}")
+    public String processDelete(@PathVariable String codcontrato) {
+        contratoDao.finalizarContrato(codcontrato);
+        contratoDao.finalizarServicios(codcontrato);
+        return "redirect:../finalizado/" + codcontrato;
+    }
+
+    @RequestMapping("/finalizado/{codcontrato}")
+    public String eliminado(Model model, @PathVariable String codcontrato) {
+        model.addAttribute("contrato", contratoDao.getContratoFinalizado(codcontrato));
+        return "contrato/finalizado";
+    }
+
     @RequestMapping("/listPasados")
     public String listPasados(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");

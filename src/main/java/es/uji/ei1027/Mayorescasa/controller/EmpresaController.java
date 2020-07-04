@@ -151,7 +151,12 @@ public class EmpresaController {
         } else {
             return "empresa/contActivo";
         }
-        return "redirect:../list";
+        return "redirect:../eliminado";
+    }
+
+    @RequestMapping("/eliminado")
+    public String eliminado(Model model) {
+        return "empresa/eliminado";
     }
 
     @RequestMapping(value="/misContratosActivo")

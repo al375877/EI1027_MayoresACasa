@@ -146,10 +146,17 @@ public class BeneficiarioController {
         return "redirect:unilist/" + user.getUsuario();
     }
 
-    @RequestMapping(value = "/delete/{usuario}")
-    public String processDelete(@PathVariable String usuario) {
-        usuarioDao.deleteUsuario(usuario);
-        return "redirect:../list";
+    @RequestMapping(value ="/delete/{dni}")
+    public String eliminarVoluntario(@PathVariable String dni){
+        if(!usuarioDao.consultarDisponibilidadBen(dni).isEmpty()) return "beneficiario/errorRel";
+        if(!usuarioDao.consultarDisponibilidadPendienteBen(dni).isEmpty()) {
+            usuarioDao.deleteDisponibilidadBen(dni);
+        }
+        if(!usuarioDao.consultarServicio(dni).isEmpty()) {
+            usuarioDao.finalizaServicio(dni);
+        }
+        usuarioDao.deleteUsuario(dni);
+        return "beneficiario/eliminado";
     }
 
     @RequestMapping(value = "/updateAsis/{dni}", method = RequestMethod.GET)

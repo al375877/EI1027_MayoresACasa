@@ -129,7 +129,9 @@ public class VoluntarioController {
     @RequestMapping(value ="/delete/{dni}")
     public String eliminarVoluntario(@PathVariable String dni){
         if(!usuarioDao.consultarDisponibilidad(dni).isEmpty()) return "voluntario/errorRel";
-        usuarioDao.deleteDisponibilidad(dni);
+        if(!usuarioDao.consultarDisponibilidadPendiente(dni).isEmpty()) {
+            usuarioDao.deleteDisponibilidad(dni);
+        }
         usuarioDao.deleteVoluntario(dni);
         usuarioDao.deleteUsuario(dni);
         return "voluntario/eliminado";

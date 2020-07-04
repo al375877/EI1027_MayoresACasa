@@ -61,7 +61,7 @@ public class ContratoDao {
     //LISTAMOS contrato
     public List<Contrato> getContratos() {
         try{
-            return jdbcTemplate.query("SELECT * FROM contrato WHERE fechafinal>=CURRENT_DATE", new
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE fechafinal>CURRENT_DATE", new
                     ContratoRowMapper());
         }
         catch (EmptyResultDataAccessException e){
@@ -71,7 +71,7 @@ public class ContratoDao {
     //LISTAMOS contrato
     public List<Contrato> getPasados() {
         try{
-            return jdbcTemplate.query("SELECT * FROM contrato WHERE fechafinal<CURRENT_DATE ORDER BY fechafinal DESC", new
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE fechafinal<=CURRENT_DATE ORDER BY fechafinal DESC", new
                     ContratoRowMapper());
         }
         catch (EmptyResultDataAccessException e){
@@ -86,6 +86,24 @@ public class ContratoDao {
                     PeticionRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Peticion>();
+        }
+    }
+
+    //Finalizar contrato
+    public void finalizarContrato(String codigo){
+        jdbcTemplate.update("UPDATE Contrato SET fechafinal=CURRENT_DATE WHERE codcontrato=?",codigo);
+    }
+
+    //Finalizar servicios
+    public void finalizarServicios(String codigo){
+        jdbcTemplate.update("UPDATE Peticion SET fechafinal=CURRENT_DATE, estado='Finalizada' WHERE codcontrato=?",codigo);
+    }
+
+    public Contrato getContratoFinalizado(String codigo) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM contrato WHERE codcontrato=?", new ContratoRowMapper(), codigo);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
         }
     }
 

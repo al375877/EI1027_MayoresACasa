@@ -101,7 +101,7 @@ public class PeticionDao {
     }
     public List<Peticion> getPeticionesPropiasRechazadas(String dni) {
         try {
-            return jdbcTemplate.query("SELECT * FROM Peticion WHERE dni_ben=? AND estado='Rechazada'", new
+            return jdbcTemplate.query("SELECT * FROM Peticion WHERE dni_ben=? AND (estado='Rechazada' OR estado='Finalizada')", new
                     PeticionRowMapper(), dni);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Peticion>();

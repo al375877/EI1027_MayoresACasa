@@ -28,7 +28,12 @@ public class EmpresaDao {
 
     //BORRAMOS empresa
     public void deleteEmpresa(String empresa) {
-        jdbcTemplate.update("DELETE FROM empresa WHERE usuario=?",empresa);
+        jdbcTemplate.update("UPDATE Empresa SET tiposervicio='Borrado' WHERE usuario=?",empresa);
+    }
+
+
+    public void deleteUsuario(String usuario) {
+        jdbcTemplate.update("UPDATE Usuario SET tipousuario='Borrado' WHERE usuario=?", usuario);
     }
 
     //ACTUALIZAMOS empresa (No se actualiza usuario y dni por claves primaria)
@@ -64,7 +69,7 @@ public class EmpresaDao {
     //Busca Contrato
     public List<Contrato> buscaContrato(String empresa){
         try {
-            return jdbcTemplate.query("SELECT * FROM contrato WHERE empresa=?", new ContratoRowMapper(), empresa);
+            return jdbcTemplate.query("SELECT * FROM contrato WHERE empresa=? AND fechafinal>CURRENT_DATE", new ContratoRowMapper(), empresa);
         } catch (EmptyResultDataAccessException e){
             return  new ArrayList<Contrato>();
         }
@@ -95,11 +100,6 @@ public class EmpresaDao {
                 nombre, usuario, contraseña, email, direccion, dni, genero, nacimiento, telefono, tipoUsuario, tipoDieta );
     }
 
-    //BORRAMOS Usuario
-    public void deleteUsuario(String usuario) {
-        jdbcTemplate.update("DELETE FROM Usuario WHERE usuario=?", usuario);
-    }
-
     //Existe
     public Empresa existe (String usuario, String nombre, String cif){
         try{
@@ -111,7 +111,7 @@ public class EmpresaDao {
     //LISTAMOS empresa
     public List<Empresa> getEmpresas() {
         try{
-            return jdbcTemplate.query("SELECT * FROM empresa", new
+            return jdbcTemplate.query("SELECT * FROM empresa WHERE tiposervicio!='Borrado'", new
                     EmpresaRowMapper());
         }
         catch (EmptyResultDataAccessException e){

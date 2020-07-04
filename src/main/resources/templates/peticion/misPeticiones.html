@@ -80,23 +80,23 @@
     </table>
     <br>
     <hr>
-    <h3 style="color:red" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Peticiones rechazadas</h3>
+    <h3 style="color:red" >Info: <img src="https://image.flaticon.com/icons/svg/2912/2912778.svg"width="50" height="50">&nbsp;Servicios finalizados / Peticiones rechazadas</h3>
     <br>
     <table class="table" border="5" bordercolor="#ff0000" style="background: rgba(255, 0, 0, 0.2)"  >
         <thead>
         <tr>
-            <th scope="col">Código</th>
             <th scope="col">Servicio</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Rechazada</th>
+            <th scope="col">Petición Rechazada</th>
+            <th scope="col">Servicio Finalizado</th>
+            <th scope="col">Empresa</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="peticionR: ${petRechazadas}">
-            <td th:text="${peticionR.cod_pet}"></td>
             <td th:text="${peticionR.tiposervicio}"></td>
-            <td th:text="${peticionR.estado}"></td>
             <td th:text="${{peticionR.fecharechazada}}"></td>
+            <td th:text="${{peticionR.fechafinal}}"></td>
+            <td th:text="${peticionR.empresa}"></td>
         </tr>
         </tbody>
     </table>

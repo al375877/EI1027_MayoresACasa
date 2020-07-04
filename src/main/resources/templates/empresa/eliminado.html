@@ -9,23 +9,21 @@
 
     <meta charset="UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-    <title>Error Empresa</title>
+    <title>Empresa eliminado</title>
 
 </head>
 <body>
 <div  layout:fragment="content" >
     <table>
-        <tr><td><img src="https://image.flaticon.com/icons/svg/753/753345.svg" width="90" height="90"></td></tr>
-        <tr><td><h4>No se pueda dar de baja la empresa debido a que tiene un contrato activo.</h4></td></tr>
         <tr><td><img src="https://image.flaticon.com/icons/svg/2905/2905068.svg"width="60" height="60"><a style="font-size: 15px;"></a></td></tr>
-        <tr><td>En caso de querer dar de baja la empresa, debes finalizar antes su contrato.</td></tr>
+        <tr><td>Empresa eliminada, esta acción es irreversible.</td></tr>
     </table>
     <br>
     <br>
-    <a th:href="@{/empresa/list}" class="boton_personalizado1" role="button" >Volver al listado</a>
+    <br>
+    <a th:href="@{/empresa/list}" class="boton_personalizado1" role="button">Lista empresas</a>
     <br>
     <br>
 </div>
-<br><br>
 </body>
 </html>

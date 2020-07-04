@@ -99,14 +99,38 @@ public class UsuarioDao {
         }
     }
 
-    //BORRAMOS Usuario
+    //OCULTAMOS Usuario
     public void deleteUsuario(String dni) {
-        jdbcTemplate.update("DELETE FROM Usuario WHERE dni=?", dni);
+        jdbcTemplate.update("UPDATE Usuario SET tipousuario='Borrado' WHERE dni=?", dni);
     }
 
-    //BORRAMOS Voluntario
+    //OCULTAMOS Voluntario
     public void deleteVoluntario(String dni) {
-        jdbcTemplate.update("DELETE FROM Voluntario WHERE dni=?", dni);
+        jdbcTemplate.update("UPDATE Voluntario SET estado='Borrado', visible='no' WHERE dni=?", dni);
+    }
+
+    //Finalizamos Servicio
+    public List<Peticion> consultarServicio(String dni) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM peticion WHERE dni_ben=? AND estado='Aceptada'", new PeticionRowMapper(), dni);
+        }
+        catch (EmptyResultDataAccessException e){
+            return  null;
+        }
+    }
+    //OCULTAMOS Disponibilidad
+    public void finalizaServicio(String dni) {
+        jdbcTemplate.update("UPDATE Peticion SET estado='Finalizada' WHERE dni_ben=?", dni);
+    }
+
+    //OCULTAMOS Disponibilidad
+    public void deleteDisponibilidad(String dni) {
+        jdbcTemplate.update("UPDATE Disponibilidad SET estado='Borrado' WHERE dni_vol=?", dni);
+    }
+
+    //OCULTAMOS Disponibilidad
+    public void deleteDisponibilidadBen(String dni) {
+        jdbcTemplate.update("UPDATE Disponibilidad SET estado='Borrado' WHERE dni_ben=?", dni);
     }
 
     //Consultar Disponibilidad
@@ -119,9 +143,35 @@ public class UsuarioDao {
         }
     }
 
-    //BORRAMOS Disponibilidad
-    public void deleteDisponibilidad(String dni) {
-        jdbcTemplate.update("DELETE FROM Disponibilidad WHERE dni_vol=?", dni);
+    //Consultar Disponibilidad
+    public List<Disponibilidad> consultarDisponibilidadBen(String dni) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM disponibilidad WHERE dni_ben=? AND estado='Aceptada'", new DisponibildadRowMapper(), dni);
+        }
+        catch (EmptyResultDataAccessException e){
+            return  null;
+        }
+    }
+
+
+    //Consultar Disponibilidad
+    public List<Disponibilidad> consultarDisponibilidadPendiente(String dni) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM disponibilidad WHERE dni_vol=? AND estado='Pendiente'", new DisponibildadRowMapper(), dni);
+        }
+        catch (EmptyResultDataAccessException e){
+            return  null;
+        }
+    }
+
+    //Consultar Disponibilidad
+    public List<Disponibilidad> consultarDisponibilidadPendienteBen(String dni) {
+        try{
+            return jdbcTemplate.query("SELECT * FROM disponibilidad WHERE dni_ben=? AND estado='Pendiente'", new DisponibildadRowMapper(), dni);
+        }
+        catch (EmptyResultDataAccessException e){
+            return  null;
+        }
     }
 
     //ACTUALIZAMOS Usuario
